@@ -17,6 +17,12 @@ echo "Fetching $total pages into $REFS_DIR"
 ok=0; failed=0
 for url in $urls; do
   rel="${url#https://bun.com/docs/}"
+  # Guard: upstream controls these paths — only allow safe chars, no traversal
+  if [[ ! "$rel" =~ ^[A-Za-z0-9._/-]+$ || "$rel" == *..* || "$rel" == /* ]]; then
+    echo "SKIP unsafe path: $rel"
+    failed=$((failed + 1))
+    continue
+  fi
   dest="$REFS_DIR/$rel"
   mkdir -p "$(dirname "$dest")"
   if ! curl -sfL --retry 2 "$url" -o "$dest" || head -1 "$dest" | grep -qiE '<!DOCTYPE html|Redirecting'; then
