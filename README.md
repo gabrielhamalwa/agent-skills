@@ -22,7 +22,7 @@ npx skills add gabrielhamalwa/agent-skills --skill bun -g
 
 ## Attribution
 
-The `bun` skill's `references/` directory is a mirror of the official Bun documentation at [bun.com/docs](https://bun.com/docs), fetched via their [llms.txt](https://bun.com/llms.txt) endpoint. All documentation content is authored by the Bun team (Oven) — see `references/project/license.md`. This repo only adds the `SKILL.md` index and the sync script.
+The `bun` skill's `references/` directory is an unmodified mirror of the official Bun documentation at [bun.com/docs](https://bun.com/docs), fetched via their [llms.txt](https://bun.com/llms.txt) endpoint. All documentation content is authored by the Bun team (Oven, Inc.) and distributed under Bun's MIT license — see `bun/references/project/license.md`. This repo's own content (SKILL.md files, scripts, workflows) is MIT-licensed under the repo [LICENSE](LICENSE).
 
 The mirror refreshes weekly via GitHub Actions (`bun/scripts/refresh-docs.sh`). To update manually:
 
