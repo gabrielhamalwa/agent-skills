@@ -1,6 +1,6 @@
 ---
 name: astro
-description: Use when building or reviewing Astro sites — .astro components and frontmatter, islands architecture with client:* hydration directives, content collections, routing/middleware/endpoints, on-demand rendering with adapters, astro.config, images, view transitions, or migrating an existing site to Astro.
+description: Astro documentation and reference. Use when building or reviewing Astro sites: .astro components and frontmatter, islands architecture with client:* hydration directives, content collections, routing, middleware and endpoints, on-demand rendering and adapters, astro.config, images, view transitions, or migrating an existing site to Astro.
 metadata:
     source: https://github.com/withastro/docs
     mirrored: "2026-09-22"
@@ -13,7 +13,7 @@ metadata:
 
 Astro is a content-driven web framework: islands architecture, zero-JS-by-default output, `.astro` components with a server-side frontmatter fence, and optional hydration of React/Vue/Svelte/etc. islands via `client:*` directives.
 
-`references/` is a mirror of the English docs source (`withastro/docs`, `src/content/docs/en/`) — 422 .mdx pages. `references/VERSION` records the upstream commit. Refresh with `bash scripts/refresh-docs.sh`.
+`references/` contains the full English Astro documentation: 422 pages covering guides, recipes, the tutorial, and the complete reference section (config, directives, CLI, API, errors). `references/VERSION` records the upstream commit. Update with `bash scripts/refresh-docs.sh`.
 
 ## When to Use
 
@@ -26,7 +26,7 @@ Astro is a content-driven web framework: islands architecture, zero-JS-by-defaul
 
 ## Reference Index
 
-Pages mirror `src/content/docs/en/<path>` → `references/<path>` (`.mdx`):
+Pages map `src/content/docs/en/<path>` → `references/<path>` (`.mdx`):
 
 | Area | Path | Covers |
 |------|------|--------|
@@ -69,4 +69,4 @@ Pages mirror `src/content/docs/en/<path>` → `references/<path>` (`.mdx`):
 
 ## Maintenance
 
-Docs mirror regenerated from `withastro/docs` (sparse checkout of `src/content/docs/en/`). To update: `bash scripts/refresh-docs.sh`.
+Update `references/` with `bash scripts/refresh-docs.sh` (pulls the latest docs source, prunes stale pages). Runs weekly via GitHub Actions.

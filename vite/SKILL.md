@@ -1,6 +1,6 @@
 ---
 name: vite
-description: Use when configuring, debugging, or extending Vite — vite.config.ts options, plugins, dev server and HMR, environment variables (import.meta.env, VITE_ prefix), production builds and library mode, SSR, dependency pre-bundling, Environment API, or migrating between Vite versions.
+description: Vite documentation and reference. Use when configuring, debugging, or extending Vite: vite.config options, plugins and HMR, environment variables (import.meta.env, VITE_ prefix), production builds and library mode, SSR, dependency pre-bundling, Environment API, or migrating between Vite versions.
 metadata:
     source: https://vite.dev/llms.txt
     mirrored: "2026-09-22"
@@ -13,7 +13,7 @@ metadata:
 
 Vite is a frontend build tool: a dev server serving native ESM with instant HMR, plus a Rolldown-powered production bundler. Key files: `vite.config.ts`, `.env*` files, `index.html` as entry. Commands: `vite` (dev), `vite build`, `vite preview`.
 
-`references/` is a mirror of vite.dev — 42 markdown pages covering the full guide, config reference, and plugin/Environment APIs. `references/llms.txt` is the upstream index. Refresh with `bash scripts/refresh-docs.sh`.
+`references/` contains the full vite.dev documentation: 42 pages covering the guide, config reference, and plugin/Environment APIs. `references/llms.txt` is the page index. Update with `bash scripts/refresh-docs.sh`.
 
 ## When to Use
 
@@ -27,7 +27,7 @@ Vite is a frontend build tool: a dev server serving native ESM with instant HMR,
 
 ## Reference Index
 
-Pages mirror `vite.dev/<path>` → `references/<path>`:
+Pages map `vite.dev/<path>` → `references/<path>`:
 
 | Area | Path | Covers |
 |------|------|--------|
@@ -68,4 +68,4 @@ Pages mirror `vite.dev/<path>` → `references/<path>`:
 
 ## Maintenance
 
-Docs mirror regenerated from `https://vite.dev/llms.txt`. To update: `bash scripts/refresh-docs.sh`.
+Update `references/` with `bash scripts/refresh-docs.sh` (pulls the latest docs from vite.dev, prunes stale pages). Runs weekly via GitHub Actions.

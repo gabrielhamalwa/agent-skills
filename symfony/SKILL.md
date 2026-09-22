@@ -1,6 +1,6 @@
 ---
 name: symfony
-description: Use when building or debugging Symfony PHP applications — controllers, routing, service container and autowiring, Doctrine entities and migrations, forms, security/authentication, Messenger queues, Twig templates, console commands, bundle configuration, testing, or bin/console usage. Covers the Symfony docs for the 7.x branch.
+description: Symfony documentation and reference (7.x branch). Use when building or debugging Symfony PHP applications: controllers, routing, service container and autowiring, Doctrine entities and migrations, forms and validation, security and authentication, Messenger queues, Twig templates, console commands, bundle configuration, or testing.
 metadata:
     source: https://github.com/symfony/symfony-docs
     mirrored: "2026-09-22"
@@ -13,7 +13,7 @@ metadata:
 
 Symfony is a PHP framework of decoupled components + a full-stack app skeleton. Core model: services in a compiled container (autowiring/autoconfiguration via `config/services.yaml`), bundles provide features, attributes or YAML configure behavior, `bin/console` is the CLI entry.
 
-`references/` is a verbatim mirror of `symfony/symfony-docs` (default branch `7.4`) — 430 `.rst` pages, reStructuredText format (readable plain text; `.. code-block:: php` = code samples). `references/VERSION` records branch + commit. Refresh with `bash scripts/refresh-docs.sh`. The docs content is upstream's (CC BY-SA 3.0, see `references/LICENSE.md`) — do not edit files in `references/`.
+`references/` contains the full Symfony documentation (7.4 branch): 430 `.rst` pages in reStructuredText (readable plain text; `.. code-block:: php` marks code samples). `references/VERSION` records the branch and commit. Do not edit files in `references/` (licensed CC BY-SA 3.0, see `references/LICENSE.md`); update with `bash scripts/refresh-docs.sh`.
 
 ## When to Use
 
@@ -67,8 +67,8 @@ Root `.rst` pages are component/topic entries (each often has a matching subdire
 - **`.env` is for defaults, not secrets** — use the secrets vault (`secrets:set`) or real env vars; `%env(VAR)%` resolves at runtime, `%env(json:VAR)%`/`%env(bool:VAR)%` for typed decoding.
 - **Attributes are the modern default** for routes, security, validation constraints, doctrine mapping — YAML/XML still supported.
 - **Messenger handlers run in a separate worker process** — code changes need a worker restart; use `messenger:consume --limit` or restart strategy in deploys.
-- **Routes/forms/validation docs are per-version** — this mirror tracks the `7.4` docs branch; older projects may differ (check `references/VERSION`).
+- **Routes/forms/validation docs are per-version** — these references track the `7.4` docs branch; older projects may differ (check `references/VERSION`).
 
 ## Maintenance
 
-Docs mirror regenerated from `symfony/symfony-docs` default branch. To update: `bash scripts/refresh-docs.sh`.
+Update `references/` with `bash scripts/refresh-docs.sh` (pulls the latest docs source, prunes stale pages). Runs weekly via GitHub Actions.

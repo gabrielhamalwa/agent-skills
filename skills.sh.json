@@ -4,12 +4,12 @@
   "groupings": [
     {
       "title": "JavaScript Tooling",
-      "description": "Weekly-refreshed mirrors of the official Bun and Vite documentation.",
+      "description": "Skills for working with Bun and Vite: runtime, package manager, bundler, test runner, dev server, plugins, and build tooling.",
       "skills": ["bun", "vite"]
     },
     {
       "title": "Frameworks",
-      "description": "Weekly-refreshed mirrors of the official Astro, Symfony, and Inertia.js documentation.",
+      "description": "Skills for building with Astro, Symfony, and Inertia.js: content sites, backend applications, and server-driven SPAs.",
       "skills": ["astro", "inertia", "symfony"]
     }
   ]

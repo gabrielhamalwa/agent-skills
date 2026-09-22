@@ -1,6 +1,6 @@
 ---
 name: inertia
-description: Use when building or debugging Inertia.js apps — server-driven SPAs connecting Laravel/Rails/Django/etc. backends to React, Vue, or Svelte without an API. Covers Inertia::render, router visits, Link/Form components, useForm, shared and deferred props, partial reloads, prefetching, validation errors, file uploads, CSRF, asset versioning, SSR, and v1/v2/v3 differences.
+description: Inertia.js documentation and reference (v1, v2, and v3). Use when building or debugging Inertia apps: server-driven SPAs with React, Vue, or Svelte on Laravel, Rails, or other backends. Covers Inertia::render, router visits, Link and Form components, useForm, shared and deferred props, partial reloads, prefetching, validation errors, file uploads, CSRF, asset versioning, SSR, and version upgrades.
 metadata:
     source: https://inertiajs.com/docs/llms.txt
     mirrored: "2026-09-22"
@@ -13,7 +13,7 @@ metadata:
 
 Inertia is a protocol plus adapters that let server-side frameworks (Laravel first-class; community adapters for Rails, Django, Symfony, and more) drive React/Vue/Svelte page components without building an API. Routes return `Inertia::render()` responses; the client adapter swaps the page component and hydrates props. "The modern monolith."
 
-`references/` is a mirror of inertiajs.com/docs — 122 markdown pages across all three doc versions: `v3/` (current), `v2/`, `v1/` (legacy apps). `references/llms.txt` is the upstream index. Refresh with `bash scripts/refresh-docs.sh`.
+`references/` contains the full Inertia.js documentation: 122 pages across all three doc versions (`v3/` current, `v2/` and `v1/` for legacy apps). `references/llms.txt` is the page index. Update with `bash scripts/refresh-docs.sh`.
 
 ## When to Use
 
@@ -27,7 +27,7 @@ Inertia is a protocol plus adapters that let server-side frameworks (Laravel fir
 
 ## Reference Index
 
-Pages mirror `inertiajs.com/docs/<version>/<section>/<page>.md` → `references/<version>/<section>/<page>.md`. v3 is current; v2/v1 sections exist for legacy apps (page sets differ slightly — check `references/llms.txt`).
+Pages map `inertiajs.com/docs/<version>/<section>/<page>.md` → `references/<version>/<section>/<page>.md`. v3 is current; v2/v1 sections exist for legacy apps (page sets differ slightly — check `references/llms.txt`).
 
 | Section | Path | Covers |
 |---------|------|--------|
@@ -88,4 +88,4 @@ Client side:
 
 ## Maintenance
 
-Docs mirror regenerated from `https://inertiajs.com/docs/llms.txt`. To update: `bash scripts/refresh-docs.sh`.
+Update `references/` with `bash scripts/refresh-docs.sh` (pulls the latest docs from inertiajs.com, prunes stale pages). Runs weekly via GitHub Actions.

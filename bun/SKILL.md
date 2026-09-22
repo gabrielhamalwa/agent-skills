@@ -1,6 +1,6 @@
 ---
 name: bun
-description: Use when working with the Bun JavaScript/TypeScript toolkit — running or bundling .ts/.tsx files, managing dependencies with bun install/add/update/bunx, writing tests with bun test, building HTTP/WebSocket servers with Bun.serve, compiling single-file executables, configuring bunfig.toml or bun.lock, or migrating a Node.js/npm project to Bun.
+description: Bun documentation and reference for the all-in-one JavaScript/TypeScript toolkit. Use when working with Bun: bun install/add/update/bunx, bun test, bun build, Bun.serve, bunfig.toml and bun.lock, native APIs (file I/O, SQLite, SQL, S3, Redis, shell, FFI), single-file executables, or migrating a Node.js/npm project to Bun.
 metadata:
     source: https://bun.com/llms.txt
     mirrored: "2026-09-22"
@@ -13,7 +13,7 @@ metadata:
 
 Bun is an all-in-one JavaScript/TypeScript toolkit (runtime, package manager, bundler, test runner) powered by JavaScriptCore. Key files: `bunfig.toml`, `package.json`, `bun.lock`. Primary commands: `bun run`, `bun install`, `bun build`, `bun test`, `bunx`.
 
-`references/` contains a complete local mirror of the official docs — 319 pages as markdown. `references/llms.txt` is the index: every page title, path, and one-line description. Grep it or browse `references/` to find the page for any topic. Refresh with `bash scripts/refresh-docs.sh`.
+`references/` contains the full Bun documentation: 319 pages covering the runtime, package manager, bundler, test runner, native APIs, and guides. `references/llms.txt` is the page index: every page title, path, and one-line description. `references/api/` holds the `bun-types` `.d.ts` definitions the API reference is generated from. Grep the index or browse `references/` to find the page for any topic. Update with `bash scripts/refresh-docs.sh`.
 
 ## When to Use
 
@@ -26,7 +26,7 @@ Bun is an all-in-one JavaScript/TypeScript toolkit (runtime, package manager, bu
 
 ## Reference Index
 
-Pages mirror `bun.com/docs/<path>` → `references/<path>`:
+Pages map `bun.com/docs/<path>` → `references/<path>`:
 
 | Area | Path | Covers |
 |------|------|--------|
@@ -40,7 +40,7 @@ Pages mirror `bun.com/docs/<path>` → `references/<path>`:
 | Bundler | `references/bundler/` | index, fullstack, hot-reloading, html-static, standalone-html, css, loaders, executables, plugins, macros, bytecode, minifier, esbuild |
 | Test runner | `references/test/` | index, writing-tests, configuration, runtime-behavior, discovery, parallel, lifecycle, mocks, snapshots, dates-times, dom, code-coverage, reporters |
 | Guides | `references/guides/` | Task recipes: deployment (vercel, railway, aws-lambda, ...), ecosystem (nextjs, elysia, hono, prisma, drizzle, react, vite, docker, ...), http, websocket, process, install, test, read-file, write-file, binary, streams |
-| API reference | `references/api/` | TypeScript definitions the bun.com/reference site is generated from — grep `bun.d.ts` for `Bun.*` signatures (serve, file, spawn, sleep, ...), plus per-module files (ffi, sqlite, fetch, jsc, test). VERSION = mirrored bun-types version |
+| API reference | `references/api/` | TypeScript definitions the bun.com/reference site is generated from — grep `bun.d.ts` for `Bun.*` signatures (serve, file, spawn, sleep, ...), plus per-module files (ffi, sqlite, fetch, jsc, test). VERSION records the bun-types version |
 
 ## Quick Reference
 
@@ -79,4 +79,4 @@ Pages mirror `bun.com/docs/<path>` → `references/<path>`:
 
 ## Maintenance
 
-Docs mirror regenerated from `https://bun.com/llms.txt`. To update: `bash scripts/refresh-docs.sh` (fetches new/changed pages, prunes stale ones).
+Update `references/` with `bash scripts/refresh-docs.sh` (pulls the latest docs from bun.com, prunes stale pages). Runs weekly via GitHub Actions.
