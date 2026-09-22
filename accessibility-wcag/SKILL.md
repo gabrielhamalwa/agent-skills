@@ -13,7 +13,7 @@ A systematic accessibility audit is not "spot the obvious issues" — it is walk
 
 `references/wcag-2.2-checklist.md` is the full checklist: code-level checks mapped to WCAG success criteria, organized by audit area. Consult it for anything beyond the quick pass below.
 
-`references/apg/` mirrors the W3C ARIA Authoring Practices Guide: the canonical keyboard-interaction and ARIA contract for 30 widgets (`<name>/pattern.md` + working `examples/`), plus `practices/` — cross-cutting guidance on accessible names, keyboard interface design, landmarks, hiding semantics, and structural roles. When building or fixing a custom widget, read its `pattern.md` before writing code — never guess keyboard behavior.
+`references/apg/` mirrors the W3C ARIA Authoring Practices Guide: the canonical keyboard-interaction and ARIA contract for 30 widgets (`<name>/pattern.md` + working `examples/`), plus `practices/` — cross-cutting guidance on accessible names, keyboard interface design, landmarks, hiding semantics, and structural roles. `references/apg/example-index.md` is a reverse index: every example by ARIA role and property. When building or fixing a custom widget, read its `pattern.md` before writing code — never guess keyboard behavior.
 
 ## When to Use
 
@@ -26,7 +26,7 @@ A systematic accessibility audit is not "spot the obvious issues" — it is walk
 
 1. **Static code pass** — read/grep the markup for every checklist category. Checklist order: semantics → keyboard → focus → names/roles → forms → media → contrast → motion → dynamic content → pointer/touch → reflow/text.
 2. **Automated pass** — run whatever tooling exists (`axe`, Lighthouse, eslint-plugin-jsx-a11y). Automated tools catch ~30-40% of issues; they cannot replace the manual checklist (they don't test focus traps, keyboard flows, or screen-reader output).
-3. **Manual verification** — keyboard-only walkthrough (Tab/Shift+Tab/Enter/Space/Escape/arrows), 200% zoom + 320px reflow, `prefers-reduced-motion` emulation, screen-reader spot check if possible.
+3. **Runtime verification** — static analysis can't prove focus behavior or announcements. If a browser automation or computer-use tool is connected (Playwright/DevTools MCP, cua-driver, playwright CLI), execute the checklist's runtime pass for real: send keys, dump the accessibility tree, emulate 200% zoom / 320px / `prefers-reduced-motion`, screenshot focused states, run axe in-page. If no browser tool is available, mark those items "needs manual verification" in the report — never silently skip them.
 4. **Report** — findings grouped by severity, each citing the WCAG criterion and location.
 
 ## Quick Reference
@@ -72,6 +72,7 @@ Severity: **Critical** = keyboard/SR cannot operate it, or required information 
 |------|-----|
 | `eslint-plugin-jsx-a11y` | Lint-time: alt-text, click-events-have-key-events, anchor-is-valid, no-noninteractive-tabindex |
 | `axe-core` / `@axe-core/playwright` | Runtime DOM audit in tests; `await new AxeBuilder({ page }).analyze()` |
+| Browser automation / computer-use (Playwright or DevTools MCP, cua-driver, playwright CLI) | Executes the runtime verification pass for real: key events (Tab/Enter/Esc/arrows), a11y-tree snapshot, zoom/viewport/`prefers-reduced-motion` emulation, screenshots of focus states |
 | Lighthouse CI | Page-level a11y score in CI |
 | Design-system MCP audit tools (if connected) | Some design systems ship MCP `code_audit`-style tools — run them when available, scoped to their accessibility category. Check their reported analysis method/confidence: regex-level results are advisory (false positives/misses possible). Fix suggestions may name that system's components — apply the equivalent pattern in the project's stack, not the tool's library |
 | Screen readers | VoiceOver (⌘F5), NVDA (free), JAWS — spot-check nav order + announcements |

@@ -57,4 +57,17 @@ for practice_html in "$SRC"/apg/content/practices/*/*-practice.html; do
   count=$((count + 1))
 done
 
+# Example index: generated site page (no repo source) — reverse index of every
+# example by ARIA role and by properties/states.
+curl -fsSL "https://www.w3.org/WAI/ARIA/apg/example-index/" \
+  | pandoc -f html -t gfm --wrap=none \
+  | clean \
+  | sed -E \
+      -e 's|\.\./patterns/([a-z-]+)/examples/([a-zA-Z0-9_-]+)/?|../\1/examples/\2.html|g' \
+      -e 's|\.\./patterns/([a-z-]+)/[a-z-]+-pattern\.html(#[A-Za-z0-9_-]+)?|../\1/pattern.md|g' \
+      -e 's|^# <span[^>]*> *</span> *Index|# APG Example Index|' \
+      -e '/^Index$/d' \
+  > "$DEST/example-index.md"
+count=$((count + 1))
+
 echo "Mirrored $count APG pages to $DEST"
