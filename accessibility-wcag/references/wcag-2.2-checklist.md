@@ -29,11 +29,13 @@ Code-level checks grouped by audit area. Each item maps to a WCAG success criter
 
 - [ ] Visible focus indicator on every interactive element; `:focus-visible` styled; never bare `outline: none` (2.4.7)
 - [ ] Focus indicator contrast ≥ 3:1 against adjacent colors (1.4.11)
-- [ ] Focus not obscured by sticky headers/footers/cookie banners (2.4.11 AA, 2.4.12 enhanced)
+- [ ] Focus not obscured by sticky headers/footers/cookie banners — fix with `scroll-padding-top`/`scroll-margin-top` sized to the sticky element (2.4.11 AA, 2.4.12 enhanced)
 - [ ] Dialogs/menus move focus in on open (to a safe target, not destructive actions) and return focus to the trigger on close (2.4.3)
 - [ ] Focus trap inside `aria-modal` dialogs; background content inert (2.4.3)
 - [ ] Focus after route change/spa navigation goes to page heading or main (SPA convention)
 - [ ] Dynamic content appearing (validation, toasts) doesn't steal focus unless user-initiated (3.2.1, 3.2.2)
+- [ ] Item deleted from a list: focus moves to the next item (previous if it was last, else the list container), never dumped to `<body>` (2.4.3)
+- [ ] Step/wizard advance: focus moves to the new step heading or first focusable element (2.4.3)
 
 ## 4. Names, roles, values
 
@@ -45,6 +47,8 @@ Code-level checks grouped by audit area. Each item maps to a WCAG success criter
 - [ ] Inputs expose programmatic value/constraint info (`aria-valuenow`, `aria-required`, `aria-invalid`) (4.1.2)
 - [ ] Dialogs: `role="dialog"` + `aria-modal="true"` + `aria-labelledby` pointing at title (4.1.2)
 - [ ] `<a>` without `href` isn't focusable or used as a button — pick the right element (4.1.2)
+- [ ] `aria-hidden="true"` never applied to interactive elements or their ancestors (4.1.2; axe `aria-hidden-focus`)
+- [ ] Identical visible labels disambiguated in the accessible name: two "Delete" buttons → `aria-label="Delete item: Project Alpha"` (2.5.3)
 
 ## 5. Forms
 
@@ -63,10 +67,10 @@ Code-level checks grouped by audit area. Each item maps to a WCAG success criter
 ## 6. Images & media
 
 - [ ] Informative images: meaningful `alt` conveying purpose, not filename (1.1.1)
-- [ ] Decorative images/icons: `alt=""` or `aria-hidden="true"` — never missing `alt` (1.1.1)
+- [ ] Decorative images/icons: `alt=""` or `aria-hidden="true"` — never omit `alt` (omission makes screen readers announce the filename) (1.1.1)
 - [ ] Functional images (icon buttons/links): `alt` describes the action ("Search", not "magnifier") (1.1.1)
 - [ ] Complex images (charts): short `alt` + adjacent long description or data table (1.1.1)
-- [ ] SVG: `role="img"` + `aria-label`, or `aria-hidden` if decorative (1.1.1)
+- [ ] SVG: `role="img"` + `aria-label` (or `<title>` child) if meaningful; `aria-hidden="true"` + `focusable="false"` if decorative (1.1.1)
 - [ ] `<canvas>`: fallback content or equivalent data table (1.1.1)
 - [ ] Video: captions (1.2.2 AA), audio description or transcript (1.2.5 AA); audio: transcript (1.2.1)
 - [ ] No text rendered inside images when real text suffices (1.4.5)
@@ -141,6 +145,17 @@ Code-level checks grouped by audit area. Each item maps to a WCAG success criter
 - [ ] If auth involves cognitive tests (CAPTCHA, puzzles), an alternative exists (3.3.8 AA — 2.2 new)
 - [ ] Consistent help mechanisms across pages (3.2.6 A — 2.2 new)
 
+## 15. Component libraries & design systems
+
+Auditing code built on a component library (MUI, Radix, shadcn, Chakra, Carbon, Bootstrap, an internal design system) needs two extra passes: don't fight what the library provides, and hunt for the props that activate accessibility.
+
+- [ ] **Don't duplicate built-in behavior.** Library `Modal`/`Dialog` already ships `role="dialog"`, `aria-modal`, focus trap, return-focus; `Menu`/`ComboBox`/`Select` ship keyboard handling, `aria-expanded`, `aria-activedescendant`; notifications ship `role="alert"`/`status`. Adding your own versions duplicates or fights them and breaks assistive tech. Check the library's accessibility docs before adding ARIA to a library component (4.1.2)
+- [ ] **A11y-activating props are optional in types but mandatory for output.** Nothing errors when they're missing, so audit usages: icon-only buttons need a name prop (`iconDescription`, `label`, `aria-label`), inputs need `label`/`labelText`, modals need `title`/`modalHeading`, notifications need `title` (4.1.2)
+- [ ] **Overrides can silently break a11y.** Custom `className`/`style` on library components can remove focus rings, shrink targets under 24px, or break contrast. Check every style override against §3, §7, §10 (2.4.7, 1.4.3, 2.5.8)
+- [ ] **Interactive variants of static components.** A `Tag`/`Badge`/`Card` with an `onClick` or action needs the library's action/name prop or a redesign; clickable-but-inert variants are a common trap (4.1.2, 2.1.1)
+- [ ] **Heading composition.** Library `Heading`/`Section` level props must still produce a non-skipped hierarchy when nested and composed (1.3.1)
+- [ ] If the library cannot express a pattern, build the custom widget to the generic rules above; the library's a11y coverage ends where its components end
+
 ## Static-analysis grep starters
 
 ```bash
@@ -164,3 +179,4 @@ grep -rn 'role="dialog"\|aria-modal'                            # modal semantic
 5. DevTools → emulate `prefers-reduced-motion: reduce`: do animations stop?
 6. Turn on VoiceOver (⌘F5) or NVDA: listen to nav landmarks, a form, a button group. Are names sensible? Is state announced?
 7. Squint test: can you tell links from text? Errors from normal fields? Current nav item?
+8. Component states: exercise every state (collapsed/expanded, open/closed, focused, hovered, disabled, error, loading, selected). Regressions hide in non-default states.
