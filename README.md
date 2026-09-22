@@ -15,6 +15,7 @@ npx skills add gabrielhamalwa/agent-skills --skill bun -g
 npx skills add gabrielhamalwa/agent-skills --skill astro -g
 npx skills add gabrielhamalwa/agent-skills --skill symfony -g
 npx skills add gabrielhamalwa/agent-skills --skill vite -g
+npx skills add gabrielhamalwa/agent-skills --skill inertia -g
 ```
 
 ## Skills
@@ -25,6 +26,7 @@ npx skills add gabrielhamalwa/agent-skills --skill vite -g
 | [astro](astro/) | Complete local mirror of the official Astro docs source (422 pages). Components, islands and hydration, content collections, routing, SSR adapters, config/CLI/directives reference, and recipes. |
 | [symfony](symfony/) | Complete local mirror of the official Symfony documentation (430 pages, reStructuredText, 7.4 branch). Controllers, routing, service container, Doctrine, forms, security, Messenger, Twig, console, testing. |
 | [vite](vite/) | Complete local mirror of vite.dev docs (42 pages). Config options, plugin and HMR APIs, env/modes, build and library mode, SSR, Environment API, migration guides. |
+| [inertia](inertia/) | Complete local mirror of inertiajs.com docs (122 pages, all doc versions v1-v3). Pages/responses, links and router visits, forms and validation, shared/deferred/merged props, prefetching, CSRF and history encryption, SSR, testing. |
 
 ## Attribution
 
@@ -34,6 +36,7 @@ Each skill's `references/` directory is an unmodified mirror of upstream documen
 - `astro/references/` — [withastro/docs](https://github.com/withastro/docs) `src/content/docs/en/` (the source of docs.astro.build). Authored by the Astro team and contributors, MIT license.
 - `symfony/references/` — [symfony/symfony-docs](https://github.com/symfony/symfony-docs) (the source of symfony.com/doc). Authored by Symfony SAS and contributors under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) — see `symfony/references/LICENSE.md`. Mirrored verbatim as a Collection; the mirrored pages remain under CC BY-SA.
 - `vite/references/` — [vite.dev](https://vite.dev) docs via their [llms.txt](https://vite.dev/llms.txt) endpoint (source: [vitejs/vite](https://github.com/vitejs/vite)). Authored by the Vite team and contributors, MIT license.
+- `inertia/references/` — [inertiajs.com/docs](https://inertiajs.com/docs/v3/getting-started/index) via their [llms.txt](https://inertiajs.com/docs/llms.txt) endpoint. Authored by Jonathan Reinink and the Inertia.js contributors.
 
 This repo's own content (SKILL.md files, scripts, workflows) is MIT-licensed under the repo [LICENSE](LICENSE).
 
@@ -44,6 +47,7 @@ bash bun/scripts/refresh-docs.sh
 bash astro/scripts/refresh-docs.sh
 bash symfony/scripts/refresh-docs.sh
 bash vite/scripts/refresh-docs.sh
+bash inertia/scripts/refresh-docs.sh
 ```
 
 ## Updating installed skills

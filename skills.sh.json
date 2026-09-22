@@ -9,8 +9,8 @@
     },
     {
       "title": "Frameworks",
-      "description": "Weekly-refreshed mirrors of the official Astro and Symfony documentation.",
-      "skills": ["astro", "symfony"]
+      "description": "Weekly-refreshed mirrors of the official Astro, Symfony, and Inertia.js documentation.",
+      "skills": ["astro", "inertia", "symfony"]
     }
   ]
 }

@@ -1,0 +1,167 @@
+# Client-side Setup
+
+<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+
+Once you have your [server-side framework configured](/docs/v1/installation/server-side-setup), you then need to setup your client-side framework. Inertia currently provides support for React, Vue, and Svelte.
+
+## Laravel Starter Kits
+
+Laravel's [starter kits](https://laravel.com/docs/starter-kits), Breeze and Jetstream, provide out-of-the-box scaffolding for new Inertia applications. These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually install Inertia into your application, please consult the documentation below.
+
+## Install Dependencies
+
+First, install the Inertia client-side adapter corresponding to your framework of choice.
+
+<CodeGroup>
+  ```bash Vue 2 theme={null}
+  npm install @inertiajs/vue2
+  ```
+
+  ```bash Vue 3 theme={null}
+  npm install @inertiajs/vue3
+  ```
+
+  ```bash React icon="react" theme={null}
+  npm install @inertiajs/react
+  ```
+
+  ```bash Svelte icon="s" theme={null}
+  npm install @inertiajs/svelte
+  ```
+</CodeGroup>
+
+## Initialize the Inertia App
+
+Next, update your main JavaScript file to boot your Inertia app. To accomplish this, we'll initialize the client-side framework with the base Inertia component.
+
+<CodeGroup>
+  ```js Vue 2 icon="vuejs" theme={null}
+  import Vue from 'vue'
+  import { createInertiaApp } from '@inertiajs/vue2'
+
+  createInertiaApp({
+      resolve: name => {
+          const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+          return pages[`./Pages/${name}.vue`]
+      },
+      setup({ el, App, props, plugin }) {
+          Vue.use(plugin)
+
+          new Vue({
+              render: h => h(App, props),
+          }).$mount(el)
+      },
+  })
+  ```
+
+  ```js Vue 3 icon="vuejs" theme={null}
+  import { createApp, h } from 'vue'
+  import { createInertiaApp } from '@inertiajs/vue3'
+
+  createInertiaApp({
+      resolve: name => {
+          const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+          return pages[`./Pages/${name}.vue`]
+      },
+      setup({ el, App, props, plugin }) {
+          createApp({ render: () => h(App, props) })
+              .use(plugin)
+              .mount(el)
+      },
+  })
+  ```
+
+  ```jsx React icon="react" theme={null}
+  import { createInertiaApp } from '@inertiajs/react'
+  import { createRoot } from 'react-dom/client'
+
+  createInertiaApp({
+      resolve: name => {
+          const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+          return pages[`./Pages/${name}.jsx`]
+      },
+      setup({ el, App, props }) {
+          createRoot(el).render(<App {...props} />)
+      },
+  })
+  ```
+
+  ```js Svelte icon="s" theme={null}
+  import { createInertiaApp } from '@inertiajs/svelte'
+
+  createInertiaApp({
+      resolve: name => {
+          const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+          return pages[`./Pages/${name}.svelte`]
+      },
+      setup({ el, App, props }) {
+          new App({ target: el, props })
+      },
+  })
+  ```
+</CodeGroup>
+
+The `setup` callback receives everything necessary to initialize the client-side framework, including the root Inertia `App` component.
+
+## Resolving Components
+
+The `resolve` callback tells Inertia how to load a page component. It receives a page name (string), and returns a page component module. How you implement this callback depends on which bundler (Vite or Webpack) you're using.
+
+<CodeGroup>
+  ```js Vue 2 icon="vuejs" theme={null}
+  // Vite
+  resolve: name => {
+      const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+      return pages[`./Pages/${name}.vue`]
+  },
+
+  // Webpack
+  resolve: name => require(`./Pages/${name}`),
+  ```
+
+  ```js Vue 3 icon="vuejs" theme={null}
+  // Vite
+  resolve: name => {
+      const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+      return pages[`./Pages/${name}.vue`]
+  },
+
+  // Webpack
+  resolve: name => require(`./Pages/${name}`),
+  ```
+
+  ```js React icon="react" theme={null}
+  // Vite
+  resolve: name => {
+      const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+      return pages[`./Pages/${name}.jsx`]
+  },
+
+  // Webpack
+  resolve: name => require(`./Pages/${name}`),
+  ```
+
+  ```js Svelte icon="s" theme={null}
+  // Vite
+  resolve: name => {
+      const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+      return pages[`./Pages/${name}.svelte`]
+  },
+
+  // Webpack
+  resolve: name => require(`./Pages/${name}.svelte`),
+  ```
+</CodeGroup>
+
+By default we recommend eager loading your components, which will result in a single JavaScript bundle. However, if you'd like to lazy-load your components, see our [code splitting](/docs/code-splitting) documentation.
+
+## Defining a Root Element
+
+By default, Inertia assumes that your application's root template has a root element with an `id` of `app`. If your application's root element has a different `id`, you can provide it using the `id` property.
+
+```js theme={null}
+createInertiaApp({
+id: 'my-app',
+// ...
+})
+```
