@@ -16,6 +16,7 @@ npx skills add gabrielhamalwa/agent-skills --skill astro -g
 npx skills add gabrielhamalwa/agent-skills --skill symfony -g
 npx skills add gabrielhamalwa/agent-skills --skill vite -g
 npx skills add gabrielhamalwa/agent-skills --skill inertia -g
+npx skills add gabrielhamalwa/agent-skills --skill storybook -g
 ```
 
 ## Skills
@@ -27,6 +28,7 @@ npx skills add gabrielhamalwa/agent-skills --skill inertia -g
 | [symfony](symfony/) | Official Symfony documentation (430 pages, reStructuredText, 7.x branch). Controllers, routing, service container, Doctrine, forms, security, Messenger, Twig, console, testing. |
 | [vite](vite/) | Official Vite documentation (42 pages). Config options, plugin and HMR APIs, env/modes, build and library mode, SSR, Environment API, migration guides. |
 | [inertia](inertia/) | Official Inertia.js documentation (122 pages, v1-v3). Pages/responses, links and router visits, forms and validation, shared/deferred props, prefetching, CSRF and history encryption, SSR, testing. |
+| [storybook](storybook/) | Official Storybook documentation (167 pages, v10). Stories/CSF, args, decorators, play functions, interaction/visual/a11y testing, autodocs and MDX, addons, configuration, framework guides, migration. |
 
 ## Attribution
 
@@ -37,6 +39,7 @@ Each skill ships the complete upstream documentation under `references/` (unmodi
 - `symfony/references/` — [symfony/symfony-docs](https://github.com/symfony/symfony-docs) (the source of symfony.com/doc). Authored by Symfony SAS and contributors under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) — see `symfony/references/LICENSE.md`. Mirrored verbatim as a Collection; the mirrored pages remain under CC BY-SA.
 - `vite/references/` — [vite.dev](https://vite.dev) docs via their [llms.txt](https://vite.dev/llms.txt) endpoint (source: [vitejs/vite](https://github.com/vitejs/vite)). Authored by the Vite team and contributors, MIT license.
 - `inertia/references/` — [inertiajs.com/docs](https://inertiajs.com/docs/v3/getting-started/index) via their [llms.txt](https://inertiajs.com/docs/llms.txt) endpoint. Authored by Jonathan Reinink and the Inertia.js contributors.
+- `storybook/references/` — [storybook.js.org/docs](https://storybook.js.org/docs) via their [llms.txt](https://storybook.js.org/llms.txt) endpoint (React + TypeScript variant, current version). Authored by the Storybook team and contributors, MIT license.
 
 This repo's own content (SKILL.md files, scripts, workflows) is MIT-licensed under the repo [LICENSE](LICENSE).
 
@@ -48,6 +51,7 @@ bash astro/scripts/refresh-docs.sh
 bash symfony/scripts/refresh-docs.sh
 bash vite/scripts/refresh-docs.sh
 bash inertia/scripts/refresh-docs.sh
+bash storybook/scripts/refresh-docs.sh
 ```
 
 ## Updating installed skills

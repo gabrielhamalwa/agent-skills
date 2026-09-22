@@ -30,6 +30,7 @@ documentation and retain their own licenses:
   `symfony/references/LICENSE.md`
 - `vite/references/` - Vite docs, MIT (VoidZero Inc. / Vite contributors)
 - `inertia/references/` - Inertia.js docs (Jonathan Reinink and contributors)
+- `storybook/references/` - Storybook docs, MIT (Storybook contributors)
 
 This license covers the original content in this repository (SKILL.md files,
 scripts, workflows); upstream documentation remains the property of its
