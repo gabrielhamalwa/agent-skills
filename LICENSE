@@ -37,6 +37,8 @@ Practices Guide):
 - `accessibility-wcag/references/apg/` - W3C ARIA Authoring Practices Guide
   patterns, W3C Software and Document License (W3C), see
   `accessibility-wcag/references/apg/LICENSE.md`
+- `code-migration/references/kit/` - Anthropic's code migration kit, Apache-2.0,
+  see `code-migration/references/kit/LICENSE`
 
 This license covers the original content in this repository (SKILL.md files,
 scripts, workflows); upstream documentation remains the property of its

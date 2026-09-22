@@ -19,6 +19,7 @@ npx skills add gabrielhamalwa/agent-skills --skill inertia -g
 npx skills add gabrielhamalwa/agent-skills --skill storybook -g
 npx skills add gabrielhamalwa/agent-skills --skill tailwind -g
 npx skills add gabrielhamalwa/agent-skills --skill accessibility-wcag -g
+npx skills add gabrielhamalwa/agent-skills --skill code-migration -g
 ```
 
 ## Skills
@@ -33,6 +34,7 @@ npx skills add gabrielhamalwa/agent-skills --skill accessibility-wcag -g
 | [storybook](storybook/) | Official Storybook documentation (167 pages, v10). Stories/CSF, args, decorators, play functions, interaction/visual/a11y testing, autodocs and MDX, addons, configuration, framework guides, migration. |
 | [tailwind](tailwind/) | Official Tailwind CSS documentation (197 pages + install guides, v4). CSS-first `@theme` config, every utility reference, variants and dark mode, custom utilities/variants, Vite/PostCSS/CLI setup, framework guides, v3 upgrade. |
 | [accessibility-wcag](accessibility-wcag/) | WCAG 2.2 AA audit methodology and checklist plus the W3C ARIA Authoring Practices Guide patterns (30 widgets: keyboard interaction + ARIA contracts, working examples). Audit workflow, severity rubric, report format, tooling (axe, jsx-a11y). |
+| [code-migration](code-migration/) | Anthropic's six-step large-scale language migration kit, agent-agnostic: feasibility, parity judge, dependency map + rulebook, stress-test, queued translation, compile/run/parity gates. Prompts, rulebook template, depmap scripts, queue runner. |
 
 ## Attribution
 
@@ -49,6 +51,7 @@ Each skill ships the complete upstream documentation under `references/` (unmodi
 This repo's own content (SKILL.md files, scripts, workflows) is MIT-licensed under the repo [LICENSE](LICENSE).
 
 - `accessibility-wcag/references/apg/` — [W3C ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/) patterns and examples (source: [w3c/aria-practices](https://github.com/w3c/aria-practices)). W3C Software and Document License — see `accessibility-wcag/references/apg/LICENSE.md`. The rest of `accessibility-wcag` (SKILL.md, WCAG checklist) is authored content covered by this repo's MIT license.
+- `code-migration/references/kit/` — [anthropics/code-migration-kit-with-claude-code](https://github.com/anthropics/code-migration-kit-with-claude-code), the migration kit from Anthropic's engineering blog. Apache-2.0 — see `code-migration/references/kit/LICENSE`. `code-migration/SKILL.md` is an authored adaptation that makes the routing agent-agnostic (the kit's `.claude/` mechanics are translated per harness in its Harness notes).
 
 Mirrors refresh weekly via GitHub Actions. To update manually:
 
@@ -61,6 +64,7 @@ bash inertia/scripts/refresh-docs.sh
 bash storybook/scripts/refresh-docs.sh
 bash tailwind/scripts/refresh-docs.sh
 bash accessibility-wcag/scripts/refresh-docs.sh   # APG patterns (needs pandoc)
+bash code-migration/scripts/refresh-docs.sh
 ```
 
 ## Updating installed skills

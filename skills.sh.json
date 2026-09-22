@@ -16,6 +16,11 @@
       "title": "Quality",
       "description": "Skills for auditing and improving UI code: WCAG 2.2 accessibility checks, severity grading, and reporting.",
       "skills": ["accessibility-wcag"]
+    },
+    {
+      "title": "Workflows",
+      "description": "Skills for large multi-step operations: codebase language migrations with sign-off gates and adversarial review.",
+      "skills": ["code-migration"]
     }
   ]
 }
