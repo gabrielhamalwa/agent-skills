@@ -1,0 +1,16 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "JavaScript Tooling",
+      "description": "Weekly-refreshed mirrors of the official Bun and Vite documentation.",
+      "skills": ["bun", "vite"]
+    },
+    {
+      "title": "Frameworks",
+      "description": "Weekly-refreshed mirrors of the official Astro and Symfony documentation.",
+      "skills": ["astro", "symfony"]
+    }
+  ]
+}
