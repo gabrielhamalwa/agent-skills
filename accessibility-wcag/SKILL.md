@@ -13,10 +13,12 @@ A systematic accessibility audit is not "spot the obvious issues" — it is walk
 
 `references/wcag-2.2-checklist.md` is the full checklist: code-level checks mapped to WCAG success criteria, organized by audit area. Consult it for anything beyond the quick pass below.
 
+`references/apg/` mirrors the W3C ARIA Authoring Practices Guide: the canonical keyboard-interaction and ARIA contract for 30 widgets (`<name>/pattern.md` + working `examples/`), plus `practices/` — cross-cutting guidance on accessible names, keyboard interface design, landmarks, hiding semantics, and structural roles. When building or fixing a custom widget, read its `pattern.md` before writing code — never guess keyboard behavior.
+
 ## When to Use
 
 - **Audit/review**: checking existing components, pages, or PRs for a11y issues
-- **Writing UI**: building modals, menus, tabs, forms, tables, tooltips, custom widgets accessibly from the start
+- **Writing UI**: building modals, menus, tabs, forms, tables, tooltips, custom widgets accessibly from the start — check `references/apg/<widget>/pattern.md` for the exact keyboard + ARIA contract
 - **Fixing issues**: resolving axe/Lighthouse/manual findings
 - **Setup**: adding a11y linting or automated testing to a project
 
@@ -93,6 +95,17 @@ Severity: **Critical** = keyboard/SR cannot operate it, or required information 
 - **Contrast in states** — hover/focus/disabled variants often drop below 3:1 even when default passes.
 - **Zoom/reflow** — fixed pixel heights + `overflow:hidden` clipping content at 200% zoom.
 
+## APG Pattern Index
+
+| Category | Patterns in `references/apg/` |
+|----------|-------------------------------|
+| Disclosure & containers | accordion, disclosure, tabs, feed, carousel |
+| Overlays | alert, alertdialog, dialog-modal, tooltip |
+| Forms & input | button, checkbox, combobox, listbox, radio, slider, slider-multithumb, spinbutton, switch, meter |
+| Navigation & menus | breadcrumb, link, menu-button, menubar, toolbar, landmarks, windowsplitter |
+| Data & trees | grid, table, treegrid, treeview |
+| Practices (in `references/apg/practices/`) | keyboard-interface, names-and-descriptions, landmark-regions, hiding-semantics, structural-roles, grid-and-table-properties, range-related-properties, read-me-first |
+
 ## Maintenance
 
-Authored skill — no upstream mirror. Update by editing SKILL.md and `references/` directly. Informed by WCAG 2.2 and published design-system accessibility guidance.
+`SKILL.md` and `references/wcag-2.2-checklist.md` are authored — edit directly. `references/apg/` is a mirror of W3C ARIA Authoring Practices (w3c/aria-practices, W3C Software and Document License) — update via `scripts/refresh-docs.sh`, do not hand-edit.

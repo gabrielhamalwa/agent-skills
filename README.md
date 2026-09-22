@@ -32,7 +32,7 @@ npx skills add gabrielhamalwa/agent-skills --skill accessibility-wcag -g
 | [inertia](inertia/) | Official Inertia.js documentation (122 pages, v1-v3). Pages/responses, links and router visits, forms and validation, shared/deferred props, prefetching, CSRF and history encryption, SSR, testing. |
 | [storybook](storybook/) | Official Storybook documentation (167 pages, v10). Stories/CSF, args, decorators, play functions, interaction/visual/a11y testing, autodocs and MDX, addons, configuration, framework guides, migration. |
 | [tailwind](tailwind/) | Official Tailwind CSS documentation (197 pages + install guides, v4). CSS-first `@theme` config, every utility reference, variants and dark mode, custom utilities/variants, Vite/PostCSS/CLI setup, framework guides, v3 upgrade. |
-| [accessibility-wcag](accessibility-wcag/) | WCAG 2.2 AA audit methodology and checklist for any UI codebase: semantics, keyboard, focus, names/roles, forms, contrast, motion, live regions, pointer targets, reflow. Audit workflow, severity rubric, report format, tooling (axe, jsx-a11y). |
+| [accessibility-wcag](accessibility-wcag/) | WCAG 2.2 AA audit methodology and checklist plus the W3C ARIA Authoring Practices Guide patterns (30 widgets: keyboard interaction + ARIA contracts, working examples). Audit workflow, severity rubric, report format, tooling (axe, jsx-a11y). |
 
 ## Attribution
 
@@ -48,7 +48,7 @@ Each skill ships the complete upstream documentation under `references/` (unmodi
 
 This repo's own content (SKILL.md files, scripts, workflows) is MIT-licensed under the repo [LICENSE](LICENSE).
 
-`accessibility-wcag` is authored content, not a mirror — it has no refresh workflow and is covered by this repo's MIT license like the SKILL.md files.
+- `accessibility-wcag/references/apg/` — [W3C ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/) patterns and examples (source: [w3c/aria-practices](https://github.com/w3c/aria-practices)). W3C Software and Document License — see `accessibility-wcag/references/apg/LICENSE.md`. The rest of `accessibility-wcag` (SKILL.md, WCAG checklist) is authored content covered by this repo's MIT license.
 
 Mirrors refresh weekly via GitHub Actions. To update manually:
 
@@ -60,6 +60,7 @@ bash vite/scripts/refresh-docs.sh
 bash inertia/scripts/refresh-docs.sh
 bash storybook/scripts/refresh-docs.sh
 bash tailwind/scripts/refresh-docs.sh
+bash accessibility-wcag/scripts/refresh-docs.sh   # APG patterns (needs pandoc)
 ```
 
 ## Updating installed skills

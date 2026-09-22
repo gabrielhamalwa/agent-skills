@@ -2,6 +2,8 @@
 
 Code-level checks grouped by audit area. Each item maps to a WCAG success criterion (SC). Target conformance: **A + AA**.
 
+Building or fixing a specific widget? `../apg/<widget>/pattern.md` has the canonical keyboard interaction + ARIA contract and `../apg/<widget>/examples/` a working implementation — check it before writing code.
+
 ## 1. Semantic structure
 
 - [ ] `<html lang="…">` set; `lang` on foreign-language fragments (3.1.1, 3.1.2)
