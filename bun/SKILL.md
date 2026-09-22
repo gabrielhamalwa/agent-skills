@@ -40,6 +40,7 @@ Pages mirror `bun.com/docs/<path>` → `references/<path>`:
 | Bundler | `references/bundler/` | index, fullstack, hot-reloading, html-static, standalone-html, css, loaders, executables, plugins, macros, bytecode, minifier, esbuild |
 | Test runner | `references/test/` | index, writing-tests, configuration, runtime-behavior, discovery, parallel, lifecycle, mocks, snapshots, dates-times, dom, code-coverage, reporters |
 | Guides | `references/guides/` | Task recipes: deployment (vercel, railway, aws-lambda, ...), ecosystem (nextjs, elysia, hono, prisma, drizzle, react, vite, docker, ...), http, websocket, process, install, test, read-file, write-file, binary, streams |
+| API reference | `references/api/` | TypeScript definitions the bun.com/reference site is generated from — grep `bun.d.ts` for `Bun.*` signatures (serve, file, spawn, sleep, ...), plus per-module files (ffi, sqlite, fetch, jsc, test). VERSION = mirrored bun-types version |
 
 ## Quick Reference
 

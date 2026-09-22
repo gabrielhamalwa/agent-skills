@@ -17,7 +17,7 @@ echo "Fetching $total pages into $REFS_DIR"
 ok=0; failed=0
 for url in $urls; do
   rel="${url#https://bun.com/docs/}"
-  # Guard: upstream controls these paths — only allow safe chars, no traversal
+  # Guard: upstream controls these paths to only allow safe chars, no traversal
   if [[ ! "$rel" =~ ^[A-Za-z0-9._/-]+$ || "$rel" == *..* || "$rel" == /* ]]; then
     echo "SKIP unsafe path: $rel"
     failed=$((failed + 1))
@@ -48,5 +48,18 @@ find "$REFS_DIR" -name '*.md' | while read -r f; do
   grep -q "docs/$rel)" "$LLMS_TXT" || { echo "STALE: $rel"; rm -f "$f"; }
 done
 find "$REFS_DIR" -type d -empty -delete
+
+# API reference: bun.com/reference is generated from the bun-types package.
+# Mirror the .d.ts sources so agents get real signatures, not the HTML site.
+API_DIR="$REFS_DIR/api"
+version=$(curl -sf "https://registry.npmjs.org/bun-types/latest" | python3 -c 'import json,sys; print(json.load(sys.stdin)["version"])')
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT
+curl -sfL "https://registry.npmjs.org/bun-types/-/bun-types-$version.tgz" -o "$tmp/bun-types.tgz"
+tar -xzf "$tmp/bun-types.tgz" -C "$tmp"
+rm -rf "$API_DIR" && mkdir -p "$API_DIR"
+rsync -a --include='*/' --include='*.d.ts' --include='package.json' --exclude='*' "$tmp/package/" "$API_DIR/"
+echo "$version" > "$API_DIR/VERSION"
+echo "bun-types $version mirrored to $API_DIR"
 
 echo "Done: $ok fetched, $failed failed"
