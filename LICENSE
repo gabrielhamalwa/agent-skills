@@ -22,8 +22,13 @@ SOFTWARE.
 
 ---
 
-NOTE: The contents of `bun/references/` are an unmodified mirror of the
-official Bun documentation (https://bun.com/docs), which is part of Bun and
-copyright Oven, Inc., distributed under the MIT license. This license covers
-the original content in this repository (SKILL.md files, scripts, workflows);
-upstream documentation remains the property of its respective authors.
+NOTE: The `*/references/` directories are unmodified mirrors of upstream
+documentation and retain their own licenses:
+- `bun/references/` - Bun docs and bun-types definitions, MIT (Oven, Inc.)
+- `astro/references/` - Astro docs source, MIT (Astro contributors)
+- `symfony/references/` - Symfony docs, CC BY-SA 3.0 (Symfony SAS), see
+  `symfony/references/LICENSE.md`
+
+This license covers the original content in this repository (SKILL.md files,
+scripts, workflows); upstream documentation remains the property of its
+respective authors.
