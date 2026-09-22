@@ -1,6 +1,6 @@
 ---
 name: storybook
-description: Storybook documentation and reference (v10). Use when building, testing, or documenting UI components in isolation: writing stories (CSF, args, decorators, parameters), play functions and interaction, visual or accessibility tests, autodocs and MDX, addons, main.ts and preview.ts configuration, framework setup (React, Vue, Angular, Svelte, Next.js), publishing Storybooks, or upgrading between versions.
+description: "Storybook documentation and reference (v10). Use when building, testing, or documenting UI components in isolation: writing stories (CSF, args, decorators, parameters), play functions and interaction, visual or accessibility tests, autodocs and MDX, addons, main.ts and preview.ts configuration, framework setup (React, Vue, Angular, Svelte, Next.js), publishing Storybooks, or upgrading between versions."
 metadata:
     source: https://storybook.js.org/llms.txt
     mirrored: "2026-09-22"

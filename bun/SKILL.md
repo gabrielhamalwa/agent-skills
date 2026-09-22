@@ -1,6 +1,6 @@
 ---
 name: bun
-description: Bun documentation and reference for the all-in-one JavaScript/TypeScript toolkit. Use when working with Bun: bun install/add/update/bunx, bun test, bun build, Bun.serve, bunfig.toml and bun.lock, native APIs (file I/O, SQLite, SQL, S3, Redis, shell, FFI), single-file executables, or migrating a Node.js/npm project to Bun.
+description: "Bun documentation and reference for the all-in-one JavaScript/TypeScript toolkit. Use when working with Bun: bun install/add/update/bunx, bun test, bun build, Bun.serve, bunfig.toml and bun.lock, native APIs (file I/O, SQLite, SQL, S3, Redis, shell, FFI), single-file executables, or migrating a Node.js/npm project to Bun."
 metadata:
     source: https://bun.com/llms.txt
     mirrored: "2026-09-22"

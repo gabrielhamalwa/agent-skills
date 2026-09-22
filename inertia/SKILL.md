@@ -1,6 +1,6 @@
 ---
 name: inertia
-description: Inertia.js documentation and reference (v1, v2, and v3). Use when building or debugging Inertia apps: server-driven SPAs with React, Vue, or Svelte on Laravel, Rails, or other backends. Covers Inertia::render, router visits, Link and Form components, useForm, shared and deferred props, partial reloads, prefetching, validation errors, file uploads, CSRF, asset versioning, SSR, and version upgrades.
+description: "Inertia.js documentation and reference (v1, v2, and v3). Use when building or debugging Inertia apps: server-driven SPAs with React, Vue, or Svelte on Laravel, Rails, or other backends. Covers Inertia::render, router visits, Link and Form components, useForm, shared and deferred props, partial reloads, prefetching, validation errors, file uploads, CSRF, asset versioning, SSR, and version upgrades."
 metadata:
     source: https://inertiajs.com/docs/llms.txt
     mirrored: "2026-09-22"

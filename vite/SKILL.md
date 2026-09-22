@@ -1,6 +1,6 @@
 ---
 name: vite
-description: Vite documentation and reference. Use when configuring, debugging, or extending Vite: vite.config options, plugins and HMR, environment variables (import.meta.env, VITE_ prefix), production builds and library mode, SSR, dependency pre-bundling, Environment API, or migrating between Vite versions.
+description: "Vite documentation and reference. Use when configuring, debugging, or extending Vite: vite.config options, plugins and HMR, environment variables (import.meta.env, VITE_ prefix), production builds and library mode, SSR, dependency pre-bundling, Environment API, or migrating between Vite versions."
 metadata:
     source: https://vite.dev/llms.txt
     mirrored: "2026-09-22"

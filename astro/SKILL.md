@@ -1,6 +1,6 @@
 ---
 name: astro
-description: Astro documentation and reference. Use when building or reviewing Astro sites: .astro components and frontmatter, islands architecture with client:* hydration directives, content collections, routing, middleware and endpoints, on-demand rendering and adapters, astro.config, images, view transitions, or migrating an existing site to Astro.
+description: "Astro documentation and reference. Use when building or reviewing Astro sites: .astro components and frontmatter, islands architecture with client:* hydration directives, content collections, routing, middleware and endpoints, on-demand rendering and adapters, astro.config, images, view transitions, or migrating an existing site to Astro."
 metadata:
     source: https://github.com/withastro/docs
     mirrored: "2026-09-22"

@@ -1,6 +1,6 @@
 ---
 name: symfony
-description: Symfony documentation and reference (7.x branch). Use when building or debugging Symfony PHP applications: controllers, routing, service container and autowiring, Doctrine entities and migrations, forms and validation, security and authentication, Messenger queues, Twig templates, console commands, bundle configuration, or testing.
+description: "Symfony documentation and reference (7.x branch). Use when building or debugging Symfony PHP applications: controllers, routing, service container and autowiring, Doctrine entities and migrations, forms and validation, security and authentication, Messenger queues, Twig templates, console commands, bundle configuration, or testing."
 metadata:
     source: https://github.com/symfony/symfony-docs
     mirrored: "2026-09-22"
