@@ -147,10 +147,10 @@ Code-level checks grouped by audit area. Each item maps to a WCAG success criter
 
 ## 15. Component libraries & design systems
 
-Auditing code built on a component library (MUI, Radix, shadcn, Chakra, Carbon, Bootstrap, an internal design system) needs two extra passes: don't fight what the library provides, and hunt for the props that activate accessibility.
+Auditing code built on a component library (MUI, Radix, shadcn, Chakra, Bootstrap, or an internal design system) needs two extra passes: don't fight what the library provides, and hunt for the props that activate accessibility.
 
 - [ ] **Don't duplicate built-in behavior.** Library `Modal`/`Dialog` already ships `role="dialog"`, `aria-modal`, focus trap, return-focus; `Menu`/`ComboBox`/`Select` ship keyboard handling, `aria-expanded`, `aria-activedescendant`; notifications ship `role="alert"`/`status`. Adding your own versions duplicates or fights them and breaks assistive tech. Check the library's accessibility docs before adding ARIA to a library component (4.1.2)
-- [ ] **A11y-activating props are optional in types but mandatory for output.** Nothing errors when they're missing, so audit usages: icon-only buttons need a name prop (`iconDescription`, `label`, `aria-label`), inputs need `label`/`labelText`, modals need `title`/`modalHeading`, notifications need `title` (4.1.2)
+- [ ] **A11y-activating props are optional in types but mandatory for output.** Nothing errors when they're missing, so audit usages: icon-only buttons need a name prop (`label`, `ariaLabel`, `aria-label`), inputs need a label prop, modals need a heading/title prop, notifications need a title prop (4.1.2)
 - [ ] **Overrides can silently break a11y.** Custom `className`/`style` on library components can remove focus rings, shrink targets under 24px, or break contrast. Check every style override against §3, §7, §10 (2.4.7, 1.4.3, 2.5.8)
 - [ ] **Interactive variants of static components.** A `Tag`/`Badge`/`Card` with an `onClick` or action needs the library's action/name prop or a redesign; clickable-but-inert variants are a common trap (4.1.2, 2.1.1)
 - [ ] **Heading composition.** Library `Heading`/`Section` level props must still produce a non-skipped hierarchy when nested and composed (1.3.1)

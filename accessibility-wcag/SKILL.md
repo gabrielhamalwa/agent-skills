@@ -71,7 +71,7 @@ Severity: **Critical** = keyboard/SR cannot operate it, or required information 
 | `eslint-plugin-jsx-a11y` | Lint-time: alt-text, click-events-have-key-events, anchor-is-valid, no-noninteractive-tabindex |
 | `axe-core` / `@axe-core/playwright` | Runtime DOM audit in tests; `await new AxeBuilder({ page }).analyze()` |
 | Lighthouse CI | Page-level a11y score in CI |
-| carbon-mcp `code_audit` (if connected) | `categories: ["accessibility"]`, single `code` or batch `files[]` (max 50). Trust `analysis_method`: `"ast"` is reliable, `"regex"` is advisory (false positives/misses possible; `validation_confidence` 0.85 vs 0.95, <0.8 = degraded). Fix suggestions may name a specific design system's components — apply the equivalent pattern, not that library |
+| Design-system MCP audit tools (if connected) | Some design systems ship MCP `code_audit`-style tools — run them when available, scoped to their accessibility category. Check their reported analysis method/confidence: regex-level results are advisory (false positives/misses possible). Fix suggestions may name that system's components — apply the equivalent pattern in the project's stack, not the tool's library |
 | Screen readers | VoiceOver (⌘F5), NVDA (free), JAWS — spot-check nav order + announcements |
 
 ## Common Misses
@@ -88,11 +88,11 @@ Severity: **Critical** = keyboard/SR cannot operate it, or required information 
 - **Live regions must exist before content** — in React, mount the empty `<p role="alert">` and inject text on error; rendering `{error && <div role="alert">}` creates region+content together and may not announce.
 - **`<dialog>`/native elements exist** — prefer `<dialog>`, `<details>`, `<button>` over rebuilding with divs; modern `<dialog>` gives focus trap + Escape + top layer for free.
 - **Duplicating library-provided a11y** — a component library's Modal/Menu/ComboBox already ships `role`, focus trap, return-focus, `aria-expanded`; adding your own ARIA or overrides breaks it. Check the library's accessibility contract before adding attributes.
-- **A11y props optional in types but required for output** — libraries expose names via props (`iconDescription`, `label`, `labelText`, `modalHeading`, notification `title`) that TypeScript won't flag as missing. Audit usages, not just markup.
+- **A11y props optional in types but required for output** — libraries expose accessible names via props (`label`, `ariaLabel`, `title` on icon-only buttons, inputs, dialogs, notifications) that TypeScript won't flag as missing. Audit usages, not just markup.
 - **`aria-hidden` on focusable content** — hiding an interactive element or its ancestor removes it from the accessibility tree while it stays keyboard-focusable (axe `aria-hidden-focus`).
 - **Contrast in states** — hover/focus/disabled variants often drop below 3:1 even when default passes.
 - **Zoom/reflow** — fixed pixel heights + `overflow:hidden` clipping content at 200% zoom.
 
 ## Maintenance
 
-Authored skill — no upstream mirror. Update by editing SKILL.md and `references/` directly. Informed by WCAG 2.2 and published design-system accessibility guidance, including IBM Carbon's public accessibility rules (Apache-2.0).
+Authored skill — no upstream mirror. Update by editing SKILL.md and `references/` directly. Informed by WCAG 2.2 and published design-system accessibility guidance.
