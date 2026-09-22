@@ -4,8 +4,8 @@
   "groupings": [
     {
       "title": "JavaScript Tooling",
-      "description": "Skills for working with Bun, Vite, and Storybook: runtime, package manager, bundler, test runner, dev server, plugins, and component development.",
-      "skills": ["bun", "storybook", "vite"]
+      "description": "Skills for working with Bun, Vite, Storybook, and Tailwind CSS: runtime, bundler, dev server, component development, and styling.",
+      "skills": ["bun", "storybook", "tailwind", "vite"]
     },
     {
       "title": "Frameworks",

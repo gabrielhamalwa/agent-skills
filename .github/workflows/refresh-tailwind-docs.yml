@@ -1,0 +1,26 @@
+name: refresh-tailwind-docs
+
+on:
+  schedule:
+    - cron: "47 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Refresh Tailwind CSS docs mirror
+        run: bash tailwind/scripts/refresh-docs.sh
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tailwind/references
+          git diff --cached --quiet || git commit -m "chore(tailwind): refresh docs mirror"
+          git push
