@@ -11,6 +11,11 @@
       "title": "Frameworks",
       "description": "Skills for building with Astro, Symfony, and Inertia.js: content sites, backend applications, and server-driven SPAs.",
       "skills": ["astro", "inertia", "symfony"]
+    },
+    {
+      "title": "Quality",
+      "description": "Skills for auditing and improving UI code: WCAG 2.2 accessibility checks, severity grading, and reporting.",
+      "skills": ["accessibility-wcag"]
     }
   ]
 }

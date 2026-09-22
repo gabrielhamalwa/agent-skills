@@ -22,8 +22,9 @@ SOFTWARE.
 
 ---
 
-NOTE: The `*/references/` directories are unmodified mirrors of upstream
-documentation and retain their own licenses:
+NOTE: The `*/references/` directories of the docs skills are unmodified mirrors
+of upstream documentation and retain their own licenses (the
+`accessibility-wcag` skill is original content, fully MIT-licensed):
 - `bun/references/` - Bun docs and bun-types definitions, MIT (Oven, Inc.)
 - `astro/references/` - Astro docs source, MIT (Astro contributors)
 - `symfony/references/` - Symfony docs, CC BY-SA 3.0 (Symfony SAS), see

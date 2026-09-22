@@ -18,6 +18,7 @@ npx skills add gabrielhamalwa/agent-skills --skill vite -g
 npx skills add gabrielhamalwa/agent-skills --skill inertia -g
 npx skills add gabrielhamalwa/agent-skills --skill storybook -g
 npx skills add gabrielhamalwa/agent-skills --skill tailwind -g
+npx skills add gabrielhamalwa/agent-skills --skill accessibility-wcag -g
 ```
 
 ## Skills
@@ -31,6 +32,7 @@ npx skills add gabrielhamalwa/agent-skills --skill tailwind -g
 | [inertia](inertia/) | Official Inertia.js documentation (122 pages, v1-v3). Pages/responses, links and router visits, forms and validation, shared/deferred props, prefetching, CSRF and history encryption, SSR, testing. |
 | [storybook](storybook/) | Official Storybook documentation (167 pages, v10). Stories/CSF, args, decorators, play functions, interaction/visual/a11y testing, autodocs and MDX, addons, configuration, framework guides, migration. |
 | [tailwind](tailwind/) | Official Tailwind CSS documentation (197 pages + install guides, v4). CSS-first `@theme` config, every utility reference, variants and dark mode, custom utilities/variants, Vite/PostCSS/CLI setup, framework guides, v3 upgrade. |
+| [accessibility-wcag](accessibility-wcag/) | WCAG 2.2 AA audit methodology and checklist for any UI codebase: semantics, keyboard, focus, names/roles, forms, contrast, motion, live regions, pointer targets, reflow. Audit workflow, severity rubric, report format, tooling (axe, jsx-a11y). |
 
 ## Attribution
 
@@ -45,6 +47,8 @@ Each skill ships the complete upstream documentation under `references/` (unmodi
 - `tailwind/references/` — [tailwindlabs/tailwindcss.com](https://github.com/tailwindlabs/tailwindcss.com) `src/docs/` plus the installation guide pages (the source of tailwindcss.com/docs). Authored by Tailwind Labs and contributors.
 
 This repo's own content (SKILL.md files, scripts, workflows) is MIT-licensed under the repo [LICENSE](LICENSE).
+
+`accessibility-wcag` is authored content, not a mirror — it has no refresh workflow and is covered by this repo's MIT license like the SKILL.md files.
 
 Mirrors refresh weekly via GitHub Actions. To update manually:
 
