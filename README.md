@@ -1,4 +1,6 @@
-# skills
+# agent-skills
+
+[![skills.sh](https://skills.sh/b/gabrielhamalwa/agent-skills)](https://skills.sh/gabrielhamalwa/agent-skills)
 
 Agent skills for Claude Code, Codex, Copilot, Gemini CLI, Devin, and other agents that support the [agentskills.io](https://agentskills.io/specification) format.
 
@@ -6,10 +8,10 @@ Agent skills for Claude Code, Codex, Copilot, Gemini CLI, Devin, and other agent
 
 ```bash
 # Install all skills
-npx skills add gabrielhamalwa/skills -g
+npx skills add gabrielhamalwa/agent-skills -g
 
 # Install a single skill
-npx skills add gabrielhamalwa/skills --skill bun -g
+npx skills add gabrielhamalwa/agent-skills --skill bun -g
 ```
 
 ## Skills
