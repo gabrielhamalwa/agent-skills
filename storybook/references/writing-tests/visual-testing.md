@@ -123,6 +123,7 @@ Visual tests compare the rendered pixels of every story against known baselines.
 
 **More testing resources**
 
+- [See our complete guide to component testing](https://storybook.js.org/blog/component-testing-a-practical-guide-for-frontend-developers/)
 - [Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon.md) for running tests in Storybook
 - [Interaction testing](https://storybook.js.org/docs/writing-tests/interaction-testing.md) for user behavior simulation
 - [Accessibility testing](https://storybook.js.org/docs/writing-tests/accessibility-testing.md) for accessibility

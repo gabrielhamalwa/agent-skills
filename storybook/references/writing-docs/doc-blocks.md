@@ -338,6 +338,7 @@ export const Colors = meta.story({
 
 **Learn more about Storybook documentation**
 
+- [Guide to design system documentation for best practices and tools](https://storybook.js.org/blog/how-to-document-your-design-system-best-practices-tools/)
 - [Autodocs](https://storybook.js.org/docs/writing-docs/autodocs.md) for creating documentation for your stories
 - [MDX](https://storybook.js.org/docs/writing-docs/mdx.md) for customizing your documentation
 - Doc Blocks for authoring your documentation

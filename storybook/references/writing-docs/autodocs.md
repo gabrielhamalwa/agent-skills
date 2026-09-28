@@ -850,6 +850,7 @@ If you turned off inline rendering for your stories via the [`inline`](https://s
 
 **Learn more about Storybook documentation**
 
+- [Guide to design system documentation for best practices and tools](https://storybook.js.org/blog/how-to-document-your-design-system-best-practices-tools/)
 - Autodocs for creating documentation for your stories
 - [MDX](https://storybook.js.org/docs/writing-docs/mdx.md) for customizing your documentation
 - [Doc Blocks](https://storybook.js.org/docs/writing-docs/doc-blocks.md) for authoring your documentation

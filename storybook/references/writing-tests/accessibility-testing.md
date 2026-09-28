@@ -740,6 +740,7 @@ export default defineMain({
 
 **More testing resources**
 
+- [See our complete guide to component testing](https://storybook.js.org/blog/component-testing-a-practical-guide-for-frontend-developers/)
 - [Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon.md) for running tests in Storybook
 - [Interaction testing](https://storybook.js.org/docs/writing-tests/interaction-testing.md) for user behavior simulation
 - [Visual testing](https://storybook.js.org/docs/writing-tests/visual-testing.md) for appearance

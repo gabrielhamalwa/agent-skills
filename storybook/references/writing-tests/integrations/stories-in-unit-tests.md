@@ -192,6 +192,7 @@ export default defineConfig({
 
 **More testing resources**
 
+- [See our complete guide to component testing](https://storybook.js.org/blog/component-testing-a-practical-guide-for-frontend-developers/)
 - [Interaction testing](https://storybook.js.org/docs/writing-tests/interaction-testing.md) for user behavior simulation
 - [Accessibility testing](https://storybook.js.org/docs/writing-tests/accessibility-testing.md) for accessibility
 - [Visual testing](https://storybook.js.org/docs/writing-tests/visual-testing.md) for appearance
