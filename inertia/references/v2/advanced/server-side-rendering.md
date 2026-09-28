@@ -385,6 +385,12 @@ To stop the SSR server, for instance when you deploy a new version of your websi
 php artisan inertia:stop-ssr
 ```
 
+By default, the command fails when the SSR server is not running. You may pass the `--graceful` option to return a successful exit code instead, making it ideal for deployment scripts where the SSR server is not yet running.
+
+```bash theme={null}
+php artisan inertia:stop-ssr --graceful
+```
+
 You may use the `inertia:check-ssr` Artisan command to verify that the SSR server is running. This can be helpful after deployment and works well as a Docker health check to ensure the server is responding as expected.
 
 ```bash theme={null}
