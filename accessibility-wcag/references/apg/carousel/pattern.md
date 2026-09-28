@@ -1,3 +1,4 @@
+
 # Carousel (Slide Show or Image Rotator) Pattern
 
 
@@ -102,4 +103,5 @@ A grouped carousel has the same structure as a basic carousel, but it also inclu
 - Each picker control is a native button element (recommended) or implements the [button pattern.](../button/pattern.md)
 - The accessible name of each picker button matches the name of the slide it displays. One technique for accomplishing this is to set aria-labelledby to a value that references the slide `group` element.
 - The picker button representing the currently displayed slide has the property aria-disabled set to `true`. Note: `aria-disabled` is preferable to the HTML `disabled` attribute because this is a circumstance where screen reader users benefit from the disabled button being included in the page `Tab` sequence.
+
 

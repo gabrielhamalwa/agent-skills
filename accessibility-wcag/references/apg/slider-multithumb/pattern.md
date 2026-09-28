@@ -1,3 +1,4 @@
+
 # Slider (Multi-Thumb) Pattern
 
 
@@ -37,4 +38,5 @@ Some users of touch-based assistive technologies may experience difficulty utili
 - If a value of `aria-valuenow` is not user-friendly, e.g., the day of the week is represented by a number, the aria-valuetext property is set to a string that makes the slider value understandable, e.g., "Monday".
 - If a slider has a visible label, it is referenced by aria-labelledby on the slider element. Otherwise, the slider element has a label provided by aria-label.
 - If a slider is vertically oriented, it has aria-orientation set to `vertical`. The default value of `aria-orientation` for a slider is `horizontal`.
+
 

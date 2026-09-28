@@ -1,3 +1,4 @@
+
 # Alert and Message Dialogs Pattern
 
 
@@ -38,5 +39,6 @@ See the keyboard interaction section for the [modal dialog pattern](../dialog-mo
 - The `aria-modal` property introduced by ARIA 1.1 replaces aria-hidden for informing assistive technologies that content outside a dialog is inert. However, in legacy dialog implementations where `aria-hidden` is used to make content outside a dialog inert for assistive technology users, it is important that:
   1.  `aria-hidden` is set to `true` on each element containing a portion of the inert layer.
   2.  The dialog element is not a descendant of any element that has `aria-hidden` set to `true`.
+
 
 

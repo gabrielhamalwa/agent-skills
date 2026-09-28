@@ -1,3 +1,4 @@
+
 # Structural Roles
 
 
@@ -26,47 +27,48 @@ Circumstances where it is appropriate to use ARIA attributes instead of equivale
 
 The following table lists all structural roles defined in ARIA 1.2. As described above in the section on [When to Use Structural Roles](#when_to_use_structural_roles), use an equivalent HTML element instead of an ARIA structural role unless the ARIA role does not have an HTML equivalent or one of the four circumstances that makes using ARIA necessary exists.
 
-| ARIA Role | HTML Equivalent |
-|----|----|
-| application | No equivalent element |
-| article | article |
-| blockquote | blockquote |
-| caption | caption |
-| cell | td |
-| code | code |
-| columnheader | th |
-| definition | dd |
-| deletion | del |
-| directory | No equivalent element |
-| document | No equivalent element |
-| emphasis | em |
-| feed | No equivalent element |
-| figure | figure |
-| generic | div, span |
-| group | No equivalent element |
+| ARIA Role                                                  | HTML Equivalent        |
+|------------------------------------------------------------|------------------------|
+| application                                                | No equivalent element  |
+| article                                                    | article                |
+| blockquote                                                 | blockquote             |
+| caption                                                    | caption                |
+| cell                                                       | td                     |
+| code                                                       | code                   |
+| columnheader                                               | th                     |
+| definition                                                 | dd                     |
+| deletion                                                   | del                    |
+| directory                                                  | No equivalent element  |
+| document                                                   | No equivalent element  |
+| emphasis                                                   | em                     |
+| feed                                                       | No equivalent element  |
+| figure                                                     | figure                 |
+| generic                                                    | div, span              |
+| group                                                      | No equivalent element  |
 | heading with aria-level="N" where N is 1, 2, 3, 4, 5, or 6 | h1, h2, h3, h4, h5, h6 |
-| insertion | ins |
-| img | img |
-| list | ul, ol |
-| listitem | li |
-| mark | mark |
-| math | No equivalent element |
-| none | No equivalent element |
-| note | No equivalent element |
-| presentation | No equivalent element |
-| paragraph | p |
-| row | tr |
-| rowgroup | tbody, thead, tfoot |
-| rowheader | th |
-| separator (when not focusable) | hr |
-| strong | strong |
-| subscript | sub |
-| superscript | sup |
-| table | table |
-| term | dfn |
-| time | time |
-| toolbar | No equivalent element |
-| tooltip | No equivalent element |
+| insertion                                                  | ins                    |
+| img                                                        | img                    |
+| list                                                       | ul, ol                 |
+| listitem                                                   | li                     |
+| mark                                                       | mark                   |
+| math                                                       | No equivalent element  |
+| none                                                       | No equivalent element  |
+| note                                                       | No equivalent element  |
+| presentation                                               | No equivalent element  |
+| paragraph                                                  | p                      |
+| row                                                        | tr                     |
+| rowgroup                                                   | tbody, thead, tfoot    |
+| rowheader                                                  | th                     |
+| separator (when not focusable)                             | hr                     |
+| strong                                                     | strong                 |
+| subscript                                                  | sub                    |
+| superscript                                                | sup                    |
+| table                                                      | table                  |
+| term                                                       | dfn                    |
+| time                                                       | time                   |
+| toolbar                                                    | No equivalent element  |
+| tooltip                                                    | No equivalent element  |
 
-ARIA structural roles {.widget-features}
+ARIA structural roles
+
 

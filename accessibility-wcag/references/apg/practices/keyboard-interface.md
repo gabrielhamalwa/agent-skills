@@ -1,3 +1,4 @@
+
 # Developing a Keyboard Interface
 
 
@@ -201,14 +202,14 @@ One design technique for mitigating the impact of including disabled elements in
 
 The following key assignments can be used in any context where their conventionally associated functions are appropriate. While the assignments associated with Windows and Linux platforms can be implemented and used in browsers running in macOS, replacing them with macOS assignments in browsers running on a macOS device can make the keyboard interface more discoverable and intuitive for those users. In some cases, it may also help avoid system or browser keyboard conflicts.
 
-| Function | Windows/Linux Key | macOS Key |
-|----|----|----|
-| open context menu | `Shift` + `F10` |  |
-| Copy to clipboard | `Control` + `C` | `Command` + `C` |
-| Paste from clipboard | `Control` + `V` | `Command` + `V` |
-| Cut to clipboard | `Control` + `X` | `Command` + `X` |
-| undo last action | `Control` + `Z` | `Command` + `Z` |
-| Redo action | `Control` + `Y` | `Command` + `Shift` + `Z` |
+| Function             | Windows/Linux Key                                             | macOS Key                                                                                      |
+|----------------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| open context menu    | `Shift` + `F10` |                                                                                                |
+| Copy to clipboard    | `Control` + `C` | `Command` + `C`                                  |
+| Paste from clipboard | `Control` + `V` | `Command` + `V`                                  |
+| Cut to clipboard     | `Control` + `X` | `Command` + `X`                                  |
+| undo last action     | `Control` + `Z` | `Command` + `Z`                                  |
+| Redo action          | `Control` + `Y` | `Command` + `Shift` + `Z` |
 
 
 
@@ -341,6 +342,7 @@ While avoiding key conflicts is usually desirable, there are circumstances where
 - There is an efficient, alternative path to the browser function.
 
 For example, consider a save function that is available when the focus is in an editor. Most browsers use ... to be continued ...
+
 
 
 

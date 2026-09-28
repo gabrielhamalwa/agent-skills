@@ -1,3 +1,4 @@
+
 # Alert Pattern
 
 
@@ -27,4 +28,5 @@ Not applicable.
 ## WAI-ARIA Roles, States, and Properties
 
 The widget has a role of alert.
+
 

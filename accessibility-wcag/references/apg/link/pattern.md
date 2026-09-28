@@ -1,3 +1,4 @@
+
 # Link Pattern
 
 
@@ -30,4 +31,5 @@ Authors are strongly encouraged to use a native host language link element, such
 ## WAI-ARIA Roles, States, and Properties
 
 The element containing the link text or graphic has role of link.
+
 

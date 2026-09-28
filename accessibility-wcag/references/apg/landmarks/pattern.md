@@ -1,3 +1,4 @@
+
 # Landmarks Pattern
 
 
@@ -34,4 +35,5 @@ Not applicable.
 ## WAI-ARIA Roles, States, and Properties
 
 The [Landmark Regions Practice](../practices/landmark-regions.md) describes the HTML elements, roles, properties, and usage guidelines for each of the landmark region roles.
+
 

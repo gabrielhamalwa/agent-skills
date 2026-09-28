@@ -1,3 +1,4 @@
+
 # Hiding Semantics with the `presentation` Role
 
 
@@ -102,4 +103,5 @@ Because WAI-ARIA requires descendants of tab to be presentational, the heading s
 So, from the perspective of anyone using a technology that relies on an accessibility API, such as a screen reader, the heading does not exist. As described above in the section on [Effects of Role `presentation`](#presentation_role_effects), the previous code is equivalent to the following.
 
     <li role="tab">Title of My Tab</li>
+
 

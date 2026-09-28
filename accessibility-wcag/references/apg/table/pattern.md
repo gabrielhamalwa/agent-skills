@@ -1,3 +1,4 @@
+
 # Table Pattern
 
 
@@ -49,5 +50,6 @@ Not applicable.
 ### Note
 
 If rows or cells are included in a table via aria-owns, they will be presented to assistive technologies after the DOM descendants of the `table` element unless the DOM descendants are also included in the `aria-owns` attribute.
+
 
 

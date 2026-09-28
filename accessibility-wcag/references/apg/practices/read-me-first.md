@@ -1,3 +1,4 @@
+
 # Read Me First
 
 
@@ -66,4 +67,5 @@ Except in cases where the ARIA Working Group and other contributors have overloo
 Currently, this guide does not indicate which examples are compatible with mobile browsers or touch interfaces. While some of the examples include specific features that enhance mobile and touch support, some ARIA features are not supported in any mobile browser. In addition, there is not yet a standardized approach for providing touch interactions that work across mobile browsers.
 
 More guidance about touch and mobile support is planned for future releases of the guide.
+
 

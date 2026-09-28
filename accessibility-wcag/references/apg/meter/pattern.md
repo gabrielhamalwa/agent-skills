@@ -1,3 +1,4 @@
+
 # Meter Pattern
 
 
@@ -35,4 +36,5 @@ Not applicable.
 - The meter has aria-valuemax set to a decimal value greater than `aria-valuemin`.
 - Assistive technologies often present `aria-valuenow` as a percentage. If conveying the value of the meter only in terms of a percentage would not be user friendly, the aria-valuetext property is set to a string that makes the meter value understandable. For example, a battery meter value might be conveyed as `aria-valuetext="50% (6 hours) remaining"`.
 - If the meter has a visible label, it is referenced by aria-labelledby on the element with role `meter`. Otherwise, the element with role `meter` has a label provided by aria-label.
+
 

@@ -1,3 +1,4 @@
+
 # Listbox Pattern
 
 
@@ -104,5 +105,6 @@ For a vertically oriented listbox:
     - The user interface makes the meaning and purpose of each state apparent.
     - The user interface provides a separate method for controlling each state.
 3.  If aria-owns is set on the listbox element to include elements that are not DOM children of the container, those elements will appear in the reading order in the sequence they are referenced and after any items that are DOM children. Scripts that manage focus need to ensure the visual focus order matches this assistive technology reading order.
+
 
 

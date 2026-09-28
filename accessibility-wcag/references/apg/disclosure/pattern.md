@@ -1,3 +1,4 @@
+
 # Disclosure (Show/Hide) Pattern
 
 
@@ -32,4 +33,5 @@ When the disclosure control has focus:
 - The element that shows and hides the content has role button.
 - When the content is visible, the element with role `button` has aria-expanded set to `true`. When the content area is hidden, it is set to `false`.
 - Optionally, the element with role `button` has a value specified for aria-controls that refers to the element that contains all the content that is shown or hidden.
+
 

@@ -1,3 +1,4 @@
+
 # Grid and Table Properties
 
 
@@ -21,48 +22,50 @@ The below sections explain how to use the following properties that ARIA provide
 <col style="width: 50%" />
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Property</th>
 <th>Definition</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <th><code>aria-colcount</code></th>
 <td>Defines the total number of columns in a <code>table</code>, <code>grid</code>, or <code>treegrid</code>.</td>
 </tr>
-<tr>
+<tr class="even">
 <th><code>aria-rowcount</code></th>
 <td>Defines the total number of rows in a <code>table</code>, <code>grid</code>, or <code>treegrid</code>.</td>
 </tr>
-<tr>
+<tr class="odd">
 <th><code>aria-colindex</code></th>
 <td><ul>
 <li>Defines a cell's position with respect to the total number of columns within a <code>table</code>, <code>grid</code>, or <code>treegrid</code>.</li>
 <li><strong>Note:</strong> Numbering starts with 1, not 0.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <th><code>aria-rowindex</code></th>
 <td><ul>
 <li>Defines a cell's position with respect to the total number of rows within a <code>table</code>, <code>grid</code>, or <code>treegrid</code>.</li>
 <li><strong>Note:</strong> Numbering starts with 1, not 0.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <th><code>aria-colspan</code></th>
 <td>Defines the number of columns spanned by a cell or gridcell within a <code>table</code>, <code>grid</code>, or <code>treegrid</code>.</td>
 </tr>
-<tr>
+<tr class="even">
 <th><code>aria-rowspan</code></th>
 <td>Defines the number of rows spanned by a cell or gridcell within a <code>table</code>, <code>grid</code>, or <code>treegrid</code>.</td>
 </tr>
-<tr>
+<tr class="odd">
 <th><code>aria-sort</code></th>
 <td>Indicates if items in a row or column are sorted in ascending or descending order.</td>
 </tr>
 </tbody>
 </table>
+
+Grid and Table Property Definitions
 
 
 
@@ -337,14 +340,14 @@ The following example grid has a two row header. The first two columns have head
 
 When rows or columns are sorted, the `aria-sort` property can be applied to a column or row header to indicate the sorting method. The following table describes allowed values for `aria-sort`.
 
-| Value | Description |
-|----|----|
-| `ascending` | Data are sorted in ascending order. |
-| `descending` | Data are sorted in descending order. |
-| `other` | Data are sorted by an algorithm other than ascending or descending. |
-| `none` | Default (no sort applied). |
+| Value        | Description                                                         |
+|--------------|---------------------------------------------------------------------|
+| `ascending`  | Data are sorted in ascending order.                                 |
+| `descending` | Data are sorted in descending order.                                |
+| `other`      | Data are sorted by an algorithm other than ascending or descending. |
+| `none`       | Default (no sort applied).                                          |
 
-Description of values for `aria-sort` {.widget-features}
+Description of values for `aria-sort`
 
 It is important to note that ARIA does not provide a way to indicate levels of sort for data sets that have multiple sort keys. Thus, there is limited value to applying `aria-sort` with a value other than `none` to more than one column or row.
 
@@ -397,4 +400,5 @@ The following example grid uses `aria-sort` to indicate the rows are sorted from
         </tr>
       </tbody>
     </table>
+
 

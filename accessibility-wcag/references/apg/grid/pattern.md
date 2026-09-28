@@ -1,3 +1,4 @@
+
 # Grid (Interactive Tabular Data and Layout Containers) Pattern
 
 
@@ -199,5 +200,6 @@ When grid navigation is disabled, conventional changes to navigation behaviors i
 
 - If the element with the `grid` role is an HTML `table` element, then it is not necessary to use ARIA roles for rows and cells because the HTML elements have implied ARIA semantics. For example, an HTML `<TR>` has an implied ARIA role of `row`. A `grid` built from an HTML `table` that includes cells that span multiple rows or columns must use HTML `rowspan` and `colspan` and must not use `aria-rowspan` or `aria-colspan`.
 - If rows or cells are included in a grid via aria-owns, they will be presented to assistive technologies after the DOM descendants of the `grid` element unless the DOM descendants are also included in the `aria-owns` attribute.
+
 
 

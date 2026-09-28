@@ -1,3 +1,4 @@
+
 # Providing Accessible Names and Descriptions
 
 
@@ -374,29 +375,29 @@ Provides information to help determine if providing a name is beneficial, and if
 <col style="width: 33%" />
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>role</th>
 <th>Necessity of Naming</th>
 <th>Guidance</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><a href="#alert" class="role-reference"><code>alert</code></a></td>
 <td>Discretionary</td>
 <td>Some screen readers announce the name of an alert before announcing the content of the alert. Thus, <code>aria-label</code> provides a method for prefacing the visible content of an alert with text that is not displayed as part of the alert. Using <code>aria-label</code> is functionally equivalent to providing off-screen text in the contents of the alert, except off-screen text would be announced by screen readers that do not support <code>aria-label</code> on <code>alert</code> elements.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#alertdialog" class="role-reference"><code>alertdialog</code></a></td>
 <td>Required</td>
 <td>Use <code>aria-labelledby</code> if a visible label is present, otherwise use <code>aria-label</code>.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#application" class="role-reference"><code>application</code></a></td>
 <td>Required</td>
 <td>Use <code>aria-labelledby</code> if a visible label is present, otherwise use <code>aria-label</code>.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#article" class="role-reference"><code>article</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -404,7 +405,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Use <code>aria-labelledby</code> if a visible label is present, otherwise use <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#banner" class="role-reference"><code>banner</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -413,12 +414,12 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="landmark-regions.md">Banner Landmark</a> section.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#blockquote" class="role-reference"><code>blockquote</code></a></td>
 <td>Discretionary</td>
 <td>If a visible label is present, associating it with the blockquote by using <code>aria-labelledby</code> could benefit some assistive technology users.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#button" class="role-reference"><code>button</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -426,12 +427,12 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Ideally named by visible, descendant content.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#caption" class="role-reference"><code>caption</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#cell" class="role-reference"><code>cell</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -441,7 +442,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Note that associated row or column headers do not name a <code>cell</code>; the name of a cell in a table is its content. Headers are complementary information.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#checkbox" class="role-reference"><code>checkbox</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -450,12 +451,12 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Otherwise, reference visible content via <code>aria-labelledby</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#code" class="role-reference"><code>code</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#columnheader" class="role-reference"><code>columnheader</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -464,7 +465,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>If the <code>columnheader</code> role is implied from an HTML <code>th</code>, the HTML <code>abbr</code> attribute can be used to specify an abbreviated version of the name that is only announced when screen readers are reading an associated <code>cell</code> within the <code>table</code>, <code>grid</code>, or <code>treegrid</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#combobox" class="role-reference"><code>combobox</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -473,7 +474,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Use <code>aria-label</code> if a visible label is not present.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#complementary" class="role-reference"><code>complementary</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -483,7 +484,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="landmark-regions.md">Complementary Landmark</a> section.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#contentinfo" class="role-reference"><code>contentinfo</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -491,22 +492,22 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Named using <code>aria-labelledby</code> if a visible label is present, otherwise with <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#definition" class="role-reference"><code>definition</code></a></td>
 <td>Recommended</td>
 <td>Reference the term being defined with <code>role="term"</code>, using <code>aria-labelledby</code>.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#deletion" class="role-reference"><code>deletion</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#dialog" class="role-reference"><code>dialog</code></a></td>
 <td>Required</td>
 <td>Use <code>aria-labelledby</code> if a visible label is present, otherwise use <code>aria-label</code>.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#directory" class="role-reference"><code>directory</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -514,17 +515,17 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Use <code>aria-labelledby</code> if a visible label is present, otherwise use <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#document" class="role-reference"><code>document</code></a></td>
 <td>Discretionary</td>
 <td>Elements with the <code>document</code> role are contained within an element with the <code>application</code> role, which is required to have a name. Typically, the name of the <code>application</code> element will provide sufficient context and identity for the <code>document</code> element. Because the <code>application</code> element is used only to create unusual, custom widgets, careful assessment is necessary to determine whether or not adding an accessible name is beneficial.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#emphasis" class="role-reference"><code>emphasis</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#feed" class="role-reference"><code>feed</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -533,7 +534,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../feed/pattern.md">Feed Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#figure" class="role-reference"><code>figure</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -542,7 +543,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>If there is no visible caption, <code>aria-label</code> can be used.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#form" class="role-reference"><code>form</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -551,12 +552,12 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="landmark-regions.md">Form Landmark</a> section.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#generic" class="role-reference"><code>generic</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#grid" class="role-reference"><code>grid</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -564,7 +565,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Otherwise, use <code>aria-labelledby</code> if a visible label is present, otherwise use <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#gridcell" class="role-reference"><code>gridcell</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -574,7 +575,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Note that associated row or column headers do not name a <code>gridcell</code>; the name of a cell in a grid is its content. Headers are complementary information.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#group" class="role-reference"><code>group</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -584,7 +585,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Otherwise, use <code>aria-labelledby</code> if a visible label is present, otherwise use <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#heading" class="role-reference"><code>heading</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -592,17 +593,17 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Ideally named by visible, descendant content.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#insertion" class="role-reference"><code>insertion</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#img" class="role-reference"><code>img</code></a></td>
 <td>Required</td>
 <td>For the HTML <code>img</code> element, use the <code>alt</code> attribute. For other elements with the <code>img</code> role, use <code>aria-labelledby</code> or <code>aria-label</code>.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#link" class="role-reference"><code>link</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -610,7 +611,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Ideally named by visible, descendant content.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#list" class="role-reference"><code>list</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -619,7 +620,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Can be named using <code>aria-labelledby</code> if a visible label is present, otherwise with <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#listbox" class="role-reference"><code>listbox</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -629,22 +630,22 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../listbox/pattern.md">Listbox Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#listitem" class="role-reference"><code>listitem</code></a></td>
 <td>Do Not Name</td>
 <td>Naming is not supported by assistive technologies; it is necessary to include relevant content within the list item.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#log" class="role-reference"><code>log</code></a></td>
 <td>Discretionary</td>
 <td>Some screen readers announce the name of a log element before announcing the content of the log element. Thus, <code>aria-label</code> provides a method for prefacing the visible content of a log element with text that is not displayed as part of the log element. Using <code>aria-label</code> is functionally equivalent to providing off-screen text in the contents of the log element, except off-screen text would be announced by screen readers that do not support <code>aria-label</code> on <code>log</code> elements.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#mark" class="role-reference"><code>mark</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#main" class="role-reference"><code>main</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -653,12 +654,12 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="landmark-regions.md">Main Landmark</a> section.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#marquee" class="role-reference"><code>marquee</code></a></td>
 <td>Discretionary</td>
 <td>Use <code>aria-labelledby</code> if a visible label is present, otherwise use <code>aria-label</code>.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#math" class="role-reference"><code>math</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -667,7 +668,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Otherwise, use a<code>aria-label</code> to name the expression, e.g., <code>aria-label="Pythagorean Theorem"</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#menu" class="role-reference"><code>menu</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -676,7 +677,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../menubar/pattern.md">Menu and Menubar Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#menubar" class="role-reference"><code>menubar</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -685,7 +686,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../menubar/pattern.md">Menu and Menubar Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#menuitem" class="role-reference"><code>menuitem</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -695,7 +696,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../menubar/pattern.md">Menu and Menubar Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#menuitemcheckbox" class="role-reference"><code>menuitemcheckbox</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -704,7 +705,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../menubar/pattern.md">Menu and Menubar Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#menuitemradio" class="role-reference"><code>menuitemradio</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -713,7 +714,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../menubar/pattern.md">Menu and Menubar Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#meter" class="role-reference"><code>meter</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -722,7 +723,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Use <code>aria-label</code> if a visible label is not present.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#navigation" class="role-reference"><code>navigation</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -731,12 +732,12 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="landmark-regions.md">Navigation Landmark</a> section.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#none" class="role-reference"><code>none</code></a></td>
 <td>Prohibited</td>
 <td>An element with <code>role="none"</code> is not part of the accessibility tree (except in error cases). Do not use <code>aria-labelledby</code> or <code>aria-label</code>.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#note" class="role-reference"><code>note</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -744,7 +745,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Named using <code>aria-labelledby</code> if a visible label is present, otherwise with <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#option" class="role-reference"><code>option</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -753,17 +754,17 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../combobox/pattern.md">Combobox Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#paragraph" class="role-reference"><code>paragraph</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#presentation" class="role-reference"><code>presentation</code></a></td>
 <td>Prohibited</td>
 <td>An element with <code>role="presentation"</code> is not part of the accessibility tree (except in error cases). Do not use <code>aria-labelledby</code> or <code>aria-label</code>.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#progressbar" class="role-reference"><code>progressbar</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -772,7 +773,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Use <code>aria-label</code> if a visible label is not present.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#radio" class="role-reference"><code>radio</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -781,7 +782,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Otherwise, reference visible content via <code>aria-labelledby</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#radiogroup" class="role-reference"><code>radiogroup</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -790,7 +791,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../radio/pattern.md">Radio Group Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#region" class="role-reference"><code>region</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -799,17 +800,17 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="landmark-regions.md">Region Landmark</a> section.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#row" class="role-reference"><code>row</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient <strong>AND</strong> descendant of a <code>treegrid</code> <strong>AND</strong> the row is focusable</td>
 <td>When <code>row</code> elements are focusable in a <a href="../treegrid/pattern.md">treegrid</a>, screen readers announce the entire contents of a row when navigating by row. This is typically the most appropriate behavior. However, in some circumstances, it could be beneficial to change the order in which cells are announced or exclude announcement of certain cells by using <code>aria-labelledby</code> to specify which cells to announce.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#rowgroup" class="role-reference"><code>rowgroup</code></a></td>
 <td>Do Not Name</td>
 <td>Naming is not supported by assistive technologies.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#rowheader" class="role-reference"><code>rowheader</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -818,7 +819,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>If the <code>rowheader</code> role is implied from an HTML <code>th</code>, the HTML <code>abbr</code> attribute can be used to specify an abbreviated version of the name that is only announced when screen readers are reading an associated <code>cell</code> within the <code>table</code>, <code>grid</code>, or <code>treegrid</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#scrollbar" class="role-reference"><code>scrollbar</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -826,7 +827,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Named using <code>aria-labelledby</code> if a visible label is present, otherwise with <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#search" class="role-reference"><code>search</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -835,7 +836,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="landmark-regions.md">Search Landmark</a> section.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#searchbox" class="role-reference"><code>searchbox</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -844,7 +845,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Use <code>aria-label</code> if a visible label is not present.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#separator" class="role-reference"><code>separator</code></a></td>
 <td>Discretionary</td>
 <td><ul>
@@ -853,7 +854,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Named using <code>aria-labelledby</code> if a visible label is present, otherwise with <code>aria-label</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#slider" class="role-reference"><code>slider</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -863,7 +864,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../slider/pattern.md">Slider Pattern</a> and the <a href="../slider-multithumb/pattern.md">Slider (Multi-Thumb) Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#spinbutton" class="role-reference"><code>spinbutton</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -873,27 +874,27 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../spinbutton/pattern.md">Spinbutton Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#status" class="role-reference"><code>status</code></a></td>
 <td>Discretionary</td>
 <td>Some screen readers announce the name of a status element before announcing the content of the status element. Thus, <code>aria-label</code> provides a method for prefacing the visible content of a status element with text that is not displayed as part of the status element. Using <code>aria-label</code> is functionally equivalent to providing off-screen text in the contents of the status element, except off-screen text would be announced by screen readers that do not support <code>aria-label</code> on <code>status</code> elements.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#strong" class="role-reference"><code>strong</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#subscript" class="role-reference"><code>subscript</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#superscript" class="role-reference"><code>superscript</code></a></td>
 <td>Prohibited</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#switch" class="role-reference"><code>switch</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -902,7 +903,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Otherwise, reference visible content via <code>aria-labelledby</code>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#tab" class="role-reference"><code>tab</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -910,7 +911,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Ideally named by visible, descendant content.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#table" class="role-reference"><code>table</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -920,7 +921,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../table/pattern.md">Table Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#tablist" class="role-reference"><code>tablist</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -929,7 +930,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../carousel/pattern.md">Carousel Pattern</a> and <a href="../tabs/pattern.md">Tabs Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#tabpanel" class="role-reference"><code>tabpanel</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -937,12 +938,12 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../carousel/pattern.md">Carousel Pattern</a> and <a href="../tabs/pattern.md">Tabs Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#term" class="role-reference"><code>term</code></a></td>
 <td>Do Not Name</td>
 <td>Since a term is usually the name for the <code>role="definition"</code> element, it could be confusing if the term itself also has a name.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#textbox" class="role-reference"><code>textbox</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -951,17 +952,17 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Use <code>aria-label</code> if a visible label is not present.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#time" class="role-reference"><code>time</code></a></td>
 <td>Do Not Name</td>
 <td>Naming is not supported by assistive technologies.</td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#timer" class="role-reference"><code>timer</code></a></td>
 <td>Discretionary</td>
 <td>Some screen readers announce the name of a timer element before announcing the content of the timer element. Thus, <code>aria-label</code> provides a method for prefacing the visible content of a timer element with text that is not displayed as part of the timer element. Using <code>aria-label</code> is functionally equivalent to providing off-screen text in the contents of the timer element, except off-screen text would be announced by screen readers that do not support <code>aria-label</code> on <code>timer</code> elements.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#toolbar" class="role-reference"><code>toolbar</code></a></td>
 <td>Recommended</td>
 <td><ul>
@@ -971,7 +972,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../toolbar/pattern.md">Toolbar Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#tooltip" class="role-reference"><code>tooltip</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -979,7 +980,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>Ideally named by visible, descendant content.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#tree" class="role-reference"><code>tree</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -987,7 +988,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../treeview/pattern.md">Tree View Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a href="#treegrid" class="role-reference"><code>treegrid</code></a></td>
 <td>Required</td>
 <td><ul>
@@ -996,7 +997,7 @@ Provides information to help determine if providing a name is beneficial, and if
 <li>See the <a href="../treegrid/pattern.md">Treegrid Pattern</a>.</li>
 </ul></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a href="#treeitem" class="role-reference"><code>treeitem</code></a></td>
 <td>Required <strong>Only If</strong> Content Insufficient</td>
 <td><ul>
@@ -1024,8 +1025,8 @@ User agents construct an accessible name string for an element by walking throug
     `input` whose `type` attribute is in the Button, Submit Button, or Reset Button state  
     The `value` attribute.
 
-    `input` whose `type` attribute is in the Image Button state\
-    `img`\
+    `input` whose `type` attribute is in the Image Button state  
+    `img`  
     `area`  
     The `alt` attribute.
 
@@ -1045,7 +1046,7 @@ User agents construct an accessible name string for an element by walking throug
 
 5.  Finally, if the name is still empty, then other fallback host-language-specific attributes or elements are used if present. For HTML, these are, depending on the element:
 
-    `input` whose `type` attribute is in the Text, Password, Search, Telephone, or URL states\
+    `input` whose `type` attribute is in the Text, Password, Search, Telephone, or URL states  
     `textarea`  
     The `title` attribute. Otherwise, the `placeholder` attribute.
 
@@ -1272,4 +1273,5 @@ User agents construct an accessible description string for an element by walking
     The first child `caption` element.
 
 3.  Finally, if the description is still empty, then other host-language-specific attributes or elements are used if present, if it wasn't already used for the accessible name. For HTML, this is the `title` attribute.
+
 

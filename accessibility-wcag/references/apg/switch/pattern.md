@@ -1,3 +1,4 @@
+
 # Switch Pattern
 
 
@@ -41,4 +42,5 @@ Since switch, checkbox, and toggle button all offer binary input, they are often
   - The switches are included in an element with role group that has the property aria-labelledby set to the ID of the element containing the group label.
   - The set is contained in an HTML `fieldset` and the label for the set is contained in an HTML `legend` element.
 - If the presentation includes additional descriptive static text relevant to a switch or switch group, the switch or switch group has the property aria-describedby set to the ID of the element containing the description.
+
 
