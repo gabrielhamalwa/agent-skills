@@ -149,12 +149,12 @@ return Inertia::render('Users/Index', [
 
 Here's a summary of each approach:
 
-| Approach                                                                              | Standard Visits | Partial Reloads | Evaluated        |   |
-| :------------------------------------------------------------------------------------ | :-------------- | :-------------- | :--------------- | - |
-| <span style={{whiteSpace: 'nowrap'}}>`User::all()`</span>                             | Always          | Optionally      | Always           |   |
-| <span style={{whiteSpace: 'nowrap'}}>`fn () => User::all()`</span>                    | Always          | Optionally      | Only when needed |   |
-| <span style={{whiteSpace: 'nowrap'}}>`Inertia::optional(fn () => User::all())`</span> | Never           | Optionally      | Only when needed |   |
-| <span style={{whiteSpace: 'nowrap'}}>`Inertia::always(fn () => User::all())`</span>   | Always          | Always          | Always           |   |
+| Approach | Standard Visits | Partial Reloads | Evaluated | |
+| :- | :- | :- | :- | - |
+| <span style={{whiteSpace: 'nowrap'}}>`User::all()`</span> | Always | Optionally | Always | |
+| <span style={{whiteSpace: 'nowrap'}}>`fn () => User::all()`</span> | Always | Optionally | Only when needed | |
+| <span style={{whiteSpace: 'nowrap'}}>`Inertia::optional(fn () => User::all())`</span> | Never | Optionally | Only when needed | |
+| <span style={{whiteSpace: 'nowrap'}}>`Inertia::always(fn () => User::all())`</span> | Always | Always | Always | |
 
 ## Preserving Errors
 

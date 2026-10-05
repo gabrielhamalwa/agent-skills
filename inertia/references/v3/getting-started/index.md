@@ -14,12 +14,12 @@ Inertia isn't a framework, nor is it a replacement for your existing server-side
 
 Inertia.js follows the same support policy as [Laravel](https://laravel.com/docs/releases#support-policy). When a new major version is released, the previous version receives bug fixes for 6 months and security fixes for 12 months. Inertia.js v3 was released on March 26, 2026.
 
-| Version | Bug Fixes Until    | Security Fixes Until |
-| ------- | ------------------ | -------------------- |
-| 0.x     | End of life        | End of life          |
-| 1.x     | End of life        | End of life          |
-| 2.x     | September 26, 2026 | March 26, 2027       |
-| 3.x     | TBD                | TBD                  |
+| Version | Bug Fixes Until | Security Fixes Until |
+| - | - | - |
+| 0.x | End of life | End of life |
+| 1.x | End of life | End of life |
+| 2.x | September 26, 2026 | March 26, 2027 |
+| 3.x | TBD | TBD |
 
 ## Next Steps
 

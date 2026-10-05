@@ -350,27 +350,27 @@ Resolution differs between the two request modes. A full visit resolves the comp
 
 **Full visit**
 
-| Prop category                | Resolved?                                | Metadata emitted                                               |
-| :--------------------------- | :--------------------------------------- | :------------------------------------------------------------- |
-| Regular                      | Yes                                      | none                                                           |
-| Always                       | Yes (immune to `only`/`except`)          | none                                                           |
-| Optional                     | No (not resolved, not announced)         | none                                                           |
-| Deferred                     | No (announced only)                      | `deferredProps`                                                |
-| Merge / deep merge / prepend | Yes                                      | `mergeProps`, `deepMergeProps`, `prependProps`, `matchPropsOn` |
-| Once                         | Yes, unless already remembered by client | `onceProps`                                                    |
-| Scroll                       | Yes                                      | `scrollProps`, `mergeProps`                                    |
+| Prop category | Resolved? | Metadata emitted |
+| :- | :- | :- |
+| Regular | Yes | none |
+| Always | Yes (immune to `only`/`except`) | none |
+| Optional | No (not resolved, not announced) | none |
+| Deferred | No (announced only) | `deferredProps` |
+| Merge / deep merge / prepend | Yes | `mergeProps`, `deepMergeProps`, `prependProps`, `matchPropsOn` |
+| Once | Yes, unless already remembered by client | `onceProps` |
+| Scroll | Yes | `scrollProps`, `mergeProps` |
 
 **Partial reload**
 
-| Prop category                | Resolved?                                   | Metadata emitted                                               |
-| :--------------------------- | :------------------------------------------ | :------------------------------------------------------------- |
-| Regular                      | Only when requested via `only`/`except`     | none                                                           |
-| Always                       | Yes (immune to `only`/`except`)             | none                                                           |
-| Optional                     | Only when selected via `only`/`except`      | none                                                           |
-| Deferred                     | Only when selected via `only`/`except`      | `rescuedProps` (on rescue)                                     |
-| Merge / deep merge / prepend | When resolved                               | `mergeProps`, `deepMergeProps`, `prependProps`, `matchPropsOn` |
-| Once                         | Always when requested (except-once ignored) | `onceProps`                                                    |
-| Scroll                       | When resolved                               | `scrollProps`, `mergeProps`                                    |
+| Prop category | Resolved? | Metadata emitted |
+| :- | :- | :- |
+| Regular | Only when requested via `only`/`except` | none |
+| Always | Yes (immune to `only`/`except`) | none |
+| Optional | Only when selected via `only`/`except` | none |
+| Deferred | Only when selected via `only`/`except` | `rescuedProps` (on rescue) |
+| Merge / deep merge / prepend | When resolved | `mergeProps`, `deepMergeProps`, `prependProps`, `matchPropsOn` |
+| Once | Always when requested (except-once ignored) | `onceProps` |
+| Scroll | When resolved | `scrollProps`, `mergeProps` |
 
 A few metadata fields are mode-specific:
 
@@ -667,18 +667,18 @@ Requests may scope errors to a named error bag with the `X-Inertia-Error-Bag` he
 
 Inertia uses specific HTTP status codes to handle different scenarios.
 
-| Status Code       | Description                                                                                                                                                                |
-| :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **200 OK**        | Standard successful response for both HTML and Inertia JSON responses.                                                                                                     |
-| **302 Found**     | Standard redirect response.                                                                                                                                                |
-| **303 See Other** | The redirect status after a non-GET request, which tells the browser to follow it with a `GET`. See [redirects](#redirects).                                               |
-| **409 Conflict**  | A control response rather than a page, used for an [asset version mismatch](#asset-versioning), an external redirect, or a fragment redirect. See [redirects](#redirects). |
+| Status Code | Description |
+| :- | :- |
+| **200 OK** | Standard successful response for both HTML and Inertia JSON responses. |
+| **302 Found** | Standard redirect response. |
+| **303 See Other** | The redirect status after a non-GET request, which tells the browser to follow it with a `GET`. See [redirects](#redirects). |
+| **409 Conflict** | A control response rather than a page, used for an [asset version mismatch](#asset-versioning), an external redirect, or a fragment redirect. See [redirects](#redirects). |
 
 The following status codes are used for [Precognition](/docs/v3/the-basics/forms#precognition) validation requests.
 
-| Status Code                  | Description                                                                                    |
-| :--------------------------- | :--------------------------------------------------------------------------------------------- |
-| **204 No Content**           | Successful Precognition validation request with no validation errors.                          |
+| Status Code | Description |
+| :- | :- |
+| **204 No Content** | Successful Precognition validation request with no validation errors. |
 | **422 Unprocessable Entity** | Precognition validation request with validation errors. The response body contains the errors. |
 
 ## Server-Side Rendering

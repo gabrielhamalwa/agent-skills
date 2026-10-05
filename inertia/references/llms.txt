@@ -39,6 +39,7 @@
 - [CSRF Protection](https://inertiajs.com/docs/v3/security/csrf-protection.md)
 - [History Encryption](https://inertiajs.com/docs/v3/security/history-encryption.md)
 - [Asset Versioning](https://inertiajs.com/docs/v3/advanced/asset-versioning.md)
+- [Big Integers](https://inertiajs.com/docs/v3/advanced/big-integers.md)
 - [Code Splitting](https://inertiajs.com/docs/v3/advanced/code-splitting.md)
 - [DevTools](https://inertiajs.com/docs/v3/advanced/devtools.md)
 - [Error Handling](https://inertiajs.com/docs/v3/advanced/error-handling.md)

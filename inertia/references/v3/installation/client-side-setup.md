@@ -267,12 +267,12 @@ createInertiaApp({
 })
 ```
 
-| Option      | Description                                                                                                          |
-| ----------- | -------------------------------------------------------------------------------------------------------------------- |
-| `path`      | The directory to search for page components.                                                                         |
+| Option | Description |
+| - | - |
+| `path` | The directory to search for page components. |
 | `extension` | A string or array of file extensions (e.g., `'.tsx'` or `['.tsx', '.jsx']`). Defaults to your framework's extension. |
-| `lazy`      | Whether to lazy-load page components. Defaults to `true`. See [code splitting](/docs/v3/advanced/code-splitting).         |
-| `transform` | A callback that receives the page name and page object, returning a transformed name.                                |
+| `lazy` | Whether to lazy-load page components. Defaults to `true`. See [code splitting](/docs/v3/advanced/code-splitting). |
+| `transform` | A callback that receives the page name and page object, returning a transformed name. |
 
 ## Customizing the App
 

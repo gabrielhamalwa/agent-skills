@@ -540,16 +540,16 @@ Content-Type: application/json
 
 Inertia uses specific HTTP status codes to handle different scenarios.
 
-| Status Code       | Description                                                                                                                                                                                                                                                           |
-| :---------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **200 OK**        | Standard successful response for both HTML and Inertia JSON responses.                                                                                                                                                                                                |
-| **302 Found**     | Standard redirect response. Inertia's server-side adapters automatically convert this to `303 See Other` when returned after `PUT`, `PATCH`, or `DELETE` requests.                                                                                                    |
-| **303 See Other** | Used for redirects after non-GET requests. This status code tells the browser to make a `GET` request to the redirect URL, preventing duplicate form submissions that could occur if the browser repeated the original request method.                                |
-| **409 Conflict**  | Returned when there's an asset version mismatch or for external redirects. For asset mismatches, this prompts a full page reload. For external redirects, the response includes an `X-Inertia-Location` header and triggers a `window.location` redirect client-side. |
+| Status Code | Description |
+| :- | :- |
+| **200 OK** | Standard successful response for both HTML and Inertia JSON responses. |
+| **302 Found** | Standard redirect response. Inertia's server-side adapters automatically convert this to `303 See Other` when returned after `PUT`, `PATCH`, or `DELETE` requests. |
+| **303 See Other** | Used for redirects after non-GET requests. This status code tells the browser to make a `GET` request to the redirect URL, preventing duplicate form submissions that could occur if the browser repeated the original request method. |
+| **409 Conflict** | Returned when there's an asset version mismatch or for external redirects. For asset mismatches, this prompts a full page reload. For external redirects, the response includes an `X-Inertia-Location` header and triggers a `window.location` redirect client-side. |
 
 The following status codes are used for [Precognition](/docs/v2/the-basics/forms#precognition) validation requests.
 
-| Status Code                  | Description                                                                                    |
-| :--------------------------- | :--------------------------------------------------------------------------------------------- |
-| **204 No Content**           | Successful Precognition validation request with no validation errors.                          |
+| Status Code | Description |
+| :- | :- |
+| **204 No Content** | Successful Precognition validation request with no validation errors. |
 | **422 Unprocessable Entity** | Precognition validation request with validation errors. The response body contains the errors. |

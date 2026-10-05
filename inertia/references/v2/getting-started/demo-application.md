@@ -16,14 +16,14 @@ In addition to the Vue version of Ping CRM, we also maintain a Svelte version of
 
 Beyond our official demo app, Ping CRM has also been translated into numerous different languages and frameworks.
 
-| Platform                                                            | Author            |
-| :------------------------------------------------------------------ | :---------------- |
-| [Clojure/React](https://github.com/prestancedesign/pingcrm-clojure) | Michaël Salihi    |
-| [Echo/Vue](https://github.com/kohkimakimoto/pingcrm-echo)           | Kohki Makimoto    |
-| [Grails/Vue](https://github.com/matrei/pingcrm-grails)              | Mattias Reichel   |
-| [Laravel/React](https://github.com/Landish/pingcrm-react)           | Lado Lomidze      |
-| [Laravel/Mithril.js](https://github.com/tbreuss/pingcrm-mithril)    | Thomas Breuss     |
-| [Laravel/Svelte](https://github.com/zgabievi/pingcrm-svelte)        | Zura Gabievi      |
-| [Ruby on Rails/Vue](https://github.com/ledermann/pingcrm/)          | Georg Ledermann   |
-| [Symfony/Vue](https://github.com/aleksblendwerk/pingcrm-symfony)    | Aleks Seltenreich |
-| [Yii 2/Vue](https://github.com/tbreuss/pingcrm-yii2)                | Thomas Breuss     |
+| Platform | Author |
+| :- | :- |
+| [Clojure/React](https://github.com/prestancedesign/pingcrm-clojure) | Michaël Salihi |
+| [Echo/Vue](https://github.com/kohkimakimoto/pingcrm-echo) | Kohki Makimoto |
+| [Grails/Vue](https://github.com/matrei/pingcrm-grails) | Mattias Reichel |
+| [Laravel/React](https://github.com/Landish/pingcrm-react) | Lado Lomidze |
+| [Laravel/Mithril.js](https://github.com/tbreuss/pingcrm-mithril) | Thomas Breuss |
+| [Laravel/Svelte](https://github.com/zgabievi/pingcrm-svelte) | Zura Gabievi |
+| [Ruby on Rails/Vue](https://github.com/ledermann/pingcrm/) | Georg Ledermann |
+| [Symfony/Vue](https://github.com/aleksblendwerk/pingcrm-symfony) | Aleks Seltenreich |
+| [Yii 2/Vue](https://github.com/tbreuss/pingcrm-yii2) | Thomas Breuss |

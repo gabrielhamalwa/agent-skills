@@ -129,10 +129,10 @@ npm install lodash-es
 
 Two global events have been renamed for clarity:
 
-| v2 Name     | v3 Name         | Document Event          |
-| ----------- | --------------- | ----------------------- |
-| `invalid`   | `httpException` | `inertia:httpException` |
-| `exception` | `networkError`  | `inertia:networkError`  |
+| v2 Name | v3 Name | Document Event |
+| - | - | - |
+| `invalid` | `httpException` | `inertia:httpException` |
+| `exception` | `networkError` | `inertia:networkError` |
 
 Global event listeners should be updated accordingly:
 

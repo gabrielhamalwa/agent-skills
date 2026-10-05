@@ -245,15 +245,15 @@ Each `useHttp` instance tracks its own `processing`, `errors`, and other reactiv
 
 The `useHttp` hook exposes the same reactive properties as `useForm`:
 
-| Property             | Type             | Description                                       |
-| -------------------- | ---------------- | ------------------------------------------------- |
-| `errors`             | `object`         | Validation errors keyed by field name             |
-| `hasErrors`          | `boolean`        | Whether validation errors exist                   |
-| `processing`         | `boolean`        | Whether a request is in progress                  |
-| `progress`           | `object \| null` | Upload progress with `percentage` and `total`     |
-| `wasSuccessful`      | `boolean`        | Whether the last request was successful           |
-| `recentlySuccessful` | `boolean`        | `true` for two seconds after a successful request |
-| `isDirty`            | `boolean`        | Whether the data differs from its defaults        |
+| Property | Type | Description |
+| - | - | - |
+| `errors` | `object` | Validation errors keyed by field name |
+| `hasErrors` | `boolean` | Whether validation errors exist |
+| `processing` | `boolean` | Whether a request is in progress |
+| `progress` | `object \| null` | Upload progress with `percentage` and `total` |
+| `wasSuccessful` | `boolean` | Whether the last request was successful |
+| `recentlySuccessful` | `boolean` | `true` for two seconds after a successful request |
+| `isDirty` | `boolean` | Whether the data differs from its defaults |
 
 ## Validation Errors
 

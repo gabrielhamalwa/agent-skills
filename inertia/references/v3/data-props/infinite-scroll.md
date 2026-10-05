@@ -517,17 +517,17 @@ The `previous` and `next` slots are rendered above and below the main content, t
 
 The `loading`, `previous`, and `next` slots receive the following properties:
 
-| Property          | Description                                    |
-| :---------------- | :--------------------------------------------- |
-| `loading`         | Whether the slot is currently loading content  |
-| `loadingPrevious` | Whether previous content is loading            |
-| `loadingNext`     | Whether next content is loading                |
-| `fetch`           | Function to trigger loading for the slot       |
-| `hasMore`         | Whether more content is available for the slot |
-| `hasPrevious`     | Whether more previous content is available     |
-| `hasNext`         | Whether more next content is available         |
-| `manualMode`      | Whether manual mode is active                  |
-| `autoMode`        | Whether automatic loading is active            |
+| Property | Description |
+| :- | :- |
+| `loading` | Whether the slot is currently loading content |
+| `loadingPrevious` | Whether previous content is loading |
+| `loadingNext` | Whether next content is loading |
+| `fetch` | Function to trigger loading for the slot |
+| `hasMore` | Whether more content is available for the slot |
+| `hasPrevious` | Whether more previous content is available |
+| `hasNext` | Whether more next content is available |
+| `manualMode` | Whether manual mode is active |
+| `autoMode` | Whether automatic loading is active |
 
 ## Custom Element
 
