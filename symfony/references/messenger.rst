@@ -2633,6 +2633,12 @@ If you *do* choose to use the Symfony serializer, you can control the context
 on a case-by-case basis via the :class:`Symfony\\Component\\Messenger\\Stamp\\SerializerStamp`
 (see `Envelopes & Stamps`_).
 
+The ``xml`` format can't restore stamp values whose type isn't defined in the
+stamp properties (e.g. ``array`` properties without a PHPDoc type). It decodes
+single-element lists as their only element and numbers and booleans as strings;
+empty lists and ``null`` become empty strings. Use the ``json`` format when your
+stamps store this kind of data.
+
 .. tip::
 
     When sending/receiving messages to/from another application, you may need
@@ -3554,6 +3560,8 @@ parameter of this method (e.g. ``$envelope->all(ReceivedStamp::class)``).
     if going through transport using the :class:`Symfony\\Component\\Messenger\\Transport\\Serialization\\Serializer`
     base serializer.
 
+.. _messenger-default-stamps:
+
 Default Stamps on Messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3601,14 +3609,27 @@ What happens when you dispatch a message to a message bus depends on its
 collection of middleware and their order. By default, the middleware configured
 for each bus looks like this:
 
+#. ``add_default_stamps_middleware`` - adds the
+   :ref:`default stamps <messenger-default-stamps>` declared by the message;
+
 #. ``add_bus_name_stamp_middleware`` - adds a stamp to record which bus this
    message was dispatched into;
 
-#. ``dispatch_after_current_bus``- see :ref:`messenger-transactional-messages`;
+#. ``reject_redelivered_message_middleware`` - prevents handling messages
+   redelivered by AMQP (e.g. after the connection was lost before acknowledging
+   them) and sends them through the
+   :ref:`retry logic <messenger-retries-failures>` instead, to avoid infinite
+   redelivery loops;
+
+#. ``dispatch_after_current_bus`` - see :ref:`messenger-transactional-messages`;
 
 #. ``failed_message_processing_middleware`` - processes messages that are being
    retried via the :ref:`failure transport <messenger-failure-transport>` to make
    them properly function as if they were being received from their original transport;
+
+#. ``deduplicate_middleware`` - skips a message when another message with the
+   same :ref:`deduplication key <messenger-deduplication>` is already queued or
+   being processed (added only when the :doc:`Lock component </lock>` is enabled);
 
 #. Your own collection of middleware_;
 
@@ -3738,6 +3759,8 @@ The above example will forward the message to the next middleware with an
 additional stamp *if* the message has just been received (i.e. has at least one
 ``ReceivedStamp`` stamp). You can create your own stamps by implementing
 :class:`Symfony\\Component\\Messenger\\Stamp\\StampInterface`.
+
+.. _messenger-deduplication:
 
 Message Deduplication
 ~~~~~~~~~~~~~~~~~~~~~
@@ -4054,6 +4077,12 @@ Let's say you want to create a message decoder::
             throw new \LogicException('This serializer is only used for decoding messages.');
         }
     }
+
+Stamps implementing
+:class:`Symfony\\Component\\Messenger\\Stamp\\NonSendableStampInterface` are
+never sent to transports: the application adds them while it processes the
+message, like the ``ReceivedStamp`` added by the worker. Your decoder should not
+create such stamps from the data it receives.
 
 The next step is to tell Symfony to use this serializer in one or more of your
 transports:
