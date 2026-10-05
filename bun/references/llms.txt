@@ -326,3 +326,6 @@
 
 - [Reference](https://bun.com/reference)
 - [Blog](https://bun.com/blog)
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.
