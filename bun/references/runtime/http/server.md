@@ -740,6 +740,9 @@ interface TLSOptions {
   /** Server certificate */
   cert?: string | Buffer | BunFile | Array<string | Buffer | BunFile>;
 
+  /** Certificate revocation lists */
+  crl?: string | Buffer | BunFile | Array<string | Buffer | BunFile>;
+
   /** Path to DH parameters file */
   dhParamsFile?: string;
 
@@ -751,6 +754,12 @@ interface TLSOptions {
 
   /** Private key passphrase */
   passphrase?: string;
+
+  /** Refuse a peer whose certificate does not verify (default: true) */
+  rejectUnauthorized?: boolean;
+
+  /** Ask clients for a certificate (default: false) */
+  requestCert?: boolean;
 
   /** OpenSSL options flags */
   secureOptions?: number;
