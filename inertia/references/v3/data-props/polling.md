@@ -152,6 +152,8 @@ If you'd like more control over the polling behavior, the poll helper provides `
   ```
 </CodeGroup>
 
+<Badge>v3.7.0+</Badge>
+
 The poll helper also returns a reactive `polling` value that reflects whether the poll is running, making it ideal for rendering a pause or resume button. The value doesn't indicate whether a request is in flight.
 
 <CodeGroup>
@@ -227,16 +229,20 @@ The default `overlap` mode allows requests to run in parallel. The `cancel` mode
   ```
 </CodeGroup>
 
-## Throttling
+## Background Tabs
 
-By default, the poll helper will throttle requests by 90% when the browser tab is in the background. If you'd like to disable this behavior, you can pass the `keepAlive` option to the poll helper.
+<Badge>v3.9.0+</Badge>
+
+By default, the poll helper throttles requests by 90% when the browser tab is in the background. You may control this behavior with the `background` option, which accepts one of three values: `throttle`, `pause`, or `continue`.
+
+The `pause` mode stops polling entirely while the tab is hidden. Once the tab becomes visible again, polling resumes, firing a request immediately if the interval has already elapsed since the last one. The `continue` mode keeps polling at the regular interval, even while the tab is hidden.
 
 <CodeGroup>
   ```js Vue icon="vuejs" theme={null}
   import { usePoll } from '@inertiajs/vue3'
 
   usePoll(2000, {}, {
-      keepAlive: true,
+      background: 'pause',
   })
   ```
 
@@ -244,7 +250,7 @@ By default, the poll helper will throttle requests by 90% when the browser tab i
   import { usePoll } from '@inertiajs/react'
 
   usePoll(2000, {}, {
-      keepAlive: true,
+      background: 'pause',
   })
   ```
 
@@ -252,7 +258,11 @@ By default, the poll helper will throttle requests by 90% when the browser tab i
   import { usePoll } from '@inertiajs/svelte'
 
   usePoll(2000, {}, {
-      keepAlive: true,
+      background: 'pause',
   })
   ```
 </CodeGroup>
+
+<Note>
+  The `keepAlive` option is deprecated in favor of `background: 'continue'`.
+</Note>

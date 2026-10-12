@@ -708,12 +708,17 @@ The `finish` event is not cancelable.
 
 The `navigate` event fires on successful page visits, as well as when navigating through history.
 
+<Badge>v3.9.0+</Badge>
+
+The event detail includes a `type` value describing how the navigation happened: `initial` for the first page load, `visit` for Inertia visits, and `history` for back and forward navigation.
+
 <CodeGroup>
   ```js Vue icon="vuejs" theme={null}
   import { router } from "@inertiajs/vue3";
 
   router.on("navigate", (event) => {
     console.log(`Navigated to ${event.detail.page.url}`);
+    console.log(`Navigation type: ${event.detail.type}`);
   });
   ```
 
@@ -722,6 +727,7 @@ The `navigate` event fires on successful page visits, as well as when navigating
 
   router.on("navigate", (event) => {
     console.log(`Navigated to ${event.detail.page.url}`);
+    console.log(`Navigation type: ${event.detail.type}`);
   });
   ```
 
@@ -730,6 +736,7 @@ The `navigate` event fires on successful page visits, as well as when navigating
 
   router.on("navigate", (event) => {
     console.log(`Navigated to ${event.detail.page.url}`);
+    console.log(`Navigation type: ${event.detail.type}`);
   });
   ```
 </CodeGroup>
