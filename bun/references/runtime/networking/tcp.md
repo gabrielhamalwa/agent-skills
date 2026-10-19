@@ -97,9 +97,7 @@ Bun.listen({
 `Bun.listen` returns a server that conforms to the `TCPSocketListener` interface.
 
 ```ts server.ts icon="/icons/typescript.svg"
-const server = Bun.listen({
-  /* config*/
-});
+const server = Bun.listen({/* config*/});
 
 // stop listening
 // parameter determines whether active connections are closed
@@ -155,9 +153,7 @@ You can hot reload both TCP servers and sockets with new handlers.
 <CodeGroup>
 
 ```ts server.ts icon="/icons/typescript.svg"
-const server = Bun.listen({
-  /* config */
-});
+const server = Bun.listen({/* config */});
 
 // reloads handlers for all active server-side sockets
 server.reload({
@@ -170,9 +166,7 @@ server.reload({
 ```
 
 ```ts client.ts icon="/icons/typescript.svg"
-const socket = await Bun.connect({
-  /* config */
-});
+const socket = await Bun.connect({/* config */});
 
 socket.reload({
   data() {

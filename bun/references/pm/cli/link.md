@@ -28,7 +28,11 @@ cd /path/to/my-app
 bun link cool-pkg
 ```
 
-The `--save` flag also adds `cool-pkg` to the `dependencies` field of your app's package.json, with a version specifier that tells Bun to load from the registered local directory instead of installing from `npm`:
+Pass `--save` to also add `cool-pkg` to the `dependencies` field of your app's package.json, with a version specifier that tells Bun to load from the registered local directory instead of installing from `npm`:
+
+```bash terminal icon="terminal"
+bun link --save cool-pkg
+```
 
 ```json package.json icon="file-json"
 {
@@ -39,6 +43,24 @@ The `--save` flag also adds `cool-pkg` to the `dependencies` field of your app's
   }
 }
 ```
+
+## Linking a directory by path
+
+`link:` also accepts a path, as in Yarn and pnpm. The path is relative to the `package.json` that declares it, and Bun installs a symlink to that directory. Nothing has to be registered with `bun link` first.
+
+```json package.json icon="file-json"
+{
+  "dependencies": {
+    "design-tokens": "link:./vendor/design-tokens",
+    "shared": "link:../shared"
+  }
+}
+```
+
+- Anything that is not a package name is a path: `link:./dir`, `link:../dir`, `link:vendor/dir`, an absolute path. `link:dir` and `link:@scope/dir` are names registered with `bun link`; write `link:./dir` for the directory.
+- The directory must exist. It does not need a `package.json`.
+- The directory's own dependencies are not installed. Use `file:` for a copy whose dependencies are installed, or make the directory a [workspace](/pm/workspaces).
+- Only your project may use a path: the root `package.json`, a workspace, a `file:` directory one of them depends on, or a top-level `overrides` / `resolutions` entry. `bun install` fails when a package from the registry, git or a tarball declares one, so replace a `link:` path before you publish a package.
 
 ## Unlinking
 
@@ -65,7 +87,7 @@ bun link <packages>
 ### Installation Scope
 
 <ParamField path="--global" type="boolean">
-  Install globally. Alias: <code>-g</code>
+  Has no effect: `bun link` always registers packages in the global folder. Alias: <code>-g</code>
 </ParamField>
 
 ### Dependency Management
@@ -97,11 +119,11 @@ bun link <packages>
 </ParamField>
 
 <ParamField path="--no-save" type="boolean">
-  Has no effect. <code>bun link</code> updates <code>package.json</code> and the lockfile only with <code>--save</code>
+  Don't update <code>package.json</code> or save a lockfile (the default)
 </ParamField>
 
 <ParamField path="--save" type="boolean">
-  Save to <code>package.json</code>
+  Update <code>package.json</code> and save a lockfile (false by default)
 </ParamField>
 
 <ParamField path="--trust" type="boolean">
@@ -146,12 +168,16 @@ bun link <packages>
   Same as <code>--ca</code>, but as a file path to the certificate
 </ParamField>
 
+<ParamField path="--use-system-ca" type="boolean">
+  Use the system's trusted certificate authorities
+</ParamField>
+
 <ParamField path="--registry" type="string">
   Use a specific registry by default, overriding <code>.npmrc</code>, <code>bunfig.toml</code>, and environment
   variables
 </ParamField>
 
-<ParamField path="--network-concurrency" type="number" default="48">
+<ParamField path="--network-concurrency" type="number" default="64">
   Maximum number of concurrent network requests
 </ParamField>
 
@@ -205,6 +231,10 @@ bun link <packages>
   all)
 </ParamField>
 
+<ParamField path="--libc" type="string">
+  Override libc for optional dependencies (e.g., <code>glibc</code>, <code>musl</code>, <code>*</code> for all)
+</ParamField>
+
 ### Global Configuration &amp; Context
 
 <ParamField path="--config" type="string">
@@ -213,6 +243,14 @@ bun link <packages>
 
 <ParamField path="--cwd" type="string">
   Set a specific current working directory
+</ParamField>
+
+<ParamField path="--env-file" type="string">
+  Load environment variables from the specified file(s)
+</ParamField>
+
+<ParamField path="--no-env-file" type="boolean">
+  Disable automatic loading of .env files
 </ParamField>
 
 ### Help

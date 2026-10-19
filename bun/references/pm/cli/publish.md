@@ -2,7 +2,7 @@
 
 > Use `bun publish` to publish a package to the npm registry
 
-`bun publish` packs your package into a tarball and strips catalog and workspace protocols from the `package.json`, resolving versions if necessary. It then publishes to the registry specified in your configuration files. Both `bunfig.toml` and `.npmrc` files are supported.
+`bun publish` packs your package into a tarball and strips catalog and workspace protocols from the `package.json`, resolving versions if necessary. It then publishes to the registry specified in your configuration files or in the package's `publishConfig`. Both `bunfig.toml` and `.npmrc` files are supported.
 
 ```sh terminal icon="terminal"
 ## Publishing the package from the current working directory
@@ -42,6 +42,24 @@ bun publish ./package.tgz
   provide a tarball path. Scripts run only when `bun publish` packs the package itself.
 </Note>
 
+<Note>
+  `bun publish` cannot generate provenance statements yet. `--provenance`, `"provenance": true` in `publishConfig` and
+  `NPM_CONFIG_PROVENANCE=true` are errors.
+</Note>
+
+### `--recursive` and `--filter`
+
+In a monorepo, `--recursive` (`-r`) publishes the root package and every workspace package, dependencies before their dependents. `--filter` (`-F`) does the same for the matching workspace packages only.
+
+```sh terminal icon="terminal"
+bun publish --recursive
+bun publish --filter "@acme/*"
+```
+
+Both flags must come after `publish`. `bun --filter "@acme/*" publish` means something else: it runs each matching package's `publish` script, like any other [`--filter`](/pm/filter) command.
+
+Packages that are `"private"` or whose version is already on the registry are skipped. Every package is packed before the first one is published, and the first failure ends the run; running the command again skips what was published.
+
 ### `--access`
 
 `--access` sets the access level of the package being published, either `public` or `restricted`. Unscoped packages are always public, and publishing an unscoped package with `--access restricted` is an error.
@@ -77,6 +95,38 @@ You can also set `--tag` in the `publishConfig` field of your `package.json`.
   }
 }
 ```
+
+A prerelease version such as `2.0.0-beta.1` needs a tag: without one it would become `latest`, the version `bun add` installs. To publish it as `latest` anyway, pass `--tag latest`.
+
+A tag cannot be a version or a version range, such as `1.2.3` or `v1`.
+
+### `publishConfig.registry`
+
+A package can pin the registry it is published to in the `publishConfig` field of its `package.json`, regardless of the registry configured for installs. `--registry` on the command line still overrides it.
+
+```json package.json icon="file-json"
+{
+  "name": "internal-package",
+  "publishConfig": {
+    "registry": "https://registry.myorg.example/"
+  }
+}
+```
+
+As in npm, `publishConfig.registry` replaces the default registry only. A registry configured for the package's scope (`@myorg:registry` in `.npmrc`, or `[install.scopes]` in `bunfig.toml`) still takes precedence over it; to replace that one, set the scope's key in `publishConfig` instead:
+
+```json package.json icon="file-json"
+{
+  "name": "@myorg/package",
+  "publishConfig": {
+    "@myorg:registry": "https://registry.myorg.example/"
+  }
+}
+```
+
+Credentials are the ones configured for that registry, the same as when it is the default registry: a `//registry.myorg.example/:_authToken=...` line in `.npmrc`, or a registry with the same URL in `bunfig.toml` or `.npmrc`. When there are none, the credentials of the registry the package would otherwise have been published to are used only if the pinned registry has the same origin; otherwise `bun publish` fails with a missing authentication error instead of sending them to a different registry.
+
+As in npm, `publishConfig` is read like the name and the version: from the `package.json` that the `prepublishOnly`, `prepack` and `prepare` scripts leave behind.
 
 ### `--dry-run`
 
@@ -123,6 +173,16 @@ bun publish --otp 123456
   other automated workflows.
 </Note>
 
+### `--provenance`
+
+`bun publish` cannot generate provenance statements yet: `--provenance`, `--provenance-file`, `"provenance": true` in `publishConfig`, `NPM_CONFIG_PROVENANCE=true` and `provenance=true` in `.npmrc` are errors, so that a package is never published without the statement it asked for.
+
+A setting that turns provenance off is fine. As in npm, the command line wins over `publishConfig`, `publishConfig` over the environment, and the environment over `.npmrc`:
+
+```sh terminal icon="terminal"
+bun publish --no-provenance # or --provenance=false
+```
+
 ---
 
 ## CLI Usage
@@ -153,7 +213,7 @@ You can also set `--access` in the `publishConfig` field of your `package.json`.
 </ParamField>
 
 <ParamField path="--tag" type="string" default="latest">
-Set the tag of the package version being published. By default, the tag is `latest`. The initial version of a package is always given the `latest` tag in addition to the specified tag.
+Set the tag of the package version being published. By default, the tag is `latest`. A prerelease version needs a tag. The initial version of a package is always given the `latest` tag in addition to the specified tag.
 
 ```sh terminal icon="terminal"
 bun publish --tag alpha
@@ -182,6 +242,26 @@ bun publish --dry-run
 
 <ParamField path="--tolerate-republish" type="boolean">
   `bun publish` exits with code 0 instead of 1 when the version being published already exists in the registry.
+</ParamField>
+
+<ParamField path="--recursive" type="boolean">
+Publish the root package and every workspace package, dependencies before their dependents. Alias: <code>-r</code>
+
+A package is skipped when it is `"private"` or when its version is already on the registry. Every package is packed before the first one is published, and the first failure ends the run; running the command again skips what was published.
+
+```sh terminal icon="terminal"
+bun publish --recursive
+```
+
+</ParamField>
+
+<ParamField path="--filter" type="string">
+Like `--recursive`, for the workspace packages that match the pattern only. Can be repeated. Alias: <code>-F</code>
+
+```sh terminal icon="terminal"
+bun publish --filter "@acme/*"
+```
+
 </ParamField>
 
 <ParamField path="--gzip-level" type="string" default="9">
@@ -231,6 +311,16 @@ bun publish --otp 123456
 bun publish --registry https://my-private-registry.com
 ```
 
+A package can pin the registry it is published to with `publishConfig.registry` in its `package.json` (`--registry` still overrides it). Like npm, this replaces the default registry only; a registry configured for the package's scope takes precedence unless `publishConfig` also sets `@scope:registry`.
+
+```json package.json icon="file-json"
+{
+  "publishConfig": {
+    "registry": "https://my-private-registry.com" // [!code ++]
+  }
+}
+```
+
 #### SSL Certificates
 
 <ParamField path="--ca" type="string">
@@ -239,6 +329,10 @@ bun publish --registry https://my-private-registry.com
 
 <ParamField path="--cafile" type="string">
   Path to Certificate Authority certificate file
+</ParamField>
+
+<ParamField path="--use-system-ca" type="boolean">
+  Use the system's trusted certificate authorities
 </ParamField>
 
 <CodeGroup>
@@ -304,7 +398,7 @@ bun publish --cafile ./ca-cert.pem
   `copyfile`
 </ParamField>
 
-<ParamField path="--network-concurrency" type="number" default="48">
+<ParamField path="--network-concurrency" type="number" default="64">
   Maximum concurrent network requests
 </ParamField>
 

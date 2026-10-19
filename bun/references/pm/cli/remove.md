@@ -99,6 +99,10 @@ bun remove <package>
   Same as <code>--ca</code>, but as a file path to the certificate
 </ParamField>
 
+<ParamField path="--use-system-ca" type="boolean">
+  Use the system's trusted certificate authorities
+</ParamField>
+
 <ParamField path="--registry" type="string">
   Use a specific registry by default, overriding <code>.npmrc</code>, <code>bunfig.toml</code> and environment variables
 </ParamField>
@@ -106,8 +110,8 @@ bun remove <package>
 ### Execution Control & Validation
 
 <ParamField path="--dry-run" type="boolean">
-  Resolve the change but don't remove packages, update <code>package.json</code>, or save a lockfile (the project's own
-  lifecycle scripts still run)
+  Resolve the change but don't remove packages, update <code>package.json</code>, save a lockfile, or run the project's
+  lifecycle scripts
 </ParamField>
 
 <ParamField path="--force" type="boolean">
@@ -166,6 +170,14 @@ bun remove <package>
   Set a specific cwd
 </ParamField>
 
+<ParamField path="--env-file" type="string">
+  Load environment variables from the specified file(s)
+</ParamField>
+
+<ParamField path="--no-env-file" type="boolean">
+  Disable automatic loading of .env files
+</ParamField>
+
 ### Advanced & Performance
 
 <ParamField path="--backend" type="string">
@@ -173,6 +185,6 @@ bun remove <package>
   macOS), <code>hardlink</code> (default on Linux and Windows), <code>symlink</code>, <code>copyfile</code>
 </ParamField>
 
-<ParamField path="--network-concurrency" type="number" default="48">
-  Maximum number of concurrent network requests (default 48)
+<ParamField path="--network-concurrency" type="number" default="64">
+  Maximum number of concurrent network requests (default 64)
 </ParamField>

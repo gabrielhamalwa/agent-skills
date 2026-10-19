@@ -10,7 +10,7 @@ Features:
 
 - Generates `.patch` files that Bun applies to dependencies in `node_modules` on install
 - You can commit `.patch` files to your repository and reuse them across installs, projects, and machines
-- `"patchedDependencies"` in `package.json` keeps track of patched packages
+- `"patchedDependencies"` in `package.json` keeps track of patched packages. Bun only reads it from the root `package.json`; `bun install` warns when a workspace package declares it.
 - Patches packages in `node_modules/` while preserving the integrity of Bun's [Global Cache](/pm/global-cache)
 - Test your changes locally before committing them with `bun patch --commit <pkg>`
 - To preserve disk space and keep `bun install` fast, Bun commits patched packages to the Global Cache and shares them across projects where possible
@@ -60,6 +60,28 @@ bun patch --commit react --patches-dir=mypatches
 # `patch-commit` is available for compatibility with pnpm
 bun patch-commit react
 ```
+
+If `bun install` could not apply the resulting patch, or the install is refused (for example by a [security scanner](/pm/security-scanner-api)), the commit fails and changes nothing: your edits, `package.json`, the lockfile, and any earlier patch file stay as they were.
+
+To run the same checks without writing anything, pass `--dry-run`. It prints the path of the patch file that the commit would write.
+
+#### Removing a patch
+
+Undo your changes and commit again:
+
+```bash terminal icon="terminal"
+bun patch react
+# restore the files you changed in node_modules/react
+bun patch --commit react
+```
+
+When the package has no changes left, Bun removes it from `"patchedDependencies"` in `package.json` and the lockfile, deletes its patch file unless another entry uses it, and reinstalls the original package.
+
+You can also delete the entry from `"patchedDependencies"` and the patch file yourself, then run `bun install`.
+
+#### A missing patch file
+
+`bun install` and `bun patch <pkg>` fail when a file in `"patchedDependencies"` does not exist, and leave `node_modules` alone. While the patched package is still in `node_modules`, `bun patch --commit <pkg>` writes the file again. To start over, delete the entry from `"patchedDependencies"` and run `bun install`.
 
 ---
 
@@ -142,9 +164,12 @@ bun patch <package>@<version>
   Only install packages published at least N seconds ago (security feature)
 </ParamField>
 
+<ParamField path="--minimum-release-age-excludes" type="string">
+  Packages exempt from <code>--minimum-release-age</code> (comma-separated or repeated; replaces the bunfig.toml list)
+</ParamField>
+
 <ParamField path="--dry-run" type="boolean">
-  Don't install packages, update <code>package.json</code>, or save a lockfile. The package is still copied into{" "}
-  <code>node_modules</code> for patching, and <code>--commit</code> still writes the patch file
+  Print what the command would do, with or without <code>--commit</code>, and leave the project as it is
 </ParamField>
 
 <ParamField path="--force" type="boolean">
@@ -165,13 +190,17 @@ bun patch <package>@<version>
   Same as <code>--ca</code>, but as a file path to the certificate
 </ParamField>
 
+<ParamField path="--use-system-ca" type="boolean">
+  Use the system's trusted certificate authorities
+</ParamField>
+
 <ParamField path="--registry" type="string">
   Use a specific registry by default, overriding <code>.npmrc</code>, <code>bunfig.toml</code>, and environment
   variables
 </ParamField>
 
-<ParamField path="--network-concurrency" type="number" default="48">
-  Maximum number of concurrent network requests (default 48)
+<ParamField path="--network-concurrency" type="number" default="64">
+  Maximum number of concurrent network requests (default 64)
 </ParamField>
 
 ### Performance &amp; Resource
@@ -224,6 +253,10 @@ bun patch <package>@<version>
   all)
 </ParamField>
 
+<ParamField path="--libc" type="string">
+  Override libc for optional dependencies (e.g., <code>glibc</code>, <code>musl</code>, <code>*</code> for all)
+</ParamField>
+
 ### Global Configuration &amp; Context
 
 <ParamField path="--config" type="string">
@@ -232,6 +265,14 @@ bun patch <package>@<version>
 
 <ParamField path="--cwd" type="string">
   Set a specific current working directory
+</ParamField>
+
+<ParamField path="--env-file" type="string">
+  Load environment variables from the specified file(s)
+</ParamField>
+
+<ParamField path="--no-env-file" type="boolean">
+  Disable automatic loading of .env files
 </ParamField>
 
 ### Help

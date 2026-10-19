@@ -29,7 +29,9 @@ The output table shows three version columns:
 
 - **Current**: The version currently installed
 - **Update**: The latest version that satisfies your package.json version range
-- **Latest**: The latest version published to the registry
+- **Latest**: The version that the `latest` tag in the registry points to
+
+A dependency that is ahead of `latest`, such as a prerelease, is listed when `bun update` would change its version.
 
 ### Dependency Filters
 
@@ -89,6 +91,32 @@ bun outdated '!@types/*'
 | prettier (dev)                 | 3.4.2   | 3.5.0     | 3.5.0      |
 | tsup (dev)                     | 8.3.5   | 8.3.6     | 8.3.6      |
 | typescript (dev)               | 5.7.2   | 5.7.3     | 5.7.3      |
+```
+
+With several patterns, a dependency is listed when at least one of them matches it. A pattern that starts with `!` removes the dependencies it matches:
+
+```sh terminal icon="terminal"
+bun outdated typescript 'eslint*' '!eslint-plugin-sonarjs'
+```
+
+```txt
+| Package                        | Current | Update | Latest     |
+| ------------------------------ | ------- | ------ | ---------- |
+| eslint (dev)                   | 8.57.1  | 8.57.1 | 9.20.0     |
+| eslint-plugin-security (dev)   | 2.1.1   | 2.1.1  | 3.0.1      |
+| typescript (dev)               | 5.7.2   | 5.7.3  | 5.7.3      |
+```
+
+An aliased dependency such as `"lodash3": "npm:lodash@^3.0.0"` is listed with both of its names, and a pattern selects it by either name:
+
+```sh terminal icon="terminal"
+bun outdated lodash
+```
+
+```txt
+| Package              | Current | Update | Latest  |
+| -------------------- | ------- | ------ | ------- |
+| lodash3@npm:lodash   | 3.10.1  | 3.10.1 | 4.17.21 |
 ```
 
 ### Workspace Filters
@@ -187,6 +215,14 @@ bun outdated <filter>
   Set a specific cwd
 </ParamField>
 
+<ParamField path="--env-file" type="string">
+  Load environment variables from the specified file(s)
+</ParamField>
+
+<ParamField path="--no-env-file" type="boolean">
+  Disable automatic loading of .env files
+</ParamField>
+
 <ParamField path="-h, --help" type="boolean">
   Print this help menu
 </ParamField>
@@ -271,12 +307,16 @@ bun outdated <filter>
   Same as <code>--ca</code>, but as a file path to the certificate
 </ParamField>
 
+<ParamField path="--use-system-ca" type="boolean">
+  Use the system's trusted certificate authorities
+</ParamField>
+
 <ParamField path="--registry" type="string">
   Use a specific registry by default, overriding <code>.npmrc</code>, <code>bunfig.toml</code> and environment variables
 </ParamField>
 
-<ParamField path="--network-concurrency" type="number" default="48">
-  Maximum number of concurrent network requests (default 48)
+<ParamField path="--network-concurrency" type="number" default="64">
+  Maximum number of concurrent network requests (default 64)
 </ParamField>
 
 ### Caching

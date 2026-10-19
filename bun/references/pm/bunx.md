@@ -41,7 +41,9 @@ Run these executables with `bunx`:
 bunx my-cli
 ```
 
-As with `npx`, `bunx` checks for a locally installed package first, then falls back to auto-installing it from `npm`. `bunx` stores installed packages in Bun's [global cache](/pm/global-cache) for future use.
+As with `npx`, `bunx` checks for a locally installed package first, then falls back to auto-installing it from `npm`. With a version (`bunx my-cli@2`), it does not use the local package. `bunx` stores installed packages in Bun's [global cache](/pm/global-cache) for future use.
+
+`bunx my-cli` asks the registry for newer versions of the package and of its dependencies once a day. If the registry cannot be reached or answers with a 5xx, 429 or 408 status, it warns and runs the version it has. `bunx my-cli@latest` asks on every run.
 
 ## Arguments and flags
 
@@ -77,6 +79,12 @@ bunx -p renovate renovate-config-validator
 bunx --package @angular/cli ng
 ```
 
+As with `npx`, the command can be any program. It finds the package's binaries first on its `PATH`:
+
+```bash terminal icon="terminal"
+bunx -p typescript sh -c "tsc --version"
+```
+
 To force a script to always run with Bun, give it a `bun` shebang.
 
 ```js dist/index.js icon="/icons/javascript.svg"
@@ -106,6 +114,22 @@ Execute an npm package executable (CLI). If the package isn't installed in `node
 
 <ParamField path="--no-install" type="boolean">
   Skip installation if package is not already installed
+</ParamField>
+
+<ParamField path="--cwd" type="string">
+  Set the working directory
+</ParamField>
+
+<ParamField path="--env-file" type="string">
+  Load environment variables from the specified file(s)
+</ParamField>
+
+<ParamField path="--minimum-release-age" type="number">
+  Only install packages published at least N seconds ago (security feature)
+</ParamField>
+
+<ParamField path="--trust" type="boolean">
+  Run the lifecycle scripts of the package and of **all** of its dependencies during installation
 </ParamField>
 
 <ParamField path="--verbose" type="boolean">
