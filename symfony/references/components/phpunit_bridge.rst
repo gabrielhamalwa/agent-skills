@@ -175,6 +175,14 @@ There are three ways to mark a test as legacy:
 Configuration
 -------------
 
+.. note::
+
+    The ``SYMFONY_DEPRECATIONS_HELPER`` environment variable explained in this
+    section only works with PHPUnit 9 or lower. With PHPUnit 10 or higher, the
+    bridge doesn't register its deprecation handler and ignores this variable.
+    Use the `failOnDeprecation`_ option of PHPUnit instead to make tests fail
+    when they trigger deprecations.
+
 In case you need to inspect the stack trace of a particular deprecation
 triggered by your unit tests, you can set the ``SYMFONY_DEPRECATIONS_HELPER``
 `environment variable`_ to a regular expression that matches this deprecation's
@@ -335,9 +343,19 @@ It's also possible to change verbosity per deprecation type. For example, using
 ``quiet[]=indirect&quiet[]=other`` will hide details for deprecations of types
 "indirect" and "other".
 
-The ``quiet`` option hides details for the specified deprecation types, but will
-not change the outcome in terms of exit code. That's what :ref:`max <making-tests-fail>`
-is for, and both settings are orthogonal.
+The ``verbose`` and ``quiet`` options only change the output, not the exit
+code (use the :ref:`max <making-tests-fail>` option for that). However, the
+bridge always displays the details of the deprecation types that make the
+tests fail. Since any deprecation makes the tests fail by default, these
+options only hide details when you combine them with a ``max`` threshold:
+
+.. code-block:: terminal
+
+    # hides the details of indirect and other deprecations, which don't make the tests fail
+    $ SYMFONY_DEPRECATIONS_HELPER='max[total]=999999&quiet[]=indirect&quiet[]=other' ./vendor/bin/simple-phpunit
+
+    # hides the same details, but direct deprecations still make the tests fail
+    $ SYMFONY_DEPRECATIONS_HELPER='max[direct]=0&quiet[]=indirect&quiet[]=other' ./vendor/bin/simple-phpunit
 
 Disabling the Deprecation Helper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -382,8 +400,9 @@ the compiling and warming up of the container:
 Log Deprecations
 ~~~~~~~~~~~~~~~~
 
-For turning the verbose output off and write it to a log file instead you can use
-``SYMFONY_DEPRECATIONS_HELPER='logFile=/path/deprecations.log'``.
+To turn the verbose output off and write it to a log file instead, use
+``SYMFONY_DEPRECATIONS_HELPER='logFile=/path/deprecations.log'``. Like
+``verbose`` and ``quiet``, this option doesn't change the exit code.
 
 Setting The Locale For Tests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1147,6 +1166,7 @@ not find the SUT:
 .. _`PHPUnit's assertStringMatchesFormat()`: https://docs.phpunit.de/en/11.5/assertions.html#assertstringmatchesformat
 .. _`PHP error handler`: https://www.php.net/manual/en/book.errorfunc.php
 .. _`environment variable`: https://docs.phpunit.de/en/11.5/configuration.html#the-env-element
+.. _`failOnDeprecation`: https://docs.phpunit.de/en/11.5/configuration.html#the-failondeprecation-attribute
 .. _`@-silencing operator`: https://www.php.net/manual/en/language.operators.errorcontrol.php
 .. _`Travis CI`: https://travis-ci.org/
 .. _`@covers`: https://docs.phpunit.de/en/11.5/annotations.html#covers

@@ -412,8 +412,20 @@ In Twig, pass translatable objects to the ``trans`` filter just like regular str
 
 .. tip::
 
-    The translation parameters of a ``TranslatableMessage`` can themselves be
-    :class:`Symfony\\Component\\Translation\\TranslatableMessage` instances.
+    Translation parameters can also be translatable objects. They are
+    translated using the same locale as the message that contains them::
+
+        use Symfony\Component\Translation\TranslatableMessage;
+
+        $orderStatus = new TranslatableMessage('order.status.shipped');
+
+        // as a parameter of a translatable message...
+        $message = new TranslatableMessage('order.status', [
+            '%status%' => $orderStatus,
+        ]);
+
+        // ...or as a parameter passed directly to the translator
+        $translator->trans('order.status', ['%status%' => $orderStatus]);
 
 Translatable Objects In Practice
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -485,9 +497,10 @@ any class. The interface requires a single ``trans()`` method::
     }
 
 Any object that implements ``TranslatableInterface`` can be passed to the
-``trans`` Twig filter and will be translated automatically. This approach is
-useful when translation logic is more complex than a static message ID, for
-example when the message depends on runtime conditions.
+``trans`` Twig filter or used as a translation parameter, and it's translated
+automatically. This approach is useful when translation logic is more complex
+than a static message ID, for example when the message depends on runtime
+conditions.
 
 Non-Translatable Messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -864,6 +877,35 @@ If your translations use a format not supported by Symfony or you store them
 in a special way (e.g. not using files or Doctrine entities), you need to provide
 a custom class implementing the :class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface`
 interface. See the :ref:`dic-tags-translation-loader` tag for more information.
+
+.. _translation-cache:
+
+Translation Cache
+-----------------
+
+The translator compiles each catalog into a PHP file stored in the
+``var/cache/<env>/translations/`` directory. The translator loads these files
+with ``include``, so OPcache can cache them too.
+
+When debug mode is disabled (e.g. in the ``prod`` environment), the translator
+doesn't check whether the translation files changed after building the cache.
+If you update the contents of existing translation files in production, delete
+that directory so the translator rebuilds the catalogs on the next request:
+
+.. code-block:: terminal
+
+    $ rm -rf var/cache/prod/translations/
+
+If you add new translation files, you must clear the entire cache instead, as
+explained in the previous sections.
+
+.. tip::
+
+    To invalidate translations on several servers at once (e.g. based on a
+    version number stored in a shared cache), create a class that implements
+    :class:`Symfony\\Component\\Config\\ConfigCacheFactoryInterface` and pass
+    it to the ``setConfigCacheFactory()`` method of the ``translator.default``
+    service.
 
 .. _translation-providers:
 

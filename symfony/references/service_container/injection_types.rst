@@ -401,7 +401,8 @@ value. The container injects the service if it exists and ``null`` otherwise::
     }
 
 When configuring services explicitly, you can choose between two strategies
-for missing dependencies: ``null`` and ``ignore``.
+for missing dependencies (``null`` and ``ignore``) and one strategy for
+dependencies that the container hasn't created yet (``ignore_uninitialized``).
 
 Setting Missing Dependencies to ``null``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -512,6 +513,69 @@ call if the service exists and remove the method call if it does not:
     If the argument to the method call is a collection of arguments and any of
     them is missing, those elements are removed but the method call is still
     made with the remaining elements of the collection.
+
+Ignoring Uninitialized Dependencies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some services only need a dependency if the application already used it. For
+example, a listener that flushes a newsletter queue at the end of the request
+doesn't need to create the queue when nothing used it during that request.
+Use the ``ignore_uninitialized`` strategy to inject the service only if the
+container already created it, and ``null`` otherwise (the argument must accept
+``null``):
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/services.yaml
+        services:
+            App\EventListener\NewsletterQueueFlusher:
+                # the '@!' syntax injects the service only if the container already created it
+                arguments: ['@!App\Newsletter\NewsletterQueue']
+
+    .. code-block:: xml
+
+        <!-- config/services.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+            <services>
+                <service id="App\EventListener\NewsletterQueueFlusher">
+                    <argument type="service" id="App\Newsletter\NewsletterQueue"
+                        on-invalid="ignore_uninitialized"/>
+                </service>
+            </services>
+        </container>
+
+    .. code-block:: php
+
+        // config/services.php
+        namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+        use App\EventListener\NewsletterQueueFlusher;
+        use App\Newsletter\NewsletterQueue;
+
+        return function(ContainerConfigurator $container): void {
+            $services = $container->services();
+
+            $services->set(NewsletterQueueFlusher::class)
+                ->args([service(NewsletterQueue::class)->ignoreOnUninitialized()]);
+        };
+
+The container checks the dependency only when it creates the service that uses
+it. If the container creates the dependency later, the service keeps the
+``null`` value. This works in the example because the container creates event
+listeners only when the application dispatches their event. Non-shared
+dependencies are always ``null`` because the container never stores their
+instances.
+
+When used within a method call, the container removes the method call if it
+hasn't created the dependency yet, like the ``ignore`` strategy does for
+missing services.
 
 .. tip::
 
