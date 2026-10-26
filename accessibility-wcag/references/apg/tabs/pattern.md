@@ -1,4 +1,3 @@
-
 # Tabs Pattern
 
 
@@ -73,5 +72,4 @@ For the tab list:
 - Each element with role `tabpanel` has the property aria-labelledby referring to its associated `tab` element.
 - If a `tab` element has a popup menu, it has the property aria-haspopup set to either `menu` or `true`.
 - If the `tablist` element is vertically oriented, it has the property aria-orientation set to `vertical`. The default value of `aria-orientation` for a `tablist` element is `horizontal`.
-
 

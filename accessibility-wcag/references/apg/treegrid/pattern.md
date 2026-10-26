@@ -1,4 +1,3 @@
-
 # Treegrid Pattern
 
 
@@ -127,6 +126,5 @@ See [Key Assignment Conventions for Common Functions](../practices/keyboard-inte
 
 - A `treegrid` built from an HTML `table` that includes cells that span multiple rows or columns must use HTML `rowspan` and `colspan` and must not use `aria-rowspan` or `aria-colspan`.
 - If rows or cells are included in a treegrid via aria-owns, they will be presented to assistive technologies after the DOM descendants of the `treegrid` element unless the DOM descendants are also included in the `aria-owns` attribute.
-
 
 

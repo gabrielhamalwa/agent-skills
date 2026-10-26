@@ -1,4 +1,3 @@
-
 # Toolbar Pattern
 
 
@@ -54,5 +53,4 @@ To optimize the benefit of toolbar widgets:
 - The element that serves as the toolbar container has role toolbar.
 - If the toolbar has a visible label, it is referenced by aria-labelledby on the toolbar element. Otherwise, the toolbar element has a label provided by aria-label.
 - If the controls are arranged vertically, the toolbar element has aria-orientation set to `vertical`. The default orientation is horizontal.
-
 

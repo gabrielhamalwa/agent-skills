@@ -1,4 +1,3 @@
-
 # Radio Group Pattern
 
 
@@ -73,5 +72,4 @@ Radio buttons in a toolbar are frequently styled in a manner that appears more l
 - Each `radio` element is labelled by its content, has a visible label referenced by aria-labelledby, or has a label specified with aria-label.
 - The `radiogroup` element has a visible label referenced by aria-labelledby or has a label specified with aria-label.
 - If elements providing additional information about either the radio group or each radio button are present, those elements are referenced by the `radiogroup` element or `radio` elements with the aria-describedby property.
-
 

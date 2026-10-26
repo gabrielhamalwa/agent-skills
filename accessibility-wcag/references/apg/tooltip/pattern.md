@@ -1,4 +1,3 @@
-
 # Tooltip Pattern
 
 
@@ -37,5 +36,4 @@ Work to develop a tooltip example is tracked by [issue 127.](https://github.com/
 
 - The element that serves as the tooltip container has role tooltip.
 - The element that triggers the tooltip references the tooltip element with aria-describedby.
-
 

@@ -1,4 +1,3 @@
-
 # Menu and Menubar Pattern
 
 
@@ -122,6 +121,5 @@ When a `menu` opens, or when a `menubar` receives focus, keyboard focus is place
 ### Note
 
 If aria-owns is set on the menu container to include elements that are not DOM children of the container, those elements will appear in the reading order in the sequence they are referenced and after any items that are DOM children. Scripts that manage focus need to ensure the visual focus order matches this assistive technology reading order.
-
 
 

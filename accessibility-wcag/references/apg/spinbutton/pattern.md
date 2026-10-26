@@ -1,4 +1,3 @@
-
 # Spinbutton Pattern
 
 
@@ -53,5 +52,4 @@ If the range is large, a spinbutton may support changing the value in both small
 - If the value of `aria-valuenow` is not user-friendly, e.g., the day of the week is represented by a number, the aria-valuetext property is set on the spinbutton element to a string that makes the spinbutton value understandable, e.g., "Monday".
 - If the spinbutton has a visible label, it is referenced by aria-labelledby on the spinbutton element. Otherwise, the spinbutton element has a label provided by aria-label.
 - The spinbutton element has aria-invalid set to `true` if the value is outside the allowed range. Note that most implementations prevent input of invalid values, but in some scenarios, blocking all invalid input may not be practical.
-
 

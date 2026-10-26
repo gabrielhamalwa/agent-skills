@@ -1,4 +1,3 @@
-
 # Communicating Value and Limits for Range Widgets
 
 
@@ -17,12 +16,12 @@ For example, a spin button for choosing a day within the month of January would 
 
 This section describes considerations for using the following four properties that communicate characteristics of a range widget:
 
-| Property         | Definition                                                                                                                                                                      |
-|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `aria-valuemin`  | Defines the minimum value allowed by a range widget.                                                                                                                            |
-| `aria-valuemax`  | Defines the maximum value allowed by a range widget.                                                                                                                            |
-| `aria-valuenow`  | Defines the current value of a range widget. This value is a number greater than or equal to `aria-valuemin` and less than or equal to `aria-valuemax` (if they are specified). |
-| `aria-valuetext` | If a numeric value is not sufficiently descriptive, this property can define a text description of the current value of a range widget.                                         |
+| Property | Definition |
+|----|----|
+| `aria-valuemin` | Defines the minimum value allowed by a range widget. |
+| `aria-valuemax` | Defines the maximum value allowed by a range widget. |
+| `aria-valuenow` | Defines the current value of a range widget. This value is a number greater than or equal to `aria-valuemin` and less than or equal to `aria-valuemax` (if they are specified). |
+| `aria-valuetext` | If a numeric value is not sufficiently descriptive, this property can define a text description of the current value of a range widget. |
 
 
 
@@ -44,7 +43,7 @@ The range widget roles have the following default values and requirements for `a
 <col style="width: 16%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th scope="col">Role</th>
 <th scope="col"><code>aria-valuemin</code><br />
 (default)</th>
@@ -59,7 +58,7 @@ The range widget roles have the following default values and requirements for `a
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <th scope="row"><code>meter</code></th>
 <td>0</td>
 <td>100</td>
@@ -67,7 +66,7 @@ The range widget roles have the following default values and requirements for `a
 <td>No</td>
 <td>Yes</td>
 </tr>
-<tr class="even">
+<tr>
 <th scope="row"><code>progressbar</code></th>
 <td>0</td>
 <td>100</td>
@@ -75,7 +74,7 @@ The range widget roles have the following default values and requirements for `a
 <td>No</td>
 <td>No</td>
 </tr>
-<tr class="odd">
+<tr>
 <th scope="row"><code>scrollbar</code></th>
 <td>0</td>
 <td>100</td>
@@ -83,7 +82,7 @@ The range widget roles have the following default values and requirements for `a
 <td>No</td>
 <td>Yes</td>
 </tr>
-<tr class="even">
+<tr>
 <th scope="row"><code>separator</code> <span class="small">(if focusable)</span></th>
 <td>0</td>
 <td>100</td>
@@ -91,7 +90,7 @@ The range widget roles have the following default values and requirements for `a
 <td>No</td>
 <td>Yes</td>
 </tr>
-<tr class="odd">
+<tr>
 <th scope="row"><code>slider</code></th>
 <td>0</td>
 <td>100</td>
@@ -99,7 +98,7 @@ The range widget roles have the following default values and requirements for `a
 <td>No</td>
 <td>Yes</td>
 </tr>
-<tr class="even">
+<tr>
 <th scope="row"><code>spinbutton</code></th>
 <td>None</td>
 <td>None</td>
@@ -262,5 +261,4 @@ If there are minimum and maximum allowed values, set the `aria-valuemin` and `ar
 The spin button example above can be made using the native HTML `<input type="number">` element.
 
     <label>Price per paperclip: $<input type="number" min="0.01" value="0.5" max="2" step="0.01"></label>
-
 

@@ -1,4 +1,3 @@
-
 # Combobox Pattern
 
 
@@ -227,6 +226,5 @@ Unlike other combobox popups, dialogs do not support `aria-activedescendant` so 
     - [Grid Roles, States, and Properties](../grid/pattern.md)
     - [Tree Roles, States, and Properties](../treeview/pattern.md)
     - [Dialog Roles, States, and Properties](../dialog-modal/pattern.md)
-
 
 

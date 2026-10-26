@@ -1,4 +1,3 @@
-
 # Window Splitter Pattern
 
 
@@ -50,5 +49,4 @@ A fixed size splitter omits implementation of the arrow keys.
 - The separator element has the aria-valuemax property set to a decimal value that represents the position where the primary pane has its maximum size. This is typically `100`.
 - If the primary pane has a visible label, it is referenced by aria-labelledby on the separator element. Otherwise, the separator element has a label provided by aria-label.
 - The separator element has aria-controls referring to the primary pane.
-
 
