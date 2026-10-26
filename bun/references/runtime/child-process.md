@@ -634,9 +634,9 @@ interface ResourceUsage {
   };
 
   cpuTime: {
-    user: number;
-    system: number;
-    total: number;
+    user: bigint;
+    system: bigint;
+    total: bigint;
   };
   maxRSS: number;
 

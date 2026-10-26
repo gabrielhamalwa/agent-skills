@@ -101,7 +101,12 @@ interface Bun {
       fileExtensions?: string[];
     });
 
-    reload(): void;
+    readonly assetPrefix: string | null;
+    readonly origin: string | null;
+    readonly routes: Record<string, string>;
+    readonly style: "nextjs";
+
+    reload(): this;
 
     match(path: string | Request | Response): {
       filePath: string;

@@ -43,6 +43,8 @@ bunx my-cli
 
 As with `npx`, `bunx` checks for a locally installed package first, then falls back to auto-installing it from `npm`. With a version (`bunx my-cli@2`), it does not use the local package. `bunx` stores installed packages in Bun's [global cache](/pm/global-cache) for future use.
 
+On macOS and Linux, if the project has the package but the file of its executable is missing or has no execute permission, `bunx my-cli` exits with an error that names the file. It does not download another copy.
+
 `bunx my-cli` asks the registry for newer versions of the package and of its dependencies once a day. If the registry cannot be reached or answers with a 5xx, 429 or 408 status, it warns and runs the version it has. `bunx my-cli@latest` asks on every run.
 
 ## Arguments and flags
@@ -126,6 +128,18 @@ Execute an npm package executable (CLI). If the package isn't installed in `node
 
 <ParamField path="--minimum-release-age" type="number">
   Only install packages published at least N seconds ago (security feature)
+</ParamField>
+
+<ParamField path="--use-system-ca" type="boolean">
+  Use the system's trusted certificate authorities during installation
+</ParamField>
+
+<ParamField path="--use-openssl-ca" type="boolean">
+  Use OpenSSL's default CA store instead of the bundled one during installation
+</ParamField>
+
+<ParamField path="--use-bundled-ca" type="boolean">
+  Use bundled CA store during installation
 </ParamField>
 
 <ParamField path="--trust" type="boolean">
