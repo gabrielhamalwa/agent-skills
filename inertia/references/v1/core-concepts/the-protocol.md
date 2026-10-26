@@ -1,8 +1,10 @@
 # The Protocol
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
-This page contains a detailed specification of the Inertia protocol. Be sure to read the [how it works](/docs/v1/core-concepts/how-it-works) page first for a high-level overview.
+This page contains a detailed specification of the Inertia protocol. Be sure to read the [how it works](https://inertiajs.com/docs/v1/core-concepts/how-it-works.md) page first for a high-level overview.
 
 ## HTML Responses
 
@@ -10,7 +12,7 @@ The very first request to an Inertia app is just a regular, full-page browser re
 
 This HTML response includes the site assets (CSS, JavaScript) as well as a root `<div>` in the
 page's body. The root `<div>` serves as a mounting point for the client-side app, and includes a
-`data-page` attribute with a JSON encoded <a href="#the-page-object">page object</a> for the initial
+`data-page` attribute with a JSON encoded [page object](#the-page-object) for the initial
 page. Inertia uses this information to boot your client-side framework and display the initial page component.
 
 ```http theme={null}
@@ -35,9 +37,9 @@ Content-Type: text/html; charset=utf-8
 </html>
 ```
 
-<Info>
-  While the initial response is HTML, Inertia does not server-side render the JavaScript page components.
-</Info>
+> [!NOTE]
+>
+> While the initial response is HTML, Inertia does not server-side render the JavaScript page components.
 
 ## Inertia responses
 
@@ -46,7 +48,7 @@ Once the Inertia app has been booted, all subsequent requests to the site are ma
 Inertia and isn't a standard full-page visit.
 
 When the server detects the `X-Inertia` header, instead of responding with a full HTML document, it
-returns a JSON response with an encoded <a href="#the-page-object">page object</a>.
+returns a JSON response with an encoded [page object](#the-page-object).
 
 ```http theme={null}
 REQUEST
@@ -97,7 +99,7 @@ One common challenge with single-page apps is refreshing site assets when they'v
 this easy by optionally tracking the current version of the site's assets. In the event that an asset changes,
 Inertia will automatically make a full-page visit instead of an XHR visit.
 
-The Inertia <a href="#the-page-object">page object</a> includes a `version` identifier. This version
+The Inertia [page object](#the-page-object) includes a `version` identifier. This version
 identifier is set server-side and can be a number, string, file hash, or any other value that represents the
 current "version" of your site's assets, as long as the value changes when the site's assets have been updated.
 

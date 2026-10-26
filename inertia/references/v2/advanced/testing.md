@@ -1,6 +1,8 @@
 # Testing
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 There are many different ways to test an Inertia application. This page provides a quick overview of the tools available.
 
@@ -167,7 +169,7 @@ $response->assertInertia(fn (Assert $page) => $page
 
 ### Testing Partial Reloads
 
-You may use the `reloadOnly` and `reloadExcept` methods to test how your application responds to [partial reloads](/docs/v2/data-props/partial-reloads). These methods perform a follow-up request and allow you to make assertions against the response.
+You may use the `reloadOnly` and `reloadExcept` methods to test how your application responds to [partial reloads](https://inertiajs.com/docs/v2/data-props/partial-reloads.md). These methods perform a follow-up request and allow you to make assertions against the response.
 
 ```php theme={null}
 $response->assertInertia(fn (Assert $page) => $page
@@ -184,7 +186,7 @@ Instead of passing a single prop as a string, you may also pass an array of prop
 
 ### Testing Deferred Props
 
-You may use the `loadDeferredProps` method to test how your application responds to [deferred props](/docs/v2/data-props/deferred-props). This method performs a follow-up request to load the deferred properties and allows you to make assertions against the response.
+You may use the `loadDeferredProps` method to test how your application responds to [deferred props](https://inertiajs.com/docs/v2/data-props/deferred-props.md). This method performs a follow-up request to load the deferred properties and allows you to make assertions against the response.
 
 ```php theme={null}
 $response->assertInertia(fn (Assert $page) => $page
@@ -227,7 +229,7 @@ $response->assertInertia(fn (Assert $page) => $page
 
 ### Testing Flash Data
 
-You may use the `hasFlash` and `missingFlash` methods to test [flash data](/docs/v2/data-props/flash-data) in your Inertia responses.
+You may use the `hasFlash` and `missingFlash` methods to test [flash data](https://inertiajs.com/docs/v2/data-props/flash-data.md) in your Inertia responses.
 
 ```php theme={null}
 $response->assertInertia(fn (Assert $page) => $page

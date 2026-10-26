@@ -48,13 +48,13 @@ declare module "@inertiajs/core" {
 }
 ```
 
-<Note>
-  The `import` statement (or `export {}`) is required to make this file a module. Without it, `declare module` replaces the module definition instead of augmenting it. Your `tsconfig.json` also needs to include `.d.ts` files, so make sure a pattern like `"resources/js/**/*.d.ts"` is present in the `include` array.
-</Note>
+> [!NOTE]
+>
+> The `import` statement (or `export {}`) is required to make this file a module. Without it, `declare module` replaces the module definition instead of augmenting it. Your `tsconfig.json` also needs to include `.d.ts` files, so make sure a pattern like `"resources/js/**/*.d.ts"` is present in the `include` array.
 
 ### Shared Page Props
 
-The `sharedPageProps` option defines the type of data that is [shared](/docs/v3/data-props/shared-data) with every page in your application. With this configuration, `page.props.auth` and `page.props.appName` will be properly typed everywhere.
+The `sharedPageProps` option defines the type of data that is [shared](https://inertiajs.com/docs/v3/data-props/shared-data.md) with every page in your application. With this configuration, `page.props.auth` and `page.props.appName` will be properly typed everywhere.
 
 ```ts theme={null}
 sharedPageProps: {
@@ -65,7 +65,7 @@ sharedPageProps: {
 
 ### Flash Data
 
-The `flashDataType` option defines the type of [flash data](/docs/v3/data-props/flash-data) in your application.
+The `flashDataType` option defines the type of [flash data](https://inertiajs.com/docs/v3/data-props/flash-data.md) in your application.
 
 ```ts theme={null}
 flashDataType: {
@@ -75,7 +75,7 @@ flashDataType: {
 
 ### Error Values
 
-By default, validation error values are typed as `string`. You may configure TypeScript to expect arrays instead for [multiple errors per field](/docs/v3/the-basics/validation#multiple-errors-per-field).
+By default, validation error values are typed as `string`. You may configure TypeScript to expect arrays instead for [multiple errors per field](https://inertiajs.com/docs/v3/the-basics/validation.md#multiple-errors-per-field).
 
 ```ts theme={null}
 errorValueType: string[]
@@ -105,110 +105,121 @@ setLayoutProps<{ custom: string }>({ custom: 'value' })
 setLayoutProps<{ collapsed: boolean }>('sidebar', { collapsed: true })
 ```
 
-<Note>
-  The next version of [Laravel
-  Wayfinder](https://github.com/laravel/wayfinder/tree/next) may automatically
-  generate these types for you by analyzing your Laravel application. It
-  generates TypeScript types for shared props, page props, form requests, and
-  Eloquent models. This version is currently in beta.
-</Note>
+> [!NOTE]
+>
+> The next version of [Laravel
+> Wayfinder](https://github.com/laravel/wayfinder/tree/next) may automatically
+> generate these types for you by analyzing your Laravel application. It
+> generates TypeScript types for shared props, page props, form requests, and
+> Eloquent models. This version is currently in beta.
 
 ## Page Components
 
 You may type the `import.meta.glob` result for better type safety when resolving page components.
 
-<CodeGroup>
-  ```ts Vue icon="vuejs" theme={null}
-  import { createInertiaApp } from "@inertiajs/vue3";
-  import type { DefineComponent } from "vue";
+```ts Vue icon="vuejs" theme={null}
+import { createInertiaApp } from "@inertiajs/vue3";
+import type { DefineComponent } from "vue";
 
-  createInertiaApp({
-    resolve: (name) => {
-      const pages = import.meta.glob<DefineComponent>("./Pages/**/*.vue");
-      return pages[`./Pages/${name}.vue`]();
-    },
-    // ...
-  });
-  ```
+createInertiaApp({
+  resolve: (name) => {
+    const pages = import.meta.glob<DefineComponent>("./Pages/**/*.vue");
+    return pages[`./Pages/${name}.vue`]();
+  },
+  // ...
+});
+```
 
-  ```tsx React icon="react" theme={null}
-  import { createInertiaApp, type ResolvedComponent } from "@inertiajs/react";
+```tsx React icon="react" theme={null}
+import { createInertiaApp, type ResolvedComponent } from "@inertiajs/react";
 
-  createInertiaApp({
-    resolve: (name) => {
-      const pages = import.meta.glob<ResolvedComponent>("./Pages/**/*.tsx");
-      return pages[`./Pages/${name}.tsx`]();
-    },
-    // ...
-  });
-  ```
+createInertiaApp({
+  resolve: (name) => {
+    const pages = import.meta.glob<ResolvedComponent>("./Pages/**/*.tsx");
+    return pages[`./Pages/${name}.tsx`]();
+  },
+  // ...
+});
+```
 
-  ```ts Svelte icon="s" theme={null}
-  import { createInertiaApp, type ResolvedComponent } from "@inertiajs/svelte";
+```ts Svelte icon="s" theme={null}
+import { createInertiaApp, type ResolvedComponent } from "@inertiajs/svelte";
 
-  createInertiaApp({
-    resolve: (name) => {
-      const pages = import.meta.glob<ResolvedComponent>("./Pages/**/*.svelte");
-      return pages[`./Pages/${name}.svelte`]();
-    },
-    // ...
-  });
-  ```
-</CodeGroup>
+createInertiaApp({
+  resolve: (name) => {
+    const pages = import.meta.glob<ResolvedComponent>("./Pages/**/*.svelte");
+    return pages[`./Pages/${name}.svelte`]();
+  },
+  // ...
+});
+```
 
 ## Page Props
 
 You may type page-specific props by passing a generic to `usePage()`. These are merged with your global `sharedPageProps`, giving you autocomplete and type checking for both shared and page-specific data.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup lang="ts">
-  import { usePage } from "@inertiajs/vue3";
+```vue Vue icon="vuejs" theme={null}
+<script setup lang="ts">
+import { usePage } from "@inertiajs/vue3";
 
+const page = usePage<{
+  posts: { id: number; title: string }[];
+}>();
+</script>
+```
+
+```tsx React icon="react" theme={null}
+import { usePage } from "@inertiajs/react";
+
+export default function Posts() {
   const page = usePage<{
     posts: { id: number; title: string }[];
   }>();
-  </script>
-  ```
 
-  ```tsx React icon="react" theme={null}
-  import { usePage } from "@inertiajs/react";
+  return (
+    <ul>
+      {page.props.posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
 
-  export default function Posts() {
+```svelte Svelte icon="s" theme={null}
+<script lang="ts">
+    import { usePage } from '@inertiajs/svelte'
+
     const page = usePage<{
-      posts: { id: number; title: string }[];
-    }>();
-
-    return (
-      <ul>
-        {page.props.posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
-    );
-  }
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script lang="ts">
-      import { usePage } from '@inertiajs/svelte'
-
-      const page = usePage<{
-          posts: { id: number; title: string }[]
-      }>()
-  </script>
-  ```
-</CodeGroup>
+        posts: { id: number; title: string }[]
+    }>()
+</script>
+```
 
 ## Form Helper
 
-The [form helper](/docs/v3/the-basics/forms#form-helper) accepts a generic type parameter for type-safe form data and error handling. This provides autocomplete for form fields and errors, and prevents typos in field names.
+The [form helper](https://inertiajs.com/docs/v3/the-basics/forms.md#form-helper) accepts a generic type parameter for type-safe form data and error handling. This provides autocomplete for form fields and errors, and prevents typos in field names.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup lang="ts">
-  import { useForm } from "@inertiajs/vue3";
+```vue Vue icon="vuejs" theme={null}
+<script setup lang="ts">
+import { useForm } from "@inertiajs/vue3";
 
+const form = useForm<{
+  name: string;
+  email: string;
+  company: { name: string };
+}>({
+  name: "",
+  email: "",
+  company: { name: "" },
+});
+</script>
+```
+
+```tsx React icon="react" theme={null}
+import { useForm } from "@inertiajs/react";
+
+export default function CreateUser() {
   const form = useForm<{
     name: string;
     email: string;
@@ -218,43 +229,26 @@ The [form helper](/docs/v3/the-basics/forms#form-helper) accepts a generic type 
     email: "",
     company: { name: "" },
   });
-  </script>
-  ```
 
-  ```tsx React icon="react" theme={null}
-  import { useForm } from "@inertiajs/react";
+  return null;
+}
+```
 
-  export default function CreateUser() {
+```svelte Svelte icon="s" theme={null}
+<script lang="ts">
+    import { useForm } from '@inertiajs/svelte'
+
     const form = useForm<{
-      name: string;
-      email: string;
-      company: { name: string };
+        name: string
+        email: string
+        company: { name: string }
     }>({
-      name: "",
-      email: "",
-      company: { name: "" },
-    });
-
-    return null;
-  }
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script lang="ts">
-      import { useForm } from '@inertiajs/svelte'
-
-      const form = useForm<{
-          name: string
-          email: string
-          company: { name: string }
-      }>({
-          name: '',
-          email: '',
-          company: { name: '' },
-      })
-  </script>
-  ```
-</CodeGroup>
+        name: '',
+        email: '',
+        company: { name: '' },
+    })
+</script>
+```
 
 ### Nested Data and Arrays
 
@@ -276,72 +270,70 @@ const form = useForm<{
 
 The `<Form>` component accepts a generic type parameter for type-safe slot props. In React, you may pass the generic directly. In Vue and Svelte, you may use the `createForm` helper to create a typed form component.
 
-<CodeGroup>
-  ```tsx React icon="react" theme={null}
-  import { Form } from "@inertiajs/react";
+```tsx React icon="react" theme={null}
+import { Form } from "@inertiajs/react";
 
-  interface UserForm {
-    name: string;
-    email: string;
-  }
+interface UserForm {
+  name: string;
+  email: string;
+}
 
-  export default function CreateUser() {
-    return (
-      <Form<UserForm> action="/users" method="post">
-        {({ errors }) => (
-          <>
-            <input type="text" name="name" />
-            {errors.name && <div>{errors.name}</div>}
-            <button type="submit">Create User</button>
-          </>
-        )}
-      </Form>
-    );
-  }
-  ```
-
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup lang="ts">
-  import { createForm } from "@inertiajs/vue3";
-
-  interface UserForm {
-    name: string;
-    email: string;
-  }
-
-  const TypedForm = createForm<UserForm>();
-  </script>
-
-  <template>
-    <TypedForm action="/users" method="post" #default="{ errors }">
-      <input type="text" name="name" />
-      <div v-if="errors.name">{{ errors.name }}</div>
-      <button type="submit">Create User</button>
-    </TypedForm>
-  </template>
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script lang="ts">
-      import { createForm } from '@inertiajs/svelte'
-
-      interface UserForm {
-          name: string
-          email: string
-      }
-
-      const TypedForm = createForm<UserForm>()
-  </script>
-
-  <TypedForm action="/users" method="post">
-      {#snippet children({ errors })}
+export default function CreateUser() {
+  return (
+    <Form<UserForm> action="/users" method="post">
+      {({ errors }) => (
+        <>
           <input type="text" name="name" />
-          {#if errors.name}<div>{errors.name}</div>{/if}
+          {errors.name && <div>{errors.name}</div>}
           <button type="submit">Create User</button>
-      {/snippet}
+        </>
+      )}
+    </Form>
+  );
+}
+```
+
+```vue Vue icon="vuejs" theme={null}
+<script setup lang="ts">
+import { createForm } from "@inertiajs/vue3";
+
+interface UserForm {
+  name: string;
+  email: string;
+}
+
+const TypedForm = createForm<UserForm>();
+</script>
+
+<template>
+  <TypedForm action="/users" method="post" #default="{ errors }">
+    <input type="text" name="name" />
+    <div v-if="errors.name">{{ errors.name }}</div>
+    <button type="submit">Create User</button>
   </TypedForm>
-  ```
-</CodeGroup>
+</template>
+```
+
+```svelte Svelte icon="s" theme={null}
+<script lang="ts">
+    import { createForm } from '@inertiajs/svelte'
+
+    interface UserForm {
+        name: string
+        email: string
+    }
+
+    const TypedForm = createForm<UserForm>()
+</script>
+
+<TypedForm action="/users" method="post">
+    {#snippet children({ errors })}
+        <input type="text" name="name" />
+        {#if errors.name}<div>{errors.name}</div>{/if}
+        <button type="submit">Create User</button>
+    {/snippet}
+</TypedForm>
+```
 
 The generic provides autocomplete and type checking for the `errors` object, `setError`, `clearErrors`, and other slot props that reference form fields.
 
@@ -349,33 +341,31 @@ The generic provides autocomplete and type checking for the `errors` object, `se
 
 The `useFormContext()` function also accepts a generic type parameter, providing type-safe access to the form context from child components.
 
-<CodeGroup>
-  ```tsx React icon="react" theme={null}
-  import { useFormContext } from "@inertiajs/react";
+```tsx React icon="react" theme={null}
+import { useFormContext } from "@inertiajs/react";
 
-  const form = useFormContext<UserForm>();
-  ```
+const form = useFormContext<UserForm>();
+```
 
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup lang="ts">
-  import { useFormContext } from "@inertiajs/vue3";
+```vue Vue icon="vuejs" theme={null}
+<script setup lang="ts">
+import { useFormContext } from "@inertiajs/vue3";
 
-  const form = useFormContext<UserForm>();
-  </script>
-  ```
+const form = useFormContext<UserForm>();
+</script>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  <script lang="ts">
-      import { useFormContext } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+<script lang="ts">
+    import { useFormContext } from '@inertiajs/svelte'
 
-      const form = useFormContext<UserForm>()
-  </script>
-  ```
-</CodeGroup>
+    const form = useFormContext<UserForm>()
+</script>
+```
 
 ## HTTP Helper
 
-The [`useHttp`](/docs/v3/the-basics/http-requests) hook accepts two generic type parameters: the form data type and an optional default response type.
+The [`useHttp`](https://inertiajs.com/docs/v3/the-basics/http-requests) hook accepts two generic type parameters: the form data type and an optional default response type.
 
 ```ts theme={null}
 import { useHttp } from "@inertiajs/react";
@@ -395,104 +385,100 @@ const http = useHttp<UserForm, UserResponse>({ name: "", email: "" });
 
 ## Layout Callbacks
 
-The `LayoutCallback` type provides type safety for [layout callbacks](/docs/v3/the-basics/layouts#callback-props). The callback receives the page's props (typed via your global `sharedPageProps` configuration) and should return a valid layout definition.
+The `LayoutCallback` type provides type safety for [layout callbacks](https://inertiajs.com/docs/v3/the-basics/layouts.md#callback-props). The callback receives the page's props (typed via your global `sharedPageProps` configuration) and should return a valid layout definition.
 
-<CodeGroup>
-  ```tsx React icon="react" theme={null}
-  import type { LayoutCallback } from "@inertiajs/react";
-  import Layout from "./Layout";
+```tsx React icon="react" theme={null}
+import type { LayoutCallback } from "@inertiajs/react";
+import Layout from "./Layout";
 
-  const Profile = () => <h1>Profile</h1>;
+const Profile = () => <h1>Profile</h1>;
 
-  const callback: LayoutCallback = (props) => {
-    return [Layout, { title: props.auth.user?.name }];
-  };
+const callback: LayoutCallback = (props) => {
+  return [Layout, { title: props.auth.user?.name }];
+};
 
-  Profile.layout = callback;
+Profile.layout = callback;
 
-  export default Profile;
-  ```
+export default Profile;
+```
 
-  ```vue Vue icon="vuejs" theme={null}
-  <script lang="ts">
-  import Layout from "./Layout.vue";
-  import type { LayoutCallback } from "@inertiajs/vue3";
+```vue Vue icon="vuejs" theme={null}
+<script lang="ts">
+import Layout from "./Layout.vue";
+import type { LayoutCallback } from "@inertiajs/vue3";
 
-  const callback: LayoutCallback = (props) => {
-    return [Layout, { title: props.auth.user?.name }];
-  };
+const callback: LayoutCallback = (props) => {
+  return [Layout, { title: props.auth.user?.name }];
+};
 
-  export default {
-    layout: callback,
-  };
-  </script>
-  ```
+export default {
+  layout: callback,
+};
+</script>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  <script module lang="ts">
-      import Layout from './Layout.svelte'
-      import type { LayoutCallback } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+<script module lang="ts">
+    import Layout from './Layout.svelte'
+    import type { LayoutCallback } from '@inertiajs/svelte'
 
-      export const layout: LayoutCallback = (props) => {
-          return [Layout, { title: props.auth.user?.name }]
-      }
-  </script>
-  ```
-</CodeGroup>
+    export const layout: LayoutCallback = (props) => {
+        return [Layout, { title: props.auth.user?.name }]
+    }
+</script>
+```
 
 ## Remembering State
 
 The `useRemember` hook accepts a generic type parameter for type-safe local state persistence, providing autocomplete and ensuring values match the expected types.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup lang="ts">
-  import { useRemember } from "@inertiajs/vue3";
+```vue Vue icon="vuejs" theme={null}
+<script setup lang="ts">
+import { useRemember } from "@inertiajs/vue3";
 
-  const filters = useRemember<{
+const filters = useRemember<{
+  search: string;
+  status: "active" | "inactive" | "all";
+}>({
+  search: "",
+  status: "all",
+});
+</script>
+```
+
+```tsx React icon="react" theme={null}
+import { useRemember } from "@inertiajs/react";
+
+export default function Users() {
+  const [filters, setFilters] = useRemember<{
     search: string;
     status: "active" | "inactive" | "all";
   }>({
     search: "",
     status: "all",
   });
-  </script>
-  ```
 
-  ```tsx React icon="react" theme={null}
-  import { useRemember } from "@inertiajs/react";
+  return null;
+}
+```
 
-  export default function Users() {
-    const [filters, setFilters] = useRemember<{
-      search: string;
-      status: "active" | "inactive" | "all";
+```svelte Svelte icon="s" theme={null}
+<script lang="ts">
+    import { useRemember } from '@inertiajs/svelte'
+
+    const filters = useRemember<{
+        search: string
+        status: 'active' | 'inactive' | 'all'
     }>({
-      search: "",
-      status: "all",
-    });
-
-    return null;
-  }
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script lang="ts">
-      import { useRemember } from '@inertiajs/svelte'
-
-      const filters = useRemember<{
-          search: string
-          status: 'active' | 'inactive' | 'all'
-      }>({
-          search: '',
-          status: 'all',
-      })
-  </script>
-  ```
-</CodeGroup>
+        search: '',
+        status: 'all',
+    })
+</script>
+```
 
 ## Restoring State
 
-The `router.restore()` method accepts a generic for typing state restored from [history](/docs/v3/data-props/remembering-state#manually-saving-state).
+The `router.restore()` method accepts a generic for typing state restored from [history](https://inertiajs.com/docs/v3/data-props/remembering-state.md#manually-saving-state).
 
 ```ts theme={null}
 import { router } from "@inertiajs/react";
@@ -540,7 +526,7 @@ router.flash<{ paymentError: string }>({ paymentError: "Card declined" });
 
 ## Client-Side Visits
 
-The `router.push()` and `router.replace()` methods accept a generic for typing [client-side visit](/docs/v3/the-basics/manual-visits#client-side-visits) props.
+The `router.push()` and `router.replace()` methods accept a generic for typing [client-side visit](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#client-side-visits) props.
 
 ```ts theme={null}
 import { router } from "@inertiajs/react";

@@ -1,8 +1,10 @@
 # Flash Data
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
-<Badge>v2.3.3+</Badge>
+v2.3.3+
 
 Sometimes you may wish to send one-time data to your frontend that shouldn't reappear when users navigate through browser history. Unlike regular props, flash data isn't persisted in history state, making it ideal for success messages, newly created IDs, or other temporary values.
 
@@ -52,144 +54,136 @@ Flash data is scoped to the current request. The middleware automatically persis
 
 Flash data is available on `page.flash`. You may also listen for the global `flash` event or use the `onFlash` callback.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { usePage } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { usePage } from '@inertiajs/vue3'
 
-  const page = usePage()
-  </script>
+const page = usePage()
+</script>
 
-  <template>
-      <div v-if="page.flash.toast" class="toast">
-          {{ page.flash.toast.message }}
-      </div>
-  </template>
-  ```
+<template>
+    <div v-if="page.flash.toast" class="toast">
+        {{ page.flash.toast.message }}
+    </div>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { usePage } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { usePage } from '@inertiajs/react'
 
-  export default function Layout({ children }) {
-      const { flash } = usePage()
+export default function Layout({ children }) {
+    const { flash } = usePage()
 
-      return (
-          <>
-              {flash.toast && <div className="toast">{flash.toast.message}</div>}
-              {children}
-          </>
-      )
-  }
-  ```
+    return (
+        <>
+            {flash.toast && <div className="toast">{flash.toast.message}</div>}
+            {children}
+        </>
+    )
+}
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-      import { page } from '@inertiajs/svelte'
-  </script>
+```svelte Svelte icon="s" theme={null}
+<script>
+    import { page } from '@inertiajs/svelte'
+</script>
 
-  {#if $page.flash.toast}
-      <div class="toast">{$page.flash.toast.message}</div>
-  {/if}
-  ```
-</CodeGroup>
+{#if $page.flash.toast}
+    <div class="toast">{$page.flash.toast.message}</div>
+{/if}
+```
 
 ## The onFlash Callback
 
 You may use the `onFlash` callback to handle flash data when making requests.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.post('/users', data, {
-      onFlash: ({ newUserId }) => {
-          form.userId = newUserId
-      },
-  })
-  ```
+router.post('/users', data, {
+    onFlash: ({ newUserId }) => {
+        form.userId = newUserId
+    },
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.post('/users', data, {
-      onFlash: ({ newUserId }) => {
-          form.userId = newUserId
-      },
-  })
-  ```
+router.post('/users', data, {
+    onFlash: ({ newUserId }) => {
+        form.userId = newUserId
+    },
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.post('/users', data, {
-      onFlash: ({ newUserId }) => {
-          form.userId = newUserId
-      },
-  })
-  ```
-</CodeGroup>
+router.post('/users', data, {
+    onFlash: ({ newUserId }) => {
+        form.userId = newUserId
+    },
+})
+```
 
 ## Global Flash Event
 
-You may use the global `flash` event to handle flash data in a central location, such as a layout component. For more information on events, see the [events documentation](/docs/v2/advanced/events).
+You may use the global `flash` event to handle flash data in a central location, such as a layout component. For more information on events, see the [events documentation](https://inertiajs.com/docs/v2/advanced/events.md).
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.on('flash', (event) => {
-      if (event.detail.flash.toast) {
-          showToast(event.detail.flash.toast)
-      }
-  })
-  ```
+router.on('flash', (event) => {
+    if (event.detail.flash.toast) {
+        showToast(event.detail.flash.toast)
+    }
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.on('flash', (event) => {
-      if (event.detail.flash.toast) {
-          showToast(event.detail.flash.toast)
-      }
-  })
-  ```
+router.on('flash', (event) => {
+    if (event.detail.flash.toast) {
+        showToast(event.detail.flash.toast)
+    }
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.on('flash', (event) => {
-      if (event.detail.flash.toast) {
-          showToast(event.detail.flash.toast)
-      }
-  })
-  ```
-</CodeGroup>
+router.on('flash', (event) => {
+    if (event.detail.flash.toast) {
+        showToast(event.detail.flash.toast)
+    }
+})
+```
 
-<Warning>
-  Event listeners registered inside components should be cleaned up when the component unmounts to prevent them from accumulating and firing multiple times. This is especially important in non-persistent layouts. See [removing event listeners](/docs/v2/advanced/events#removing-listeners) for more information.
-</Warning>
+> [!WARNING]
+>
+> Event listeners registered inside components should be cleaned up when the component unmounts to prevent them from accumulating and firing multiple times. This is especially important in non-persistent layouts. See [removing event listeners](https://inertiajs.com/docs/v2/advanced/events.md#removing-listeners) for more information.
 
 Native browser events are also supported.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  document.addEventListener('inertia:flash', (event) => {
-      console.log(event.detail.flash)
-  })
-  ```
+```js Vue icon="vuejs" theme={null}
+document.addEventListener('inertia:flash', (event) => {
+    console.log(event.detail.flash)
+})
+```
 
-  ```js React icon="react" theme={null}
-  document.addEventListener('inertia:flash', (event) => {
-      console.log(event.detail.flash)
-  })
-  ```
+```js React icon="react" theme={null}
+document.addEventListener('inertia:flash', (event) => {
+    console.log(event.detail.flash)
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  document.addEventListener('inertia:flash', (event) => {
-      console.log(event.detail.flash)
-  })
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+document.addEventListener('inertia:flash', (event) => {
+    console.log(event.detail.flash)
+})
+```
 
 The `flash` event is not cancelable and fires on every response that carries flash data.
 
@@ -197,58 +191,54 @@ The `flash` event is not cancelable and fires on every response that carries fla
 
 You may set flash data on the client without a server request using the `router.flash()` method. Values are merged with existing flash data.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.flash('foo', 'bar')
-  router.flash({ foo: 'bar' })
-  ```
+router.flash('foo', 'bar')
+router.flash({ foo: 'bar' })
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.flash('foo', 'bar')
-  router.flash({ foo: 'bar' })
-  ```
+router.flash('foo', 'bar')
+router.flash({ foo: 'bar' })
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.flash('foo', 'bar')
-  router.flash({ foo: 'bar' })
-  ```
-</CodeGroup>
+router.flash('foo', 'bar')
+router.flash({ foo: 'bar' })
+```
 
 A callback may also be passed to access the current flash data or replace it entirely.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.flash((current) => ({ ...current, bar: 'baz' }))
-  router.flash(() => ({}))
-  ```
+router.flash((current) => ({ ...current, bar: 'baz' }))
+router.flash(() => ({}))
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.flash((current) => ({ ...current, bar: 'baz' }))
-  router.flash(() => ({}))
-  ```
+router.flash((current) => ({ ...current, bar: 'baz' }))
+router.flash(() => ({}))
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.flash((current) => ({ ...current, bar: 'baz' }))
-  router.flash(() => ({}))
-  ```
-</CodeGroup>
+router.flash((current) => ({ ...current, bar: 'baz' }))
+router.flash(() => ({}))
+```
 
 ## TypeScript
 
-You may configure the flash data type globally using [TypeScript's declaration merging](/docs/v2/advanced/typescript#flash-data).
+You may configure the flash data type globally using [TypeScript's declaration merging](https://inertiajs.com/docs/v2/advanced/typescript.md#flash-data).
 
 ## Testing
 
-For information on testing flash data, see the [testing documentation](/docs/v2/advanced/testing#testing-flash-data).
+For information on testing flash data, see the [testing documentation](https://inertiajs.com/docs/v2/advanced/testing.md#testing-flash-data).

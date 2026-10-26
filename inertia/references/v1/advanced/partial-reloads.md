@@ -1,6 +1,8 @@
 # Partial Reloads
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 When making visits to the same page you are already on, it's not always necessary to re-fetch all of the page's data from the server. In fact, selecting only a subset of the data can be a helpful performance optimization if it's acceptable that some page data becomes stale. Inertia makes this possible via its "partial reload" feature.
 
@@ -12,139 +14,131 @@ Partial reloads only work for visits made to the same page component.
 
 To perform a partial reload, use the `only` visit option to specify which data the server should return. This option should be an array of keys which correspond to the keys of the props.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue2'
+```js Vue 2 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue2'
 
-  router.visit(url, {
-      only: ['users'],
-  })
-  ```
+router.visit(url, {
+    only: ['users'],
+})
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue 3 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.visit(url, {
-      only: ['users'],
-  })
-  ```
+router.visit(url, {
+    only: ['users'],
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.visit(url, {
-      only: ['users'],
-  })
-  ```
+router.visit(url, {
+    only: ['users'],
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.visit(url, {
-      only: ['users'],
-  })
-  ```
-</CodeGroup>
+router.visit(url, {
+    only: ['users'],
+})
+```
 
 ## Except Certain Props
 
 In addition to the `only` visit option you can also use the `except` option to specify which data the server should exclude. This option should also be an array of keys which correspond to the keys of the props.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue2'
+```js Vue 2 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue2'
 
-  router.visit(url, {
-      except: ['users'],
-  })
-  ```
+router.visit(url, {
+    except: ['users'],
+})
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue 3 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.visit(url, {
-      except: ['users'],
-  })
-  ```
+router.visit(url, {
+    except: ['users'],
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.visit(url, {
-      except: ['users'],
-  })
-  ```
+router.visit(url, {
+    except: ['users'],
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.visit(url, {
-      except: ['users'],
-  })
-  ```
-</CodeGroup>
+router.visit(url, {
+    except: ['users'],
+})
+```
 
 ## Router Shorthand
 
 Since partial reloads can only be made to the same page component the user is already on, it almost always makes sense to just use the `router.reload()` method, which automatically uses the current URL.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue2'
+```js Vue 2 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue2'
 
-  router.reload({ only: ['users'] })
-  ```
+router.reload({ only: ['users'] })
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue 3 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.reload({ only: ['users'] })
-  ```
+router.reload({ only: ['users'] })
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.reload({ only: ['users'] })
-  ```
+router.reload({ only: ['users'] })
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.reload({ only: ['users'] })
-  ```
-</CodeGroup>
+router.reload({ only: ['users'] })
+```
 
 ## Using Links
 
 It's also possible to perform partial reloads with Inertia links using the `only` property.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/users?active=true" :only="['users']">Show active</Link>
-  ```
+<Link href="/users?active=true" :only="['users']">Show active</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users?active=true" :only="['users']">Show active</Link>
-  ```
+<Link href="/users?active=true" :only="['users']">Show active</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users?active=true" only={['users']}>Show active</Link>
-  ```
+<Link href="/users?active=true" only={['users']}>Show active</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
+<a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
 
-  <Link href="/users?active=true" only={['users']}>Show active</Link>
-  ```
-</CodeGroup>
+<Link href="/users?active=true" only={['users']}>Show active</Link>
+```
 
 ## Lazy Data Evaluation
 

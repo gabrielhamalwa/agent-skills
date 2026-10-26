@@ -1,6 +1,8 @@
 # Shared Data
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 Sometimes you need to access specific pieces of data on numerous pages within your application. For example, you may need to display the current user in the site header. Passing this data manually in each response across your entire application is cumbersome. Thankfully, there is a better option: shared data.
 
@@ -8,7 +10,7 @@ Sometimes you need to access specific pieces of data on numerous pages within yo
 
 Inertia's server-side adapters all provide a method of making shared data available for every request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller.
 
-In Laravel applications, this is typically handled by the `HandleInertiaRequests` middleware that is automatically installed when installing the [server-side adapter](/docs/v2/installation/server-side-setup#middleware).
+In Laravel applications, this is typically handled by the `HandleInertiaRequests` middleware that is automatically installed when installing the [server-side adapter](https://inertiajs.com/docs/v2/installation/server-side-setup.md#middleware).
 
 ```php theme={null}
 class HandleInertiaRequests extends Middleware
@@ -49,7 +51,7 @@ Page props and shared data are merged together, so be sure to namespace your sha
 
 ## Sharing Once Props
 
-You may share data that is resolved only once and remembered by the client across subsequent navigations using [once props](/docs/v2/data-props/once-props).
+You may share data that is resolved only once and remembered by the client across subsequent navigations using [once props](https://inertiajs.com/docs/v2/data-props/once-props.md).
 
 ```php theme={null}
 class HandleInertiaRequests extends Middleware
@@ -87,62 +89,60 @@ Inertia::shareOnce('countries', fn () => Country::all());
 
 Once you have shared the data server-side, you will be able to access it within any of your pages or components. Here's an example of how to access shared data in a layout component.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { computed } from "vue";
-  import { usePage } from "@inertiajs/vue3";
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
 
-  const page = usePage();
+const page = usePage();
 
-  const user = computed(() => page.props.auth.user);
-  </script>
+const user = computed(() => page.props.auth.user);
+</script>
 
-  <template>
-    <main>
-      <header>You are logged in as: {{ user.name }}</header>
-      <article>
-        <slot />
-      </article>
-    </main>
-  </template>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  import { usePage } from "@inertiajs/react";
-
-  export default function Layout({ children }) {
-    const { auth } = usePage().props;
-
-    return (
-      <main>
-        <header>You are logged in as: {auth.user.name}</header>
-        <article>{children}</article>
-      </main>
-    );
-  }
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-      import { page } from '@inertiajs/svelte'
-  </script>
-
+<template>
   <main>
-      <header>
-          You are logged in as: {$page.props.auth.user.name}
-      </header>
-      <article>
-          <slot />
-      </article>
+    <header>You are logged in as: {{ user.name }}</header>
+    <article>
+      <slot />
+    </article>
   </main>
-  ```
-</CodeGroup>
+</template>
+```
+
+```jsx React icon="react" theme={null}
+import { usePage } from "@inertiajs/react";
+
+export default function Layout({ children }) {
+  const { auth } = usePage().props;
+
+  return (
+    <main>
+      <header>You are logged in as: {auth.user.name}</header>
+      <article>{children}</article>
+    </main>
+  );
+}
+```
+
+```svelte Svelte icon="s" theme={null}
+<script>
+    import { page } from '@inertiajs/svelte'
+</script>
+
+<main>
+    <header>
+        You are logged in as: {$page.props.auth.user.name}
+    </header>
+    <article>
+        <slot />
+    </article>
+</main>
+```
 
 ## TypeScript
 
-You may configure the shared props type globally using [TypeScript's declaration merging](/docs/v2/advanced/typescript#shared-page-props).
+You may configure the shared props type globally using [TypeScript's declaration merging](https://inertiajs.com/docs/v2/advanced/typescript.md#shared-page-props).
 
 ## Flash Data
 
-For one-time notifications like toast messages or success alerts, you may use [flash data](/docs/v2/data-props/flash-data). Unlike shared data, flash data is not persisted in the browser's history state, so it won't reappear when navigating through history.
+For one-time notifications like toast messages or success alerts, you may use [flash data](https://inertiajs.com/docs/v2/data-props/flash-data.md). Unlike shared data, flash data is not persisted in the browser's history state, so it won't reappear when navigating through history.

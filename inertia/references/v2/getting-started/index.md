@@ -1,6 +1,8 @@
 # Introduction
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 Inertia is a new approach to building classic server-driven web apps. We call it the modern monolith.
 
@@ -14,4 +16,4 @@ Inertia isn't a framework, nor is it a replacement for your existing server-side
 
 ## Next Steps
 
-Want to learn a bit more before diving in? Check out the [who is it for](/docs/v2/core-concepts/who-is-it-for) and [how it works](/docs/v2/core-concepts/how-it-works) pages. Or, if you're ready to get started, jump right into the [installation instructions](/docs/v2/installation/server-side-setup).
+Want to learn a bit more before diving in? Check out the [who is it for](https://inertiajs.com/docs/v2/core-concepts/who-is-it-for.md) and [how it works](https://inertiajs.com/docs/v2/core-concepts/how-it-works.md) pages. Or, if you're ready to get started, jump right into the [installation instructions](https://inertiajs.com/docs/v2/installation/server-side-setup.md).

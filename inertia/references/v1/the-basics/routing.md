@@ -1,14 +1,16 @@
 # Routing
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 ## Defining Routes
 
-When using Inertia, all of your application's routes are defined server-side. This means that you don't need Vue Router or React Router. Instead, you can simply define Laravel routes and return [Inertia responses](/docs/v1/the-basics/responses) from those routes.
+When using Inertia, all of your application's routes are defined server-side. This means that you don't need Vue Router or React Router. Instead, you can simply define Laravel routes and return [Inertia responses](https://inertiajs.com/docs/v1/the-basics/responses.md) from those routes.
 
 ## Shorthand Routes
 
-If you have a [page](/docs/v1/the-basics/pages) that doesn't need a corresponding controller method, like an "FAQ" or "about" page, you can route directly to a component via the `Route::inertia()` method.
+If you have a [page](https://inertiajs.com/docs/v1/the-basics/pages.md) that doesn't need a corresponding controller method, like an "FAQ" or "about" page, you can route directly to a component via the `Route::inertia()` method.
 
 ```php theme={null}
 Route::inertia('/about', 'About');
@@ -44,15 +46,13 @@ However, when using Laravel, the [Ziggy](https://github.com/tightenco/ziggy) lib
 
 If you're using Ziggy with Vue, it's helpful to make this function available as a custom `$route`property so you can use it directly in your templates.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  Vue.prototype.$route = route
-  ```
+```js Vue 2 icon="vuejs" theme={null}
+Vue.prototype.$route = route
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  app.config.globalProperties.$route = route
-  ```
-</CodeGroup>
+```js Vue 3 icon="vuejs" theme={null}
+app.config.globalProperties.$route = route
+```
 
 ```html theme={null}
 <a :href="$route('users.create')">Create User</a>

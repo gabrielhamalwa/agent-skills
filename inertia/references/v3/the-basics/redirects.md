@@ -38,25 +38,23 @@ If you're using one of our official server-side adapters, all redirects will aut
 
 Sometimes a user may visit a URL with a fragment, such as `/article/old-slug#section`, and the server needs to redirect to a different URL. The fragment from the original request is normally lost during the redirect.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/article/old-slug#section">View section</Link>
-  ```
+<Link href="/article/old-slug#section">View section</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { Link } from "@inertiajs/react";
 
-  <Link href="/article/old-slug#section">View section</Link>
-  ```
+<Link href="/article/old-slug#section">View section</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { Link } from '@inertiajs/svelte'
 
-  <Link href="/article/old-slug#section">View section</Link>
-  ```
-</CodeGroup>
+<Link href="/article/old-slug#section">View section</Link>
+```
 
 You may preserve the fragment by chaining the `preserveFragment` method on the redirect response. The client will carry over the `#section` fragment to the redirect target, resulting in `/article/new-slug#section`.
 
@@ -76,7 +74,7 @@ The `Inertia::location()` method will generate a `409 Conflict` response and inc
 
 ## Previous URL
 
-<Badge>Laravel Adapter v3.4.0+</Badge>
+Laravel Adapter v3.4.0+
 
 Sometimes you may wish to know which page the user navigated from. Laravel's session middleware doesn't store the previous URL and route for Inertia visits, since they are sent as AJAX requests, so `session()->previousUrl()`, `session()->previousUri()`, and `session()->previousRoute()` return the last full page load. The `back()` helper is unaffected, as it resolves the previous location from the request's `Referer` header. You may enable the `store_previous_url` option in your `config/inertia.php` configuration file to store the previous location for Inertia visits as well.
 
@@ -86,7 +84,7 @@ return [
 ];
 ```
 
-Prefetch requests and [partial reloads](/docs/v3/data-props/partial-reloads) are excluded, since deferred props, polling, and infinite scroll requests aren't navigations the user came from. Overriding the `shouldStoreCurrentUrl()` method in your `HandleInertiaRequests` middleware allows you to customize which visits are stored.
+Prefetch requests and [partial reloads](https://inertiajs.com/docs/v3/data-props/partial-reloads.md) are excluded, since deferred props, polling, and infinite scroll requests aren't navigations the user came from. Overriding the `shouldStoreCurrentUrl()` method in your `HandleInertiaRequests` middleware allows you to customize which visits are stored.
 
 ```php theme={null}
 use Illuminate\Http\Request;

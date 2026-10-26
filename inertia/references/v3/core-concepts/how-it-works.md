@@ -16,4 +16,4 @@ When Inertia makes an XHR visit, the server detects that it's an Inertia visit a
 
 **The end result is a silky smooth single-page experience.**
 
-To learn more about the nitty-gritty, technical details of how Inertia works under the hood, check out the [protocol page](/docs/v3/core-concepts/the-protocol).
+To learn more about the nitty-gritty, technical details of how Inertia works under the hood, check out the [protocol page](https://inertiajs.com/docs/v3/core-concepts/the-protocol.md).

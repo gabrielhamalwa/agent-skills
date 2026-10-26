@@ -1,6 +1,8 @@
 # Scroll Management
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 ## Scroll Resetting
 
@@ -12,125 +14,117 @@ In addition, Inertia keeps track of the scroll position of each page and automat
 
 Sometimes it's desirable to prevent the default scroll resetting when making visits. You can disable this behavior by setting the `preserveScroll` option to `false`.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue2'
+```js Vue 2 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue2'
 
-  router.visit(url, { preserveScroll: false })
-  ```
+router.visit(url, { preserveScroll: false })
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue 3 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.visit(url, { preserveScroll: false })
-  ```
+router.visit(url, { preserveScroll: false })
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.visit(url, { preserveScroll: false })
-  ```
+router.visit(url, { preserveScroll: false })
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.visit(url, { preserveScroll: false })
-  ```
-</CodeGroup>
+router.visit(url, { preserveScroll: false })
+```
 
 If you'd like to only preserve the scroll position if the response includes validation errors, set the `preserveScroll` option to "errors".
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue2'
+```js Vue 2 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue2'
 
-  router.visit(url, { preserveScroll: 'errors' })
-  ```
+router.visit(url, { preserveScroll: 'errors' })
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue 3 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.visit(url, { preserveScroll: 'errors' })
-  ```
+router.visit(url, { preserveScroll: 'errors' })
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.visit(url, { preserveScroll: 'errors' })
-  ```
+router.visit(url, { preserveScroll: 'errors' })
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.visit(url, { preserveScroll: 'errors' })
-  ```
-</CodeGroup>
+router.visit(url, { preserveScroll: 'errors' })
+```
 
 You can also lazily evaluate the `preserveScroll` option based on the response by providing a callback.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue2'
+```js Vue 2 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue2'
 
-  router.post('/users', data, {
-      preserveScroll: (page) => page.props.someProp === 'value',
-  })
-  ```
+router.post('/users', data, {
+    preserveScroll: (page) => page.props.someProp === 'value',
+})
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue 3 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.post('/users', data, {
-      preserveScroll: (page) => page.props.someProp === 'value',
-  })
-  ```
+router.post('/users', data, {
+    preserveScroll: (page) => page.props.someProp === 'value',
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.post('/users', data, {
-      preserveScroll: (page) => page.props.someProp === 'value',
-  })
-  ```
+router.post('/users', data, {
+    preserveScroll: (page) => page.props.someProp === 'value',
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.post('/users', data, {
-      preserveScroll: (page) => page.props.someProp === 'value',
-  })
-  ```
-</CodeGroup>
+router.post('/users', data, {
+    preserveScroll: (page) => page.props.someProp === 'value',
+})
+```
 
-When using an [Inertia link](/docs/v1/the-basics/links), you can preserve the scroll position using the `preserveScroll` prop.
+When using an [Inertia link](https://inertiajs.com/docs/v1/the-basics/links.md), you can preserve the scroll position using the `preserveScroll` prop.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/" preserve-scroll>Home</Link>
-  ```
+<Link href="/" preserve-scroll>Home</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/" preserve-scroll>Home</Link>
-  ```
+<Link href="/" preserve-scroll>Home</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <a preserveScroll href="/">Home</a>
-  ```
+<a preserveScroll href="/">Home</a>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
+<a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
 
-  <Link href="/" preserveScroll>Home</Link>
-  ```
-</CodeGroup>
+<Link href="/" preserveScroll>Home</Link>
+```
 
 ## Scroll Regions
 

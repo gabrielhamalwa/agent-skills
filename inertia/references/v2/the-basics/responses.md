@@ -1,10 +1,12 @@
 # Responses
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 ## Creating Responses
 
-Creating an Inertia response is simple. To get started, invoke the `Inertia::render()` method within your controller or route, providing both the name of the [JavaScript page component](/docs/v2/the-basics/pages) that you wish to render, as well as any properties (data) for the page.
+Creating an Inertia response is simple. To get started, invoke the `Inertia::render()` method within your controller or route, providing both the name of the [JavaScript page component](https://inertiajs.com/docs/v2/the-basics/pages.md) that you wish to render, as well as any properties (data) for the page.
 
 In the example below, we will pass a single property (`event`) which contains four attributes (`id`, `title`, `start_date` and `description`) to the `Event/Show` page component.
 
@@ -37,13 +39,13 @@ class EventsController extends Controller
 }
 ```
 
-<Tip>
-  To ensure that pages load quickly, only return the minimum data required for the page.
-</Tip>
+> [!TIP]
+>
+> To ensure that pages load quickly, only return the minimum data required for the page.
 
-<Note>
-  Be aware that all data returned from the controllers will be visible client-side, so be sure to omit sensitive information.
-</Note>
+> [!NOTE]
+>
+> Be aware that all data returned from the controllers will be visible client-side, so be sure to omit sensitive information.
 
 ## Properties
 

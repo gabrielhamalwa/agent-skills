@@ -39,163 +39,157 @@ In the example above, the `teams`, `projects`, and `tasks` props will be fetched
 
 On the client side, Inertia provides the `Deferred` component to help you manage deferred props. This component will automatically wait for the specified deferred props to be available before rendering its children.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { Deferred } from "@inertiajs/vue3";
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { Deferred } from "@inertiajs/vue3";
+</script>
 
-  <template>
-    <Deferred data="permissions">
-      <template #fallback>
-        <div>Loading...</div>
-      </template>
-
-      <div v-for="permission in permissions">
-        <!-- ... -->
-      </div>
-    </Deferred>
-  </template>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  import { Deferred } from "@inertiajs/react";
-
-  export default () => (
-    <Deferred data="permissions" fallback={<div>Loading...</div>}>
-      <PermissionsChildComponent />
-    </Deferred>
-  );
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-      import { Deferred } from '@inertiajs/svelte'
-
-      let { permissions } = $props()
-  </script>
-
+<template>
   <Deferred data="permissions">
-      {#snippet fallback()}
-          <div>Loading...</div>
-      {/snippet}
+    <template #fallback>
+      <div>Loading...</div>
+    </template>
 
-      {#each permissions as permission}
-          <!-- ... -->
-      {/each}
+    <div v-for="permission in permissions">
+      <!-- ... -->
+    </div>
   </Deferred>
-  ```
-</CodeGroup>
+</template>
+```
+
+```jsx React icon="react" theme={null}
+import { Deferred } from "@inertiajs/react";
+
+export default () => (
+  <Deferred data="permissions" fallback={<div>Loading...</div>}>
+    <PermissionsChildComponent />
+  </Deferred>
+);
+```
+
+```svelte Svelte icon="s" theme={null}
+<script>
+    import { Deferred } from '@inertiajs/svelte'
+
+    let { permissions } = $props()
+</script>
+
+<Deferred data="permissions">
+    {#snippet fallback()}
+        <div>Loading...</div>
+    {/snippet}
+
+    {#each permissions as permission}
+        <!-- ... -->
+    {/each}
+</Deferred>
+```
 
 ## Multiple Deferred Props
 
 If you need to wait for multiple deferred props to become available, you can specify an array to the `data` prop.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { Deferred } from "@inertiajs/vue3";
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { Deferred } from "@inertiajs/vue3";
+</script>
 
-  <template>
-    <Deferred :data="['teams', 'users']">
-      <template #fallback>
-        <div>Loading...</div>
-      </template>
+<template>
+  <Deferred :data="['teams', 'users']">
+    <template #fallback>
+      <div>Loading...</div>
+    </template>
 
-      <!-- Props are now loaded -->
-    </Deferred>
-  </template>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  import { Deferred } from "@inertiajs/react";
-
-  export default () => (
-    <Deferred data={["teams", "users"]} fallback={<div>Loading...</div>}>
-      <ChildComponent />
-    </Deferred>
-  );
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-      import { Deferred } from '@inertiajs/svelte'
-
-      let { teams, users } = $props()
-  </script>
-
-  <Deferred data={['teams', 'users']}>
-      {#snippet fallback()}
-          <div>Loading...</div>
-      {/snippet}
-
-      <!-- Props are now loaded -->
+    <!-- Props are now loaded -->
   </Deferred>
-  ```
-</CodeGroup>
+</template>
+```
+
+```jsx React icon="react" theme={null}
+import { Deferred } from "@inertiajs/react";
+
+export default () => (
+  <Deferred data={["teams", "users"]} fallback={<div>Loading...</div>}>
+    <ChildComponent />
+  </Deferred>
+);
+```
+
+```svelte Svelte icon="s" theme={null}
+<script>
+    import { Deferred } from '@inertiajs/svelte'
+
+    let { teams, users } = $props()
+</script>
+
+<Deferred data={['teams', 'users']}>
+    {#snippet fallback()}
+        <div>Loading...</div>
+    {/snippet}
+
+    <!-- Props are now loaded -->
+</Deferred>
+```
 
 ## Reloading Indicator
 
 When deferred props are being reloaded via a partial reload, the `Deferred` component exposes a `reloading` boolean through its slot. This allows you to show a loading indicator while still displaying the previously loaded data.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { Deferred } from "@inertiajs/vue3";
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { Deferred } from "@inertiajs/vue3";
+</script>
 
-  <template>
-    <Deferred data="permissions" #default="{ reloading }">
-      <template #fallback>
-        <div>Loading...</div>
-      </template>
+<template>
+  <Deferred data="permissions" #default="{ reloading }">
+    <template #fallback>
+      <div>Loading...</div>
+    </template>
 
-      <div :class="{ 'opacity-50': reloading }">
-        <div v-for="permission in permissions">
-          <!-- ... -->
-        </div>
+    <div :class="{ 'opacity-50': reloading }">
+      <div v-for="permission in permissions">
+        <!-- ... -->
       </div>
-    </Deferred>
-  </template>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  import { Deferred } from "@inertiajs/react";
-
-  export default () => (
-    <Deferred data="permissions" fallback={<div>Loading...</div>}>
-      {({ reloading }) => (
-        <div className={reloading ? "opacity-50" : ""}>
-          <PermissionsChildComponent />
-        </div>
-      )}
-    </Deferred>
-  );
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-      import { Deferred } from '@inertiajs/svelte'
-
-      let { permissions } = $props()
-  </script>
-
-  <Deferred data="permissions">
-      {#snippet fallback()}
-          <div>Loading...</div>
-      {/snippet}
-
-      {#snippet children({ reloading })}
-          <div class:opacity-50={reloading}>
-              {#each permissions as permission}
-                  <!-- ... -->
-              {/each}
-          </div>
-      {/snippet}
+    </div>
   </Deferred>
-  ```
-</CodeGroup>
+</template>
+```
+
+```jsx React icon="react" theme={null}
+import { Deferred } from "@inertiajs/react";
+
+export default () => (
+  <Deferred data="permissions" fallback={<div>Loading...</div>}>
+    {({ reloading }) => (
+      <div className={reloading ? "opacity-50" : ""}>
+        <PermissionsChildComponent />
+      </div>
+    )}
+  </Deferred>
+);
+```
+
+```svelte Svelte icon="s" theme={null}
+<script>
+    import { Deferred } from '@inertiajs/svelte'
+
+    let { permissions } = $props()
+</script>
+
+<Deferred data="permissions">
+    {#snippet fallback()}
+        <div>Loading...</div>
+    {/snippet}
+
+    {#snippet children({ reloading })}
+        <div class:opacity-50={reloading}>
+            {#each permissions as permission}
+                <!-- ... -->
+            {/each}
+        </div>
+    {/snippet}
+</Deferred>
+```
 
 The `reloading` prop is `false` on the initial load and becomes `true` whenever a partial reload is in progress for the deferred keys. It returns to `false` once the reload completes.
 
@@ -215,76 +209,74 @@ When a deferred prop is rescued, it is omitted from the response and the excepti
 
 On the client side, you may provide a `rescue` slot to the `Deferred` component to render a fallback UI when a prop fails to load.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { Deferred, router } from "@inertiajs/vue3";
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { Deferred, router } from "@inertiajs/vue3";
+</script>
 
-  <template>
-    <Deferred data="permissions">
-      <template #fallback>
-        <div>Loading...</div>
-      </template>
-
-      <template #rescue="{ reloading }">
-        <div>
-          <p>Failed to load permissions.</p>
-          <button :disabled="reloading" @click="router.reload({ only: ['permissions'] })">Retry</button>
-        </div>
-      </template>
-
-      <div v-for="permission in permissions">
-        <!-- ... -->
-      </div>
-    </Deferred>
-  </template>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  import { Deferred, router } from "@inertiajs/react";
-
-  export default () => (
-    <Deferred
-      data="permissions"
-      fallback={<div>Loading...</div>}
-      rescue={({ reloading }) => (
-        <div>
-          <p>Failed to load permissions.</p>
-          <button disabled={reloading} onClick={() => router.reload({ only: ["permissions"] })}>Retry</button>
-        </div>
-      )}
-    >
-      <PermissionsChildComponent />
-    </Deferred>
-  );
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-      import { Deferred, router } from '@inertiajs/svelte'
-
-      let { permissions } = $props()
-  </script>
-
+<template>
   <Deferred data="permissions">
-      {#snippet fallback()}
-          <div>Loading...</div>
-      {/snippet}
+    <template #fallback>
+      <div>Loading...</div>
+    </template>
 
-      {#snippet rescue({ reloading })}
-          <div>
-              <p>Failed to load permissions.</p>
-              <button disabled={reloading} onclick={() => router.reload({ only: ['permissions'] })}>Retry</button>
-          </div>
-      {/snippet}
+    <template #rescue="{ reloading }">
+      <div>
+        <p>Failed to load permissions.</p>
+        <button :disabled="reloading" @click="router.reload({ only: ['permissions'] })">Retry</button>
+      </div>
+    </template>
 
-      {#each permissions as permission}
-          <!-- ... -->
-      {/each}
+    <div v-for="permission in permissions">
+      <!-- ... -->
+    </div>
   </Deferred>
-  ```
-</CodeGroup>
+</template>
+```
+
+```jsx React icon="react" theme={null}
+import { Deferred, router } from "@inertiajs/react";
+
+export default () => (
+  <Deferred
+    data="permissions"
+    fallback={<div>Loading...</div>}
+    rescue={({ reloading }) => (
+      <div>
+        <p>Failed to load permissions.</p>
+        <button disabled={reloading} onClick={() => router.reload({ only: ["permissions"] })}>Retry</button>
+      </div>
+    )}
+  >
+    <PermissionsChildComponent />
+  </Deferred>
+);
+```
+
+```svelte Svelte icon="s" theme={null}
+<script>
+    import { Deferred, router } from '@inertiajs/svelte'
+
+    let { permissions } = $props()
+</script>
+
+<Deferred data="permissions">
+    {#snippet fallback()}
+        <div>Loading...</div>
+    {/snippet}
+
+    {#snippet rescue({ reloading })}
+        <div>
+            <p>Failed to load permissions.</p>
+            <button disabled={reloading} onclick={() => router.reload({ only: ['permissions'] })}>Retry</button>
+        </div>
+    {/snippet}
+
+    {#each permissions as permission}
+        <!-- ... -->
+    {/each}
+</Deferred>
+```
 
 The rescue state is preserved until you explicitly reload the rescued prop. The `rescue` slot receives a `reloading` boolean, allowing you to disable the retry button or show a loading indicator while the reload is in progress.
 
@@ -298,4 +290,4 @@ return Inertia::render('Dashboard', [
 ]);
 ```
 
-For more information on once props, see the [once props](/docs/v3/data-props/once-props) documentation.
+For more information on once props, see the [once props](https://inertiajs.com/docs/v3/data-props/once-props.md) documentation.

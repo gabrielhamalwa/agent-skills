@@ -1,8 +1,8 @@
 # Merging Props
 
-Inertia overwrites props with the same name when reloading a page. However, you may need to merge new data with existing data instead. For example, when implementing a "load more" button for paginated results. The [Infinite scroll](/docs/v3/data-props/infinite-scroll) component uses prop merging under the hood.
+Inertia overwrites props with the same name when reloading a page. However, you may need to merge new data with existing data instead. For example, when implementing a "load more" button for paginated results. The [Infinite scroll](https://inertiajs.com/docs/v3/data-props/infinite-scroll.md) component uses prop merging under the hood.
 
-Prop merging only works during [partial reloads](/docs/v3/data-props/partial-reloads). Full page visits will always replace props entirely, even if you've marked them for merging.
+Prop merging only works during [partial reloads](https://inertiajs.com/docs/v3/data-props/partial-reloads.md). Full page visits will always replace props entirely, even if you've marked them for merging.
 
 ## Merge Methods
 
@@ -103,11 +103,11 @@ Route::get('/chat', function () {
 
 ## Client-Side Visits
 
-You can also merge props directly on the client side without making a server request using [client side visits](/docs/v3/the-basics/manual-visits#client-side-visits). Inertia provides [prop helper methods](/docs/v3/the-basics/manual-visits#prop-helpers) that allow you to append, prepend, or replace prop values.
+You can also merge props directly on the client side without making a server request using [client side visits](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#client-side-visits). Inertia provides [prop helper methods](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#prop-helpers) that allow you to append, prepend, or replace prop values.
 
 ## Combining with Deferred Props
 
-You may combine [deferred props](/docs/v3/data-props/deferred-props) with mergeable props to defer the loading of the prop and ultimately mark it as mergeable once it's loaded.
+You may combine [deferred props](https://inertiajs.com/docs/v3/data-props/deferred-props.md) with mergeable props to defer the loading of the prop and ultimately mark it as mergeable once it's loaded.
 
 ```php theme={null}
 Route::get('/users', function () {
@@ -130,7 +130,7 @@ return Inertia::render('Users/Index', [
 ]);
 ```
 
-For more information on once props, see the [once props](/docs/v3/data-props/once-props) documentation.
+For more information on once props, see the [once props](https://inertiajs.com/docs/v3/data-props/once-props.md) documentation.
 
 ## Resetting Props
 

@@ -10,113 +10,105 @@ Partial reloads only work for visits made to the same page component.
 
 To perform a partial reload, use the `only` visit option to specify which data the server should return. This option should be an array of keys which correspond to the keys of the props.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.visit(url, {
-    only: ["users"],
-  });
-  ```
+router.visit(url, {
+  only: ["users"],
+});
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```js React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.visit(url, {
-    only: ["users"],
-  });
-  ```
+router.visit(url, {
+  only: ["users"],
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.visit(url, {
-    only: ["users"],
-  });
-  ```
-</CodeGroup>
+router.visit(url, {
+  only: ["users"],
+});
+```
 
 ## Except Certain Props
 
 In addition to the `only` visit option you can also use the `except` option to specify which data the server should exclude. This option should also be an array of keys which correspond to the keys of the props.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.visit(url, {
-    except: ["users"],
-  });
-  ```
+router.visit(url, {
+  except: ["users"],
+});
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```js React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.visit(url, {
-    except: ["users"],
-  });
-  ```
+router.visit(url, {
+  except: ["users"],
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.visit(url, {
-    except: ["users"],
-  });
-  ```
-</CodeGroup>
+router.visit(url, {
+  except: ["users"],
+});
+```
 
 ## Router Shorthand
 
 Since partial reloads can only be made to the same page component the user is already on, it almost always makes sense to just use the `router.reload()` method, which automatically uses the current URL.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.reload({ only: ["users"] });
-  ```
+router.reload({ only: ["users"] });
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```js React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.reload({ only: ["users"] });
-  ```
+router.reload({ only: ["users"] });
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.reload({ only: ["users"] });
-  ```
-</CodeGroup>
+router.reload({ only: ["users"] });
+```
 
 ## Using Links
 
 It's also possible to perform partial reloads with Inertia links using the `only` property.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users?active=true" :only="['users']">Show active</Link>
-  ```
+<Link href="/users?active=true" :only="['users']">Show active</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { Link } from "@inertiajs/react";
 
-  <Link href="/users?active=true" only={["users"]}>
-    Show active
-  </Link>;
-  ```
+<Link href="/users?active=true" only={["users"]}>
+  Show active
+</Link>;
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <a href="/users?active=true" use:inertia={{ only: ['users'] }}>Show active</a>
+<a href="/users?active=true" use:inertia={{ only: ['users'] }}>Show active</a>
 
-  <Link href="/users?active=true" only={['users']}>Show active</Link>
-  ```
-</CodeGroup>
+<Link href="/users?active=true" only={['users']}>Show active</Link>
+```
 
 ## Lazy Data Evaluation
 
@@ -151,43 +143,41 @@ Here's a summary of each approach:
 
 | Approach | Standard Visits | Partial Reloads | Evaluated | |
 | :- | :- | :- | :- | - |
-| <span style={{whiteSpace: 'nowrap'}}>`User::all()`</span> | Always | Optionally | Always | |
-| <span style={{whiteSpace: 'nowrap'}}>`fn () => User::all()`</span> | Always | Optionally | Only when needed | |
-| <span style={{whiteSpace: 'nowrap'}}>`Inertia::optional(fn () => User::all())`</span> | Never | Optionally | Only when needed | |
-| <span style={{whiteSpace: 'nowrap'}}>`Inertia::always(fn () => User::all())`</span> | Always | Always | Always | |
+| `User::all()` | Always | Optionally | Always | |
+| `fn () => User::all()` | Always | Optionally | Only when needed | |
+| `Inertia::optional(fn () => User::all())` | Never | Optionally | Only when needed | |
+| `Inertia::always(fn () => User::all())` | Always | Always | Always | |
 
 ## Preserving Errors
 
 Since the Laravel adapter shares errors using `Inertia::always()`, they are included in every response, even partial reloads where no validation runs. This means an empty error bag from the server will overwrite any existing client-side validation errors. You may use the `preserveErrors` option to keep existing errors when the server doesn't return new ones.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.reload({
-      only: ['posts'],
-      preserveErrors: true,
-  })
-  ```
+router.reload({
+    only: ['posts'],
+    preserveErrors: true,
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.reload({
-      only: ['posts'],
-      preserveErrors: true,
-  })
-  ```
+router.reload({
+    only: ['posts'],
+    preserveErrors: true,
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.reload({
-      only: ['posts'],
-      preserveErrors: true,
-  })
-  ```
-</CodeGroup>
+router.reload({
+    only: ['posts'],
+    preserveErrors: true,
+})
+```
 
 ## Combining with Once Props
 
@@ -199,4 +189,4 @@ return Inertia::render('Users/Index', [
 ]);
 ```
 
-For more information on once props, see the [once props](/docs/v3/data-props/once-props) documentation.
+For more information on once props, see the [once props](https://inertiajs.com/docs/v3/data-props/once-props.md) documentation.

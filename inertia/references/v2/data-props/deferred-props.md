@@ -1,6 +1,8 @@
 # Deferred Props
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 Inertia's deferred props feature allows you to defer the loading of certain page data until after the initial page render. This can be useful for improving the perceived performance of your app by allowing the initial page render to happen as quickly as possible.
 
@@ -41,136 +43,132 @@ In the example above, the `teams`, `projects`, and `tasks` props will be fetched
 
 On the client side, Inertia provides the `Deferred` component to help you manage deferred props. This component will automatically wait for the specified deferred props to be available before rendering its children.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { Deferred } from '@inertiajs/vue3'
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { Deferred } from '@inertiajs/vue3'
+</script>
 
-  <template>
-      <Deferred data="permissions">
-          <template #fallback>
-              <div>Loading...</div>
-          </template>
+<template>
+    <Deferred data="permissions">
+        <template #fallback>
+            <div>Loading...</div>
+        </template>
 
-          <div v-for="permission in permissions">
-              <!-- ... -->
-          </div>
-      </Deferred>
-  </template>
-  ```
+        <div v-for="permission in permissions">
+            <!-- ... -->
+        </div>
+    </Deferred>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Deferred } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Deferred } from '@inertiajs/react'
 
-  export default () => (
-      <Deferred data="permissions" fallback={<div>Loading...</div>}>
-          <PermissionsChildComponent />
-      </Deferred>
-  )
-  ```
+export default () => (
+    <Deferred data="permissions" fallback={<div>Loading...</div>}>
+        <PermissionsChildComponent />
+    </Deferred>
+)
+```
 
-  ```svelte Svelte 4 icon="s" theme={null}
-  <script>
-      import { Deferred } from '@inertiajs/svelte'
+```svelte Svelte 4 icon="s" theme={null}
+<script>
+    import { Deferred } from '@inertiajs/svelte'
 
-      export let permissions
-  </script>
+    export let permissions
+</script>
 
-  <Deferred data="permissions">
-      <svelte:fragment slot="fallback">
-          <div>Loading...</div>
-      </svelte:fragment>
+<Deferred data="permissions">
+    <svelte:fragment slot="fallback">
+        <div>Loading...</div>
+    </svelte:fragment>
 
-      {#each permissions as permission}
-          <!-- ... -->
-      {/each}
-  </Deferred>
-  ```
+    {#each permissions as permission}
+        <!-- ... -->
+    {/each}
+</Deferred>
+```
 
-  ```svelte Svelte 5 icon="s" theme={null}
-  <script>
-      import { Deferred } from '@inertiajs/svelte'
+```svelte Svelte 5 icon="s" theme={null}
+<script>
+    import { Deferred } from '@inertiajs/svelte'
 
-      let { permissions } = $props()
-  </script>
+    let { permissions } = $props()
+</script>
 
-  <Deferred data="permissions">
-      {#snippet fallback()}
-          <div>Loading...</div>
-      {/snippet}
+<Deferred data="permissions">
+    {#snippet fallback()}
+        <div>Loading...</div>
+    {/snippet}
 
-      {#each permissions as permission}
-          <!-- ... -->
-      {/each}
-  </Deferred>
-  ```
-</CodeGroup>
+    {#each permissions as permission}
+        <!-- ... -->
+    {/each}
+</Deferred>
+```
 
 ## Multiple Deferred Props
 
 If you need to wait for multiple deferred props to become available, you can specify an array to the `data` prop.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { Deferred } from '@inertiajs/vue3'
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { Deferred } from '@inertiajs/vue3'
+</script>
 
-  <template>
-      <Deferred :data="['teams', 'users']">
-          <template #fallback>
-              <div>Loading...</div>
-          </template>
+<template>
+    <Deferred :data="['teams', 'users']">
+        <template #fallback>
+            <div>Loading...</div>
+        </template>
 
-          <!-- Props are now loaded -->
-      </Deferred>
-  </template>
-  ```
+        <!-- Props are now loaded -->
+    </Deferred>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Deferred } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Deferred } from '@inertiajs/react'
 
-  export default () => (
-      <Deferred data={['teams', 'users']} fallback={<div>Loading...</div>}>
-          <ChildComponent />
-      </Deferred>
-  )
-  ```
+export default () => (
+    <Deferred data={['teams', 'users']} fallback={<div>Loading...</div>}>
+        <ChildComponent />
+    </Deferred>
+)
+```
 
-  ```svelte Svelte 4 icon="s" theme={null}
-  <script>
-      import { Deferred } from '@inertiajs/svelte'
+```svelte Svelte 4 icon="s" theme={null}
+<script>
+    import { Deferred } from '@inertiajs/svelte'
 
-      export let teams
-      export let users
-  </script>
+    export let teams
+    export let users
+</script>
 
-  <Deferred data={['teams', 'users']}>
-      <svelte:fragment slot="fallback">
-          <div>Loading...</div>
-      </svelte:fragment>
+<Deferred data={['teams', 'users']}>
+    <svelte:fragment slot="fallback">
+        <div>Loading...</div>
+    </svelte:fragment>
 
-      <!-- Props are now loaded -->
-  </Deferred>
-  ```
+    <!-- Props are now loaded -->
+</Deferred>
+```
 
-  ```svelte Svelte 5 icon="s" theme={null}
-  <script>
-      import { Deferred } from '@inertiajs/svelte'
+```svelte Svelte 5 icon="s" theme={null}
+<script>
+    import { Deferred } from '@inertiajs/svelte'
 
-      let { teams, users } = $props()
-  </script>
+    let { teams, users } = $props()
+</script>
 
-  <Deferred data={['teams', 'users']}>
-      {#snippet fallback()}
-          <div>Loading...</div>
-      {/snippet}
+<Deferred data={['teams', 'users']}>
+    {#snippet fallback()}
+        <div>Loading...</div>
+    {/snippet}
 
-      <!-- Props are now loaded -->
-  </Deferred>
-  ```
-</CodeGroup>
+    <!-- Props are now loaded -->
+</Deferred>
+```
 
 ## Combining with Once Props
 
@@ -182,4 +180,4 @@ return Inertia::render('Dashboard', [
 ]);
 ```
 
-For more information on once props, see the [once props](/docs/v2/data-props/once-props) documentation.
+For more information on once props, see the [once props](https://inertiajs.com/docs/v2/data-props/once-props.md) documentation.

@@ -1,12 +1,14 @@
 # Validation
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 ## How It Works
 
 Handling server-side validation errors in Inertia works differently than a classic XHR-driven form that requires you to catch the validation errors from `422` responses and manually update the form's error state - because Inertia never receives `422` responses. Instead, Inertia operates much more like a standard full page form submission. Here's how:
 
-First, you [submit your form using Inertia](/docs/v1/the-basics/forms). If there are server-side validation errors, you don't return those errors as a `422` JSON response. Instead, you redirect (server-side) the user back to the form page they were previously on, flashing the validation errors in the session. Some frameworks, such as Laravel, do this automatically.
+First, you [submit your form using Inertia](https://inertiajs.com/docs/v1/the-basics/forms.md). If there are server-side validation errors, you don't return those errors as a `422` JSON response. Instead, you redirect (server-side) the user back to the form page they were previously on, flashing the validation errors in the session. Some frameworks, such as Laravel, do this automatically.
 
 Next, any time these validation errors are present in the session, they automatically get shared with Inertia, making them available client-side as page props which you can display in your form. Since props are reactive, they are automatically shown when the form submission completes.
 
@@ -20,158 +22,156 @@ In order for your server-side validation errors to be available client-side, you
 
 Since validation errors are made available client-side as page component props, you can conditionally display them based on their existence. Remember, when using our first-party server adapters (such as the Laravel adapter), the `errors` prop will automatically be available to your page.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  <template>
-      <form @submit.prevent="submit">
-          <label for="first_name">First name:</label>
-          <input id="first_name" v-model="form.first_name" />
-          <div v-if="errors.first_name">{{ errors.first_name }}</div>
-          <label for="last_name">Last name:</label>
-          <input id="last_name" v-model="form.last_name" />
-          <div v-if="errors.last_name">{{ errors.last_name }}</div>
-          <label for="email">Email:</label>
-          <input id="email" v-model="form.email" />
-          <div v-if="errors.email">{{ errors.email }}</div>
-          <button type="submit">Submit</button>
-      </form>
-  </template>
+```vue Vue 2 icon="vuejs" theme={null}
+<template>
+    <form @submit.prevent="submit">
+        <label for="first_name">First name:</label>
+        <input id="first_name" v-model="form.first_name" />
+        <div v-if="errors.first_name">{{ errors.first_name }}</div>
+        <label for="last_name">Last name:</label>
+        <input id="last_name" v-model="form.last_name" />
+        <div v-if="errors.last_name">{{ errors.last_name }}</div>
+        <label for="email">Email:</label>
+        <input id="email" v-model="form.email" />
+        <div v-if="errors.email">{{ errors.email }}</div>
+        <button type="submit">Submit</button>
+    </form>
+</template>
 
-  <script>
-  import { router } from '@inertiajs/vue2'
+<script>
+import { router } from '@inertiajs/vue2'
 
-  export default {
-      props: {
-          errors: Object,
-      },
-      data() {
-          return {
-              form: {
-                  first_name: null,
-                  last_name: null,
-                  email: null,
-              },
-          }
-      },
-      methods: {
-          submit() {
-              router.post('/users', this.form)
-          },
-      },
-  }
-  </script>
-  ```
+export default {
+    props: {
+        errors: Object,
+    },
+    data() {
+        return {
+            form: {
+                first_name: null,
+                last_name: null,
+                email: null,
+            },
+        }
+    },
+    methods: {
+        submit() {
+            router.post('/users', this.form)
+        },
+    },
+}
+</script>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  <script setup>
-  import { reactive } from 'vue'
-  import { router } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+<script setup>
+import { reactive } from 'vue'
+import { router } from '@inertiajs/vue3'
 
-  defineProps({ errors: Object })
+defineProps({ errors: Object })
 
-  const form = reactive({
-      first_name: null,
-      last_name: null,
-      email: null,
-  })
+const form = reactive({
+    first_name: null,
+    last_name: null,
+    email: null,
+})
 
-  function submit() {
-      router.post('/users', form)
-  }
-  </script>
+function submit() {
+    router.post('/users', form)
+}
+</script>
 
-  <template>
-      <form @submit.prevent="submit">
-          <label for="first_name">First name:</label>
-          <input id="first_name" v-model="form.first_name" />
-          <div v-if="errors.first_name">{{ errors.first_name }}</div>
-          <label for="last_name">Last name:</label>
-          <input id="last_name" v-model="form.last_name" />
-          <div v-if="errors.last_name">{{ errors.last_name }}</div>
-          <label for="email">Email:</label>
-          <input id="email" v-model="form.email" />
-          <div v-if="errors.email">{{ errors.email }}</div>
-          <button type="submit">Submit</button>
-      </form>
-  </template>
-  ```
+<template>
+    <form @submit.prevent="submit">
+        <label for="first_name">First name:</label>
+        <input id="first_name" v-model="form.first_name" />
+        <div v-if="errors.first_name">{{ errors.first_name }}</div>
+        <label for="last_name">Last name:</label>
+        <input id="last_name" v-model="form.last_name" />
+        <div v-if="errors.last_name">{{ errors.last_name }}</div>
+        <label for="email">Email:</label>
+        <input id="email" v-model="form.email" />
+        <div v-if="errors.email">{{ errors.email }}</div>
+        <button type="submit">Submit</button>
+    </form>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { useState } from 'react'
-  import { router, usePage } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { useState } from 'react'
+import { router, usePage } from '@inertiajs/react'
 
-  export default function Edit() {
-      const { errors } = usePage().props
+export default function Edit() {
+    const { errors } = usePage().props
 
-      const [values, setValues] = useState({
-          first_name: null,
-          last_name: null,
-          email: null,
-      })
+    const [values, setValues] = useState({
+        first_name: null,
+        last_name: null,
+        email: null,
+    })
 
-      function handleChange(e) {
-          setValues(values => ({
-              ...values,
-              [e.target.id]: e.target.value,
-          }))
-      }
+    function handleChange(e) {
+        setValues(values => ({
+            ...values,
+            [e.target.id]: e.target.value,
+        }))
+    }
 
-      function handleSubmit(e) {
-          e.preventDefault()
-          router.post('/users', values)
-      }
+    function handleSubmit(e) {
+        e.preventDefault()
+        router.post('/users', values)
+    }
 
-      return (
-          <form onSubmit={handleSubmit}>
-              <label for="first_name">First name:</label>
-              <input id="first_name" value={values.first_name} onChange={handleChange} />
-              {errors.first_name && <div>{errors.first_name}</div>}
-              <label for="last_name">Last name:</label>
-              <input id="last_name" value={values.last_name} onChange={handleChange} />
-              {errors.last_name && <div>{errors.last_name}</div>}
-              <label for="email">Email:</label>
-              <input id="email" value={values.email} onChange={handleChange} />
-              {errors.email && <div>{errors.email}</div>}
-              <button type="submit">Submit</button>
-          </form>
-      )
-  }
-  ```
+    return (
+        <form onSubmit={handleSubmit}>
+            <label for="first_name">First name:</label>
+            <input id="first_name" value={values.first_name} onChange={handleChange} />
+            {errors.first_name && <div>{errors.first_name}</div>}
+            <label for="last_name">Last name:</label>
+            <input id="last_name" value={values.last_name} onChange={handleChange} />
+            {errors.last_name && <div>{errors.last_name}</div>}
+            <label for="email">Email:</label>
+            <input id="email" value={values.email} onChange={handleChange} />
+            {errors.email && <div>{errors.email}</div>}
+            <button type="submit">Submit</button>
+        </form>
+    )
+}
+```
 
-  ```html Svelte icon="s" theme={null}
-  <script>
-      import { router } from '@inertiajs/svelte'
+```html Svelte icon="s" theme={null}
+<script>
+    import { router } from '@inertiajs/svelte'
 
-      export let errors = {}
+    export let errors = {}
 
-      let values = {
-          first_name: null,
-          last_name: null,
-          email: null,
-      }
+    let values = {
+        first_name: null,
+        last_name: null,
+        email: null,
+    }
 
-      function handleSubmit() {
-          router.post('/users', values)
-      }
-  </script>
+    function handleSubmit() {
+        router.post('/users', values)
+    }
+</script>
 
-  <form on:submit|preventDefault={handleSubmit}>
-      <label for="first_name">First name:</label>
-      <input id="first_name" bind:value={values.first_name}>
-      {#if errors.first_name}<div>{errors.first_name}</div>{/if}
+<form on:submit|preventDefault={handleSubmit}>
+    <label for="first_name">First name:</label>
+    <input id="first_name" bind:value={values.first_name}>
+    {#if errors.first_name}<div>{errors.first_name}</div>{/if}
 
-      <label for="last_name">Last name:</label>
-      <input id="last_name" bind:value={values.last_name}>
-      {#if errors.last_name}<div>{errors.last_name}</div>{/if}
+    <label for="last_name">Last name:</label>
+    <input id="last_name" bind:value={values.last_name}>
+    {#if errors.last_name}<div>{errors.last_name}</div>{/if}
 
-      <label for="email">Email:</label>
-      <input id="email" bind:value={values.email}>
-      {#if errors.email}<div>{errors.email}</div>{/if}
+    <label for="email">Email:</label>
+    <input id="email" bind:value={values.email}>
+    {#if errors.email}<div>{errors.email}</div>{/if}
 
-      <button type="submit">Submit</button>
-  </form>
-  ```
-</CodeGroup>
+    <button type="submit">Submit</button>
+</form>
+```
 
 When using the Vue adapters, you may also access the errors via the `$page.props.errors` object.
 
@@ -179,66 +179,64 @@ When using the Vue adapters, you may also access the errors via the `$page.props
 
 While handling errors in Inertia is similar to full page form submissions, Inertia offers even more benefits. In fact, you don't even need to manually repopulate old form input data.
 
-When validation errors occur, the user is typically redirected back to the form page they were previously on. And, by default, Inertia automatically preserves the [component state](/docs/manual-visits#state-preservation) for `post`, `put`, `patch`, and `delete` requests. Therefore, all the old form input data remains exactly as it was when the user submitted the form.
+When validation errors occur, the user is typically redirected back to the form page they were previously on. And, by default, Inertia automatically preserves the [component state](https://inertiajs.com/docs/manual-visits.md#state-preservation) for `post`, `put`, `patch`, and `delete` requests. Therefore, all the old form input data remains exactly as it was when the user submitted the form.
 
 So, the only work remaining is to display any validation errors using the `errors` prop.
 
 ## Error Bags
 
-If you're using the [form helper](/docs/forms#form-helper), it's not necessary to use error bags since validation errors are automatically scoped to the form object making the request.
+If you're using the [form helper](https://inertiajs.com/docs/forms.md#form-helper), it's not necessary to use error bags since validation errors are automatically scoped to the form object making the request.
 
 For pages that have more than one form, it's possible to encounter conflicts when displaying validation errors if two forms share the same field names. For example, imagine a "create company" form and a "create user" form that both have a `name` field. Since both forms will be displaying the `page.props.errors.name` validation error, generating a validation error for the `name`field in either form will cause the error to appear in both forms.
 
 To solve this issue, you can use "error bags". Error bags scope the validation errors returned from the server within a unique key specific to that form. Continuing with our example above, you might have a `createCompany` error bag for the first form and a `createUser` error bag for the second form.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue2'
+```js Vue 2 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue2'
 
-  router.post('/companies', data, {
-      errorBag: 'createCompany',
-  })
+router.post('/companies', data, {
+    errorBag: 'createCompany',
+})
 
-  router.post('/users', data, {
-      errorBag: 'createUser',
-  })
-  ```
+router.post('/users', data, {
+    errorBag: 'createUser',
+})
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue 3 icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.post('/companies', data, {
-      errorBag: 'createCompany',
-  })
+router.post('/companies', data, {
+    errorBag: 'createCompany',
+})
 
-  router.post('/users', data, {
-      errorBag: 'createUser',
-  })
-  ```
+router.post('/users', data, {
+    errorBag: 'createUser',
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.post('/companies', data, {
-      errorBag: 'createCompany',
-  })
+router.post('/companies', data, {
+    errorBag: 'createCompany',
+})
 
-  router.post('/users', data, {
-      errorBag: 'createUser',
-  })
-  ```
+router.post('/users', data, {
+    errorBag: 'createUser',
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.post('/companies', data, {
-      errorBag: 'createCompany',
-  })
+router.post('/companies', data, {
+    errorBag: 'createCompany',
+})
 
-  router.post('/users', data, {
-      errorBag: 'createUser',
-  })
-  ```
-</CodeGroup>
+router.post('/users', data, {
+    errorBag: 'createUser',
+})
+```
 
 Specifying an error bag will cause the validation errors to come back from the server within `page.props.errors.createCompany` and `page.props.errors.createUser`.

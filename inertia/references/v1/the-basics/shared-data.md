@@ -1,6 +1,8 @@
 # Shared Data
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 Sometimes you need to access specific pieces of data on numerous pages within your application. For example, you may need to display the current user in the site header. Passing this data manually in each response across your entire application is cumbersome. Thankfully, there is a better option: shared data.
 
@@ -8,7 +10,7 @@ Sometimes you need to access specific pieces of data on numerous pages within yo
 
 Inertia's server-side adapters all provide a method of making shared data available for every request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller.
 
-In Laravel applications, this is typically handled by the `HandleInertiaRequests` middleware that is automatically installed when installing the [server-side adapter](/docs/server-side-setup#middleware).
+In Laravel applications, this is typically handled by the `HandleInertiaRequests` middleware that is automatically installed when installing the [server-side adapter](https://inertiajs.com/docs/server-side-setup.md#middleware).
 
 ```php theme={null}
 class HandleInertiaRequests extends Middleware
@@ -51,86 +53,84 @@ Page props and shared data are merged together, so be sure to namespace your sha
 
 Once you have shared the data server-side, you will be able to access it within any of your pages or components. Here's an example of how to access shared data in a layout component.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  <template>
-      <main>
-          <header>
-              You are logged in as: {{ user.name }}
-          </header>
-          <article>
-              <slot />
-          </article>
-      </main>
-  </template>
+```vue Vue 2 icon="vuejs" theme={null}
+<template>
+    <main>
+        <header>
+            You are logged in as: {{ user.name }}
+        </header>
+        <article>
+            <slot />
+        </article>
+    </main>
+</template>
 
-  <script>
-  export default {
-      computed: {
-          user() {
-              return this.$page.props.auth.user
-          }
-      }
-  }
-  </script>
-  ```
+<script>
+export default {
+    computed: {
+        user() {
+            return this.$page.props.auth.user
+        }
+    }
+}
+</script>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  <script setup>
-  import { computed } from 'vue'
-  import { usePage } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+<script setup>
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/vue3'
 
-  const page = usePage()
+const page = usePage()
 
-  const user = computed(() => page.props.auth.user)
-  </script>
+const user = computed(() => page.props.auth.user)
+</script>
 
-  <template>
-      <main>
-          <header>
-              You are logged in as: {{ user.name }}
-          </header>
-          <article>
-              <slot />
-          </article>
-      </main>
-  </template>
-  ```
+<template>
+    <main>
+        <header>
+            You are logged in as: {{ user.name }}
+        </header>
+        <article>
+            <slot />
+        </article>
+    </main>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { usePage } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { usePage } from '@inertiajs/react'
 
-  export default function Layout({ children }) {
-      const { auth } = usePage().props
+export default function Layout({ children }) {
+    const { auth } = usePage().props
 
-      return (
-          <main>
-              <header>
-                  You are logged in as: {auth.user.name}
-              </header>
-              <article>
-                  {children}
-              </article>
-          </main>
-      )
-  }
-  ```
+    return (
+        <main>
+            <header>
+                You are logged in as: {auth.user.name}
+            </header>
+            <article>
+                {children}
+            </article>
+        </main>
+    )
+}
+```
 
-  ```html Svelte icon="s" theme={null}
-  <script>
-      import { page } from '@inertiajs/svelte'
-  </script>
+```html Svelte icon="s" theme={null}
+<script>
+    import { page } from '@inertiajs/svelte'
+</script>
 
-  <main>
-      <header>
-          You are logged in as: {$page.props.auth.user.name}
-      </header>
-      <article>
-          <slot />
-      </article>
-  </main>
-  ```
-</CodeGroup>
+<main>
+    <header>
+        You are logged in as: {$page.props.auth.user.name}
+    </header>
+    <article>
+        <slot />
+    </article>
+</main>
+```
 
 ## Flash Messages
 
@@ -154,72 +154,70 @@ class HandleInertiaRequests extends Middleware
 
 Next, display the flash message in a frontend component, such as the site layout.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  <template>
-      <main>
-          <header></header>
-          <article>
-              <div v-if="$page.props.flash.message" class="alert">
-                  {{ $page.props.flash.message }}
-              </div>
-              <slot />
-          </article>
-          <footer></footer>
-      </main>
-  </template>
-  ```
+```vue Vue 2 icon="vuejs" theme={null}
+<template>
+    <main>
+        <header></header>
+        <article>
+            <div v-if="$page.props.flash.message" class="alert">
+                {{ $page.props.flash.message }}
+            </div>
+            <slot />
+        </article>
+        <footer></footer>
+    </main>
+</template>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  <template>
-      <main>
-          <header></header>
-          <article>
-              <div v-if="$page.props.flash.message" class="alert">
-                  {{ $page.props.flash.message }}
-              </div>
-              <slot />
-          </article>
-          <footer></footer>
-      </main>
-  </template>
-  ```
+```vue Vue 3 icon="vuejs" theme={null}
+<template>
+    <main>
+        <header></header>
+        <article>
+            <div v-if="$page.props.flash.message" class="alert">
+                {{ $page.props.flash.message }}
+            </div>
+            <slot />
+        </article>
+        <footer></footer>
+    </main>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { usePage } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { usePage } from '@inertiajs/react'
 
-  export default function Layout({ children }) {
-      const { flash } = usePage().props
+export default function Layout({ children }) {
+    const { flash } = usePage().props
 
-      return (
-          <main>
-              <header></header>
-              <article>
-                  {flash.message && (
-                      <div class="alert">{flash.message}</div>
-                  )}
-                  {children}
-              </article>
-              <footer></footer>
-          </main>
-      )
-  }
-  ```
+    return (
+        <main>
+            <header></header>
+            <article>
+                {flash.message && (
+                    <div class="alert">{flash.message}</div>
+                )}
+                {children}
+            </article>
+            <footer></footer>
+        </main>
+    )
+}
+```
 
-  ```html Svelte icon="s" theme={null}
-  <script>
-      import { page } from '@inertiajs/svelte'
-  </script>
+```html Svelte icon="s" theme={null}
+<script>
+    import { page } from '@inertiajs/svelte'
+</script>
 
-  <main>
-      <header></header>
-      <article>
-          {#if $page.props.flash.message}
-              <div class="alert">{$page.props.flash.message}</div>
-          {/if}
-          <slot />
-      </article>
-      <footer></footer>
-  </main>
-  ```
-</CodeGroup>
+<main>
+    <header></header>
+    <article>
+        {#if $page.props.flash.message}
+            <div class="alert">{$page.props.flash.message}</div>
+        {/if}
+        <slot />
+    </article>
+    <footer></footer>
+</main>
+```

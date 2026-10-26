@@ -1,8 +1,10 @@
 # Server-side Setup
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
-The first step when installing Inertia is to configure your server-side framework. Inertia maintains an official server-side adapter for [Laravel](https://laravel.com/). For other frameworks, please see the [community adapters](/docs/community-adapters).
+The first step when installing Inertia is to configure your server-side framework. Inertia maintains an official server-side adapter for [Laravel](https://laravel.com/). For other frameworks, please see the [community adapters](https://inertiajs.com/docs/community-adapters).
 
 Inertia is fine-tuned for Laravel, so the documentation examples on this website utilize Laravel. For examples of using Inertia with other server-side frameworks, please refer to the framework specific documentation maintained by that adapter.
 
@@ -60,11 +62,11 @@ use App\Http\Middleware\HandleInertiaRequests;
 })
 ```
 
-This middleware provides a `version()` method for setting your [asset version](/docs/v1/advanced/asset-versioning), as well as a `share()` method for defining [shared data](/docs/v1/the-basics/shared-data).
+This middleware provides a `version()` method for setting your [asset version](https://inertiajs.com/docs/v1/advanced/asset-versioning.md), as well as a `share()` method for defining [shared data](https://inertiajs.com/docs/v1/the-basics/shared-data.md).
 
 ## Creating Responses
 
-That's it, you're all ready to go server-side! Now you're ready to start creating Inertia [pages](/docs/v1/the-basics/pages) and rendering them via [responses](/docs/v1/the-basics/responses).
+That's it, you're all ready to go server-side! Now you're ready to start creating Inertia [pages](https://inertiajs.com/docs/v1/the-basics/pages.md) and rendering them via [responses](https://inertiajs.com/docs/v1/the-basics/responses.md).
 
 ```php theme={null}
 use Inertia\Inertia;

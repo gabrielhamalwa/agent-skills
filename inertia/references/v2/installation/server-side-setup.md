@@ -1,105 +1,105 @@
 # Server-Side Setup
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
-The first step when installing Inertia is to configure your server-side framework. Inertia maintains an official server-side adapter for [Laravel](https://laravel.com/). For other frameworks, please see the [community adapters](/docs/v2/installation/community-adapters).
+The first step when installing Inertia is to configure your server-side framework. Inertia maintains an official server-side adapter for [Laravel](https://laravel.com/). For other frameworks, please see the [community adapters](https://inertiajs.com/docs/v2/installation/community-adapters).
 
 Inertia is fine-tuned for Laravel, so the documentation examples on this website utilize Laravel. For examples of using Inertia with other server-side frameworks, please refer to the framework specific documentation maintained by that adapter.
 
-<Card icon="laravel" title="Laravel Starter Kits" href="https://laravel.com/docs/starter-kits" arrow="true" cta="Start building">
-  Laravel's starter kits provide out-of-the-box scaffolding for new Inertia applications.
-
-  These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually install Inertia into your application, please consult the documentation below.
-</Card>
+> **[Laravel Starter Kits](https://laravel.com/docs/starter-kits)**
+>
+> Laravel's starter kits provide out-of-the-box scaffolding for new Inertia applications.
+>
+> These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually install Inertia into your application, please consult the documentation below.
 
 ## Installation
 
-<Steps>
-  <Step title="Install dependencies">
-    First, install the Inertia server-side adapter using the Composer package manager.
+**1. Install dependencies**
 
-    ```bash theme={null}
-    composer require inertiajs/inertia-laravel
-    ```
-  </Step>
+First, install the Inertia server-side adapter using the Composer package manager.
 
-  <Step title="Setup root template">
-    Next, create a `resources/views/app.blade.php` file. This root template will be loaded on the first page visit to your application, and should include your assets along with the `@inertia` and `@inertiaHead` directives.
+```bash theme={null}
+composer require inertiajs/inertia-laravel
+```
 
-    ```blade resources/views/app.blade.php theme={null}
-    <html>
-        <head>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            @vite('resources/js/app.js')
-            @inertiaHead
-        </head>
-        <body>
-            @inertia
-        </body>
-    </html>
-    ```
+**2. Setup root template**
 
-    For React applications, it's recommended to include the `@viteReactRefresh` directive before the `@vite` directive to enable Fast Refresh in development.
+Next, create a `resources/views/app.blade.php` file. This root template will be loaded on the first page visit to your application, and should include your assets along with the `@inertia` and `@inertiaHead` directives.
 
-    The `@inertia` directive renders a `<div>` element with an `id` of `app`. This element serves as the mounting point for your JavaScript application. You may customize the `id` by passing a different value to the directive.
+```blade resources/views/app.blade.php theme={null}
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        @vite('resources/js/app.js')
+        @inertiaHead
+    </head>
+    <body>
+        @inertia
+    </body>
+</html>
+```
 
-    ```blade theme={null}
-    <html>
-        ...
-        <body>
-            @inertia('custom-app-id')
-        </body>
-    </html>
-    ```
+For React applications, it's recommended to include the `@viteReactRefresh` directive before the `@vite` directive to enable Fast Refresh in development.
 
-    If you change the `id` of the root element, be sure to update it [client-side](/docs/v2/installation/client-side-setup#defining-a-root-element) as well.
+The `@inertia` directive renders a `<div>` element with an `id` of `app`. This element serves as the mounting point for your JavaScript application. You may customize the `id` by passing a different value to the directive.
 
-    By default, Inertia's Laravel adapter will assume your root template is named `app.blade.php`. If you would like to use a different root view, you can change it using the `Inertia::setRootView()` method.
-  </Step>
+```blade theme={null}
+<html>
+    ...
+    <body>
+        @inertia('custom-app-id')
+    </body>
+</html>
+```
 
-  <Step title="Register middleware">
-    Next we need to setup the Inertia middleware. You can accomplish this by publishing the `HandleInertiaRequests` middleware to your application, which can be done using the following Artisan command.
+If you change the `id` of the root element, be sure to update it [client-side](https://inertiajs.com/docs/v2/installation/client-side-setup.md#defining-a-root-element) as well.
 
-    ```sh theme={null}
-    php artisan inertia:middleware
-    ```
+By default, Inertia's Laravel adapter will assume your root template is named `app.blade.php`. If you would like to use a different root view, you can change it using the `Inertia::setRootView()` method.
 
-    Once the middleware has been published, append the `HandleInertiaRequests` middleware to the `web` middleware group in your application's `bootstrap/app.php` file.
+**3. Register middleware**
 
-    ```php theme={null}
-    use App\Http\Middleware\HandleInertiaRequests;
+Next we need to setup the Inertia middleware. You can accomplish this by publishing the `HandleInertiaRequests` middleware to your application, which can be done using the following Artisan command.
 
-    ->withMiddleware(function (Middleware $middleware) {
-        $middleware->web(append: [
-            HandleInertiaRequests::class,
-        ]);
-    })
-    ```
+```sh theme={null}
+php artisan inertia:middleware
+```
 
-    This middleware provides a `version()` method for setting your [asset version](/docs/v2/advanced/asset-versioning), as well as a `share()` method for defining [shared data](/docs/v2/data-props/shared-data).
-  </Step>
+Once the middleware has been published, append the `HandleInertiaRequests` middleware to the `web` middleware group in your application's `bootstrap/app.php` file.
 
-  <Step title="Create your first response">
-    That's it, you're all ready to go server-side! Now you're ready to start creating Inertia [pages](/docs/v2/the-basics/pages) and rendering them via [responses](/docs/v2/the-basics/responses).
+```php theme={null}
+use App\Http\Middleware\HandleInertiaRequests;
 
-    ```php theme={null}
-    use Inertia\Inertia;
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->web(append: [
+        HandleInertiaRequests::class,
+    ]);
+})
+```
 
-    class EventsController extends Controller
+This middleware provides a `version()` method for setting your [asset version](https://inertiajs.com/docs/v2/advanced/asset-versioning.md), as well as a `share()` method for defining [shared data](https://inertiajs.com/docs/v2/data-props/shared-data.md).
+
+**4. Create your first response**
+
+That's it, you're all ready to go server-side! Now you're ready to start creating Inertia [pages](https://inertiajs.com/docs/v2/the-basics/pages.md) and rendering them via [responses](https://inertiajs.com/docs/v2/the-basics/responses.md).
+
+```php theme={null}
+use Inertia\Inertia;
+
+class EventsController extends Controller
+{
+    public function show(Event $event)
     {
-        public function show(Event $event)
-        {
-            return Inertia::render('Event/Show', [
-                'event' => $event->only(
-                    'id',
-                    'title',
-                    'start_date',
-                    'description',
-                ),
-            ]);
-        }
+        return Inertia::render('Event/Show', [
+            'event' => $event->only(
+                'id',
+                'title',
+                'start_date',
+                'description',
+            ),
+        ]);
     }
-    ```
-  </Step>
-</Steps>
+}
+```

@@ -2,39 +2,37 @@
 
 Sometimes you may wish to navigate to a new page without waiting for the server to respond. Instant visits allow Inertia to immediately swap to the target page component while the server request happens in the background. Once the server responds, the real props are merged in.
 
-Unlike [client-side visits](/docs/v3/the-basics/manual-visits#client-side-visits), which update the page entirely on the client without making a server request, instant visits still make a full server request. The difference is that the user sees the target page right away instead of waiting for the response.
+Unlike [client-side visits](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#client-side-visits), which update the page entirely on the client without making a server request, instant visits still make a full server request. The difference is that the user sees the target page right away instead of waiting for the response.
 
 ## Basic Usage
 
 To make an instant visit, provide the target `component` name to a `Link` or to `router.visit()`.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/dashboard" component="Dashboard">Dashboard</Link>
-  ```
+<Link href="/dashboard" component="Dashboard">Dashboard</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { Link } from "@inertiajs/react";
 
-  <Link href="/dashboard" component="Dashboard">
-    Dashboard
-  </Link>;
-  ```
+<Link href="/dashboard" component="Dashboard">
+  Dashboard
+</Link>;
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <a href="/dashboard" use:inertia={{ component: 'Dashboard' }}>Dashboard</a>
+<a href="/dashboard" use:inertia={{ component: 'Dashboard' }}>Dashboard</a>
 
-  <Link href="/dashboard" component="Dashboard">Dashboard</Link>
-  ```
-</CodeGroup>
+<Link href="/dashboard" component="Dashboard">Dashboard</Link>
+```
 
 When clicked, Inertia immediately renders the `Dashboard` component while the server request fires in the background. The full props are merged in when the response arrives.
 
-The target component must be able to render without its page-specific props, as only [shared props](/docs/v3/data-props/shared-data) are available on the intermediate page. You may use optional chaining or conditional rendering to handle missing props.
+The target component must be able to render without its page-specific props, as only [shared props](https://inertiajs.com/docs/v3/data-props/shared-data.md) are available on the intermediate page. You may use optional chaining or conditional rendering to handle missing props.
 
 Programmatic instant visits work the same way via the `component` option on `router.visit()`.
 
@@ -62,43 +60,41 @@ Inertia reads this list and carries those props over from the current page to th
 
 You may provide props for the intermediate page using the `pageProps` option. This is useful for passing data you already have on the current page, or for setting placeholder values to display loading states while the server responds.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link
-    href="/posts/1"
-    component="Posts/Show"
-    :page-props="{ title: 'Loading...' }"
-  >
-    View Post
-  </Link>
-  ```
+<Link
+  href="/posts/1"
+  component="Posts/Show"
+  :page-props="{ title: 'Loading...' }"
+>
+  View Post
+</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { Link } from "@inertiajs/react";
 
-  <Link
-    href="/posts/1"
-    component="Posts/Show"
-    pageProps={{ title: "Loading..." }}
-  >
-    View Post
-  </Link>;
-  ```
+<Link
+  href="/posts/1"
+  component="Posts/Show"
+  pageProps={{ title: "Loading..." }}
+>
+  View Post
+</Link>;
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { Link } from '@inertiajs/svelte'
 
-  <Link
-    href="/posts/1"
-    component="Posts/Show"
-    pageProps={{ title: 'Loading...' }}
-  >
-    View Post
-  </Link>
-  ```
-</CodeGroup>
+<Link
+  href="/posts/1"
+  component="Posts/Show"
+  pageProps={{ title: 'Loading...' }}
+>
+  View Post
+</Link>
+```
 
 When `pageProps` is provided as an object, shared props are not automatically carried over. You are in full control of the intermediate page's props.
 
@@ -118,61 +114,57 @@ router.visit("/posts/1", {
 
 When using [Wayfinder](https://github.com/laravel/wayfinder), you may use the `instant` prop on the `Link` component. Inertia will extract the target component from the Wayfinder route definition, removing the need to manually specify the `component` prop.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3' import { show } from
-  'App/Http/Controllers/PostController'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3' import { show } from
+'App/Http/Controllers/PostController'
 
-  <Link :href="show(1)" instant>View Post</Link>
-  ```
+<Link :href="show(1)" instant>View Post</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from "@inertiajs/react";
-  import { show } from "App/Http/Controllers/PostController";
+```jsx React icon="react" theme={null}
+import { Link } from "@inertiajs/react";
+import { show } from "App/Http/Controllers/PostController";
 
-  <Link href={show(1)} instant>
-    View Post
-  </Link>;
-  ```
+<Link href={show(1)} instant>
+  View Post
+</Link>;
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { Link } from '@inertiajs/svelte'
-  import { show } from 'App/Http/Controllers/PostController'
+```svelte Svelte icon="s" theme={null}
+import { Link } from '@inertiajs/svelte'
+import { show } from 'App/Http/Controllers/PostController'
 
-  <Link href={show(1)} instant>View Post</Link>
-  ```
-</CodeGroup>
+<Link href={show(1)} instant>View Post</Link>
+```
 
 The `instant` prop is also available on the `Form` component.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Form } from '@inertiajs/vue3'
-  import { store } from 'App/Http/Controllers/PostController'
+```vue Vue icon="vuejs" theme={null}
+import { Form } from '@inertiajs/vue3'
+import { store } from 'App/Http/Controllers/PostController'
 
-  <Form :action="store()" instant>
-    <!-- ... -->
-  </Form>
-  ```
+<Form :action="store()" instant>
+  <!-- ... -->
+</Form>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Form } from "@inertiajs/react";
-  import { store } from "App/Http/Controllers/PostController";
+```jsx React icon="react" theme={null}
+import { Form } from "@inertiajs/react";
+import { store } from "App/Http/Controllers/PostController";
 
-  <Form action={store()} instant>
-    {/* ... */}
-  </Form>;
-  ```
+<Form action={store()} instant>
+  {/* ... */}
+</Form>;
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { Form } from '@inertiajs/svelte'
-  import { store } from 'App/Http/Controllers/PostController'
+```svelte Svelte icon="s" theme={null}
+import { Form } from '@inertiajs/svelte'
+import { store } from 'App/Http/Controllers/PostController'
 
-  <Form action={store()} instant>
-    <!-- ... -->
-  </Form>
-  ```
-</CodeGroup>
+<Form action={store()} instant>
+  <!-- ... -->
+</Form>
+```
 
 An explicit `component` prop always takes priority over `instant`.
 

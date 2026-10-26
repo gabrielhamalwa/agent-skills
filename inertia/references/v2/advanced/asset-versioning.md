@@ -1,6 +1,8 @@
 # Asset Versioning
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 One common challenge when building single-page apps is refreshing site assets when they've been changed. Thankfully, Inertia makes this easy by optionally tracking the current version of your site assets. When an asset changes, Inertia will automatically make a full page visit instead of a XHR visit on the next request.
 
@@ -39,7 +41,7 @@ With Laravel's Vite integration, asset versioning is done automatically. If you'
 
 If you want to take asset refreshing into your control, you can return a fixed value from the `version` method in the `HandleInertiaRequests` middleware. This disables Inertia's automatic asset versioning.
 
-For example, if you want to notify users when a new version of your frontend is available, you can still expose the actual asset version to the frontend by including it as [shared data](/docs/v2/data-props/shared-data).
+For example, if you want to notify users when a new version of your frontend is available, you can still expose the actual asset version to the frontend by including it as [shared data](https://inertiajs.com/docs/v2/data-props/shared-data.md).
 
 ```php theme={null}
 class HandleInertiaRequests extends Middleware

@@ -1,8 +1,10 @@
 # Once Props
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
-Some data rarely changes, is expensive to compute, or is simply large. Rather than including this data in every response, you may use *once props*. These props are remembered by the client and reused on subsequent pages that include the same prop. This makes them ideal for [shared data](/docs/v2/data-props/shared-data).
+Some data rarely changes, is expensive to compute, or is simply large. Rather than including this data in every response, you may use *once props*. These props are remembered by the client and reused on subsequent pages that include the same prop. This makes them ideal for [shared data](https://inertiajs.com/docs/v2/data-props/shared-data.md).
 
 ## Creating Once Props
 
@@ -38,27 +40,25 @@ return Inertia::render('Billing', [
 
 ## Refreshing from the Client
 
-You may refresh a once prop from the client-side using a [partial reload](/docs/v2/data-props/partial-reloads). The server will always resolve a once prop when explicitly requested.
+You may refresh a once prop from the client-side using a [partial reload](https://inertiajs.com/docs/v2/data-props/partial-reloads.md). The server will always resolve a once prop when explicitly requested.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.reload({ only: ['plans'] })
-  ```
+router.reload({ only: ['plans'] })
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.reload({ only: ['plans'] })
-  ```
+router.reload({ only: ['plans'] })
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.reload({ only: ['plans'] })
-  ```
-</CodeGroup>
+router.reload({ only: ['plans'] })
+```
 
 ## Expiration
 
@@ -124,13 +124,13 @@ class HandleInertiaRequests extends Middleware
 
 ## Prefetching
 
-Once props are compatible with [prefetching](/docs/v2/data-props/prefetching). The client automatically includes any remembered once props in prefetched responses, so navigating to a prefetched page will already have the once props available.
+Once props are compatible with [prefetching](https://inertiajs.com/docs/v2/data-props/prefetching.md). The client automatically includes any remembered once props in prefetched responses, so navigating to a prefetched page will already have the once props available.
 
 Prefetched pages containing an expired once prop will be invalidated from the cache.
 
 ## Combining with Other Prop Types
 
-The `once()` modifier may be chained onto [deferred](/docs/v2/data-props/deferred-props), [merge](/docs/v2/data-props/merging-props), and [optional](/docs/v2/data-props/partial-reloads#lazy-data-evaluation) props.
+The `once()` modifier may be chained onto [deferred](https://inertiajs.com/docs/v2/data-props/deferred-props.md), [merge](https://inertiajs.com/docs/v2/data-props/merging-props.md), and [optional](https://inertiajs.com/docs/v2/data-props/partial-reloads.md#lazy-data-evaluation) props.
 
 ```php theme={null}
 return Inertia::render('Dashboard', [

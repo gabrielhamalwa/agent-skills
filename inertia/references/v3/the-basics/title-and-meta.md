@@ -10,54 +10,50 @@ The `<Head>` component is not available in the Svelte adapter, as Svelte already
 
 To add `<head>` elements to your page, use the `<Head>` component. Within this component, you can include the elements that you wish to add to the document `<head>`.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Head } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Head } from '@inertiajs/vue3'
 
-  <Head>
-      <title>Your page title</title>
-      <meta name="description" content="Your page description">
-  </Head>
-  ```
+<Head>
+    <title>Your page title</title>
+    <meta name="description" content="Your page description">
+</Head>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Head } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { Head } from "@inertiajs/react";
 
-  <Head>
+<Head>
+  <title>Your page title</title>
+  <meta name="description" content="Your page description" />
+</Head>;
+```
+
+```svelte Svelte icon="s" theme={null}
+<svelte:head>
     <title>Your page title</title>
     <meta name="description" content="Your page description" />
-  </Head>;
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <svelte:head>
-      <title>Your page title</title>
-      <meta name="description" content="Your page description" />
-  </svelte:head>
-  ```
-</CodeGroup>
+</svelte:head>
+```
 
 ## Title Shorthand
 
 If you only need to add a `<title>` to the document `<head>`, you may simply pass the title as a prop to the `<Head>` component.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Head } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Head } from '@inertiajs/vue3'
 
-  <Head title="Your page title" />
-  ```
+<Head title="Your page title" />
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Head } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { Head } from "@inertiajs/react";
 
-  <Head title="Your page title" />;
-  ```
+<Head title="Your page title" />;
+```
 
-  ```js Svelte icon="s" theme={null}
-  // Not supported
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+// Not supported
+```
 
 ## Title Callback
 
@@ -70,7 +66,7 @@ createInertiaApp({
 });
 ```
 
-The callback also receives the current [page object](/docs/v3/the-basics/pages) as its second argument, which you may use to build titles from the page's props.
+The callback also receives the current [page object](https://inertiajs.com/docs/v3/the-basics/pages.md) as its second argument, which you may use to build titles from the page's props.
 
 ```js theme={null}
 createInertiaApp({
@@ -81,23 +77,21 @@ createInertiaApp({
 
 After defining the `title` callback, the callback will automatically be invoked when you set a title using the `<Head>` component.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Head } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Head } from '@inertiajs/vue3'
 
-  <Head title="Home">
-  ```
+<Head title="Home">
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Head } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Head } from '@inertiajs/react'
 
-  <Head title="Home">
-  ```
+<Head title="Home">
+```
 
-  ```js Svelte icon="s" theme={null}
-  // Not supported
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+// Not supported
+```
 
 In this example, this results in the following `<title>` tag.
 
@@ -107,83 +101,79 @@ In this example, this results in the following `<title>` tag.
 
 The `title` callback will also be invoked when you set the title using a `<title>` tag within your `<Head>` component.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Head } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Head } from '@inertiajs/vue3'
 
-  <Head>
-      <title>Home</title>
-  </Head>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  import { Head } from "@inertiajs/react";
-
-  <Head>
+<Head>
     <title>Home</title>
-  </Head>;
-  ```
+</Head>
+```
 
-  ```js Svelte icon="s" theme={null}
-  // Not supported
-  ```
-</CodeGroup>
+```jsx React icon="react" theme={null}
+import { Head } from "@inertiajs/react";
+
+<Head>
+  <title>Home</title>
+</Head>;
+```
+
+```js Svelte icon="s" theme={null}
+// Not supported
+```
 
 ## Multiple Head Instances
 
 It's possible to have multiple instances of the `<Head>` component throughout your application. For example, your layout can set some default `<Head>` elements, and then your individual pages can override those defaults.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  // Layout.vue import { Head } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+// Layout.vue import { Head } from '@inertiajs/vue3'
 
-  <Head>
-      <title>My app</title>
-      <meta head-key="description" name="description" content="This is the default description" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </Head>
-
-  // About.vue import { Head } from '@inertiajs/vue3'
-
-  <Head>
-      <title>About - My app</title>
-      <meta head-key="description" name="description" content="This is a page specific description" />
-  </Head>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  // Layout.js
-
-  import { Head } from "@inertiajs/react";
-
-  <Head>
+<Head>
     <title>My app</title>
-    <meta
-      head-key="description"
-      name="description"
-      content="This is the default description"
-    />
+    <meta head-key="description" name="description" content="This is the default description" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </Head>;
+</Head>
 
-  // About.js
+// About.vue import { Head } from '@inertiajs/vue3'
 
-  import { Head } from "@inertiajs/react";
-
-  <Head>
+<Head>
     <title>About - My app</title>
-    <meta
-      head-key="description"
-      name="description"
-      content="This is a page specific description"
-    />
-  </Head>;
-  ```
+    <meta head-key="description" name="description" content="This is a page specific description" />
+</Head>
+```
 
-  ```js Svelte icon="s" theme={null}
-  // Not supported
-  ```
-</CodeGroup>
+```jsx React icon="react" theme={null}
+// Layout.js
+
+import { Head } from "@inertiajs/react";
+
+<Head>
+  <title>My app</title>
+  <meta
+    head-key="description"
+    name="description"
+    content="This is the default description"
+  />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</Head>;
+
+// About.js
+
+import { Head } from "@inertiajs/react";
+
+<Head>
+  <title>About - My app</title>
+  <meta
+    head-key="description"
+    name="description"
+    content="This is a page specific description"
+  />
+</Head>;
+```
+
+```js Svelte icon="s" theme={null}
+// Not supported
+```
 
 Inertia will only ever render one `<title>` tag; however, all other tags will be stacked since it's valid to have multiple instances of them. To avoid duplicate tags in your `<head>`, you can use the `head-key` property, which will make sure the tag is only rendered once. This is illustrated in the example above for the `<meta name="description">` tag.
 
@@ -201,72 +191,68 @@ The code example above will render the following HTML.
 
 When building a real application, it can sometimes be helpful to create a custom head component that extends Inertia's `<Head>` component. This gives you a place to set app-wide defaults, such as appending the app name to the page title.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <!-- AppHead.vue -->
+```vue Vue icon="vuejs" theme={null}
+<!-- AppHead.vue -->
 
-  <script setup>
-  import { Head } from "@inertiajs/vue3";
+<script setup>
+import { Head } from "@inertiajs/vue3";
 
-  defineProps({ title: String });
-  </script>
+defineProps({ title: String });
+</script>
 
-  <template>
-    <Head :title="title ? `${title} - My App` : 'My App'">
-      <slot />
+<template>
+  <Head :title="title ? `${title} - My App` : 'My App'">
+    <slot />
+  </Head>
+</template>
+```
+
+```jsx React icon="react" theme={null}
+// AppHead.js
+
+import { Head } from "@inertiajs/react";
+
+const Site = ({ title, children }) => {
+  return (
+    <Head>
+      <title>{title ? `${title} - My App` : "My App"}</title>
+      {children}
     </Head>
-  </template>
-  ```
+  );
+};
 
-  ```jsx React icon="react" theme={null}
-  // AppHead.js
+export default Site;
+```
 
-  import { Head } from "@inertiajs/react";
-
-  const Site = ({ title, children }) => {
-    return (
-      <Head>
-        <title>{title ? `${title} - My App` : "My App"}</title>
-        {children}
-      </Head>
-    );
-  };
-
-  export default Site;
-  ```
-
-  ```js Svelte icon="s" theme={null}
-  // Not supported
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+// Not supported
+```
 
 Once you have created the custom component, you can just start using it in your pages.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import AppHead from './AppHead'
+```vue Vue icon="vuejs" theme={null}
+import AppHead from './AppHead'
 
-  <AppHead title="About" />
-  ```
+<AppHead title="About" />
+```
 
-  ```jsx React icon="react" theme={null}
-  import AppHead from './AppHead'
+```jsx React icon="react" theme={null}
+import AppHead from './AppHead'
 
-  <AppHead title="About">
-  ```
+<AppHead title="About">
+```
 
-  ```js Svelte icon="s" theme={null}
-  // Not supported
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+// Not supported
+```
 
 ## Server-Side Head Elements
 
-You may wish to include default head elements like `<title>` or `<meta>` tags in your root Blade template. This creates two challenges: preventing duplicates when [SSR](/docs/v3/advanced/server-side-rendering) is active, and ensuring the client-side `<Head>` component may replace them during navigation.
+You may wish to include default head elements like `<title>` or `<meta>` tags in your root Blade template. This creates two challenges: preventing duplicates when [SSR](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md) is active, and ensuring the client-side `<Head>` component may replace them during navigation.
 
 ### SSR Fallback
 
-The `<x-inertia::head>` Blade component accepts fallback content via its slot. This content is only rendered in the initial HTML when [SSR](/docs/v3/advanced/server-side-rendering) is not active. When SSR is active, the `<Head>` component already provides these elements as part of the server-rendered response, so the fallback is skipped.
+The `<x-inertia::head>` Blade component accepts fallback content via its slot. This content is only rendered in the initial HTML when [SSR](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md) is not active. When SSR is active, the `<Head>` component already provides these elements as part of the server-rendered response, so the fallback is skipped.
 
 ```blade resources/views/app.blade.php theme={null}
 <head>

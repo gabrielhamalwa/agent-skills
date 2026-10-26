@@ -1,6 +1,8 @@
 # Progress Indicators
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 Since Inertia requests are made via XHR, there would typically not be a browser loading indicator when navigating from one page to another. To solve this, Inertia displays a progress indicator at the top of the page whenever you make an Inertia visit.
 
@@ -37,7 +39,7 @@ progress: false,
 
 ## Custom
 
-It's also possible to setup your own custom page loading indicators using Inertia [events](/docs/v1/advanced/events). Let's explore how to do this using the [NProgress](https://ricostacruz.com/nprogress/) library as an example.
+It's also possible to setup your own custom page loading indicators using Inertia [events](https://inertiajs.com/docs/v1/advanced/events.md). Let's explore how to do this using the [NProgress](https://ricostacruz.com/nprogress/) library as an example.
 
 First, disable Inertia's default loading indicator.
 
@@ -62,27 +64,25 @@ After installation, you'll need to add the NProgress [styles](https://github.com
 
 Next, import both `NProgress` and the Inertia `router` into your application.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import NProgress from 'nprogress'
-  import { router } from '@inertiajs/vue2'
-  ```
+```js Vue 2 icon="vuejs" theme={null}
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/vue2'
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import NProgress from 'nprogress'
-  import { router } from '@inertiajs/vue3'
-  ```
+```js Vue 3 icon="vuejs" theme={null}
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/vue3'
+```
 
-  ```js React icon="react" theme={null}
-  import NProgress from 'nprogress'
-  import { router } from '@inertiajs/react'
-  ```
+```js React icon="react" theme={null}
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/react'
+```
 
-  ```js Svelte icon="s" theme={null}
-  import NProgress from 'nprogress'
-  import { router } from '@inertiajs/svelte'
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/svelte'
+```
 
 Next, let's add a `start` event listener. We'll use this listener to show the progress bar when a new Inertia visit begins.
 
@@ -187,128 +187,126 @@ That's it, you now have a beautiful custom page loading indicator!
 
 For convenience, here is the full source code of the final version of our custom loading indicator.
 
-<CodeGroup>
-  ```js Vue 2 icon="vuejs" theme={null}
-  import NProgress from 'nprogress'
-  import { router } from '@inertiajs/vue2'
+```js Vue 2 icon="vuejs" theme={null}
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/vue2'
 
-  let timeout = null
+let timeout = null
 
-  router.on('start', () => {
-      timeout = setTimeout(() => NProgress.start(), 250)
-  })
+router.on('start', () => {
+    timeout = setTimeout(() => NProgress.start(), 250)
+})
 
-  router.on('progress', (event) => {
-      if (NProgress.isStarted() && event.detail.progress.percentage) {
-          NProgress.set((event.detail.progress.percentage / 100) * 0.9)
-      }
-  })
+router.on('progress', (event) => {
+    if (NProgress.isStarted() && event.detail.progress.percentage) {
+        NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+    }
+})
 
-  router.on('finish', (event) => {
-      clearTimeout(timeout)
-      if (!NProgress.isStarted()) {
-          return
-      } else if (event.detail.visit.completed) {
-          NProgress.done()
-      } else if (event.detail.visit.interrupted) {
-          NProgress.set(0)
-      } else if (event.detail.visit.cancelled) {
-          NProgress.done()
-          NProgress.remove()
-      }
-  })
-  ```
+router.on('finish', (event) => {
+    clearTimeout(timeout)
+    if (!NProgress.isStarted()) {
+        return
+    } else if (event.detail.visit.completed) {
+        NProgress.done()
+    } else if (event.detail.visit.interrupted) {
+        NProgress.set(0)
+    } else if (event.detail.visit.cancelled) {
+        NProgress.done()
+        NProgress.remove()
+    }
+})
+```
 
-  ```js Vue 3 icon="vuejs" theme={null}
-  import NProgress from 'nprogress'
-  import { router } from '@inertiajs/vue3'
+```js Vue 3 icon="vuejs" theme={null}
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/vue3'
 
-  let timeout = null
+let timeout = null
 
-  router.on('start', () => {
-      timeout = setTimeout(() => NProgress.start(), 250)
-  })
+router.on('start', () => {
+    timeout = setTimeout(() => NProgress.start(), 250)
+})
 
-  router.on('progress', (event) => {
-      if (NProgress.isStarted() && event.detail.progress.percentage) {
-          NProgress.set((event.detail.progress.percentage / 100) * 0.9)
-      }
-  })
+router.on('progress', (event) => {
+    if (NProgress.isStarted() && event.detail.progress.percentage) {
+        NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+    }
+})
 
-  router.on('finish', (event) => {
-      clearTimeout(timeout)
-      if (!NProgress.isStarted()) {
-          return
-      } else if (event.detail.visit.completed) {
-          NProgress.done()
-      } else if (event.detail.visit.interrupted) {
-          NProgress.set(0)
-      } else if (event.detail.visit.cancelled) {
-          NProgress.done()
-          NProgress.remove()
-      }
-  })
-  ```
+router.on('finish', (event) => {
+    clearTimeout(timeout)
+    if (!NProgress.isStarted()) {
+        return
+    } else if (event.detail.visit.completed) {
+        NProgress.done()
+    } else if (event.detail.visit.interrupted) {
+        NProgress.set(0)
+    } else if (event.detail.visit.cancelled) {
+        NProgress.done()
+        NProgress.remove()
+    }
+})
+```
 
-  ```js React icon="react" theme={null}
-  import NProgress from 'nprogress'
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/react'
 
-  let timeout = null
+let timeout = null
 
-  router.on('start', () => {
-      timeout = setTimeout(() => NProgress.start(), 250)
-  })
+router.on('start', () => {
+    timeout = setTimeout(() => NProgress.start(), 250)
+})
 
-  router.on('progress', (event) => {
-      if (NProgress.isStarted() && event.detail.progress.percentage) {
-          NProgress.set((event.detail.progress.percentage / 100) * 0.9)
-      }
-  })
+router.on('progress', (event) => {
+    if (NProgress.isStarted() && event.detail.progress.percentage) {
+        NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+    }
+})
 
-  router.on('finish', (event) => {
-      clearTimeout(timeout)
-      if (!NProgress.isStarted()) {
-          return
-      } else if (event.detail.visit.completed) {
-          NProgress.done()
-      } else if (event.detail.visit.interrupted) {
-          NProgress.set(0)
-      } else if (event.detail.visit.cancelled) {
-          NProgress.done()
-          NProgress.remove()
-      }
-  })
-  ```
+router.on('finish', (event) => {
+    clearTimeout(timeout)
+    if (!NProgress.isStarted()) {
+        return
+    } else if (event.detail.visit.completed) {
+        NProgress.done()
+    } else if (event.detail.visit.interrupted) {
+        NProgress.set(0)
+    } else if (event.detail.visit.cancelled) {
+        NProgress.done()
+        NProgress.remove()
+    }
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import NProgress from 'nprogress'
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/svelte'
 
-  let timeout = null
+let timeout = null
 
-  router.on('start', () => {
-      timeout = setTimeout(() => NProgress.start(), 250)
-  })
+router.on('start', () => {
+    timeout = setTimeout(() => NProgress.start(), 250)
+})
 
-  router.on('progress', (event) => {
-      if (NProgress.isStarted() && event.detail.progress.percentage) {
-          NProgress.set((event.detail.progress.percentage / 100) * 0.9)
-      }
-  })
+router.on('progress', (event) => {
+    if (NProgress.isStarted() && event.detail.progress.percentage) {
+        NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+    }
+})
 
-  router.on('finish', (event) => {
-      clearTimeout(timeout)
-      if (!NProgress.isStarted()) {
-          return
-      } else if (event.detail.visit.completed) {
-          NProgress.done()
-      } else if (event.detail.visit.interrupted) {
-          NProgress.set(0)
-      } else if (event.detail.visit.cancelled) {
-          NProgress.done()
-          NProgress.remove()
-      }
-  })
-  ```
-</CodeGroup>
+router.on('finish', (event) => {
+    clearTimeout(timeout)
+    if (!NProgress.isStarted()) {
+        return
+    } else if (event.detail.visit.completed) {
+        NProgress.done()
+    } else if (event.detail.visit.interrupted) {
+        NProgress.set(0)
+    } else if (event.detail.visit.cancelled) {
+        NProgress.done()
+        NProgress.remove()
+    }
+})
+```

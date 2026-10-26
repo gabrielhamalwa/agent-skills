@@ -1,6 +1,8 @@
 # Polling
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 ## Poll Helper
 
@@ -8,139 +10,131 @@ Polling your server for new information on the current page is common, so Inerti
 
 The only required argument is the polling interval in milliseconds.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { usePoll } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { usePoll } from '@inertiajs/vue3'
 
-  usePoll(2000)
-  ```
+usePoll(2000)
+```
 
-  ```jsx React icon="react" theme={null}
-  import { usePoll } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { usePoll } from '@inertiajs/react'
 
-  usePoll(2000)
-  ```
+usePoll(2000)
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { usePoll } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { usePoll } from '@inertiajs/svelte'
 
-  usePoll(2000)
-  ```
-</CodeGroup>
+usePoll(2000)
+```
 
 If you need to pass additional request options to the poll helper, you can pass any of the `router.reload` options as the second parameter.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { usePoll } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { usePoll } from '@inertiajs/vue3'
 
-  usePoll(2000, {
-      onStart() {
-              console.log('Polling request started')
-      },
-      onFinish() {
-              console.log('Polling request finished')
-      }
-  })
-  ```
+usePoll(2000, {
+    onStart() {
+            console.log('Polling request started')
+    },
+    onFinish() {
+            console.log('Polling request finished')
+    }
+})
+```
 
-  ```jsx React icon="react" theme={null}
-  import { usePoll } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { usePoll } from '@inertiajs/react'
 
-  usePoll(2000, {
-      onStart() {
-              console.log('Polling request started')
-      },
-      onFinish() {
-              console.log('Polling request finished')
-      }
-  })
-  ```
+usePoll(2000, {
+    onStart() {
+            console.log('Polling request started')
+    },
+    onFinish() {
+            console.log('Polling request finished')
+    }
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { usePoll } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { usePoll } from '@inertiajs/svelte'
 
-  usePoll(2000, {
-      onStart() {
-              console.log('Polling request started')
-      },
-      onFinish() {
-              console.log('Polling request finished')
-      }
-  })
-  ```
-</CodeGroup>
+usePoll(2000, {
+    onStart() {
+            console.log('Polling request started')
+    },
+    onFinish() {
+            console.log('Polling request finished')
+    }
+})
+```
 
 If you'd like more control over the polling behavior, the poll helper provides `stop` and `start` methods that allow you to manually start and stop polling. You can pass the `autoStart: false` option to the poll helper to prevent it from automatically starting polling when the component is mounted.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { usePoll } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { usePoll } from '@inertiajs/vue3'
 
-  const { start, stop } = usePoll(2000, {}, {
-      autoStart: false,
-  })
-  </script>
+const { start, stop } = usePoll(2000, {}, {
+    autoStart: false,
+})
+</script>
 
-  <template>
-      <button @click="start">Start polling</button>
-      <button @click="stop">Stop polling</button>
-  </template>
-  ```
+<template>
+    <button @click="start">Start polling</button>
+    <button @click="stop">Stop polling</button>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { usePoll } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { usePoll } from '@inertiajs/react'
 
-  export default () => {
-      const { start, stop } = usePoll(2000, {}, {
-              autoStart: false,
-      })
+export default () => {
+    const { start, stop } = usePoll(2000, {}, {
+            autoStart: false,
+    })
 
-      return (
-              <div>
-                      <button onClick={start}>Start polling</button>
-                      <button onClick={stop}>Stop polling</button>
-              </div>
-      )
-  }
-  ```
+    return (
+            <div>
+                    <button onClick={start}>Start polling</button>
+                    <button onClick={stop}>Stop polling</button>
+            </div>
+    )
+}
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { usePoll } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { usePoll } from '@inertiajs/svelte'
 
-  const { start, stop } = usePoll(2000, {}, {
-      autoStart: false,
-  })
-  ```
-</CodeGroup>
+const { start, stop } = usePoll(2000, {}, {
+    autoStart: false,
+})
+```
 
 ## Throttling
 
 By default, the poll helper will throttle requests by 90% when the browser tab is in the background. If you'd like to disable this behavior, you can pass the `keepAlive` option to the poll helper.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { usePoll } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { usePoll } from '@inertiajs/vue3'
 
-  usePoll(2000, {}, {
-      keepAlive: true,
-  })
-  ```
+usePoll(2000, {}, {
+    keepAlive: true,
+})
+```
 
-  ```jsx React icon="react" theme={null}
-  import { usePoll } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { usePoll } from '@inertiajs/react'
 
-  usePoll(2000, {}, {
-      keepAlive: true,
-  })
-  ```
+usePoll(2000, {}, {
+    keepAlive: true,
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { usePoll } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { usePoll } from '@inertiajs/svelte'
 
-  usePoll(2000, {}, {
-      keepAlive: true,
-  })
-  ```
-</CodeGroup>
+usePoll(2000, {}, {
+    keepAlive: true,
+})
+```

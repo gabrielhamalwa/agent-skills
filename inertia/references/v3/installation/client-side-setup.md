@@ -1,148 +1,78 @@
 # Client-Side Setup
 
-export const VueSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return "Vue";
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || "Vue";
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (code !== "Vue") {
-    return null;
-  }
-  return children;
-};
+Once you have your [server-side framework configured](https://inertiajs.com/docs/v3/installation/server-side-setup.md), you then need to set up your client-side framework. Inertia currently provides support for React, Vue, and Svelte.
 
-export const SvelteSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || null;
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (!code?.includes("Svelte")) {
-    return null;
-  }
-  return children;
-};
-
-export const ReactSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || null;
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (code !== "React") {
-    return null;
-  }
-  return children;
-};
-
-Once you have your [server-side framework configured](/docs/v3/installation/server-side-setup), you then need to set up your client-side framework. Inertia currently provides support for React, Vue, and Svelte.
-
-<Card icon="laravel" title="Laravel Starter Kits" href="https://laravel.com/docs/starter-kits" arrow="true" cta="Start building">
-  Laravel's starter kits provide out-of-the-box scaffolding for new Inertia applications.
-
-  These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually install Inertia into your application, please consult the documentation below.
-</Card>
+> **[Laravel Starter Kits](https://laravel.com/docs/starter-kits)**
+>
+> Laravel's starter kits provide out-of-the-box scaffolding for new Inertia applications.
+>
+> These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually install Inertia into your application, please consult the documentation below.
 
 ## Prerequisites
 
 Inertia requires your client-side framework and its corresponding [Vite plugin](https://laravel.com/docs/vite#vue) to be installed and configured. You may skip this section if your application already has these set up.
 
-<CodeGroup>
-  ```bash Vue icon="vuejs" theme={null}
-  npm install vue @vitejs/plugin-vue
-  ```
+```bash Vue icon="vuejs" theme={null}
+npm install vue @vitejs/plugin-vue
+```
 
-  ```bash React icon="react" theme={null}
-  npm install react react-dom @vitejs/plugin-react
-  ```
+```bash React icon="react" theme={null}
+npm install react react-dom @vitejs/plugin-react
+```
 
-  ```bash Svelte icon="s" theme={null}
-  npm install svelte @sveltejs/vite-plugin-svelte
-  ```
-</CodeGroup>
+```bash Svelte icon="s" theme={null}
+npm install svelte @sveltejs/vite-plugin-svelte
+```
 
 Then, add the framework plugin to your `vite.config.js` file.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { defineConfig } from 'vite'
-  import laravel from 'laravel-vite-plugin'
-  import vue from '@vitejs/plugin-vue'
+```js Vue icon="vuejs" theme={null}
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import vue from '@vitejs/plugin-vue'
 
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.js'],
-              refresh: true,
-          }),
-          vue(),
-      ],
-  })
-  ```
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            refresh: true,
+        }),
+        vue(),
+    ],
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { defineConfig } from 'vite'
-  import laravel from 'laravel-vite-plugin'
-  import react from '@vitejs/plugin-react'
+```js React icon="react" theme={null}
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import react from '@vitejs/plugin-react'
 
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.jsx'],
-              refresh: true,
-          }),
-          react(),
-      ],
-  })
-  ```
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.jsx'],
+            refresh: true,
+        }),
+        react(),
+    ],
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { defineConfig } from 'vite'
-  import laravel from 'laravel-vite-plugin'
-  import { svelte } from '@sveltejs/vite-plugin-svelte'
+```js Svelte icon="s" theme={null}
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.js'],
-              refresh: true,
-          }),
-          svelte(),
-      ],
-  })
-  ```
-</CodeGroup>
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            refresh: true,
+        }),
+        svelte(),
+    ],
+})
+```
 
 For more information on configuring these plugins, consult Laravel's [Vite documentation](https://laravel.com/docs/vite#vue).
 
@@ -150,71 +80,65 @@ For more information on configuring these plugins, consult Laravel's [Vite docum
 
 The `@inertiajs/vite` plugin supports Vite 7 and Vite 8.
 
-<Steps>
-  <Step title="Install dependencies">
-    Install the Inertia client-side adapter and Vite plugin.
+**1. Install dependencies**
 
-    <CodeGroup>
-      ```bash Vue icon="vuejs" theme={null}
-      npm install @inertiajs/vue3 @inertiajs/vite
-      ```
+Install the Inertia client-side adapter and Vite plugin.
 
-      ```bash React icon="react" theme={null}
-      npm install @inertiajs/react @inertiajs/vite
-      ```
+```bash Vue icon="vuejs" theme={null}
+npm install @inertiajs/vue3 @inertiajs/vite
+```
 
-      ```bash Svelte icon="s" theme={null}
-      npm install @inertiajs/svelte @inertiajs/vite
-      ```
-    </CodeGroup>
-  </Step>
+```bash React icon="react" theme={null}
+npm install @inertiajs/react @inertiajs/vite
+```
 
-  <Step title="Configure Vite">
-    Add the Inertia plugin to your `vite.config.js` file.
+```bash Svelte icon="s" theme={null}
+npm install @inertiajs/svelte @inertiajs/vite
+```
 
-    ```js vite.config.js theme={null}
-    import inertia from '@inertiajs/vite'
-    import laravel from 'laravel-vite-plugin'
-    import { defineConfig } from 'vite'
+**2. Configure Vite**
 
-    export default defineConfig({
-        plugins: [
-            laravel({
-                input: ['resources/js/app.js'],
-                refresh: true,
-            }),
-            inertia(),
-        ],
-    })
-    ```
-  </Step>
+Add the Inertia plugin to your `vite.config.js` file.
 
-  <Step title="Initialize the Inertia app">
-    Update your main JavaScript file to boot your Inertia app. The Vite plugin handles page resolution and mounting automatically, so a minimal entry point is all you need.
+```js vite.config.js theme={null}
+import inertia from '@inertiajs/vite'
+import laravel from 'laravel-vite-plugin'
+import { defineConfig } from 'vite'
 
-    <CodeGroup>
-      ```js Vue icon="vuejs" theme={null}
-      import { createInertiaApp } from '@inertiajs/vue3'
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            refresh: true,
+        }),
+        inertia(),
+    ],
+})
+```
 
-      createInertiaApp()
-      ```
+**3. Initialize the Inertia app**
 
-      ```jsx React icon="react" theme={null}
-      import { createInertiaApp } from '@inertiajs/react'
+Update your main JavaScript file to boot your Inertia app. The Vite plugin handles page resolution and mounting automatically, so a minimal entry point is all you need.
 
-      createInertiaApp()
-      ```
+```js Vue icon="vuejs" theme={null}
+import { createInertiaApp } from '@inertiajs/vue3'
 
-      ```js Svelte icon="s" theme={null}
-      import { createInertiaApp } from '@inertiajs/svelte'
+createInertiaApp()
+```
 
-      createInertiaApp()
-      ```
-    </CodeGroup>
+```jsx React icon="react" theme={null}
+import { createInertiaApp } from '@inertiajs/react'
 
-    The plugin generates a default resolver that looks for pages in both `./pages` and `./Pages` directories, and the app mounts automatically.
-  </Step>
-</Steps>
+createInertiaApp()
+```
+
+```js Svelte icon="s" theme={null}
+import { createInertiaApp } from '@inertiajs/svelte'
+
+createInertiaApp()
+```
+
+The plugin generates a default resolver that looks for pages in both `./pages` and `./Pages` directories, and the app mounts automatically.
 
 ### React Strict Mode
 
@@ -231,28 +155,26 @@ createInertiaApp({
 
 You may use the `pages` shorthand to customize which directory to search for page components.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  createInertiaApp({
-      pages: './AppPages',
-      // ...
-  })
-  ```
+```js Vue icon="vuejs" theme={null}
+createInertiaApp({
+    pages: './AppPages',
+    // ...
+})
+```
 
-  ```jsx React icon="react" theme={null}
-  createInertiaApp({
-      pages: './AppPages',
-      // ...
-  })
-  ```
+```jsx React icon="react" theme={null}
+createInertiaApp({
+    pages: './AppPages',
+    // ...
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  createInertiaApp({
-      pages: './AppPages',
-      // ...
-  })
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+createInertiaApp({
+    pages: './AppPages',
+    // ...
+})
+```
 
 An object may also be provided for more control over how pages are resolved. You only need to include the options you wish to customize.
 
@@ -271,140 +193,128 @@ createInertiaApp({
 | - | - |
 | `path` | The directory to search for page components. |
 | `extension` | A string or array of file extensions (e.g., `'.tsx'` or `['.tsx', '.jsx']`). Defaults to your framework's extension. |
-| `lazy` | Whether to lazy-load page components. Defaults to `true`. See [code splitting](/docs/v3/advanced/code-splitting). |
+| `lazy` | Whether to lazy-load page components. Defaults to `true`. See [code splitting](https://inertiajs.com/docs/v3/advanced/code-splitting.md). |
 | `transform` | A callback that receives the page name and page object, returning a transformed name. |
 
 ## Customizing the App
 
 Sometimes, you may wish to customize the app instance, for example, to register plugins, wrap it with providers, or set context values. Pass the `withApp` callback to `createInertiaApp` to customize the app before it renders.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { createInertiaApp } from '@inertiajs/vue3'
-  import { createI18n } from 'vue-i18n'
+```js Vue icon="vuejs" theme={null}
+import { createInertiaApp } from '@inertiajs/vue3'
+import { createI18n } from 'vue-i18n'
 
-  const i18n = createI18n({
-      // ...
-  })
+const i18n = createI18n({
+    // ...
+})
 
-  createInertiaApp({
-      withApp(app) {
-          app.use(i18n)
-      },
-  })
-  ```
+createInertiaApp({
+    withApp(app) {
+        app.use(i18n)
+    },
+})
+```
 
-  ```jsx React icon="react" theme={null}
-  import { createInertiaApp } from '@inertiajs/react'
-  import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+```jsx React icon="react" theme={null}
+import { createInertiaApp } from '@inertiajs/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-  const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
-  createInertiaApp({
-      withApp(app) {
-          return (
-              <QueryClientProvider client={queryClient}>
-                  {app}
-              </QueryClientProvider>
-          )
-      },
-  })
-  ```
+createInertiaApp({
+    withApp(app) {
+        return (
+            <QueryClientProvider client={queryClient}>
+                {app}
+            </QueryClientProvider>
+        )
+    },
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { createInertiaApp } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { createInertiaApp } from '@inertiajs/svelte'
 
-  createInertiaApp({
-      withApp(context) {
-          context.set('theme', 'dark')
-      },
-  })
-  ```
-</CodeGroup>
+createInertiaApp({
+    withApp(context) {
+        context.set('theme', 'dark')
+    },
+})
+```
 
-<VueSpecific>
-  The callback receives the Vue app instance, allowing you to call `app.use()`, `app.provide()`, `app.component()`, and any other app-level method.
-</VueSpecific>
+The callback receives the Vue app instance, allowing you to call `app.use()`, `app.provide()`, `app.component()`, and any other app-level method.
 
-<ReactSpecific>
-  The callback receives the React element and must return a new element. This is where you may wrap your app with context providers.
-</ReactSpecific>
+The callback receives the React element and must return a new element. This is where you may wrap your app with context providers.
 
-<SvelteSpecific>
-  The callback receives a `Map` that serves as Svelte's component context. Values set here are accessible in your components via `getContext()`.
-</SvelteSpecific>
+The callback receives a `Map` that serves as Svelte's component context. Values set here are accessible in your components via `getContext()`.
 
 A second argument provides the current rendering environment via `ssr`, allowing you to conditionally apply logic based on where the app is running.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  createInertiaApp({
-      withApp(app, { ssr }) {
-          app.use(i18n)
+```js Vue icon="vuejs" theme={null}
+createInertiaApp({
+    withApp(app, { ssr }) {
+        app.use(i18n)
 
-          if (!ssr) {
-              app.use(browserOnlyPlugin)
-          }
-      },
-  })
-  ```
+        if (!ssr) {
+            app.use(browserOnlyPlugin)
+        }
+    },
+})
+```
 
-  ```jsx React icon="react" theme={null}
-  createInertiaApp({
-      withApp(app, { ssr }) {
-          if (!ssr) {
-              return <BrowserProvider>{app}</BrowserProvider>
-          }
+```jsx React icon="react" theme={null}
+createInertiaApp({
+    withApp(app, { ssr }) {
+        if (!ssr) {
+            return <BrowserProvider>{app}</BrowserProvider>
+        }
 
-          return app
-      },
-  })
-  ```
+        return app
+    },
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  createInertiaApp({
-      withApp(context, { ssr }) {
-          context.set('theme', 'dark')
+```js Svelte icon="s" theme={null}
+createInertiaApp({
+    withApp(context, { ssr }) {
+        context.set('theme', 'dark')
 
-          if (!ssr) {
-              context.set('analytics', createAnalytics())
-          }
-      },
-  })
-  ```
-</CodeGroup>
+        if (!ssr) {
+            context.set('analytics', createAnalytics())
+        }
+    },
+})
+```
 
 The second argument also includes the current `page` object, giving you access to the component name, URL, version, and shared props before the app renders. This is useful for configuring plugins or providers with server-driven state, such as the user's locale.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  createInertiaApp({
-      withApp(app, { page }) {
-          const i18n = createI18n({ locale: page.props.locale })
+```js Vue icon="vuejs" theme={null}
+createInertiaApp({
+    withApp(app, { page }) {
+        const i18n = createI18n({ locale: page.props.locale })
 
-          app.use(i18n)
-      },
-  })
-  ```
+        app.use(i18n)
+    },
+})
+```
 
-  ```jsx React icon="react" theme={null}
-  createInertiaApp({
-      withApp(app, { page }) {
-          const i18n = createI18n({ locale: page.props.locale })
+```jsx React icon="react" theme={null}
+createInertiaApp({
+    withApp(app, { page }) {
+        const i18n = createI18n({ locale: page.props.locale })
 
-          return <I18nProvider i18n={i18n}>{app}</I18nProvider>
-      },
-  })
-  ```
+        return <I18nProvider i18n={i18n}>{app}</I18nProvider>
+    },
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  createInertiaApp({
-      withApp(context, { page }) {
-          context.set('locale', page.props.locale)
-      },
-  })
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+createInertiaApp({
+    withApp(context, { page }) {
+        context.set('locale', page.props.locale)
+    },
+})
+```
 
 ## AI Assistants and IDE Integrations
 
@@ -431,82 +341,80 @@ Adjust the list to match your installed tools. See Vite's [server.watch](https:/
 
 ## Manual Setup
 
-If you prefer not to use the Vite plugin, you may provide the `resolve` and `setup` callbacks manually. The `resolve` callback tells Inertia how to load a page component and receives the component name and the full [page object](/docs/v3/core-concepts/the-protocol). The `setup` callback initializes the client-side framework.
+If you prefer not to use the Vite plugin, you may provide the `resolve` and `setup` callbacks manually. The `resolve` callback tells Inertia how to load a page component and receives the component name and the full [page object](https://inertiajs.com/docs/v3/core-concepts/the-protocol.md). The `setup` callback initializes the client-side framework.
 
-<Note>A manual `setup` callback prevents the Vite plugin from auto-generating [SSR](/docs/v3/advanced/server-side-rendering) handling. You should create a [separate SSR entry point](/docs/v3/advanced/server-side-rendering#ssr-entry-point) and update your app to use [client-side hydration](/docs/v3/advanced/server-side-rendering#client-side-hydration).</Note>
+> [!NOTE]
+>
+> A manual `setup` callback prevents the Vite plugin from auto-generating [SSR](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md) handling. You should create a [separate SSR entry point](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md#ssr-entry-point) and update your app to use [client-side hydration](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md#client-side-hydration).
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { createApp, h } from 'vue'
-  import { createInertiaApp } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { createApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/vue3'
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.vue')
-          return pages[`./Pages/${name}.vue`]()
-      },
-      setup({ el, App, props, plugin }) {
-          createApp({ render: () => h(App, props) })
-              .use(plugin)
-              .mount(el)
-      },
-  })
-  ```
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.vue')
+        return pages[`./Pages/${name}.vue`]()
+    },
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .mount(el)
+    },
+})
+```
 
-  ```jsx React icon="react" theme={null}
-  import { createInertiaApp } from '@inertiajs/react'
-  import { createRoot } from 'react-dom/client'
+```jsx React icon="react" theme={null}
+import { createInertiaApp } from '@inertiajs/react'
+import { createRoot } from 'react-dom/client'
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.jsx')
-          return pages[`./Pages/${name}.jsx`]()
-      },
-      setup({ el, App, props }) {
-          createRoot(el).render(<App {...props} />)
-      },
-  })
-  ```
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.jsx')
+        return pages[`./Pages/${name}.jsx`]()
+    },
+    setup({ el, App, props }) {
+        createRoot(el).render(<App {...props} />)
+    },
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { createInertiaApp } from '@inertiajs/svelte'
-  import { mount } from 'svelte'
+```js Svelte icon="s" theme={null}
+import { createInertiaApp } from '@inertiajs/svelte'
+import { mount } from 'svelte'
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.svelte')
-          return pages[`./Pages/${name}.svelte`]()
-      },
-      setup({ el, App, props }) {
-          mount(App, { target: el, props })
-      },
-  })
-  ```
-</CodeGroup>
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.svelte')
+        return pages[`./Pages/${name}.svelte`]()
+    },
+    setup({ el, App, props }) {
+        mount(App, { target: el, props })
+    },
+})
+```
 
-By default, page components are lazy-loaded, splitting each page into its own bundle. To eagerly bundle all pages into a single file instead, see the [code splitting](/docs/v3/advanced/code-splitting) documentation.
+By default, page components are lazy-loaded, splitting each page into its own bundle. To eagerly bundle all pages into a single file instead, see the [code splitting](https://inertiajs.com/docs/v3/advanced/code-splitting.md) documentation.
 
 The `laravel-vite-plugin` package also provides a [`resolvePageComponent`](https://laravel.com/docs/vite#inertia) helper that may be used to resolve page components.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+```js Vue icon="vuejs" theme={null}
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 
-  resolve: name => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
-  ```
+resolve: name => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+```
 
-  ```js React icon="react" theme={null}
-  import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+```js React icon="react" theme={null}
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 
-  resolve: name => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
-  ```
+resolve: name => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+```js Svelte icon="s" theme={null}
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 
-  resolve: name => resolvePageComponent(`./Pages/${name}.svelte`, import.meta.glob('./Pages/**/*.svelte')),
-  ```
-</CodeGroup>
+resolve: name => resolvePageComponent(`./Pages/${name}.svelte`, import.meta.glob('./Pages/**/*.svelte')),
+```
 
 ## Configuring Defaults
 
@@ -535,61 +443,59 @@ createInertiaApp({
 });
 ```
 
-The `visitOptions` callback receives the target URL and the current visit options, and should return an object with any options you want to override. For more details on the available configuration options, see the [forms](/docs/v3/the-basics/forms#form-errors), [prefetching](/docs/v3/data-props/prefetching), and [manual visits](/docs/v3/the-basics/manual-visits#global-visit-options) documentation.
+The `visitOptions` callback receives the target URL and the current visit options, and should return an object with any options you want to override. For more details on the available configuration options, see the [forms](https://inertiajs.com/docs/v3/the-basics/forms.md#form-errors), [prefetching](https://inertiajs.com/docs/v3/data-props/prefetching.md), and [manual visits](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#global-visit-options) documentation.
 
 ### Updating Configuration at Runtime
 
 You may also update configuration values at runtime using the exported `config` instance. This is particularly useful when you need to adjust settings based on user preferences or application state.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { config } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { config } from "@inertiajs/vue3";
 
-  // Set a single value using dot notation...
-  config.set("form.recentlySuccessfulDuration", 1000);
-  config.set("prefetch.cacheFor", "5m");
+// Set a single value using dot notation...
+config.set("form.recentlySuccessfulDuration", 1000);
+config.set("prefetch.cacheFor", "5m");
 
-  // Set multiple values at once...
-  config.set({
-    "form.recentlySuccessfulDuration": 1000,
-    "prefetch.cacheFor": "5m",
-  });
-  ```
+// Set multiple values at once...
+config.set({
+  "form.recentlySuccessfulDuration": 1000,
+  "prefetch.cacheFor": "5m",
+});
+```
 
-  ```js React icon="react" theme={null}
-  import { config } from "@inertiajs/react";
+```js React icon="react" theme={null}
+import { config } from "@inertiajs/react";
 
-  // Set a single value using dot notation...
-  config.set("form.recentlySuccessfulDuration", 1000);
-  config.set("prefetch.cacheFor", "5m");
+// Set a single value using dot notation...
+config.set("form.recentlySuccessfulDuration", 1000);
+config.set("prefetch.cacheFor", "5m");
 
-  // Set multiple values at once...
-  config.set({
-    "form.recentlySuccessfulDuration": 1000,
-    "prefetch.cacheFor": "5m",
-  });
+// Set multiple values at once...
+config.set({
+  "form.recentlySuccessfulDuration": 1000,
+  "prefetch.cacheFor": "5m",
+});
 
-  // Get a configuration value...
-  const duration = config.get("form.recentlySuccessfulDuration");
-  ```
+// Get a configuration value...
+const duration = config.get("form.recentlySuccessfulDuration");
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { config } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { config } from "@inertiajs/svelte";
 
-  // Set a single value using dot notation...
-  config.set("form.recentlySuccessfulDuration", 1000);
-  config.set("prefetch.cacheFor", "5m");
+// Set a single value using dot notation...
+config.set("form.recentlySuccessfulDuration", 1000);
+config.set("prefetch.cacheFor", "5m");
 
-  // Set multiple values at once...
-  config.set({
-    "form.recentlySuccessfulDuration": 1000,
-    "prefetch.cacheFor": "5m",
-  });
+// Set multiple values at once...
+config.set({
+  "form.recentlySuccessfulDuration": 1000,
+  "prefetch.cacheFor": "5m",
+});
 
-  // Get a configuration value...
-  const duration = config.get("form.recentlySuccessfulDuration");
-  ```
-</CodeGroup>
+// Get a configuration value...
+const duration = config.get("form.recentlySuccessfulDuration");
+```
 
 ## Defining a Root Element
 
@@ -602,11 +508,11 @@ createInertiaApp({
 });
 ```
 
-If you change the `id` of the root element, be sure to update it [server-side](/docs/v3/installation/server-side-setup#root-template) as well.
+If you change the `id` of the root element, be sure to update it [server-side](https://inertiajs.com/docs/v3/installation/server-side-setup.md#root-template) as well.
 
 ## Content Security Policy
 
-For applications using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) that restricts inline styles, you may pass a `nonce` to `createInertiaApp()`. The nonce is applied to the inline styles Inertia injects for the [progress bar](/docs/v3/advanced/progress-indicators) and the [error modal](/docs/v3/advanced/error-handling), allowing them through your CSP.
+For applications using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) that restricts inline styles, you may pass a `nonce` to `createInertiaApp()`. The nonce is applied to the inline styles Inertia injects for the [progress bar](https://inertiajs.com/docs/v3/advanced/progress-indicators.md) and the [error modal](https://inertiajs.com/docs/v3/advanced/error-handling.md), allowing them through your CSP.
 
 ```js theme={null}
 createInertiaApp({
@@ -652,70 +558,68 @@ createInertiaApp({
 
 The built-in XHR client supports interceptors for modifying requests, inspecting responses, or handling errors. These interceptors apply to all HTTP requests made by Inertia, including those from the router, `useForm`, `<Form>`, and `useHttp`.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { http } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { http } from '@inertiajs/vue3'
 
-  const removeRequestHandler = http.onRequest((config) => {
-    config.headers['X-Custom-Header'] = 'value'
-    return config
-  })
+const removeRequestHandler = http.onRequest((config) => {
+  config.headers['X-Custom-Header'] = 'value'
+  return config
+})
 
-  const removeResponseHandler = http.onResponse((response) => {
-    console.log('Response status:', response.status)
-    return response
-  })
+const removeResponseHandler = http.onResponse((response) => {
+  console.log('Response status:', response.status)
+  return response
+})
 
-  const removeErrorHandler = http.onError((error) => {
-    console.error('Request failed:', error)
-  })
+const removeErrorHandler = http.onError((error) => {
+  console.error('Request failed:', error)
+})
 
-  // Remove a handler when it's no longer needed...
-  removeRequestHandler()
-  ```
+// Remove a handler when it's no longer needed...
+removeRequestHandler()
+```
 
-  ```js React icon="react" theme={null}
-  import { http } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { http } from '@inertiajs/react'
 
-  const removeRequestHandler = http.onRequest((config) => {
-    config.headers['X-Custom-Header'] = 'value'
-    return config
-  })
+const removeRequestHandler = http.onRequest((config) => {
+  config.headers['X-Custom-Header'] = 'value'
+  return config
+})
 
-  const removeResponseHandler = http.onResponse((response) => {
-    console.log('Response status:', response.status)
-    return response
-  })
+const removeResponseHandler = http.onResponse((response) => {
+  console.log('Response status:', response.status)
+  return response
+})
 
-  const removeErrorHandler = http.onError((error) => {
-    console.error('Request failed:', error)
-  })
+const removeErrorHandler = http.onError((error) => {
+  console.error('Request failed:', error)
+})
 
-  // Remove a handler when it's no longer needed...
-  removeRequestHandler()
-  ```
+// Remove a handler when it's no longer needed...
+removeRequestHandler()
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { http } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { http } from '@inertiajs/svelte'
 
-  const removeRequestHandler = http.onRequest((config) => {
-    config.headers['X-Custom-Header'] = 'value'
-    return config
-  })
+const removeRequestHandler = http.onRequest((config) => {
+  config.headers['X-Custom-Header'] = 'value'
+  return config
+})
 
-  const removeResponseHandler = http.onResponse((response) => {
-    console.log('Response status:', response.status)
-    return response
-  })
+const removeResponseHandler = http.onResponse((response) => {
+  console.log('Response status:', response.status)
+  return response
+})
 
-  const removeErrorHandler = http.onError((error) => {
-    console.error('Request failed:', error)
-  })
+const removeErrorHandler = http.onError((error) => {
+  console.error('Request failed:', error)
+})
 
-  // Remove a handler when it's no longer needed...
-  removeRequestHandler()
-  ```
-</CodeGroup>
+// Remove a handler when it's no longer needed...
+removeRequestHandler()
+```
 
 Each `on*` method returns a cleanup function that removes the handler when called. Request handlers receive the request config and must return it (modified or not). Response handlers receive the response and must also return it. Handlers may be asynchronous.
 

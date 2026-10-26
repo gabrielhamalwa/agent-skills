@@ -2,7 +2,7 @@
 
 ## Creating Responses
 
-Creating an Inertia response is simple. To get started, invoke the `Inertia::render()` method within your controller or route, providing both the name of the [JavaScript page component](/docs/v3/the-basics/pages) that you wish to render, as well as any properties (data) for the page.
+Creating an Inertia response is simple. To get started, invoke the `Inertia::render()` method within your controller or route, providing both the name of the [JavaScript page component](https://inertiajs.com/docs/v3/the-basics/pages.md) that you wish to render, as well as any properties (data) for the page.
 
 In the example below, we will pass a single property (`event`) which contains four attributes (`id`, `title`, `start_date` and `description`) to the `Event/Show` page component.
 
@@ -49,15 +49,15 @@ return Inertia::render(Page::EventShow, [
 ]);
 ```
 
-<Tip>
-  To ensure that pages load quickly, only return the minimum data required for
-  the page.
-</Tip>
+> [!TIP]
+>
+> To ensure that pages load quickly, only return the minimum data required for
+> the page.
 
-<Note>
-  Be aware that all data returned from the controllers will be visible
-  client-side, so be sure to omit sensitive information.
-</Note>
+> [!NOTE]
+>
+> Be aware that all data returned from the controllers will be visible
+> client-side, so be sure to omit sensitive information.
 
 ## Properties
 
@@ -93,7 +93,7 @@ Inertia::render('Dashboard', [
 
 Arrayable objects like Eloquent models and collections are automatically converted using their `toArray()` method. Responsable objects like API resources and JSON responses are resolved through their `toResponse()` method.
 
-Integers outside JavaScript's safe range lose precision in the browser. You may preserve them as native `BigInt` values using [big integer support](/docs/v3/advanced/big-integers).
+Integers outside JavaScript's safe range lose precision in the browser. You may preserve them as native `BigInt` values using [big integer support](https://inertiajs.com/docs/v3/advanced/big-integers.md).
 
 ## `ProvidesInertiaProperty` Interface
 

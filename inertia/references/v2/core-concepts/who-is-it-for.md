@@ -1,6 +1,8 @@
 # Who Is Inertia.js For?
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 Inertia was crafted for development teams and solo hackers who typically build server-side rendered applications using frameworks like Laravel, Ruby on Rails, Django, or Phoenix. You're used to creating controllers, retrieving data from the database (via an ORM), and rendering views.
 

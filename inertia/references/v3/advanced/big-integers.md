@@ -1,6 +1,6 @@
 # Big Integers
 
-<Badge>v3.8.0+</Badge> <Badge>Laravel Adapter v3.5.0+</Badge>
+v3.8.0+Laravel Adapter v3.5.0+
 
 Sometimes you may wish to pass integers that exceed JavaScript's safe integer range, such as IDs from a 64-bit database column. JavaScript rounds those values while parsing JSON, so `900719925474099988` reaches your components as `900719925474100000`. Big integer support keeps them exact by delivering them as native `BigInt` values, following the JSON convention [documented on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#use_within_json).
 
@@ -38,36 +38,34 @@ return Inertia::render('Users/Show', [
 // The response carries {"$bigint": "900719925474099988"}
 ```
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  defineProps({ id: BigInt });
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+defineProps({ id: BigInt });
+</script>
 
-  <template>
-    <p>User {{ id }}</p>
-    <!-- User 900719925474099988 -->
-  </template>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  export default function Show({ id }) {
-    return <p>User {String(id)}</p>;
-    // User 900719925474099988
-  }
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-    let { id } = $props();
-  </script>
-
-  <p>User {id}</p>
+<template>
+  <p>User {{ id }}</p>
   <!-- User 900719925474099988 -->
-  ```
-</CodeGroup>
+</template>
+```
 
-Integers within the safe range are left as regular numbers, so only the values that need it become a `BigInt`. The same prop may therefore arrive as a number or a `BigInt`, depending on its value. [Flash data](/docs/v3/data-props/flash-data) receives the same treatment as props.
+```jsx React icon="react" theme={null}
+export default function Show({ id }) {
+  return <p>User {String(id)}</p>;
+  // User 900719925474099988
+}
+```
+
+```svelte Svelte icon="s" theme={null}
+<script>
+  let { id } = $props();
+</script>
+
+<p>User {id}</p>
+<!-- User 900719925474099988 -->
+```
+
+Integers within the safe range are left as regular numbers, so only the values that need it become a `BigInt`. The same prop may therefore arrive as a number or a `BigInt`, depending on its value. [Flash data](https://inertiajs.com/docs/v3/data-props/flash-data.md) receives the same treatment as props.
 
 Markers are only revived on pages that enable big integer support, so applications that already send their own `{"$bigint": "..."}` objects continue to receive them as plain objects everywhere else.
 
@@ -77,7 +75,7 @@ Arrays, plain objects, Eloquent models, collections, API resources, and values i
 
 ## Submitting Big Integers
 
-A `BigInt` submitted through the router, a form, or [Precognition](/docs/v3/the-basics/forms#precognition) is sent as its digits, the same way form data and query strings send numbers. Your controller receives a numeric string, which validation rules such as `integer` and the request's `integer` method handle as usual.
+A `BigInt` submitted through the router, a form, or [Precognition](https://inertiajs.com/docs/v3/the-basics/forms.md#precognition) is sent as its digits, the same way form data and query strings send numbers. Your controller receives a numeric string, which validation rules such as `integer` and the request's `integer` method handle as usual.
 
 ```js theme={null}
 router.post("/orders", { id: props.order.id });
@@ -92,11 +90,11 @@ public function store(Request $request)
 }
 ```
 
-The [`useHttp`](/docs/v3/the-basics/http-requests) hook does not handle `BigInt` values, since it is commonly used to call third-party APIs. Convert those values to a string before sending them.
+The [`useHttp`](https://inertiajs.com/docs/v3/the-basics/http-requests) hook does not handle `BigInt` values, since it is commonly used to call third-party APIs. Convert those values to a string before sending them.
 
 ## Testing
 
-Inertia's [testing helpers](/docs/v3/advanced/testing#endpoint-tests) turn markers back into integers, so you may assert against the same values you passed to the response.
+Inertia's [testing helpers](https://inertiajs.com/docs/v3/advanced/testing.md#endpoint-tests) turn markers back into integers, so you may assert against the same values you passed to the response.
 
 ```php theme={null}
 $response->assertInertia(fn (Assert $page) => $page

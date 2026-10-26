@@ -23,4 +23,4 @@ Inertia.js follows the same support policy as [Laravel](https://laravel.com/docs
 
 ## Next Steps
 
-Want to learn a bit more before diving in? Check out the [who is it for](/docs/v3/core-concepts/who-is-it-for) and [how it works](/docs/v3/core-concepts/how-it-works) pages. Or, if you're ready to get started, jump right into the [installation instructions](/docs/v3/installation/server-side-setup).
+Want to learn a bit more before diving in? Check out the [who is it for](https://inertiajs.com/docs/v3/core-concepts/who-is-it-for.md) and [how it works](https://inertiajs.com/docs/v3/core-concepts/how-it-works.md) pages. Or, if you're ready to get started, jump right into the [installation instructions](https://inertiajs.com/docs/v3/installation/server-side-setup.md).

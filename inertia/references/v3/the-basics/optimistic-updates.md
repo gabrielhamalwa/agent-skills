@@ -1,116 +1,43 @@
 # Optimistic Updates
 
-export const VueSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return "Vue";
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || "Vue";
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (code !== "Vue") {
-    return null;
-  }
-  return children;
-};
-
-export const SvelteSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || null;
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (!code?.includes("Svelte")) {
-    return null;
-  }
-  return children;
-};
-
-export const ReactSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || null;
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (code !== "React") {
-    return null;
-  }
-  return children;
-};
-
-export const ClientSpecific = ({children}) => {
-  const [nada, setNada] = useState();
-  return children;
-};
-
 Inertia allows you to update the UI immediately without waiting for the server to respond, such as incrementing a like counter, toggling a bookmark, or adding an item to a list. Optimistic updates apply changes instantly while the request is in flight, automatically rolling back if the request fails.
 
 ## Router Visits
 
 You may chain the `optimistic()` method before any router visit. The callback receives the current page props and should return a partial update to apply immediately.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.optimistic((props) => ({
-      post: {
-          ...props.post,
-          likes: props.post.likes + 1,
-      },
-  })).post(`/posts/${post.id}/like`)
-  ```
+router.optimistic((props) => ({
+    post: {
+        ...props.post,
+        likes: props.post.likes + 1,
+    },
+})).post(`/posts/${post.id}/like`)
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.optimistic((props) => ({
-      post: {
-          ...props.post,
-          likes: props.post.likes + 1,
-      },
-  })).post(`/posts/${post.id}/like`)
-  ```
+router.optimistic((props) => ({
+    post: {
+        ...props.post,
+        likes: props.post.likes + 1,
+    },
+})).post(`/posts/${post.id}/like`)
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.optimistic((props) => ({
-      post: {
-          ...props.post,
-          likes: props.post.likes + 1,
-      },
-  })).post(`/posts/${post.id}/like`)
-  ```
-</CodeGroup>
+router.optimistic((props) => ({
+    post: {
+        ...props.post,
+        likes: props.post.likes + 1,
+    },
+})).post(`/posts/${post.id}/like`)
+```
 
 The optimistic update is applied immediately to the current page's props, so your component re-renders with the new values before the request is sent. When the server responds, Inertia replaces the optimistic data with the server's response. If the request fails, the props are automatically reverted to their original values.
 
@@ -118,166 +45,160 @@ The optimistic update is applied immediately to the current page's props, so you
 
 The `<Form>` component supports optimistic updates via the `optimistic` prop. Since the component manages input data internally, the form data is provided as a second callback argument.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <template>
-    <Form
-      action="/todos"
-      method="post"
-      :optimistic="(props, data) => ({
-        todos: [...props.todos, { id: Date.now(), name: data.name, done: false }],
-      })"
-    >
-      <input type="text" name="name" />
-      <button type="submit">Add Todo</button>
-    </Form>
-  </template>
-  ```
-
-  ```jsx React icon="react" theme={null}
+```vue Vue icon="vuejs" theme={null}
+<template>
   <Form
     action="/todos"
     method="post"
-    optimistic={(props, data) => ({
+    :optimistic="(props, data) => ({
       todos: [...props.todos, { id: Date.now(), name: data.name, done: false }],
-    })}
+    })"
   >
     <input type="text" name="name" />
     <button type="submit">Add Todo</button>
   </Form>
-  ```
+</template>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  <Form
-      action="/todos"
-      method="post"
-      optimistic={(props, data) => ({
-          todos: [...props.todos, { id: Date.now(), name: data.name, done: false }],
-      })}
-  >
-      <input type="text" name="name" />
-      <button type="submit">Add Todo</button>
-  </Form>
-  ```
-</CodeGroup>
+```jsx React icon="react" theme={null}
+<Form
+  action="/todos"
+  method="post"
+  optimistic={(props, data) => ({
+    todos: [...props.todos, { id: Date.now(), name: data.name, done: false }],
+  })}
+>
+  <input type="text" name="name" />
+  <button type="submit">Add Todo</button>
+</Form>
+```
+
+```svelte Svelte icon="s" theme={null}
+<Form
+    action="/todos"
+    method="post"
+    optimistic={(props, data) => ({
+        todos: [...props.todos, { id: Date.now(), name: data.name, done: false }],
+    })}
+>
+    <input type="text" name="name" />
+    <button type="submit">Add Todo</button>
+</Form>
+```
 
 ## Form Helper
 
 The `useForm` helper also supports optimistic updates via the same `optimistic()` method.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { useForm } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { useForm } from '@inertiajs/vue3'
 
-  const props = defineProps({ posts: Array })
+const props = defineProps({ posts: Array })
 
-  const form = useForm({
-      title: '',
-  })
+const form = useForm({
+    title: '',
+})
 
-  function save() {
-      form.optimistic((props) => ({
-          posts: [...props.posts, { title: form.title }],
-      })).post('/posts')
-  }
-  </script>
+function save() {
+    form.optimistic((props) => ({
+        posts: [...props.posts, { title: form.title }],
+    })).post('/posts')
+}
+</script>
 
-  <template>
-      <input v-model="form.title" />
-      <button @click="save" :disabled="form.processing">Save</button>
-  </template>
-  ```
+<template>
+    <input v-model="form.title" />
+    <button @click="save" :disabled="form.processing">Save</button>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { useForm } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { useForm } from '@inertiajs/react'
 
-  export default function Posts({ posts }) {
-      const { data, setData, optimistic, post, processing } = useForm({
-          title: '',
-      })
+export default function Posts({ posts }) {
+    const { data, setData, optimistic, post, processing } = useForm({
+        title: '',
+    })
 
-      function save(e) {
-          e.preventDefault()
-          optimistic((props) => ({
-              posts: [...props.posts, { title: data.title }],
-          }))
-          post('/posts')
-      }
+    function save(e) {
+        e.preventDefault()
+        optimistic((props) => ({
+            posts: [...props.posts, { title: data.title }],
+        }))
+        post('/posts')
+    }
 
-      return (
-          <form onSubmit={save}>
-              <input value={data.title} onChange={e => setData('title', e.target.value)} />
-              <button type="submit" disabled={processing}>Save</button>
-          </form>
-      )
-  }
-  ```
+    return (
+        <form onSubmit={save}>
+            <input value={data.title} onChange={e => setData('title', e.target.value)} />
+            <button type="submit" disabled={processing}>Save</button>
+        </form>
+    )
+}
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-  import { useForm } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+<script>
+import { useForm } from '@inertiajs/svelte'
 
-  let { posts } = $props()
+let { posts } = $props()
 
-  const form = useForm({
-      title: '',
-  })
+const form = useForm({
+    title: '',
+})
 
-  function save() {
-      form.optimistic((props) => ({
-          posts: [...props.posts, { title: form.title }],
-      })).post('/posts')
-  }
-  </script>
+function save() {
+    form.optimistic((props) => ({
+        posts: [...props.posts, { title: form.title }],
+    })).post('/posts')
+}
+</script>
 
-  <input bind:value={form.title} />
-  <button onclick={save} disabled={form.processing}>Save</button>
-  ```
-</CodeGroup>
+<input bind:value={form.title} />
+<button onclick={save} disabled={form.processing}>Save</button>
+```
 
 ## HTTP Requests
 
-The [`useHttp`](/docs/v3/the-basics/http-requests) hook supports optimistic updates as well. Since HTTP requests don't interact with Inertia's page props, the optimistic callback receives and updates the form's own data. On failure, the form data is reverted to its pre-request state.
+The [`useHttp`](https://inertiajs.com/docs/v3/the-basics/http-requests) hook supports optimistic updates as well. Since HTTP requests don't interact with Inertia's page props, the optimistic callback receives and updates the form's own data. On failure, the form data is reverted to its pre-request state.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { useHttp } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { useHttp } from '@inertiajs/vue3'
 
-  const form = useHttp({
-      likes: 0,
-  })
+const form = useHttp({
+    likes: 0,
+})
 
-  form.optimistic((data) => ({
-      likes: data.likes + 1,
-  })).post('/api/likes')
-  ```
+form.optimistic((data) => ({
+    likes: data.likes + 1,
+})).post('/api/likes')
+```
 
-  ```js React icon="react" theme={null}
-  import { useHttp } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { useHttp } from '@inertiajs/react'
 
-  const { optimistic, post } = useHttp({
-      likes: 0,
-  })
+const { optimistic, post } = useHttp({
+    likes: 0,
+})
 
-  optimistic((data) => ({
-      likes: data.likes + 1,
-  }))
-  post('/api/likes')
-  ```
+optimistic((data) => ({
+    likes: data.likes + 1,
+}))
+post('/api/likes')
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { useHttp } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { useHttp } from '@inertiajs/svelte'
 
-  const form = useHttp({
-      likes: 0,
-  })
+const form = useHttp({
+    likes: 0,
+})
 
-  form.optimistic((data) => ({
-      likes: data.likes + 1,
-  })).post('/api/likes')
-  ```
-</CodeGroup>
+form.optimistic((data) => ({
+    likes: data.likes + 1,
+})).post('/api/likes')
+```
 
 ## How It Works
 
@@ -307,37 +228,35 @@ Multiple optimistic requests may be in flight at the same time. Inertia tracks w
 
 You may also pass the optimistic callback directly in the visit options instead of chaining.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.post(`/posts/${post.id}/like`, {}, {
-      optimistic: (props) => ({
-          post: { ...props.post, likes: props.post.likes + 1 },
-      }),
-  })
-  ```
+router.post(`/posts/${post.id}/like`, {}, {
+    optimistic: (props) => ({
+        post: { ...props.post, likes: props.post.likes + 1 },
+    }),
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.post(`/posts/${post.id}/like`, {}, {
-      optimistic: (props) => ({
-          post: { ...props.post, likes: props.post.likes + 1 },
-      }),
-  })
-  ```
+router.post(`/posts/${post.id}/like`, {}, {
+    optimistic: (props) => ({
+        post: { ...props.post, likes: props.post.likes + 1 },
+    }),
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.post(`/posts/${post.id}/like`, {}, {
-      optimistic: (props) => ({
-          post: { ...props.post, likes: props.post.likes + 1 },
-      }),
-  })
-  ```
-</CodeGroup>
+router.post(`/posts/${post.id}/like`, {}, {
+    optimistic: (props) => ({
+        post: { ...props.post, likes: props.post.likes + 1 },
+    }),
+})
+```
 
 The inline option works with `useHttp` submit methods as well.
 

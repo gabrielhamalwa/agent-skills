@@ -1,76 +1,5 @@
 # Server-Side Rendering (SSR)
 
-export const VueSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return "Vue";
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || "Vue";
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (code !== "Vue") {
-    return null;
-  }
-  return children;
-};
-
-export const SvelteSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || null;
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (!code?.includes("Svelte")) {
-    return null;
-  }
-  return children;
-};
-
-export const ReactSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || null;
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (code !== "React") {
-    return null;
-  }
-  return children;
-};
-
-export const ClientSpecific = ({children}) => {
-  const [nada, setNada] = useState();
-  return children;
-};
-
 Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to receive fully rendered HTML when they visit your application. Since fully rendered HTML is served by your application, it's also easier for search engines to index your site.
 
 Server-side rendering uses Node.js to render your pages in a background process; therefore, Node must be available on your server for server-side rendering to function properly. Inertia's SSR server requires Node.js 22 or higher.
@@ -85,68 +14,66 @@ npm run build:ssr
 
 ## Vite Plugin Setup
 
-The recommended way to configure SSR is with the [`@inertiajs/vite` plugin](/docs/v3/installation/client-side-setup#installation). This approach handles SSR configuration automatically, including development mode SSR without a separate Node.js server.
+The recommended way to configure SSR is with the [`@inertiajs/vite` plugin](https://inertiajs.com/docs/v3/installation/client-side-setup#installation). This approach handles SSR configuration automatically, including development mode SSR without a separate Node.js server.
 
-<Steps>
-  <Step title="Install the Vite plugin">
-    ```bash theme={null}
-    npm install @inertiajs/vite
-    ```
-  </Step>
+**1. Install the Vite plugin**
 
-  <Step title="Configure Vite">
-    Add the Inertia plugin to your `vite.config.js` file. The plugin will automatically detect your SSR entry point.
+```bash theme={null}
+npm install @inertiajs/vite
+```
 
-    ```js vite.config.js theme={null}
-    import inertia from '@inertiajs/vite'
-    import laravel from 'laravel-vite-plugin'
-    import { defineConfig } from 'vite'
+**2. Configure Vite**
 
-    export default defineConfig({
-        plugins: [
-            laravel({
-                input: ['resources/js/app.js'],
-                refresh: true,
-            }),
-            inertia(),
-        ],
-    })
-    ```
+Add the Inertia plugin to your `vite.config.js` file. The plugin will automatically detect your SSR entry point.
 
-    You may also configure SSR options explicitly.
+```js vite.config.js theme={null}
+import inertia from '@inertiajs/vite'
+import laravel from 'laravel-vite-plugin'
+import { defineConfig } from 'vite'
 
-    ```js vite.config.js theme={null}
-    inertia({
-        ssr: {
-            entry: 'resources/js/ssr.js',
-            port: 13714,
-            host: '127.0.0.1',
-            cluster: true,
-        },
-    })
-    ```
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            refresh: true,
+        }),
+        inertia(),
+    ],
+})
+```
 
-    You may pass `false` to opt out of the plugin's automatic SSR handling, for example if you prefer to [configure SSR manually](#manual-setup) or [disable SSR entirely](#disabling-ssr).
+You may also configure SSR options explicitly.
 
-    ```js vite.config.js theme={null}
-    inertia({
-        ssr: false,
-    })
-    ```
-  </Step>
-
-  <Step title="Update your build script">
-    Update the `build` script in your `package.json` to build both bundles.
-
-    ```json package.json theme={null}
-    "scripts": {
-        "dev": "vite",
-       "build": "vite build" // [!code --]
-       "build": "vite build && vite build --ssr" // [!code ++]
+```js vite.config.js theme={null}
+inertia({
+    ssr: {
+        entry: 'resources/js/ssr.js',
+        port: 13714,
+        host: '127.0.0.1',
+        cluster: true,
     },
-    ```
-  </Step>
-</Steps>
+})
+```
+
+You may pass `false` to opt out of the plugin's automatic SSR handling, for example if you prefer to [configure SSR manually](#manual-setup) or [disable SSR entirely](#disabling-ssr).
+
+```js vite.config.js theme={null}
+inertia({
+    ssr: false,
+})
+```
+
+**3. Update your build script**
+
+Update the `build` script in your `package.json` to build both bundles.
+
+```json package.json theme={null}
+"scripts": {
+    "dev": "vite",
+   "build": "vite build" // [!code --]
+   "build": "vite build && vite build --ssr" // [!code ++]
+},
+```
 
 ### Development Mode
 
@@ -193,261 +120,251 @@ inertia({
 
 ## Manual Setup
 
-The Vite plugin reuses your `app.js` entry point for SSR by default, so no separate file is needed. Most customizations may be handled using the [`withApp` callback](/docs/v3/installation/client-side-setup#customizing-the-app).
+The Vite plugin reuses your `app.js` entry point for SSR by default, so no separate file is needed. Most customizations may be handled using the [`withApp` callback](https://inertiajs.com/docs/v3/installation/client-side-setup#customizing-the-app).
 
-For more control, such as providing a [manual `setup` callback](/docs/v3/installation/client-side-setup#manual-setup), you may create a separate `resources/js/ssr.js` entry point and update your `app.js` to use [client-side hydration](#client-side-hydration).
+For more control, such as providing a [manual `setup` callback](https://inertiajs.com/docs/v3/installation/client-side-setup#manual-setup), you may create a separate `resources/js/ssr.js` entry point and update your `app.js` to use [client-side hydration](#client-side-hydration).
 
 ### SSR Entry Point
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { createInertiaApp } from '@inertiajs/vue3'
-  import createServer from '@inertiajs/vue3/server'
-  import { createSSRApp, h } from 'vue'
-  import { renderToString } from 'vue/server-renderer'
+```js Vue icon="vuejs" theme={null}
+import { createInertiaApp } from '@inertiajs/vue3'
+import createServer from '@inertiajs/vue3/server'
+import { createSSRApp, h } from 'vue'
+import { renderToString } from 'vue/server-renderer'
 
-  createServer(page =>
-      createInertiaApp({
-          page,
-          render: renderToString,
-          resolve: name => {
-              const pages = import.meta.glob('./Pages/**/*.vue')
-              return pages[`./Pages/${name}.vue`]()
-          },
-          setup({ App, props, plugin }) {
-              return createSSRApp({
-                  render: () => h(App, props),
-              }).use(plugin)
-          },
-      }),
-  )
-  ```
+createServer(page =>
+    createInertiaApp({
+        page,
+        render: renderToString,
+        resolve: name => {
+            const pages = import.meta.glob('./Pages/**/*.vue')
+            return pages[`./Pages/${name}.vue`]()
+        },
+        setup({ App, props, plugin }) {
+            return createSSRApp({
+                render: () => h(App, props),
+            }).use(plugin)
+        },
+    }),
+)
+```
 
-  ```jsx React icon="react" theme={null}
-  import { createInertiaApp } from '@inertiajs/react'
-  import createServer from '@inertiajs/react/server'
-  import ReactDOMServer from 'react-dom/server'
+```jsx React icon="react" theme={null}
+import { createInertiaApp } from '@inertiajs/react'
+import createServer from '@inertiajs/react/server'
+import ReactDOMServer from 'react-dom/server'
 
-  createServer(page =>
-      createInertiaApp({
-          page,
-          render: ReactDOMServer.renderToString,
-          resolve: name => {
-              const pages = import.meta.glob('./Pages/**/*.jsx')
-              return pages[`./Pages/${name}.jsx`]()
-          },
-          setup: ({ App, props }) => <App {...props} />,
-      }),
-  )
-  ```
+createServer(page =>
+    createInertiaApp({
+        page,
+        render: ReactDOMServer.renderToString,
+        resolve: name => {
+            const pages = import.meta.glob('./Pages/**/*.jsx')
+            return pages[`./Pages/${name}.jsx`]()
+        },
+        setup: ({ App, props }) => <App {...props} />,
+    }),
+)
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { createInertiaApp } from '@inertiajs/svelte'
-  import createServer from '@inertiajs/svelte/server'
-  import { render } from 'svelte/server'
+```js Svelte icon="s" theme={null}
+import { createInertiaApp } from '@inertiajs/svelte'
+import createServer from '@inertiajs/svelte/server'
+import { render } from 'svelte/server'
 
-  createServer(page =>
-      createInertiaApp({
-          page,
-          resolve: name => {
-              const pages = import.meta.glob('./Pages/**/*.svelte')
-              return pages[`./Pages/${name}.svelte`]()
-          },
-          setup({ App, props }) {
-              return render(App, { props })
-          },
-      }),
-  )
-  ```
-</CodeGroup>
+createServer(page =>
+    createInertiaApp({
+        page,
+        resolve: name => {
+            const pages = import.meta.glob('./Pages/**/*.svelte')
+            return pages[`./Pages/${name}.svelte`]()
+        },
+        setup({ App, props }) {
+            return render(App, { props })
+        },
+    }),
+)
+```
 
 Be sure to add anything that's missing from your `app.js` file that makes sense to run in SSR mode, such as plugins or custom mixins.
 
 ### Client-Side Hydration
 
-<ClientSpecific>
-  You should also update your `app.js` to use hydration instead of normal rendering. This allows <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> to pick up the server-rendered HTML and make it interactive without re-rendering it.
-</ClientSpecific>
+You should also update your `app.js` to use hydration instead of normal rendering. This allows VueReactSvelte to pick up the server-rendered HTML and make it interactive without re-rendering it.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { createApp, h } from 'vue' // [!code --]
-  import { createSSRApp, h } from 'vue' // [!code ++]
-  import { createInertiaApp } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { createApp, h } from 'vue' // [!code --]
+import { createSSRApp, h } from 'vue' // [!code ++]
+import { createInertiaApp } from '@inertiajs/vue3'
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.vue')
-          return pages[`./Pages/${name}.vue`]()
-      },
-      setup({ el, App, props, plugin }) {
-      createApp({ render: () => h(App, props) }) // [!code --]
-      createSSRApp({ render: () => h(App, props) }) // [!code ++]
-          .use(plugin)
-          .mount(el)
-      },
-  })
-  ```
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.vue')
+        return pages[`./Pages/${name}.vue`]()
+    },
+    setup({ el, App, props, plugin }) {
+    createApp({ render: () => h(App, props) }) // [!code --]
+    createSSRApp({ render: () => h(App, props) }) // [!code ++]
+        .use(plugin)
+        .mount(el)
+    },
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { createInertiaApp } from '@inertiajs/react'
-  import { createRoot } from 'react-dom/client' // [!code --]
-  import { hydrateRoot } from 'react-dom/client' // [!code ++]
+```js React icon="react" theme={null}
+import { createInertiaApp } from '@inertiajs/react'
+import { createRoot } from 'react-dom/client' // [!code --]
+import { hydrateRoot } from 'react-dom/client' // [!code ++]
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.jsx')
-          return pages[`./Pages/${name}.jsx`]()
-      },
-      setup({ el, App, props }) {
-          createRoot(el).render(<App {...props} />) // [!code --]
-          hydrateRoot(el, <App {...props} />) // [!code ++]
-      },
-  })
-  ```
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.jsx')
+        return pages[`./Pages/${name}.jsx`]()
+    },
+    setup({ el, App, props }) {
+        createRoot(el).render(<App {...props} />) // [!code --]
+        hydrateRoot(el, <App {...props} />) // [!code ++]
+    },
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { createInertiaApp } from '@inertiajs/svelte'
-  import { mount } from 'svelte' // [!code --]
-  import { hydrate, mount } from 'svelte' // [!code ++]
+```js Svelte icon="s" theme={null}
+import { createInertiaApp } from '@inertiajs/svelte'
+import { mount } from 'svelte' // [!code --]
+import { hydrate, mount } from 'svelte' // [!code ++]
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.svelte')
-          return pages[`./Pages/${name}.svelte`]()
-      },
-      setup({ el, App, props }) {
-          mount(App, { target: el, props }) // [!code --]
-          if (el.dataset.serverRendered === 'true') { // [!code ++:5]
-              hydrate(App, { target: el, props })
-          } else {
-              mount(App, { target: el, props })
-          }
-      },
-  })
-  ```
-</CodeGroup>
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.svelte')
+        return pages[`./Pages/${name}.svelte`]()
+    },
+    setup({ el, App, props }) {
+        mount(App, { target: el, props }) // [!code --]
+        if (el.dataset.serverRendered === 'true') { // [!code ++:5]
+            hydrate(App, { target: el, props })
+        } else {
+            mount(App, { target: el, props })
+        }
+    },
+})
+```
 
 ### Opting Out of the Vite Plugin
 
 You may pass `ssr: false` to the Inertia plugin to disable its automatic SSR handling and manage the SSR build yourself. You should also add the `ssr` property to the Laravel Vite plugin configuration so it knows about your entry point.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" vite.config.js theme={null}
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.js'],
-              ssr: 'resources/js/ssr.js', // [!code ++]
-              refresh: true,
-          }),
-          inertia({
-              ssr: false, // [!code ++]
-          }),
-      ],
-  })
-  ```
+```js Vue icon="vuejs" vite.config.js theme={null}
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            ssr: 'resources/js/ssr.js', // [!code ++]
+            refresh: true,
+        }),
+        inertia({
+            ssr: false, // [!code ++]
+        }),
+    ],
+})
+```
 
-  ```js React icon="react" vite.config.js theme={null}
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.jsx'],
-              ssr: 'resources/js/ssr.jsx', // [!code ++]
-              refresh: true,
-          }),
-          inertia({
-              ssr: false, // [!code ++]
-          }),
-      ],
-  })
-  ```
+```js React icon="react" vite.config.js theme={null}
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.jsx'],
+            ssr: 'resources/js/ssr.jsx', // [!code ++]
+            refresh: true,
+        }),
+        inertia({
+            ssr: false, // [!code ++]
+        }),
+    ],
+})
+```
 
-  ```js Svelte icon="s" vite.config.js theme={null}
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.js'],
-              ssr: 'resources/js/ssr.js', // [!code ++]
-              refresh: true,
-          }),
-          inertia({
-              ssr: false, // [!code ++]
-          }),
-      ],
-  })
-  ```
-</CodeGroup>
+```js Svelte icon="s" vite.config.js theme={null}
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            ssr: 'resources/js/ssr.js', // [!code ++]
+            refresh: true,
+        }),
+        inertia({
+            ssr: false, // [!code ++]
+        }),
+    ],
+})
+```
 
 ### Clustering
 
 You may pass the `cluster` option to `createServer` to start multiple Node servers on the same port, with requests handled by each thread in a round-robin fashion.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { cluster: true },
-  )
-  ```
+```js Vue icon="vuejs" theme={null}
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { cluster: true },
+)
+```
 
-  ```jsx React icon="react" theme={null}
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { cluster: true },
-  )
-  ```
+```jsx React icon="react" theme={null}
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { cluster: true },
+)
+```
 
-  ```js Svelte icon="s" theme={null}
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { cluster: true },
-  )
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { cluster: true },
+)
+```
 
 ### Host
 
 By default, the SSR server binds to `0.0.0.0`, making it accessible on all network interfaces. You may pass the `host` option to `createServer` to restrict it to a specific interface.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { host: '127.0.0.1' },
-  )
-  ```
+```js Vue icon="vuejs" theme={null}
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { host: '127.0.0.1' },
+)
+```
 
-  ```jsx React icon="react" theme={null}
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { host: '127.0.0.1' },
-  )
-  ```
+```jsx React icon="react" theme={null}
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { host: '127.0.0.1' },
+)
+```
 
-  ```js Svelte icon="s" theme={null}
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { host: '127.0.0.1' },
-  )
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { host: '127.0.0.1' },
+)
+```
 
 ## Running the SSR Server
 
-<Note>The SSR server is only required in production. During development, the [Vite plugin](#development-mode) handles SSR automatically.</Note>
+> [!NOTE]
+>
+> The SSR server is only required in production. During development, the [Vite plugin](#development-mode) handles SSR automatically.
 
 Once you have built both your client-side and server-side bundles, you may start the SSR server using the following Artisan command.
 
@@ -508,7 +425,9 @@ You may set the `throw_on_error` option in your `config/inertia.php` file to thr
 ],
 ```
 
-<Warning>This option is not recommended for production, as it will cause SSR failures to return an error response instead of falling back to client-side rendering.</Warning>
+> [!WARNING]
+>
+> This option is not recommended for production, as it will cause SSR failures to return an error response instead of falling back to client-side rendering.
 
 You may set the environment variable in your `phpunit.xml` to enable this only during testing.
 
@@ -518,7 +437,7 @@ You may set the environment variable in your `phpunit.xml` to enable this only d
 
 ## Configuring the SSR Request
 
-<Badge>Laravel Adapter v3.4.0+</Badge>
+Laravel Adapter v3.4.0+
 
 The request to the SSR server uses Laravel's HTTP client defaults. You may set the `timeout` option in your `config/inertia.php` file so a slow or unresponsive SSR server doesn't delay your responses, as Inertia falls back to client-side rendering when the request fails.
 
@@ -539,7 +458,9 @@ Inertia::configureSsrRequestUsing(function (PendingRequest $request) {
 });
 ```
 
-<Note>When using `retry()`, pass `throw: false` so failed renders are still reported with the error details from the SSR server.</Note>
+> [!NOTE]
+>
+> When using `retry()`, pass `throw: false` so failed renders are still reported with the error details from the SSR server.
 
 Both the timeout and the callback apply to the render request and the health check used by the [`inertia:check-ssr`](#deployment) command.
 
@@ -559,7 +480,7 @@ inertia({
 ],
 ```
 
-You may also prevent the Laravel adapter from dispatching SSR requests programmatically using the `Inertia::disableSsr()` method. This is useful when you want to keep SSR in your build but [disable it during tests](/docs/v3/advanced/testing#disabling-ssr-during-tests) or in specific environments.
+You may also prevent the Laravel adapter from dispatching SSR requests programmatically using the `Inertia::disableSsr()` method. This is useful when you want to keep SSR in your build but [disable it during tests](https://inertiajs.com/docs/v3/advanced/testing.md#disabling-ssr-during-tests) or in specific environments.
 
 ```php theme={null}
 use Inertia\Inertia;
@@ -622,66 +543,62 @@ if (request()->is('admin/*')) {
 
 ## Client-Only Components
 
-<Badge>v3.8.0+</Badge>
+v3.8.0+
 
 Sometimes, a component relies on browser APIs such as `window` or `document` and cannot be rendered on the server. Instead of disabling SSR for the entire page, you may wrap the component in `WhenMounted`, which renders its children only after mounting in the browser. The `fallback` is rendered on the server and during hydration instead.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { WhenMounted } from "@inertiajs/vue3";
-  import Chart from "@/Components/Chart.vue";
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { WhenMounted } from "@inertiajs/vue3";
+import Chart from "@/Components/Chart.vue";
+</script>
 
-  <template>
-    <WhenMounted>
-      <template #fallback>
-        <div>Loading chart...</div>
-      </template>
-
-      <Chart />
-    </WhenMounted>
-  </template>
-  ```
-
-  ```jsx React icon="react" theme={null}
-  import { WhenMounted } from "@inertiajs/react";
-  import Chart from "@/Components/Chart";
-
-  export default () => (
-    <WhenMounted fallback={<div>Loading chart...</div>}>
-      <Chart />
-    </WhenMounted>
-  );
-  ```
-
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-    import { WhenMounted } from "@inertiajs/svelte";
-    import Chart from "@/Components/Chart.svelte";
-  </script>
-
+<template>
   <WhenMounted>
-    {#snippet fallback()}
+    <template #fallback>
       <div>Loading chart...</div>
-    {/snippet}
+    </template>
 
     <Chart />
   </WhenMounted>
-  ```
-</CodeGroup>
+</template>
+```
+
+```jsx React icon="react" theme={null}
+import { WhenMounted } from "@inertiajs/react";
+import Chart from "@/Components/Chart";
+
+export default () => (
+  <WhenMounted fallback={<div>Loading chart...</div>}>
+    <Chart />
+  </WhenMounted>
+);
+```
+
+```svelte Svelte icon="s" theme={null}
+<script>
+  import { WhenMounted } from "@inertiajs/svelte";
+  import Chart from "@/Components/Chart.svelte";
+</script>
+
+<WhenMounted>
+  {#snippet fallback()}
+    <div>Loading chart...</div>
+  {/snippet}
+
+  <Chart />
+</WhenMounted>
+```
 
 The fallback only appears on the initial server-rendered page load. Subsequent visits, as well as applications not using SSR, render the children immediately.
 
-<ReactSpecific>
-  JSX children are evaluated before `WhenMounted` renders, so expressions that access `window` directly still run on the server. You may pass a function as the children to defer their evaluation until the component mounts.
+JSX children are evaluated before `WhenMounted` renders, so expressions that access `window` directly still run on the server. You may pass a function as the children to defer their evaluation until the component mounts.
 
-  ```jsx theme={null}
-  <WhenMounted fallback={<div>Loading chart...</div>}>
-    {() => <Chart width={window.innerWidth} />}
-  </WhenMounted>
-  ```
-</ReactSpecific>
+```jsx theme={null}
+<WhenMounted fallback={<div>Loading chart...</div>}>
+  {() => <Chart width={window.innerWidth} />}
+</WhenMounted>
+```
 
 Note that `WhenMounted` only skips rendering on the server. The wrapped component is still part of your SSR bundle, so its module must be safe to import on the server.
 
@@ -699,7 +616,7 @@ To stop the SSR server, for instance when you deploy a new version of your websi
 php artisan inertia:stop-ssr
 ```
 
-<Badge>Laravel Adapter v3.4.0+</Badge>
+Laravel Adapter v3.4.0+
 
 By default, the command fails when the SSR server is not running. You may pass the `--graceful` option to return a successful exit code instead, making it ideal for deployment scripts where the SSR server is not yet running.
 

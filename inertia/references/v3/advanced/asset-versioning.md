@@ -35,15 +35,15 @@ With Laravel's Vite integration, asset versioning is done automatically. If you'
 
 ## Background Requests
 
-<Badge>v3.6.0+</Badge>
+v3.6.0+
 
-A version change detected on a background request, such as polling or a `router.reload()`, does not force a full-page navigation. Reloading a request the user never initiated could wipe out unsaved state, so the current page stays untouched and the next user-initiated visit picks up the new assets. You may hook into the [`location` event](/docs/v3/advanced/events#location) to detect an asset version change and show a notification instead of reloading.
+A version change detected on a background request, such as polling or a `router.reload()`, does not force a full-page navigation. Reloading a request the user never initiated could wipe out unsaved state, so the current page stays untouched and the next user-initiated visit picks up the new assets. You may hook into the [`location` event](https://inertiajs.com/docs/v3/advanced/events#location) to detect an asset version change and show a notification instead of reloading.
 
 ## Manual Refreshing
 
 If you want to take control of asset refreshing, you can return a fixed value from the `version` method in the `HandleInertiaRequests` middleware. This disables Inertia's automatic asset versioning.
 
-For example, if you want to notify users when a new version of your front end is available, you can still expose the actual asset version to the front end by including it as [shared data](/docs/v3/data-props/shared-data).
+For example, if you want to notify users when a new version of your front end is available, you can still expose the actual asset version to the front end by including it as [shared data](https://inertiajs.com/docs/v3/data-props/shared-data.md).
 
 ```php theme={null}
 class HandleInertiaRequests extends Middleware

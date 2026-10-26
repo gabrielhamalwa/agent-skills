@@ -1,6 +1,8 @@
 # Upgrade Guide for v1.0
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 You can find the legacy docs for Inertia.js v0.11 at [legacy.inertiajs.com](https://legacy.inertiajs.com).
 
@@ -20,43 +22,39 @@ To use previous Inertia releases, you had to install a number of libraries, incl
 
 To get started, remove *all* of the old Inertia libraries.
 
-<CodeGroup>
-  ```bash Vue 2 theme={null}
-  npm remove @inertiajs/inertia @inertiajs/inertia-vue @inertiajs/progress @inertiajs/server
-  ```
+```bash Vue 2 theme={null}
+npm remove @inertiajs/inertia @inertiajs/inertia-vue @inertiajs/progress @inertiajs/server
+```
 
-  ```bash Vue 3 theme={null}
-  npm remove @inertiajs/inertia @inertiajs/inertia-vue3 @inertiajs/progress @inertiajs/server
-  ```
+```bash Vue 3 theme={null}
+npm remove @inertiajs/inertia @inertiajs/inertia-vue3 @inertiajs/progress @inertiajs/server
+```
 
-  ```bash React icon="react" theme={null}
-  npm remove @inertiajs/inertia @inertiajs/inertia-react @inertiajs/progress @inertiajs/server
-  ```
+```bash React icon="react" theme={null}
+npm remove @inertiajs/inertia @inertiajs/inertia-react @inertiajs/progress @inertiajs/server
+```
 
-  ```bash Svelte icon="s" theme={null}
-  npm remove @inertiajs/inertia @inertiajs/inertia-svelte @inertiajs/progress @inertiajs/server
-  ```
-</CodeGroup>
+```bash Svelte icon="s" theme={null}
+npm remove @inertiajs/inertia @inertiajs/inertia-svelte @inertiajs/progress @inertiajs/server
+```
 
 Next, install the new Inertia adapter of your choice. The new adapter libraries have been renamed, and no longer include `inertia-` in them.
 
-<CodeGroup>
-  ```bash Vue 2 theme={null}
-  npm install @inertiajs/vue2
-  ```
+```bash Vue 2 theme={null}
+npm install @inertiajs/vue2
+```
 
-  ```bash Vue 3 theme={null}
-  npm install @inertiajs/vue3
-  ```
+```bash Vue 3 theme={null}
+npm install @inertiajs/vue3
+```
 
-  ```bash React icon="react" theme={null}
-  npm install @inertiajs/react
-  ```
+```bash React icon="react" theme={null}
+npm install @inertiajs/react
+```
 
-  ```bash Svelte icon="s" theme={null}
-  npm install @inertiajs/svelte
-  ```
-</CodeGroup>
+```bash Svelte icon="s" theme={null}
+npm install @inertiajs/svelte
+```
 
 ## Renamed Imports
 
@@ -66,128 +64,126 @@ Additionally, some exports have been renamed and previously deprecated exports h
 
 Here is a complete list of all the import changes:
 
-<CodeGroup>
-  ```js Vue 2 theme={null}
-  import { Inertia } from '@inertiajs/inertia' // [!code --]
-  import { router } from '@inertiajs/vue2' // [!code ++]
+```js Vue 2 theme={null}
+import { Inertia } from '@inertiajs/inertia' // [!code --]
+import { router } from '@inertiajs/vue2' // [!code ++]
 
-  import createServer from '@inertiajs/server' // [!code --]
-  import createServer from '@inertiajs/vue2/server' // [!code ++]
+import createServer from '@inertiajs/server' // [!code --]
+import createServer from '@inertiajs/vue2/server' // [!code ++]
 
-  import { createInertiaApp } from '@inertiajs/inertia-vue' // [!code --:5]
-  import { App } from '@inertiajs/inertia-vue'
-  import { app } from '@inertiajs/inertia-vue'
-  import { InertiaApp } from '@inertiajs/inertia-vue'
-  import { plugin } from '@inertiajs/inertia-vue'
-  import { createInertiaApp } from '@inertiajs/vue2' // [!code ++]
+import { createInertiaApp } from '@inertiajs/inertia-vue' // [!code --:5]
+import { App } from '@inertiajs/inertia-vue'
+import { app } from '@inertiajs/inertia-vue'
+import { InertiaApp } from '@inertiajs/inertia-vue'
+import { plugin } from '@inertiajs/inertia-vue'
+import { createInertiaApp } from '@inertiajs/vue2' // [!code ++]
 
-  import { Head } from '@inertiajs/inertia-vue' // [!code --:2]
-  import { InertiaHead } from '@inertiajs/inertia-vue'
-  import { Head } from '@inertiajs/vue2' // [!code ++]
+import { Head } from '@inertiajs/inertia-vue' // [!code --:2]
+import { InertiaHead } from '@inertiajs/inertia-vue'
+import { Head } from '@inertiajs/vue2' // [!code ++]
 
-  import { Link } from '@inertiajs/inertia-vue' // [!code --:3]
-  import { link } from '@inertiajs/inertia-vue'
-  import { InertiaLink } from '@inertiajs/inertia-vue'
-  import { Link } from '@inertiajs/vue2' // [!code ++]
-  ```
+import { Link } from '@inertiajs/inertia-vue' // [!code --:3]
+import { link } from '@inertiajs/inertia-vue'
+import { InertiaLink } from '@inertiajs/inertia-vue'
+import { Link } from '@inertiajs/vue2' // [!code ++]
+```
 
-  ```js Vue 3 theme={null}
-  import { Inertia } from '@inertiajs/inertia' // [!code --]
-  import { router } from '@inertiajs/vue3' // [!code ++]
+```js Vue 3 theme={null}
+import { Inertia } from '@inertiajs/inertia' // [!code --]
+import { router } from '@inertiajs/vue3' // [!code ++]
 
-  import createServer from '@inertiajs/server' // [!code --]
-  import createServer from '@inertiajs/vue3/server' // [!code ++]
+import createServer from '@inertiajs/server' // [!code --]
+import createServer from '@inertiajs/vue3/server' // [!code ++]
 
-  import { createInertiaApp } from '@inertiajs/inertia-vue3' // [!code --:5]
-  import { App } from '@inertiajs/inertia-vue3'
-  import { app } from '@inertiajs/inertia-vue3'
-  import { plugin } from '@inertiajs/inertia-vue3'
-  import { InertiaApp } from '@inertiajs/inertia-vue3'
-  import { createInertiaApp } from '@inertiajs/vue3' // [!code ++]
+import { createInertiaApp } from '@inertiajs/inertia-vue3' // [!code --:5]
+import { App } from '@inertiajs/inertia-vue3'
+import { app } from '@inertiajs/inertia-vue3'
+import { plugin } from '@inertiajs/inertia-vue3'
+import { InertiaApp } from '@inertiajs/inertia-vue3'
+import { createInertiaApp } from '@inertiajs/vue3' // [!code ++]
 
-  import { usePage } from '@inertiajs/inertia-vue3' // [!code --]
-  import { usePage } from '@inertiajs/vue3' // [!code ++]
+import { usePage } from '@inertiajs/inertia-vue3' // [!code --]
+import { usePage } from '@inertiajs/vue3' // [!code ++]
 
-  import { useForm } from '@inertiajs/inertia-vue3' // [!code --]
-  import { useForm } from '@inertiajs/vue3' // [!code ++]
+import { useForm } from '@inertiajs/inertia-vue3' // [!code --]
+import { useForm } from '@inertiajs/vue3' // [!code ++]
 
-  import { useRemember } from '@inertiajs/inertia-vue3' // [!code --]
-  import { useRemember } from '@inertiajs/vue3' // [!code ++]
+import { useRemember } from '@inertiajs/inertia-vue3' // [!code --]
+import { useRemember } from '@inertiajs/vue3' // [!code ++]
 
-  import { Head } from '@inertiajs/inertia-vue3' // [!code --:2]
-  import { InertiaHead } from '@inertiajs/inertia-vue3'
-  import { Head } from '@inertiajs/vue3' // [!code ++]
+import { Head } from '@inertiajs/inertia-vue3' // [!code --:2]
+import { InertiaHead } from '@inertiajs/inertia-vue3'
+import { Head } from '@inertiajs/vue3' // [!code ++]
 
-  import { Link } from '@inertiajs/inertia-vue3' // [!code --:3]
-  import { link } from '@inertiajs/inertia-vue3'
-  import { InertiaLink } from '@inertiajs/inertia-vue3'
-  import { Link } from '@inertiajs/vue3' // [!code ++]
-  ```
+import { Link } from '@inertiajs/inertia-vue3' // [!code --:3]
+import { link } from '@inertiajs/inertia-vue3'
+import { InertiaLink } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/vue3' // [!code ++]
+```
 
-  ```js React icon="react" theme={null}
-  import { Inertia } from '@inertiajs/inertia' // [!code --]
-  import { router } from '@inertiajs/react' // [!code ++]
+```js React icon="react" theme={null}
+import { Inertia } from '@inertiajs/inertia' // [!code --]
+import { router } from '@inertiajs/react' // [!code ++]
 
-  import createServer from '@inertiajs/server' // [!code --]
-  import createServer from '@inertiajs/react/server' // [!code ++]
+import createServer from '@inertiajs/server' // [!code --]
+import createServer from '@inertiajs/react/server' // [!code ++]
 
-  import { createInertiaApp } from '@inertiajs/inertia-react' // [!code --:4]
-  import { App } from '@inertiajs/inertia-react'
-  import { app } from '@inertiajs/inertia-react'
-  import { InertiaApp } from '@inertiajs/inertia-react'
-  import { createInertiaApp } from '@inertiajs/react' // [!code ++]
+import { createInertiaApp } from '@inertiajs/inertia-react' // [!code --:4]
+import { App } from '@inertiajs/inertia-react'
+import { app } from '@inertiajs/inertia-react'
+import { InertiaApp } from '@inertiajs/inertia-react'
+import { createInertiaApp } from '@inertiajs/react' // [!code ++]
 
-  import { usePage } from '@inertiajs/inertia-react' // [!code --]
-  import { usePage } from '@inertiajs/react' // [!code ++]
+import { usePage } from '@inertiajs/inertia-react' // [!code --]
+import { usePage } from '@inertiajs/react' // [!code ++]
 
-  import { useForm } from '@inertiajs/inertia-react' // [!code --]
-  import { useForm } from '@inertiajs/react' // [!code ++]
+import { useForm } from '@inertiajs/inertia-react' // [!code --]
+import { useForm } from '@inertiajs/react' // [!code ++]
 
-  import { useRemember } from '@inertiajs/inertia-react' // [!code --:2]
-  import { useRememberedState } from '@inertiajs/inertia-react'
-  import { useRemember } from '@inertiajs/react' // [!code ++]
+import { useRemember } from '@inertiajs/inertia-react' // [!code --:2]
+import { useRememberedState } from '@inertiajs/inertia-react'
+import { useRemember } from '@inertiajs/react' // [!code ++]
 
-  import { Head } from '@inertiajs/inertia-react' // [!code --:2]
-  import { InertiaHead } from '@inertiajs/inertia-react'
-  import { Head } from '@inertiajs/react' // [!code ++]
+import { Head } from '@inertiajs/inertia-react' // [!code --:2]
+import { InertiaHead } from '@inertiajs/inertia-react'
+import { Head } from '@inertiajs/react' // [!code ++]
 
-  import { Link } from '@inertiajs/inertia-react' // [!code --:3]
-  import { link } from '@inertiajs/inertia-react'
-  import { InertiaLink } from '@inertiajs/inertia-react'
-  import { Link } from '@inertiajs/react' // [!code ++]
-  ```
+import { Link } from '@inertiajs/inertia-react' // [!code --:3]
+import { link } from '@inertiajs/inertia-react'
+import { InertiaLink } from '@inertiajs/inertia-react'
+import { Link } from '@inertiajs/react' // [!code ++]
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { Inertia } from '@inertiajs/inertia' // [!code --]
-  import { router } from '@inertiajs/svelte' // [!code ++]
+```js Svelte icon="s" theme={null}
+import { Inertia } from '@inertiajs/inertia' // [!code --]
+import { router } from '@inertiajs/svelte' // [!code ++]
 
-  import { createInertiaApp } from '@inertiajs/inertia-svelte' // [!code --:4]
-  import { App } from '@inertiajs/inertia-svelte'
-  import { app } from '@inertiajs/inertia-svelte'
-  import { InertiaApp } from '@inertiajs/inertia-svelte'
-  import { createInertiaApp } from '@inertiajs/svelte' // [!code ++]
+import { createInertiaApp } from '@inertiajs/inertia-svelte' // [!code --:4]
+import { App } from '@inertiajs/inertia-svelte'
+import { app } from '@inertiajs/inertia-svelte'
+import { InertiaApp } from '@inertiajs/inertia-svelte'
+import { createInertiaApp } from '@inertiajs/svelte' // [!code ++]
 
-  import { page } from '@inertiajs/inertia-svelte' // [!code --]
-  import { page } from '@inertiajs/svelte' // [!code ++]
+import { page } from '@inertiajs/inertia-svelte' // [!code --]
+import { page } from '@inertiajs/svelte' // [!code ++]
 
-  import { inertia } from '@inertiajs/inertia-svelte' // [!code --]
-  import { inertia } from '@inertiajs/svelte' // [!code ++]
+import { inertia } from '@inertiajs/inertia-svelte' // [!code --]
+import { inertia } from '@inertiajs/svelte' // [!code ++]
 
-  import { useForm } from '@inertiajs/inertia-svelte' // [!code --]
-  import { useForm } from '@inertiajs/svelte' // [!code ++]
+import { useForm } from '@inertiajs/inertia-svelte' // [!code --]
+import { useForm } from '@inertiajs/svelte' // [!code ++]
 
-  import { useRemember } from '@inertiajs/inertia-svelte' // [!code --:2]
-  import { remember } from '@inertiajs/inertia-svelte'
-  import { remember } from '@inertiajs/svelte' // [!code ++]
+import { useRemember } from '@inertiajs/inertia-svelte' // [!code --:2]
+import { remember } from '@inertiajs/inertia-svelte'
+import { remember } from '@inertiajs/svelte' // [!code ++]
 
-  import { Link } from '@inertiajs/inertia-svelte' // [!code --:3]
-  import { link } from '@inertiajs/inertia-svelte'
-  import { InertiaLink } from '@inertiajs/inertia-svelte'
-  import { Link } from '@inertiajs/svelte' // [!code ++]
-  ```
-</CodeGroup>
+import { Link } from '@inertiajs/inertia-svelte' // [!code --:3]
+import { link } from '@inertiajs/inertia-svelte'
+import { InertiaLink } from '@inertiajs/inertia-svelte'
+import { Link } from '@inertiajs/svelte' // [!code ++]
+```
 
-It is no longer possible to manually configure Inertia using the `App` export. Instead, you should use the `createInertiaApp()` helper. See the [client-side setup](/docs/client-side-setup#initialize-the-inertia-app) documentation for more information.
+It is no longer possible to manually configure Inertia using the `App` export. Instead, you should use the `createInertiaApp()` helper. See the [client-side setup](https://inertiajs.com/docs/client-side-setup.md#initialize-the-inertia-app) documentation for more information.
 
 ## Progress
 
@@ -195,23 +191,21 @@ Previously, the progress indicator was available as a separate plugin (`@inertia
 
 If you haven't yet, remove the old progress library.
 
-<CodeGroup>
-  ```bash Vue 2 theme={null}
-  npm remove @inertiajs/progress
-  ```
+```bash Vue 2 theme={null}
+npm remove @inertiajs/progress
+```
 
-  ```bash Vue 3 theme={null}
-  npm remove @inertiajs/progress
-  ```
+```bash Vue 3 theme={null}
+npm remove @inertiajs/progress
+```
 
-  ```bash React icon="react" theme={null}
-  npm remove @inertiajs/progress
-  ```
+```bash React icon="react" theme={null}
+npm remove @inertiajs/progress
+```
 
-  ```bash Svelte icon="s" theme={null}
-  npm remove @inertiajs/progress
-  ```
-</CodeGroup>
+```bash Svelte icon="s" theme={null}
+npm remove @inertiajs/progress
+```
 
 Next, remove the `InertiaProgress` import and `InertiaProgress.init()` call, as they are no longer required.
 

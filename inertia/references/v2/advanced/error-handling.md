@@ -1,6 +1,8 @@
 # Error Handling
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 ## Development
 
@@ -14,7 +16,7 @@ Inertia solves this issue by showing all non-Inertia responses in a modal. This 
 
 By default, Inertia displays error modals using a custom `<div>` overlay. However, you can opt-in to using the native HTML `<dialog>` element instead, which provides built-in modal functionality including backdrop handling.
 
-To enable this, configure the `future.useDialogForErrorModal` option in your [application defaults](/docs/v2/installation/client-side-setup#configuring-defaults).
+To enable this, configure the `future.useDialogForErrorModal` option in your [application defaults](https://inertiajs.com/docs/v2/installation/client-side-setup.md#configuring-defaults).
 
 ```js theme={null}
 createInertiaApp({
@@ -59,112 +61,110 @@ use Inertia\Inertia;
 
 You may have noticed we're returning an `ErrorPage` page component in the example above. You'll need to actually create this component, which will serve as the generic error page for your application. Here's an example error component you can use as a starting point.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { computed } from 'vue'
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { computed } from 'vue'
 
-  const props = defineProps({ status: Number })
+const props = defineProps({ status: Number })
 
-  const title = computed(() => {
-      return {
-          503: '503: Service Unavailable',
-          500: '500: Server Error',
-          404: '404: Page Not Found',
-          403: '403: Forbidden',
-      }[props.status]
-  })
+const title = computed(() => {
+    return {
+        503: '503: Service Unavailable',
+        500: '500: Server Error',
+        404: '404: Page Not Found',
+        403: '403: Forbidden',
+    }[props.status]
+})
 
-  const description = computed(() => {
-      return {
-          503: 'Sorry, we are doing some maintenance. Please check back soon.',
-          500: 'Whoops, something went wrong on our servers.',
-          404: 'Sorry, the page you are looking for could not be found.',
-          403: 'Sorry, you are forbidden from accessing this page.',
-      }[props.status]
-  })
-  </script>
+const description = computed(() => {
+    return {
+        503: 'Sorry, we are doing some maintenance. Please check back soon.',
+        500: 'Whoops, something went wrong on our servers.',
+        404: 'Sorry, the page you are looking for could not be found.',
+        403: 'Sorry, you are forbidden from accessing this page.',
+    }[props.status]
+})
+</script>
 
-  <template>
-      <div>
-          <h1>{{ title }}</h1>
-          <div>{{ description }}</div>
-      </div>
-  </template>
-  ```
+<template>
+    <div>
+        <h1>{{ title }}</h1>
+        <div>{{ description }}</div>
+    </div>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  export default function ErrorPage({ status }) {
-      const title = {
-          503: '503: Service Unavailable',
-          500: '500: Server Error',
-          404: '404: Page Not Found',
-          403: '403: Forbidden',
-      }[status]
+```jsx React icon="react" theme={null}
+export default function ErrorPage({ status }) {
+    const title = {
+        503: '503: Service Unavailable',
+        500: '500: Server Error',
+        404: '404: Page Not Found',
+        403: '403: Forbidden',
+    }[status]
 
-      const description = {
-          503: 'Sorry, we are doing some maintenance. Please check back soon.',
-          500: 'Whoops, something went wrong on our servers.',
-          404: 'Sorry, the page you are looking for could not be found.',
-          403: 'Sorry, you are forbidden from accessing this page.',
-      }[status]
+    const description = {
+        503: 'Sorry, we are doing some maintenance. Please check back soon.',
+        500: 'Whoops, something went wrong on our servers.',
+        404: 'Sorry, the page you are looking for could not be found.',
+        403: 'Sorry, you are forbidden from accessing this page.',
+    }[status]
 
-      return (
-          <div>
-              <H1>{title}</H1>
-              <div>{description}</div>
-          </div>
-      )
-  }
-  ```
+    return (
+        <div>
+            <H1>{title}</H1>
+            <div>{description}</div>
+        </div>
+    )
+}
+```
 
-  ```svelte Svelte 4 icon="s" theme={null}
-  <script>
-      export let status
+```svelte Svelte 4 icon="s" theme={null}
+<script>
+    export let status
 
-      $: title = {
-          503: '503: Service Unavailable',
-          500: '500: Server Error',
-          404: '404: Page Not Found',
-          403: '403: Forbidden',
-      }[status]
+    $: title = {
+        503: '503: Service Unavailable',
+        500: '500: Server Error',
+        404: '404: Page Not Found',
+        403: '403: Forbidden',
+    }[status]
 
-      $: description = {
-          503: 'Sorry, we are doing some maintenance. Please check back soon.',
-          500: 'Whoops, something went wrong on our servers.',
-          404: 'Sorry, the page you are looking for could not be found.',
-          403: 'Sorry, you are forbidden from accessing this page.',
-      }[status]
-  </script>
+    $: description = {
+        503: 'Sorry, we are doing some maintenance. Please check back soon.',
+        500: 'Whoops, something went wrong on our servers.',
+        404: 'Sorry, the page you are looking for could not be found.',
+        403: 'Sorry, you are forbidden from accessing this page.',
+    }[status]
+</script>
 
-  <div>
-      <h1>{title}</h1>
-      <div>{description}</div>
-  </div>
-  ```
+<div>
+    <h1>{title}</h1>
+    <div>{description}</div>
+</div>
+```
 
-  ```svelte Svelte 5 icon="s" theme={null}
-  <script>
-      let { status } = $props()
+```svelte Svelte 5 icon="s" theme={null}
+<script>
+    let { status } = $props()
 
-      const title = {
-          503: '503: Service Unavailable',
-          500: '500: Server Error',
-          404: '404: Page Not Found',
-          403: '403: Forbidden',
-      }
+    const title = {
+        503: '503: Service Unavailable',
+        500: '500: Server Error',
+        404: '404: Page Not Found',
+        403: '403: Forbidden',
+    }
 
-      const description = {
-          503: 'Sorry, we are doing some maintenance. Please check back soon.',
-          500: 'Whoops, something went wrong on our servers.',
-          404: 'Sorry, the page you are looking for could not be found.',
-          403: 'Sorry, you are forbidden from accessing this page.',
-      }
-  </script>
+    const description = {
+        503: 'Sorry, we are doing some maintenance. Please check back soon.',
+        500: 'Whoops, something went wrong on our servers.',
+        404: 'Sorry, the page you are looking for could not be found.',
+        403: 'Sorry, you are forbidden from accessing this page.',
+    }
+</script>
 
-  <div>
-      <h1>{title[status]}</h1>
-      <div>{description[status]}</div>
-  </div>
-  ```
-</CodeGroup>
+<div>
+    <h1>{title[status]}</h1>
+    <div>{description[status]}</div>
+</div>
+```

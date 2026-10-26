@@ -1,126 +1,118 @@
 # Prefetching
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 Inertia supports prefetching data for pages that are likely to be visited next. This can be useful for improving the perceived performance of your app by allowing the data to be fetched in the background while the user is still interacting with the current page.
 
 ## Link Prefetching
 
-To prefetch data for a page, you can add the `prefetch` prop to the Inertia link component. By default, Inertia will prefetch the data for the page when the user hovers over the link for more than 75ms. You may customize this hover delay by setting the `prefetch.hoverDelay` option in your [application defaults](/docs/v2/installation/client-side-setup#configuring-defaults).
+To prefetch data for a page, you can add the `prefetch` prop to the Inertia link component. By default, Inertia will prefetch the data for the page when the user hovers over the link for more than 75ms. You may customize this hover delay by setting the `prefetch.hoverDelay` option in your [application defaults](https://inertiajs.com/docs/v2/installation/client-side-setup.md#configuring-defaults).
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users" prefetch>Users</Link>
-  ```
+<Link href="/users" prefetch>Users</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users" prefetch>Users</Link>
-  ```
+<Link href="/users" prefetch>Users</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia } from '@inertiajs/svelte'
 
-  <a href="/users" use:inertia={{ prefetch: true }}>Users</a>
-  ```
-</CodeGroup>
+<a href="/users" use:inertia={{ prefetch: true }}>Users</a>
+```
 
-By default, data is cached for 30 seconds before being evicted. You may customize this default value by setting the `prefetch.cacheFor` option in your [application defaults](/docs/v2/installation/client-side-setup#configuring-defaults). You may also customize the cache duration on a per-link basis by passing a `cacheFor` prop to the `Link` component.
+By default, data is cached for 30 seconds before being evicted. You may customize this default value by setting the `prefetch.cacheFor` option in your [application defaults](https://inertiajs.com/docs/v2/installation/client-side-setup.md#configuring-defaults). You may also customize the cache duration on a per-link basis by passing a `cacheFor` prop to the `Link` component.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users" prefetch cache-for="1m">Users</Link>
-  <Link href="/users" prefetch cache-for="10s">Users</Link>
-  <Link href="/users" prefetch :cache-for="5000">Users</Link>
-  ```
+<Link href="/users" prefetch cache-for="1m">Users</Link>
+<Link href="/users" prefetch cache-for="10s">Users</Link>
+<Link href="/users" prefetch :cache-for="5000">Users</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users" prefetch cacheFor="1m">Users</Link>
-  <Link href="/users" prefetch cacheFor="10s">Users</Link>
-  <Link href="/users" prefetch cacheFor={5000}>Users</Link>
-  ```
+<Link href="/users" prefetch cacheFor="1m">Users</Link>
+<Link href="/users" prefetch cacheFor="10s">Users</Link>
+<Link href="/users" prefetch cacheFor={5000}>Users</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia } from '@inertiajs/svelte'
 
-  <a href="/users" use:inertia={{ prefetch: true, cacheFor: '1m' }}>Users</a>
-  <a href="/users" use:inertia={{ prefetch: true, cacheFor: '10s' }}>Users</a>
-  <a href="/users" use:inertia={{ prefetch: true, cacheFor: 5000 }}>Users</a>
-  ```
-</CodeGroup>
+<a href="/users" use:inertia={{ prefetch: true, cacheFor: '1m' }}>Users</a>
+<a href="/users" use:inertia={{ prefetch: true, cacheFor: '10s' }}>Users</a>
+<a href="/users" use:inertia={{ prefetch: true, cacheFor: 5000 }}>Users</a>
+```
 
 Instead of prefetching on hover, you can also start prefetching on `mousedown` by passing the `click` value to the `prefetch` prop.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users" prefetch="click">Users</Link>
-  ```
+<Link href="/users" prefetch="click">Users</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users" prefetch="click">Users</Link>
-  ```
+<Link href="/users" prefetch="click">Users</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia } from '@inertiajs/svelte'
 
-  <a href="/users" use:inertia={{ prefetch: 'click' }}>Users</a>
-  ```
-</CodeGroup>
+<a href="/users" use:inertia={{ prefetch: 'click' }}>Users</a>
+```
 
 If you're confident that the user will visit a page next, you can prefetch the data on mount as well.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users" prefetch="mount">Users</Link>
-  ```
+<Link href="/users" prefetch="mount">Users</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users" prefetch="mount">Users</Link>
-  ```
+<Link href="/users" prefetch="mount">Users</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia } from '@inertiajs/svelte'
 
-  <a href="/users" use:inertia={{ prefetch: 'mount' }}>Users</a>
-  ```
-</CodeGroup>
+<a href="/users" use:inertia={{ prefetch: 'mount' }}>Users</a>
+```
 
 You can also combine prefetch strategies by passing an array of values to the `prefetch` prop.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users" :prefetch="['mount', 'hover']">Users</Link>
-  ```
+<Link href="/users" :prefetch="['mount', 'hover']">Users</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users" prefetch={['mount', 'hover']}>Users</Link>
-  ```
+<Link href="/users" prefetch={['mount', 'hover']}>Users</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia } from '@inertiajs/svelte'
 
-  <a href="/users" use:inertia={{ prefetch: ['mount', 'hover'] }}>Users</a>
-  ```
-</CodeGroup>
+<a href="/users" use:inertia={{ prefetch: ['mount', 'hover'] }}>Users</a>
+```
 
 ## Programmatic Prefetching
 
@@ -143,53 +135,49 @@ router.prefetch(
 
 Inertia also provides a `usePrefetch` hook that allows you to track the prefetch state for the current page. It returns information about whether the page is currently prefetching, has been prefetched, when it was last updated, and a `flush` method that flushes the cache for the current page only.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { usePrefetch } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { usePrefetch } from '@inertiajs/vue3'
 
-  const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
-  ```
+const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
+```
 
-  ```js React icon="react" theme={null}
-  import { usePrefetch } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { usePrefetch } from '@inertiajs/react'
 
-  const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
-  ```
+const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { usePrefetch } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { usePrefetch } from '@inertiajs/svelte'
 
-  const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
-  ```
-</CodeGroup>
+const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
+```
 
 You can also pass visit options when you need to differentiate between different request configurations for the same URL.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { usePrefetch } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { usePrefetch } from '@inertiajs/vue3'
 
-  const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
-      headers: { 'X-Custom-Header': 'value' }
-  })
-  ```
+const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
+    headers: { 'X-Custom-Header': 'value' }
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { usePrefetch } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { usePrefetch } from '@inertiajs/react'
 
-  const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
-      headers: { 'X-Custom-Header': 'value' }
-  })
-  ```
+const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
+    headers: { 'X-Custom-Header': 'value' }
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { usePrefetch } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { usePrefetch } from '@inertiajs/svelte'
 
-  const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
-      headers: { 'X-Custom-Header': 'value' }
-  })
-  ```
-</CodeGroup>
+const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
+    headers: { 'X-Custom-Header': 'value' }
+})
+```
 
 ## Cache Tags
 
@@ -197,32 +185,30 @@ Cache tags allow you to group related prefetched data and invalidate all cached 
 
 To tag cached data, pass a `cacheTags` prop to your `Link` component.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { Link } from '@inertiajs/vue3'
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { Link } from '@inertiajs/vue3'
+</script>
 
-  <template>
-      <Link href="/users" prefetch cache-tags="users">Users</Link>
-      <Link href="/dashboard" prefetch :cache-tags="['dashboard', 'stats']">Dashboard</Link>
-  </template>
-  ```
+<template>
+    <Link href="/users" prefetch cache-tags="users">Users</Link>
+    <Link href="/dashboard" prefetch :cache-tags="['dashboard', 'stats']">Dashboard</Link>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users" prefetch cacheTags="users">Users</Link>
-  <Link href="/dashboard" prefetch cacheTags={['dashboard', 'stats']}>Dashboard</Link>
-  ```
+<Link href="/users" prefetch cacheTags="users">Users</Link>
+<Link href="/dashboard" prefetch cacheTags={['dashboard', 'stats']}>Dashboard</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia } from '@inertiajs/svelte'
 
-  <a href="/users" use:inertia={{ prefetch: true, cacheTags: 'users' }}>Users</a>
-  <a href="/dashboard" use:inertia={{ prefetch: true, cacheTags: ['dashboard', 'stats'] }}>Dashboard</a>
-  ```
-</CodeGroup>
+<a href="/users" use:inertia={{ prefetch: true, cacheTags: 'users' }}>Users</a>
+<a href="/dashboard" use:inertia={{ prefetch: true, cacheTags: ['dashboard', 'stats'] }}>Dashboard</a>
+```
 
 When prefetching programmatically, pass `cacheTags` in the third argument to `router.prefetch`.
 
@@ -263,119 +249,113 @@ router.flushByCacheTags(['dashboard', 'stats'])
 
 By default, Inertia does not automatically flush the prefetch cache when you navigate to new pages. Cached data is only evicted when it expires based on the cache duration. If you want to flush all cached data on every navigation, you can set up an event listener.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { router } from '@inertiajs/vue3'
 
-  router.on('navigate', () => router.flushAll())
-  ```
+router.on('navigate', () => router.flushAll())
+```
 
-  ```js React icon="react" theme={null}
-  import { router } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { router } from '@inertiajs/react'
 
-  router.on('navigate', () => router.flushAll())
-  ```
+router.on('navigate', () => router.flushAll())
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { router } from '@inertiajs/svelte'
 
-  router.on('navigate', () => router.flushAll())
-  ```
-</CodeGroup>
+router.on('navigate', () => router.flushAll())
+```
 
 ### Invalidate on Requests
 
 To automatically invalidate caches when making requests, pass an `invalidateCacheTags` prop to the `Form` component. The specified tags will be flushed when the form submission succeeds.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { Form } from '@inertiajs/vue3'
-  </script>
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { Form } from '@inertiajs/vue3'
+</script>
 
-  <template>
-      <Form action="/users" method="post" :invalidate-cache-tags="['users', 'dashboard']">
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <button type="submit">Create User</button>
-      </Form>
-  </template>
-  ```
+<template>
+    <Form action="/users" method="post" :invalidate-cache-tags="['users', 'dashboard']">
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <button type="submit">Create User</button>
+    </Form>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Form } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Form } from '@inertiajs/react'
 
-  export default () => (
-      <Form action="/users" method="post" invalidateCacheTags={['users', 'dashboard']}>
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <button type="submit">Create User</button>
-      </Form>
-  )
-  ```
+export default () => (
+    <Form action="/users" method="post" invalidateCacheTags={['users', 'dashboard']}>
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <button type="submit">Create User</button>
+    </Form>
+)
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  <script>
-      import { Form } from '@inertiajs/svelte'
-  </script>
+```svelte Svelte icon="s" theme={null}
+<script>
+    import { Form } from '@inertiajs/svelte'
+</script>
 
-  <Form action="/users" method="post" invalidateCacheTags={['users', 'dashboard']}>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <button type="submit">Create User</button>
-  </Form>
-  ```
-</CodeGroup>
+<Form action="/users" method="post" invalidateCacheTags={['users', 'dashboard']}>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <button type="submit">Create User</button>
+</Form>
+```
 
 When using the `useForm` helper, you can include `invalidateCacheTags` in the visit options.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { useForm } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { useForm } from '@inertiajs/vue3'
 
-  const form = useForm({
-      name: '',
-      email: '',
-  })
+const form = useForm({
+    name: '',
+    email: '',
+})
 
-  const submit = () => {
-      form.post('/users', {
-          invalidateCacheTags: ['users', 'dashboard']
-      })
-  }
-  ```
+const submit = () => {
+    form.post('/users', {
+        invalidateCacheTags: ['users', 'dashboard']
+    })
+}
+```
 
-  ```js React icon="react" theme={null}
-  import { useForm } from '@inertiajs/react'
+```js React icon="react" theme={null}
+import { useForm } from '@inertiajs/react'
 
-  const { data, setData, post } = useForm({
-      name: '',
-      email: '',
-  })
+const { data, setData, post } = useForm({
+    name: '',
+    email: '',
+})
 
-  function submit(e) {
-      e.preventDefault()
-      post('/users', {
-          invalidateCacheTags: ['users', 'dashboard']
-      })
-  }
-  ```
+function submit(e) {
+    e.preventDefault()
+    post('/users', {
+        invalidateCacheTags: ['users', 'dashboard']
+    })
+}
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { useForm } from '@inertiajs/svelte'
+```js Svelte icon="s" theme={null}
+import { useForm } from '@inertiajs/svelte'
 
-  const form = useForm({
-      name: '',
-      email: '',
-  })
+const form = useForm({
+    name: '',
+    email: '',
+})
 
-  function submit() {
-      $form.post('/users', {
-          invalidateCacheTags: ['users', 'dashboard']
-      })
-  }
-  ```
-</CodeGroup>
+function submit() {
+    $form.post('/users', {
+        invalidateCacheTags: ['users', 'dashboard']
+    })
+}
+```
 
 You can also invalidate cache tags with programmatic visits by including `invalidateCacheTags` in the options.
 
@@ -395,25 +375,23 @@ By default, Inertia will fetch a fresh copy of the data when the user visits the
 
 The first value in the array represents the number of seconds the cache is considered fresh, while the second value defines how long it can be served as stale data before fetching data from the server is necessary.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users" prefetch :cacheFor="['30s', '1m']">Users</Link>
-  ```
+<Link href="/users" prefetch :cacheFor="['30s', '1m']">Users</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users" prefetch cacheFor={['30s', '1m']}>Users</Link>
-  ```
+<Link href="/users" prefetch cacheFor={['30s', '1m']}>Users</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia } from '@inertiajs/svelte'
 
-  <a href="/users" use:inertia={{ prefetch: true, cacheFor: ['30s', '1m'] }}>Users</a>
-  ```
-</CodeGroup>
+<a href="/users" use:inertia={{ prefetch: true, cacheFor: ['30s', '1m'] }}>Users</a>
+```
 
 If a request is made within the fresh period (before the first value), the cache is returned immediately without making a request to the server.
 

@@ -165,7 +165,7 @@ $response->assertInertia(fn (Assert $page) => $page
 
 ### Testing Partial Reloads
 
-You may use the `reloadOnly` and `reloadExcept` methods to test how your application responds to [partial reloads](/docs/v3/data-props/partial-reloads). These methods perform a follow-up request and allow you to make assertions against the response.
+You may use the `reloadOnly` and `reloadExcept` methods to test how your application responds to [partial reloads](https://inertiajs.com/docs/v3/data-props/partial-reloads.md). These methods perform a follow-up request and allow you to make assertions against the response.
 
 ```php theme={null}
 $response->assertInertia(fn (Assert $page) => $page
@@ -182,7 +182,7 @@ Instead of passing a single prop as a string, you may also pass an array of prop
 
 ### Testing Deferred Props
 
-You may use the `loadDeferredProps` method to test how your application responds to [deferred props](/docs/v3/data-props/deferred-props). This method performs a follow-up request to load the deferred props and allows you to make assertions against the response.
+You may use the `loadDeferredProps` method to test how your application responds to [deferred props](https://inertiajs.com/docs/v3/data-props/deferred-props.md). This method performs a follow-up request to load the deferred props and allows you to make assertions against the response.
 
 ```php theme={null}
 $response->assertInertia(fn (Assert $page) => $page
@@ -225,7 +225,7 @@ $response->assertInertia(fn (Assert $page) => $page
 
 ### Testing Flash Data
 
-You may use the `hasFlash` and `missingFlash` methods to test [flash data](/docs/v3/data-props/flash-data) in your Inertia responses.
+You may use the `hasFlash` and `missingFlash` methods to test [flash data](https://inertiajs.com/docs/v3/data-props/flash-data.md) in your Inertia responses.
 
 ```php theme={null}
 $response->assertInertia(fn (Assert $page) => $page
@@ -259,7 +259,7 @@ $response->assertRedirect('/dashboard')
 
 ## Disabling SSR During Tests
 
-Your application may have [SSR enabled](/docs/v3/advanced/server-side-rendering) for development and production, but you might not need it during testing. You may set `INERTIA_SSR_ENABLED` to `false` in your `phpunit.xml` to prevent the Laravel adapter from dispatching SSR requests.
+Your application may have [SSR enabled](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md) for development and production, but you might not need it during testing. You may set `INERTIA_SSR_ENABLED` to `false` in your `phpunit.xml` to prevent the Laravel adapter from dispatching SSR requests.
 
 ```xml theme={null}
 <env name="INERTIA_SSR_ENABLED" value="false" />

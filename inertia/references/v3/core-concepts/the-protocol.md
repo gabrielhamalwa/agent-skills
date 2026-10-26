@@ -1,6 +1,6 @@
 # The Protocol
 
-This page specifies the Inertia protocol: the exact wire contract between an Inertia client and your server. Read the [how it works](/docs/v3/core-concepts/how-it-works) page first for a high-level overview.
+This page specifies the Inertia protocol: the exact wire contract between an Inertia client and your server. Read the [how it works](https://inertiajs.com/docs/v3/core-concepts/how-it-works.md) page first for a high-level overview.
 
 The protocol is framework-agnostic. Any backend that speaks HTTP may implement it, so you may build a new server-side adapter against it in any language. The official Laravel adapter serves as the reference implementation throughout this page, and every request and response below is real and copy-pasteable.
 
@@ -32,9 +32,9 @@ Content-Type: text/html; charset=utf-8
 </html>
 ```
 
-<Warning>
-  The embedded page object is printed inside a `<script>` tag, so its serialized JSON MUST escape every forward slash (`/` becomes `\/`), which is why the example above contains `"\/events\/80"`. This prevents a `</script>` sequence inside your prop data from closing the script element early and breaking the page. HTML-entity encoding MUST NOT be used here, since the browser does not decode entities inside a script body and JSON parsing would then fail.
-</Warning>
+> [!WARNING]
+>
+> The embedded page object is printed inside a `<script>` tag, so its serialized JSON MUST escape every forward slash (`/` becomes `\/`), which is why the example above contains `"\/events\/80"`. This prevents a `</script>` sequence inside your prop data from closing the script element early and breaking the page. HTML-entity encoding MUST NOT be used here, since the browser does not decode entities inside a script body and JSON parsing would then fail.
 
 ## Inertia Responses
 
@@ -110,219 +110,219 @@ A valid Inertia response with a status of `400` or greater fires that same cance
 
 The following headers are automatically sent by Inertia when making requests. You don't need to set these manually; they're handled by the Inertia client-side adapter.
 
-<ParamField header="X-Inertia" type="boolean">
-  Set to `true` to indicate this is an Inertia request.
-</ParamField>
+**X-Inertia** `boolean`
 
-<ParamField header="X-Requested-With" type="string">
-  Set to `XMLHttpRequest` on all Inertia requests.
-</ParamField>
+Set to `true` to indicate this is an Inertia request.
 
-<ParamField header="Accept" type="string">
-  Set to `text/html, application/xhtml+xml` to indicate acceptable response
-  types.
-</ParamField>
+**X-Requested-With** `string`
 
-<ParamField header="Content-Type" type="string">
-  Set to `application/json` for requests that do not include file uploads.
-</ParamField>
+Set to `XMLHttpRequest` on all Inertia requests.
 
-<ParamField header="X-Inertia-Version" type="string">
-  The current asset version to check for asset mismatches.
-</ParamField>
+**Accept** `string`
 
-<ParamField header="X-XSRF-TOKEN" type="string">
-  The CSRF token read from the `XSRF-TOKEN` cookie. The cookie and header names
-  are configurable.
-</ParamField>
+Set to `text/html, application/xhtml+xml` to indicate acceptable response
+types.
 
-<ParamField header="Purpose" type="string">
-  Set to `prefetch` when making [prefetch](/docs/v3/data-props/prefetching) requests.
-</ParamField>
+**Content-Type** `string`
 
-<ParamField header="X-Inertia-Partial-Component" type="string">
-  The component name for [partial reloads](/docs/v3/data-props/partial-reloads).
-</ParamField>
+Set to `application/json` for requests that do not include file uploads.
 
-<ParamField header="X-Inertia-Partial-Data" type="string">
-  Comma-separated list of props to include in partial reloads.
-</ParamField>
+**X-Inertia-Version** `string`
 
-<ParamField header="X-Inertia-Partial-Except" type="string">
-  Comma-separated list of props to exclude from partial reloads.
-</ParamField>
+The current asset version to check for asset mismatches.
 
-<ParamField header="X-Inertia-Reset" type="string">
-  Comma-separated list of props to reset on navigation.
-</ParamField>
+**X-XSRF-TOKEN** `string`
 
-<ParamField header="Cache-Control" type="string">
-  Set to `no-cache` for reload requests to prevent serving stale content.
-</ParamField>
+The CSRF token read from the `XSRF-TOKEN` cookie. The cookie and header names
+are configurable.
 
-<ParamField header="X-Inertia-Error-Bag" type="string">
-  Specifies which error bag to use for [validation
-  errors](/docs/v3/the-basics/validation).
-</ParamField>
+**Purpose** `string`
 
-<ParamField header="X-Inertia-Infinite-Scroll-Merge-Intent" type="string">
-  Indicates whether the requested data should be appended or prepended when
-  using [Infinite scroll](/docs/v3/data-props/infinite-scroll).
-</ParamField>
+Set to `prefetch` when making [prefetch](https://inertiajs.com/docs/v3/data-props/prefetching.md) requests.
 
-<ParamField header="X-Inertia-Except-Once-Props" type="string">
-  Comma-separated list of non-expired [once prop](/docs/v3/data-props/once-props)
-  keys already loaded on the client. The server will skip resolving these props
-  unless explicitly requested via a partial reload or force refreshed
-  server-side.
-</ParamField>
+**X-Inertia-Partial-Component** `string`
 
-The following headers are used for [Precognition](/docs/v3/the-basics/forms#precognition) validation requests.
+The component name for [partial reloads](https://inertiajs.com/docs/v3/data-props/partial-reloads.md).
 
-<ParamField header="Precognition" type="boolean">
-  Set to `true` to indicate this is a Precognition validation request.
-</ParamField>
+**X-Inertia-Partial-Data** `string`
 
-<ParamField header="Precognition-Validate-Only" type="string">
-  Comma-separated list of field names to validate.
-</ParamField>
+Comma-separated list of props to include in partial reloads.
+
+**X-Inertia-Partial-Except** `string`
+
+Comma-separated list of props to exclude from partial reloads.
+
+**X-Inertia-Reset** `string`
+
+Comma-separated list of props to reset on navigation.
+
+**Cache-Control** `string`
+
+Set to `no-cache` for reload requests to prevent serving stale content.
+
+**X-Inertia-Error-Bag** `string`
+
+Specifies which error bag to use for [validation
+errors](https://inertiajs.com/docs/v3/the-basics/validation.md).
+
+**X-Inertia-Infinite-Scroll-Merge-Intent** `string`
+
+Indicates whether the requested data should be appended or prepended when
+using [Infinite scroll](https://inertiajs.com/docs/v3/data-props/infinite-scroll.md).
+
+**X-Inertia-Except-Once-Props** `string`
+
+Comma-separated list of non-expired [once prop](https://inertiajs.com/docs/v3/data-props/once-props.md)
+keys already loaded on the client. The server will skip resolving these props
+unless explicitly requested via a partial reload or force refreshed
+server-side.
+
+The following headers are used for [Precognition](https://inertiajs.com/docs/v3/the-basics/forms.md#precognition) validation requests.
+
+**Precognition** `boolean`
+
+Set to `true` to indicate this is a Precognition validation request.
+
+**Precognition-Validate-Only** `string`
+
+Comma-separated list of field names to validate.
 
 ## Response Headers
 
 The following headers are set on an Inertia JSON page response. Official server-side adapters handle these automatically.
 
-<ParamField header="X-Inertia" type="boolean">
-  Set to `true` to indicate this is an Inertia response.
-</ParamField>
+**X-Inertia** `boolean`
 
-<ParamField header="Vary" type="string">
-  Set to `X-Inertia` to help browsers correctly differentiate between HTML and
-  JSON responses.
-</ParamField>
+Set to `true` to indicate this is an Inertia response.
+
+**Vary** `string`
+
+Set to `X-Inertia` to help browsers correctly differentiate between HTML and
+JSON responses.
 
 The following headers appear on `409 Conflict` control responses rather than page responses. A `409` carries no `X-Inertia` header, since it instructs the client to navigate rather than render a page.
 
-<ParamField header="X-Inertia-Location" type="string">
-  The destination URL for a full `window.location` visit. Set on an external
-  location visit and on an asset-version mismatch reload.
-</ParamField>
+**X-Inertia-Location** `string`
 
-<ParamField header="X-Inertia-Redirect" type="string">
-  The full redirect URL, including its fragment, for a redirect whose target
-  contains a URL fragment. Triggers a fresh Inertia `GET` visit instead of a
-  full-page reload.
-</ParamField>
+The destination URL for a full `window.location` visit. Set on an external
+location visit and on an asset-version mismatch reload.
 
-<ParamField header="X-Inertia-Version" type="string">
-  The current asset version, echoed on a version-mismatch `409` so the client
-  may observe it.
-</ParamField>
+**X-Inertia-Redirect** `string`
 
-The following headers are used for [Precognition](/docs/v3/the-basics/forms#precognition) validation responses.
+The full redirect URL, including its fragment, for a redirect whose target
+contains a URL fragment. Triggers a fresh Inertia `GET` visit instead of a
+full-page reload.
 
-<ParamField header="Precognition" type="string">
-  Set to `true` to indicate this is a Precognition validation response.
-</ParamField>
+**X-Inertia-Version** `string`
 
-<ParamField header="Precognition-Success" type="string">
-  Set to `true` when validation passes with no errors, combined with a `204 No
-      Content` status code.
-</ParamField>
+The current asset version, echoed on a version-mismatch `409` so the client
+may observe it.
 
-<ParamField header="Vary" type="string">
-  Set to `Precognition` on all responses when the Precognition middleware is
-  applied.
-</ParamField>
+The following headers are used for [Precognition](https://inertiajs.com/docs/v3/the-basics/forms.md#precognition) validation responses.
+
+**Precognition** `string`
+
+Set to `true` to indicate this is a Precognition validation response.
+
+**Precognition-Success** `string`
+
+Set to `true` when validation passes with no errors, combined with a `204 No
+    Content` status code.
+
+**Vary** `string`
+
+Set to `Precognition` on all responses when the Precognition middleware is
+applied.
 
 ## The Page Object
 
 Inertia shares data between the server and client via a page object. This object includes the necessary information to render the page component, update the browser's history state, and track the site's asset version. The page object may include the following properties:
 
-<ParamField body="component" type="string">
-  The name of the JavaScript page component.
-</ParamField>
+**component** `string`
 
-<ParamField body="props" type="object">
-  The page props. Contains all of the page data along with an `errors` object
-  (defaults to `{}` if there are no errors).
-</ParamField>
+The name of the JavaScript page component.
 
-<ParamField body="url" type="string">
-  The page URL.
-</ParamField>
+**props** `object`
 
-<ParamField body="version" type="string|number">
-  The current [asset version](/docs/v3/advanced/asset-versioning).
-</ParamField>
+The page props. Contains all of the page data along with an `errors` object
+(defaults to `{}` if there are no errors).
 
-<ParamField body="encryptHistory" type="boolean">
-  Whether or not to [encrypt the current page's history
-  state](/docs/v3/security/history-encryption). Only included when `true`.
-</ParamField>
+**url** `string`
 
-<ParamField body="clearHistory" type="boolean">
-  Whether or not to clear any [encrypted history
-  state](/docs/v3/security/history-encryption#clearing-history). Only included when `true`.
-</ParamField>
+The page URL.
 
-<ParamField body="preserveFragment" type="boolean">
-  Whether to [preserve the URL fragment](/docs/v3/the-basics/redirects#preserving-fragments) from the original request across a redirect.
-</ParamField>
+**version** `string|number`
 
-<ParamField body="mergeProps" type="array">
-  Array of prop keys that should be [merged](/docs/v3/data-props/merging-props)
-  (appended) during navigation.
-</ParamField>
+The current [asset version](https://inertiajs.com/docs/v3/advanced/asset-versioning.md).
 
-<ParamField body="prependProps" type="array">
-  Array of prop keys that should be [prepended](/docs/v3/data-props/merging-props)
-  during navigation.
-</ParamField>
+**encryptHistory** `boolean`
 
-<ParamField body="deepMergeProps" type="array">
-  Array of prop keys that should be [deep
-  merged](/docs/v3/data-props/merging-props#deep-merge) during navigation.
-</ParamField>
+Whether or not to [encrypt the current page's history
+state](https://inertiajs.com/docs/v3/security/history-encryption.md). Only included when `true`.
 
-<ParamField body="matchPropsOn" type="array">
-  Array of prop keys to use for [matching when merging
-  props](/docs/v3/data-props/merging-props#matching-items).
-</ParamField>
+**clearHistory** `boolean`
 
-<ParamField body="scrollProps" type="object">
-  Configuration for [infinite scroll](/docs/v3/data-props/infinite-scroll) prop
-  merging behavior.
-</ParamField>
+Whether or not to clear any [encrypted history
+state](https://inertiajs.com/docs/v3/security/history-encryption.md#clearing-history). Only included when `true`.
 
-<ParamField body="deferredProps" type="object">
-  Configuration for client-side [lazy loading of
-  props](/docs/v3/data-props/deferred-props).
-</ParamField>
+**preserveFragment** `boolean`
 
-<ParamField body="rescuedProps" type="array">
-  Array of [deferred prop](/docs/v3/data-props/deferred-props#error-handling) keys
-  that failed to resolve and were rescued server-side. Used by the client to
-  render the `rescue` slot on the `<Deferred>` component.
-</ParamField>
+Whether to [preserve the URL fragment](https://inertiajs.com/docs/v3/the-basics/redirects.md#preserving-fragments) from the original request across a redirect.
 
-<ParamField body="sharedProps" type="array">
-  Array of top-level prop keys registered via `Inertia::share()`. Used by the
-  client to carry shared props over during [instant
-  visits](/docs/v3/the-basics/instant-visits).
-</ParamField>
+**mergeProps** `array`
 
-<ParamField body="onceProps" type="object">
-  Configuration for [once props](/docs/v3/data-props/once-props) that should only be
-  resolved once and reused on subsequent pages. Each entry maps a key to an
-  object containing the `prop` name and optional `expiresAt` timestamp (in
-  milliseconds).
-</ParamField>
+Array of prop keys that should be [merged](https://inertiajs.com/docs/v3/data-props/merging-props.md)
+(appended) during navigation.
 
-<ParamField body="flash" type="object">
-  Flash session data for the current request. Only included when flash data
-  exists. The client exposes it through the `inertia:flash` event and strips it
-  from persisted history state.
-</ParamField>
+**prependProps** `array`
+
+Array of prop keys that should be [prepended](https://inertiajs.com/docs/v3/data-props/merging-props.md)
+during navigation.
+
+**deepMergeProps** `array`
+
+Array of prop keys that should be [deep
+merged](https://inertiajs.com/docs/v3/data-props/merging-props.md#deep-merge) during navigation.
+
+**matchPropsOn** `array`
+
+Array of prop keys to use for [matching when merging
+props](https://inertiajs.com/docs/v3/data-props/merging-props.md#matching-items).
+
+**scrollProps** `object`
+
+Configuration for [infinite scroll](https://inertiajs.com/docs/v3/data-props/infinite-scroll.md) prop
+merging behavior.
+
+**deferredProps** `object`
+
+Configuration for client-side [lazy loading of
+props](https://inertiajs.com/docs/v3/data-props/deferred-props.md).
+
+**rescuedProps** `array`
+
+Array of [deferred prop](https://inertiajs.com/docs/v3/data-props/deferred-props.md#error-handling) keys
+that failed to resolve and were rescued server-side. Used by the client to
+render the `rescue` slot on the `<Deferred>` component.
+
+**sharedProps** `array`
+
+Array of top-level prop keys registered via `Inertia::share()`. Used by the
+client to carry shared props over during [instant
+visits](https://inertiajs.com/docs/v3/the-basics/instant-visits.md).
+
+**onceProps** `object`
+
+Configuration for [once props](https://inertiajs.com/docs/v3/data-props/once-props.md) that should only be
+resolved once and reused on subsequent pages. Each entry maps a key to an
+object containing the `prop` name and optional `expiresAt` timestamp (in
+milliseconds).
+
+**flash** `object`
+
+Flash session data for the current request. Only included when flash data
+exists. The client exposes it through the `inertia:flash` event and strips it
+from persisted history state.
 
 Only `component`, `props`, `url`, and `version` are present on every page object, so a minimal one looks like this:
 
@@ -388,7 +388,7 @@ A prop may belong to several categories at once. A prop may be deferred and merg
 
 ## Partial Reloads
 
-The partial reload option lets you request a subset of the props (data) from the server on subsequent visits to the *same* page component. This may be a helpful performance optimization if it's acceptable that some page data becomes stale. See the [partial reloads](/docs/v3/data-props/partial-reloads) documentation for details.
+The partial reload option lets you request a subset of the props (data) from the server on subsequent visits to the *same* page component. This may be a helpful performance optimization if it's acceptable that some page data becomes stale. See the [partial reloads](https://inertiajs.com/docs/v3/data-props/partial-reloads.md) documentation for details.
 
 A partial reload request includes the `X-Inertia-Partial-Component` header and may include `X-Inertia-Partial-Data` and/or `X-Inertia-Partial-Except` headers with the request.
 
@@ -425,11 +425,11 @@ Content-Type: application/json
 
 ### Resetting Props
 
-The `X-Inertia-Reset` header lists prop paths the client wants to reset before new data is applied. A reset prop is re-resolved and returned unlabeled, present in `props` but absent from every merge array, so the client replaces the value instead of merging into it. The client sends reset paths in both the `X-Inertia-Reset` header and the `only` list. For scroll props, the server also sets `scrollProps[path].reset` in the metadata, which the [infinite scroll](/docs/v3/data-props/infinite-scroll) component uses to re-sync its pagination state to the returned page. See [resetting props](/docs/v3/data-props/merging-props#resetting-props) for the client-side API.
+The `X-Inertia-Reset` header lists prop paths the client wants to reset before new data is applied. A reset prop is re-resolved and returned unlabeled, present in `props` but absent from every merge array, so the client replaces the value instead of merging into it. The client sends reset paths in both the `X-Inertia-Reset` header and the `only` list. For scroll props, the server also sets `scrollProps[path].reset` in the metadata, which the [infinite scroll](https://inertiajs.com/docs/v3/data-props/infinite-scroll.md) component uses to re-sync its pagination state to the returned page. See [resetting props](https://inertiajs.com/docs/v3/data-props/merging-props.md#resetting-props) for the client-side API.
 
 ## Deferred and Optional Props
 
-Deferred props let the server announce data that will load in a follow-up request. On a full visit the prop is skipped and its key is listed under `deferredProps`, grouped by the request group it belongs to. The client issues one partial reload per group to fetch them, and the group names themselves are arbitrary. See the [deferred props](/docs/v3/data-props/deferred-props) documentation.
+Deferred props let the server announce data that will load in a follow-up request. On a full visit the prop is skipped and its key is listed under `deferredProps`, grouped by the request group it belongs to. The client issues one partial reload per group to fetch them, and the group names themselves are arbitrary. See the [deferred props](https://inertiajs.com/docs/v3/data-props/deferred-props.md) documentation.
 
 ```json theme={null}
 {
@@ -453,7 +453,7 @@ Optional props behave similarly but are never announced. They are skipped on ful
 
 ### Rescued Deferred Props
 
-A deferred prop resolved with `rescue: true` that throws does not fail the response, which is still a `200` carrying every other prop. The server reports the exception through your framework's error handling, omits the prop from `props` entirely (it is not sent as `null`), and adds its key to the top-level `rescuedProps` array. The client uses this list to render the `rescue` slot on the `<Deferred>` component. See [error handling](/docs/v3/data-props/deferred-props#error-handling).
+A deferred prop resolved with `rescue: true` that throws does not fail the response, which is still a `200` carrying every other prop. The server reports the exception through your framework's error handling, omits the prop from `props` entirely (it is not sent as `null`), and adds its key to the top-level `rescuedProps` array. The client uses this list to render the `rescue` slot on the `<Deferred>` component. See [error handling](https://inertiajs.com/docs/v3/data-props/deferred-props.md#error-handling).
 
 ```json theme={null}
 {
@@ -469,7 +469,7 @@ A deferred prop resolved with `rescue: true` that throws does not fail the respo
 
 ## Merging Props
 
-Merge props instruct the client to combine incoming prop data with data already on the page instead of replacing it. Arrays are appended or prepended, and objects are shallow or deep merged. The page object labels each merging prop under `mergeProps` (append), `prependProps` (prepend), or `deepMergeProps` (deep merge). Merging applies on partial reloads only, so a full visit always replaces the prop even when it carries a merge label. See the [merging props](/docs/v3/data-props/merging-props) documentation.
+Merge props instruct the client to combine incoming prop data with data already on the page instead of replacing it. Arrays are appended or prepended, and objects are shallow or deep merged. The page object labels each merging prop under `mergeProps` (append), `prependProps` (prepend), or `deepMergeProps` (deep merge). Merging applies on partial reloads only, so a full visit always replaces the prop even when it carries a merge label. See the [merging props](https://inertiajs.com/docs/v3/data-props/merging-props.md) documentation.
 
 ```json theme={null}
 {
@@ -512,11 +512,11 @@ Merge props instruct the client to combine incoming prop data with data already 
 
 ### Matching Items
 
-The `matchPropsOn` array tells the client which field identifies each item so existing entries may be updated in place rather than duplicated. Each entry has the form `"<propPath>.<keyField>"` and is split on the last dot: everything before the final segment is the prop path, and the final segment is the key field. `conversations.data.id` keys the array at `conversations.data` on its `id` field. See [matching items](/docs/v3/data-props/merging-props#matching-items).
+The `matchPropsOn` array tells the client which field identifies each item so existing entries may be updated in place rather than duplicated. Each entry has the form `"<propPath>.<keyField>"` and is split on the last dot: everything before the final segment is the prop path, and the final segment is the key field. `conversations.data.id` keys the array at `conversations.data` on its `id` field. See [matching items](https://inertiajs.com/docs/v3/data-props/merging-props.md#matching-items).
 
 ## Once Props
 
-Once props are resolved a single time and remembered by the client, then reused on subsequent pages that include the same prop. The page object carries an `onceProps` configuration. Each entry maps a key to the prop name and an optional expiration timestamp in milliseconds. See the [once props](/docs/v3/data-props/once-props) documentation.
+Once props are resolved a single time and remembered by the client, then reused on subsequent pages that include the same prop. The page object carries an `onceProps` configuration. Each entry maps a key to the prop name and an optional expiration timestamp in milliseconds. See the [once props](https://inertiajs.com/docs/v3/data-props/once-props.md) documentation.
 
 ```json theme={null}
 {
@@ -580,7 +580,7 @@ Content-Type: application/json
 }
 ```
 
-Note that `plans` is included in `onceProps` but not in `props` since it was already loaded on the client. The `onceProps` key identifies the once prop across pages, while `prop` specifies the actual prop name. These may differ when using [custom keys](/docs/v3/data-props/once-props#custom-keys).
+Note that `plans` is included in `onceProps` but not in `props` since it was already loaded on the client. The `onceProps` key identifies the once prop across pages, while `prop` specifies the actual prop name. These may differ when using [custom keys](https://inertiajs.com/docs/v3/data-props/once-props.md#custom-keys).
 
 ### Force-Fresh and Partial Reloads
 
@@ -588,7 +588,7 @@ The server may send a fresh value for a once prop even when its key appears in `
 
 ## Infinite Scroll
 
-Infinite scroll builds on merge props. The prop's inner array is labeled for merging (typically `<path>.data`), and the page object carries a `scrollProps` entry describing the paginator's cursor. See the [infinite scroll](/docs/v3/data-props/infinite-scroll) documentation.
+Infinite scroll builds on merge props. The prop's inner array is labeled for merging (typically `<path>.data`), and the page object carries a `scrollProps` entry describing the paginator's cursor. See the [infinite scroll](https://inertiajs.com/docs/v3/data-props/infinite-scroll.md) documentation.
 
 ```json theme={null}
 {
@@ -645,7 +645,7 @@ X-Inertia-Location: https://example.com/events/80
 X-Inertia-Version: 2f8a1c9e4b7d0a3f6c5e8b1d4a7f0c2e
 ```
 
-See the [asset versioning](/docs/v3/advanced/asset-versioning) page for configuring the version and for how background requests are treated.
+See the [asset versioning](https://inertiajs.com/docs/v3/advanced/asset-versioning.md) page for configuring the version and for how background requests are treated.
 
 ## Redirects
 
@@ -653,15 +653,15 @@ Inertia relies on standard HTTP redirects for navigation after a server-side act
 
 External redirects point outside your Inertia app, where the Inertia request headers cannot survive the hop, so an XHR visit may not follow them. The server returns a `409 Conflict` with an `X-Inertia-Location` header instead, and the client performs a full `window.location` visit.
 
-A non-prefetch redirect whose target contains a URL fragment is returned as a `409 Conflict` with an `X-Inertia-Redirect` header holding the full URL, and the client makes a fresh Inertia `GET` visit to that URL. This is distinct from the `preserveFragment` page-object field, which carries the original request's fragment across an ordinary redirect. See the [redirects](/docs/v3/the-basics/redirects) documentation.
+A non-prefetch redirect whose target contains a URL fragment is returned as a `409 Conflict` with an `X-Inertia-Redirect` header holding the full URL, and the client makes a fresh Inertia `GET` visit to that URL. This is distinct from the `preserveFragment` page-object field, which carries the original request's fragment across an ordinary redirect. See the [redirects](https://inertiajs.com/docs/v3/the-basics/redirects.md) documentation.
 
 ## Validation Errors
 
 Validation errors are shared through the `errors` prop. The Laravel adapter registers `errors` as an always prop, so it is present on every page object and defaults to `{}` when there are no errors.
 
-Each key may map to either a single message or an array of messages, and the client renders whichever shape it receives. The choice is left to the server, so the Laravel adapter sends the first error per field by default and may be [configured](/docs/v3/the-basics/validation#multiple-errors-per-field) to send all error messages for each field.
+Each key may map to either a single message or an array of messages, and the client renders whichever shape it receives. The choice is left to the server, so the Laravel adapter sends the first error per field by default and may be [configured](https://inertiajs.com/docs/v3/the-basics/validation.md#multiple-errors-per-field) to send all error messages for each field.
 
-Requests may scope errors to a named error bag with the `X-Inertia-Error-Bag` header. The server namespaces the returned errors under that bag, so multiple forms on a page may keep their errors separate. See the [validation](/docs/v3/the-basics/validation) documentation.
+Requests may scope errors to a named error bag with the `X-Inertia-Error-Bag` header. The server namespaces the returned errors under that bag, so multiple forms on a page may keep their errors separate. See the [validation](https://inertiajs.com/docs/v3/the-basics/validation.md) documentation.
 
 ## HTTP Status Codes
 
@@ -674,7 +674,7 @@ Inertia uses specific HTTP status codes to handle different scenarios.
 | **303 See Other** | The redirect status after a non-GET request, which tells the browser to follow it with a `GET`. See [redirects](#redirects). |
 | **409 Conflict** | A control response rather than a page, used for an [asset version mismatch](#asset-versioning), an external redirect, or a fragment redirect. See [redirects](#redirects). |
 
-The following status codes are used for [Precognition](/docs/v3/the-basics/forms#precognition) validation requests.
+The following status codes are used for [Precognition](https://inertiajs.com/docs/v3/the-basics/forms.md#precognition) validation requests.
 
 | Status Code | Description |
 | :- | :- |
@@ -683,7 +683,7 @@ The following status codes are used for [Precognition](/docs/v3/the-basics/forms
 
 ## Server-Side Rendering
 
-Inertia does not server-side render the page components by default. Enabling [SSR](/docs/v3/advanced/server-side-rendering) introduces a second wire contract, this time between your server-side adapter and Inertia's Node SSR server. The adapter POSTs the page object to the SSR server, which returns the pre-rendered markup for the HTML document.
+Inertia does not server-side render the page components by default. Enabling [SSR](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md) introduces a second wire contract, this time between your server-side adapter and Inertia's Node SSR server. The adapter POSTs the page object to the SSR server, which returns the pre-rendered markup for the HTML document.
 
 ```http theme={null}
 REQUEST
@@ -722,4 +722,4 @@ A failed render returns a `500` response whose JSON body classifies the error ra
 
 The `error` message, `hint`, and `timestamp` are always present, while `component`, `url`, `stack`, and `sourceLocation` appear whenever the SSR server can determine them. The `type` narrows the cause to `browser-api` for a browser global touched during render, which also sets `browserApi` to the offending API, `component-resolution` for a page component that could not be resolved, or `render` for anything else thrown by your components.
 
-Adapters should treat a failed render as non-fatal, reporting the payload through the application's error handling and falling back to the standard client-side rendered document, so a broken SSR build never takes the site down. The Laravel adapter surfaces it as an [`SsrRenderFailed` event](/docs/v3/advanced/server-side-rendering#error-handling) and adds a `connection` type of its own when the SSR server cannot be reached at all.
+Adapters should treat a failed render as non-fatal, reporting the payload through the application's error handling and falling back to the standard client-side rendered document, so a broken SSR build never takes the site down. The Laravel adapter surfaces it as an [`SsrRenderFailed` event](https://inertiajs.com/docs/v3/advanced/server-side-rendering#error-handling) and adds a `connection` type of its own when the SSR server cannot be reached at all.

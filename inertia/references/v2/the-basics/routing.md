@@ -1,14 +1,16 @@
 # Routing
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 ## Defining Routes
 
-When using Inertia, all of your application's routes are defined server-side. This means that you don't need Vue Router or React Router. Instead, you can simply define Laravel routes and return [Inertia responses](/docs/v2/the-basics/responses) from those routes.
+When using Inertia, all of your application's routes are defined server-side. This means that you don't need Vue Router or React Router. Instead, you can simply define Laravel routes and return [Inertia responses](https://inertiajs.com/docs/v2/the-basics/responses.md) from those routes.
 
 ## Shorthand Routes
 
-If you have a [page](/docs/v2/the-basics/pages) that doesn't need a corresponding controller method, like an "FAQ" or "about" page, you can route directly to a component via the `Route::inertia()` method.
+If you have a [page](https://inertiajs.com/docs/v2/the-basics/pages.md) that doesn't need a corresponding controller method, like an "FAQ" or "about" page, you can route directly to a component via the `Route::inertia()` method.
 
 ```php theme={null}
 Route::inertia('/about', 'About');
@@ -42,7 +44,7 @@ When using Laravel, you have several options to make your server-side routes ava
 
 ### Wayfinder
 
-When using [Wayfinder](https://github.com/laravel/wayfinder), you can pass the generated TypeScript method directly to the [Link component](/docs/v2/the-basics/links#wayfinder), [form helpers](/docs/v2/the-basics/forms#wayfinder), or [router methods](/docs/v2/the-basics/manual-visits#wayfinder) and Inertia understand how to handle it. In fact, if you are developing an application using one of Laravel's [starter kits](https://laravel.com/docs/starter-kits), Wayfinder is already configured for you.
+When using [Wayfinder](https://github.com/laravel/wayfinder), you can pass the generated TypeScript method directly to the [Link component](https://inertiajs.com/docs/v2/the-basics/links.md#wayfinder), [form helpers](https://inertiajs.com/docs/v2/the-basics/forms.md#wayfinder), or [router methods](https://inertiajs.com/docs/v2/the-basics/manual-visits.md#wayfinder) and Inertia understand how to handle it. In fact, if you are developing an application using one of Laravel's [starter kits](https://laravel.com/docs/starter-kits), Wayfinder is already configured for you.
 
 ### Ziggy
 
@@ -52,7 +54,7 @@ The [Ziggy](https://github.com/tighten/ziggy) library can make your named, serve
 <Link :href="route('users.create')">Create User</Link>
 ```
 
-When [server-side rendering](/docs/v2/advanced/server-side-rendering) is enabled, you may pass an options object to the Ziggy plugin in your `ssr.js` file. This should include the route definitions and current location.
+When [server-side rendering](https://inertiajs.com/docs/v2/advanced/server-side-rendering.md) is enabled, you may pass an options object to the Ziggy plugin in your `ssr.js` file. This should include the route definitions and current location.
 
 ```js theme={null}
 .use(ZiggyVue, {
@@ -63,7 +65,7 @@ When [server-side rendering](/docs/v2/advanced/server-side-rendering) is enabled
 
 ## Customizing the Page URL
 
-The [page object](/docs/v2/core-concepts/the-protocol#the-page-object) includes a `url` that represents the current page's URL. By default, the Laravel adapter resolves this using the `fullUrl()` method on the `Request` instance, but strips the scheme and host so the result is a relative URL.
+The [page object](https://inertiajs.com/docs/v2/core-concepts/the-protocol.md#the-page-object) includes a `url` that represents the current page's URL. By default, the Laravel adapter resolves this using the `fullUrl()` method on the `Request` instance, but strips the scheme and host so the result is a relative URL.
 
 If you need to customize how the URL is resolved, you may provide a resolver within the `urlResolver`method of the Inertia `HandleInertiaRequests` middleware.
 

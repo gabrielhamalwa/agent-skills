@@ -1,67 +1,63 @@
 # Upgrade Guide for v3.0
 
-You can find the legacy docs for Inertia.js v2.0 at [inertiajs.com/docs/v2](/docs/v2).
+You can find the legacy docs for Inertia.js v2.0 at [inertiajs.com/docs/v2](https://inertiajs.com/docs/v2).
 
 ## What's New
 
 Inertia.js v3.0 is a major release focused on simplicity and developer experience. Axios has been replaced with a built-in XHR client for a smaller bundle, SSR now works out of the box during development without a separate Node.js server, and the new `@inertiajs/vite` plugin handles page resolution and SSR configuration automatically. This release also introduces standalone HTTP requests via the `useHttp` hook, optimistic updates with automatic rollback, layout props for sharing data between pages and layouts, and improved exception handling.
 
-<Columns cols={2}>
-  <Card title="Vite Plugin" href="/docs/v3/installation/client-side-setup#installation" icon="bolt">
-    Automatic page resolution, SSR setup, and optional setup/resolve callbacks.
-  </Card>
+> **[Vite Plugin](https://inertiajs.com/docs/v3/installation/client-side-setup.md#installation)**
+>
+> Automatic page resolution, SSR setup, and optional setup/resolve callbacks.
 
-  <Card title="HTTP Requests" href="/docs/v3/the-basics/http-requests" icon="globe">
-    Make standalone HTTP requests with the `useHttp` hook without triggering page visits.
-  </Card>
+> **[HTTP Requests](https://inertiajs.com/docs/v3/the-basics/http-requests.md)**
+>
+> Make standalone HTTP requests with the `useHttp` hook without triggering page visits.
 
-  <Card title="Optimistic Updates" href="/docs/v3/the-basics/optimistic-updates" icon="sparkles">
-    Apply data changes instantly before the server responds, with automatic rollback on failure.
-  </Card>
+> **[Optimistic Updates](https://inertiajs.com/docs/v3/the-basics/optimistic-updates.md)**
+>
+> Apply data changes instantly before the server responds, with automatic rollback on failure.
 
-  <Card title="Layout Props" href="/docs/v3/the-basics/layouts#layout-props" icon="layer-group">
-    Share dynamic data between pages and persistent layouts with the useLayoutProps hook.
-  </Card>
+> **[Layout Props](https://inertiajs.com/docs/v3/the-basics/layouts.md#layout-props)**
+>
+> Share dynamic data between pages and persistent layouts with the useLayoutProps hook.
 
-  <Card title="Simplified SSR" href="/docs/v3/advanced/server-side-rendering" icon="server">
-    SSR works automatically in Vite dev mode. No separate Node.js server needed.
-  </Card>
+> **[Simplified SSR](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md)**
+>
+> SSR works automatically in Vite dev mode. No separate Node.js server needed.
 
-  <Card title="Exception Handling" href="/docs/v3/advanced/error-handling#production" icon="shield">
-    Render custom Inertia error pages directly from your exception handler, with shared data.
-  </Card>
-</Columns>
+> **[Exception Handling](https://inertiajs.com/docs/v3/advanced/error-handling.md#production)**
+>
+> Render custom Inertia error pages directly from your exception handler, with shared data.
 
 This release also includes several additional improvements:
 
-* [Instant visits](/docs/v3/the-basics/instant-visits) that swap to the target component before the server responds
-* [Form component generics](/docs/v3/advanced/typescript#form-component) for type-safe errors and slot props
-* [Disable SSR per-route](/docs/v3/advanced/server-side-rendering#disabling-ssr) via middleware or facade
-* [Improved SSR error messages](/docs/v3/advanced/server-side-rendering#error-handling) with component names, URLs, and actionable hints
-* [Enum support](/docs/v3/the-basics/responses) in `Inertia::render()` responses
-* [Page object in resolve callback](/docs/v3/installation/client-side-setup#manual-setup) for context-aware component resolution
-* [Built-in HTTP interceptors](/docs/v3/installation/client-side-setup#interceptors) without Axios
-* [Default layout](/docs/v3/the-basics/layouts#default-layouts) option in `createInertiaApp`
-* [`preserveErrors`](/docs/v3/data-props/partial-reloads#preserving-errors) option to preserve validation errors during partial reloads
-* [Blade components](/docs/v3/installation/server-side-setup#setup-root-template) as an alternative to the `@inertia` and `@inertiaHead` directives, with SSR head fallback support
+* [Instant visits](https://inertiajs.com/docs/v3/the-basics/instant-visits.md) that swap to the target component before the server responds
+* [Form component generics](https://inertiajs.com/docs/v3/advanced/typescript.md#form-component) for type-safe errors and slot props
+* [Disable SSR per-route](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md#disabling-ssr) via middleware or facade
+* [Improved SSR error messages](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md#error-handling) with component names, URLs, and actionable hints
+* [Enum support](https://inertiajs.com/docs/v3/the-basics/responses.md) in `Inertia::render()` responses
+* [Page object in resolve callback](https://inertiajs.com/docs/v3/installation/client-side-setup.md#manual-setup) for context-aware component resolution
+* [Built-in HTTP interceptors](https://inertiajs.com/docs/v3/installation/client-side-setup.md#interceptors) without Axios
+* [Default layout](https://inertiajs.com/docs/v3/the-basics/layouts.md#default-layouts) option in `createInertiaApp`
+* [`preserveErrors`](https://inertiajs.com/docs/v3/data-props/partial-reloads#preserving-errors) option to preserve validation errors during partial reloads
+* [Blade components](https://inertiajs.com/docs/v3/installation/server-side-setup.md#setup-root-template) as an alternative to the `@inertia` and `@inertiaHead` directives, with SSR head fallback support
 
 ## Upgrade Dependencies
 
 To upgrade to Inertia.js v3.0, first use npm to install the client-side adapter of your choice:
 
-<CodeGroup>
-  ```bash Vue icon="vuejs" theme={null}
-  npm install @inertiajs/vue3@^3.0
-  ```
+```bash Vue icon="vuejs" theme={null}
+npm install @inertiajs/vue3@^3.0
+```
 
-  ```bash React icon="react" theme={null}
-  npm install @inertiajs/react@^3.0
-  ```
+```bash React icon="react" theme={null}
+npm install @inertiajs/react@^3.0
+```
 
-  ```bash Svelte icon="s" theme={null}
-  npm install @inertiajs/svelte@^3.0
-  ```
-</CodeGroup>
+```bash Svelte icon="s" theme={null}
+npm install @inertiajs/svelte@^3.0
+```
 
 You may also install the new optional Vite plugin, which provides a simplified SSR setup and a `pages` shorthand for component resolution:
 
@@ -107,7 +103,7 @@ The Svelte adapter now requires Svelte 5. Svelte 4 and below are no longer suppo
 
 ### Axios Removed
 
-Inertia no longer ships with or requires Axios. For most applications, this requires no changes. The built-in XHR client supports [interceptors](/docs/v3/installation/client-side-setup#interceptors) as well, so Axios interceptors may be migrated directly. You may also continue using Axios via the [Axios adapter](/docs/v3/installation/client-side-setup#using-axios), or provide a fully [custom HTTP client](/docs/v3/installation/client-side-setup#custom-http-client).
+Inertia no longer ships with or requires Axios. For most applications, this requires no changes. The built-in XHR client supports [interceptors](https://inertiajs.com/docs/v3/installation/client-side-setup.md#interceptors) as well, so Axios interceptors may be migrated directly. You may also continue using Axios via the [Axios adapter](https://inertiajs.com/docs/v3/installation/client-side-setup.md#using-axios), or provide a fully [custom HTTP client](https://inertiajs.com/docs/v3/installation/client-side-setup.md#custom-http-client).
 
 ### `qs` Dependency Removed
 
@@ -181,7 +177,7 @@ router.cancelAll()
 router.cancelAll({ async: false, prefetch: false })
 ```
 
-See the [visit cancellation](/docs/v3/the-basics/manual-visits#visit-cancellation) documentation for more details.
+See the [visit cancellation](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#visit-cancellation) documentation for more details.
 
 ### Future Options Removed
 
@@ -240,7 +236,7 @@ progress.reveal()
 
 The React `<Deferred>` component no longer resets to show the fallback during partial reloads. Previously, the fallback was shown each time a partial reload was triggered. Now the existing content remains visible while new data loads, consistent with the Vue and Svelte behavior.
 
-A new `reloading` slot prop is available across all adapters, allowing you to show a loading indicator during partial reloads while keeping the existing content visible. See the [deferred props](/docs/v3/data-props/deferred-props#reloading) documentation for details.
+A new `reloading` slot prop is available across all adapters, allowing you to show a loading indicator during partial reloads while keeping the existing content visible. See the [deferred props](https://inertiajs.com/docs/v3/data-props/deferred-props.md#reloading) documentation for details.
 
 ### Form Processing Reset Timing
 
@@ -334,7 +330,7 @@ The existing directives continue to work and require no changes.
 
 ### SSR in Development
 
-When using the new `@inertiajs/vite` plugin, SSR works automatically during development by simply running `npm run dev`. You no longer need to build your SSR bundle with `vite build --ssr` or start a separate Node.js server with `php artisan inertia:start-ssr` during development. These commands are now only required for [production deployments](/docs/v3/advanced/server-side-rendering#running-the-ssr-server).
+When using the new `@inertiajs/vite` plugin, SSR works automatically during development by simply running `npm run dev`. You no longer need to build your SSR bundle with `vite build --ssr` or start a separate Node.js server with `php artisan inertia:start-ssr` during development. These commands are now only required for [production deployments](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md#running-the-ssr-server).
 
 ### Middleware Priority
 
@@ -360,7 +356,7 @@ On the client side, the `only` and `except` options, as well as the `Deferred` a
 router.reload({ only: ['auth.notifications'] })
 ```
 
-Classes implementing the [`ProvidesInertiaProperties`](/docs/v3/the-basics/responses#providesinertiaproperties-interface) interface also work at any nesting level.
+Classes implementing the [`ProvidesInertiaProperties`](https://inertiajs.com/docs/v3/the-basics/responses#providesinertiaproperties-interface) interface also work at any nesting level.
 
 ```php theme={null}
 return Inertia::render('Dashboard', [
@@ -381,4 +377,4 @@ All Inertia packages now ship as ES Modules only. CommonJS `require()` imports a
 
 ### Page Object Changes
 
-The `clearHistory` and `encryptHistory` properties in the [page object](/docs/v3/core-concepts/the-protocol#the-page-object) are now optional and only included in the response when `true`. Previously, every response included `"clearHistory": false` and `"encryptHistory": false` even when history wasn't being cleared or encrypted.
+The `clearHistory` and `encryptHistory` properties in the [page object](https://inertiajs.com/docs/v3/core-concepts/the-protocol.md#the-page-object) are now optional and only included in the response when `true`. Previously, every response included `"clearHistory": false` and `"encryptHistory": false` even when history wasn't being cleared or encrypted.

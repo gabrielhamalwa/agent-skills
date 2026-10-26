@@ -24,7 +24,7 @@ createInertiaApp({
 });
 ```
 
-For applications using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) that restricts inline styles, you may pass a `nonce` to `createInertiaApp()` to permit the styles Inertia injects for the progress bar. See [Content Security Policy](/docs/v3/installation/client-side-setup#content-security-policy) for details.
+For applications using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) that restricts inline styles, you may pass a `nonce` to `createInertiaApp()` to permit the styles Inertia injects for the progress bar. See [Content Security Policy](https://inertiajs.com/docs/v3/installation/client-side-setup.md#content-security-policy) for details.
 
 You may disable Inertia's default loading indicator by setting the `progress` property to `false`.
 
@@ -39,52 +39,50 @@ createInertiaApp({
 
 When you need to control the progress indicator outside of Inertia requests, for example, when making requests with Axios or other libraries, you can use Inertia's progress methods directly.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { progress } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { progress } from "@inertiajs/vue3";
 
-  progress.start(); // Begin progress animation
-  progress.set(0.25); // Set to 25% complete
-  progress.finish(); // Complete and fade out
-  progress.reset(); // Reset to start
-  progress.remove(); // Complete and remove from DOM
-  progress.hide(); // Hide progress bar
-  progress.reveal(); // Show progress bar
+progress.start(); // Begin progress animation
+progress.set(0.25); // Set to 25% complete
+progress.finish(); // Complete and fade out
+progress.reset(); // Reset to start
+progress.remove(); // Complete and remove from DOM
+progress.hide(); // Hide progress bar
+progress.reveal(); // Show progress bar
 
-  progress.isStarted(); // Returns boolean
-  progress.getStatus(); // Returns current percentage or null
-  ```
+progress.isStarted(); // Returns boolean
+progress.getStatus(); // Returns current percentage or null
+```
 
-  ```js React icon="react" theme={null}
-  import { progress } from "@inertiajs/react";
+```js React icon="react" theme={null}
+import { progress } from "@inertiajs/react";
 
-  progress.start(); // Begin progress animation
-  progress.set(0.25); // Set to 25% complete
-  progress.finish(); // Complete and fade out
-  progress.reset(); // Reset to start
-  progress.remove(); // Complete and remove from DOM
-  progress.hide(); // Hide progress bar
-  progress.reveal(); // Show progress bar
+progress.start(); // Begin progress animation
+progress.set(0.25); // Set to 25% complete
+progress.finish(); // Complete and fade out
+progress.reset(); // Reset to start
+progress.remove(); // Complete and remove from DOM
+progress.hide(); // Hide progress bar
+progress.reveal(); // Show progress bar
 
-  progress.isStarted(); // Returns boolean
-  progress.getStatus(); // Returns current percentage or null
-  ```
+progress.isStarted(); // Returns boolean
+progress.getStatus(); // Returns current percentage or null
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { progress } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { progress } from "@inertiajs/svelte";
 
-  progress.start(); // Begin progress animation
-  progress.set(0.25); // Set to 25% complete
-  progress.finish(); // Complete and fade out
-  progress.reset(); // Reset to start
-  progress.remove(); // Complete and remove from DOM
-  progress.hide(); // Hide progress bar
-  progress.reveal(); // Show progress bar
+progress.start(); // Begin progress animation
+progress.set(0.25); // Set to 25% complete
+progress.finish(); // Complete and fade out
+progress.reset(); // Reset to start
+progress.remove(); // Complete and remove from DOM
+progress.hide(); // Hide progress bar
+progress.reveal(); // Show progress bar
 
-  progress.isStarted(); // Returns boolean
-  progress.getStatus(); // Returns current percentage or null
-  ```
-</CodeGroup>
+progress.isStarted(); // Returns boolean
+progress.getStatus(); // Returns current percentage or null
+```
 
 The `hide()` and `reveal()` methods work together to prevent conflicts when separate parts of your code need to control progress visibility. Each `hide()` call increments an internal counter, while `reveal()` decrements it. The progress bar only appears when this counter reaches zero.
 
@@ -104,7 +102,7 @@ If you've disabled the progress indicator with `progress: false` in `createInert
 
 ## Custom
 
-It's also possible to set up your own custom page loading indicators using Inertia [events](/docs/v3/advanced/events). Let's explore how to do this using the [NProgress](https://ricostacruz.com/nprogress/) library as an example.
+It's also possible to set up your own custom page loading indicators using Inertia [events](https://inertiajs.com/docs/v3/advanced/events.md). Let's explore how to do this using the [NProgress](https://ricostacruz.com/nprogress/) library as an example.
 
 First, disable Inertia's default loading indicator.
 
@@ -132,22 +130,20 @@ After installation, you'll need to add the NProgress [styles](https://github.com
 
 Then, import both `NProgress` and the Inertia `router` into your application.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import NProgress from "nprogress";
-  import { router } from "@inertiajs/vue3";
-  ```
+```js Vue icon="vuejs" theme={null}
+import NProgress from "nprogress";
+import { router } from "@inertiajs/vue3";
+```
 
-  ```js React icon="react" theme={null}
-  import NProgress from "nprogress";
-  import { router } from "@inertiajs/react";
-  ```
+```js React icon="react" theme={null}
+import NProgress from "nprogress";
+import { router } from "@inertiajs/react";
+```
 
-  ```js Svelte icon="s" theme={null}
-  import NProgress from "nprogress";
-  import { router } from "@inertiajs/svelte";
-  ```
-</CodeGroup>
+```js Svelte icon="s" theme={null}
+import NProgress from "nprogress";
+import { router } from "@inertiajs/svelte";
+```
 
 Next, add a `start` event listener. We'll use this listener to show the progress bar when a new Inertia visit begins.
 
@@ -253,109 +249,107 @@ That's it, you now have a beautiful custom page loading indicator!
 
 For convenience, here is the full source code of the final version of our custom loading indicator.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import NProgress from "nprogress";
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import NProgress from "nprogress";
+import { router } from "@inertiajs/vue3";
 
-  let timeout = null;
+let timeout = null;
 
-  router.on("start", () => {
-    timeout = setTimeout(() => NProgress.start(), 250);
-  });
+router.on("start", () => {
+  timeout = setTimeout(() => NProgress.start(), 250);
+});
 
-  router.on("progress", (event) => {
-    if (NProgress.isStarted() && event.detail.progress.percentage) {
-      NProgress.set((event.detail.progress.percentage / 100) * 0.9);
-    }
-  });
+router.on("progress", (event) => {
+  if (NProgress.isStarted() && event.detail.progress.percentage) {
+    NProgress.set((event.detail.progress.percentage / 100) * 0.9);
+  }
+});
 
-  router.on("finish", (event) => {
-    clearTimeout(timeout);
+router.on("finish", (event) => {
+  clearTimeout(timeout);
 
-    if (!NProgress.isStarted()) {
-      return;
-    }
+  if (!NProgress.isStarted()) {
+    return;
+  }
 
-    if (event.detail.visit.completed) {
-      NProgress.done();
-    } else if (event.detail.visit.interrupted) {
-      NProgress.set(0);
-    } else if (event.detail.visit.cancelled) {
-      NProgress.done();
-      NProgress.remove();
-    }
-  });
-  ```
+  if (event.detail.visit.completed) {
+    NProgress.done();
+  } else if (event.detail.visit.interrupted) {
+    NProgress.set(0);
+  } else if (event.detail.visit.cancelled) {
+    NProgress.done();
+    NProgress.remove();
+  }
+});
+```
 
-  ```js React icon="react" theme={null}
-  import NProgress from "nprogress";
-  import { router } from "@inertiajs/react";
+```js React icon="react" theme={null}
+import NProgress from "nprogress";
+import { router } from "@inertiajs/react";
 
-  let timeout = null;
+let timeout = null;
 
-  router.on("start", () => {
-    timeout = setTimeout(() => NProgress.start(), 250);
-  });
+router.on("start", () => {
+  timeout = setTimeout(() => NProgress.start(), 250);
+});
 
-  router.on("progress", (event) => {
-    if (NProgress.isStarted() && event.detail.progress.percentage) {
-      NProgress.set((event.detail.progress.percentage / 100) * 0.9);
-    }
-  });
+router.on("progress", (event) => {
+  if (NProgress.isStarted() && event.detail.progress.percentage) {
+    NProgress.set((event.detail.progress.percentage / 100) * 0.9);
+  }
+});
 
-  router.on("finish", (event) => {
-    clearTimeout(timeout);
+router.on("finish", (event) => {
+  clearTimeout(timeout);
 
-    if (!NProgress.isStarted()) {
-      return;
-    }
+  if (!NProgress.isStarted()) {
+    return;
+  }
 
-    if (event.detail.visit.completed) {
-      NProgress.done();
-    } else if (event.detail.visit.interrupted) {
-      NProgress.set(0);
-    } else if (event.detail.visit.cancelled) {
-      NProgress.done();
-      NProgress.remove();
-    }
-  });
-  ```
+  if (event.detail.visit.completed) {
+    NProgress.done();
+  } else if (event.detail.visit.interrupted) {
+    NProgress.set(0);
+  } else if (event.detail.visit.cancelled) {
+    NProgress.done();
+    NProgress.remove();
+  }
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import NProgress from "nprogress";
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import NProgress from "nprogress";
+import { router } from "@inertiajs/svelte";
 
-  let timeout = null;
+let timeout = null;
 
-  router.on("start", () => {
-    timeout = setTimeout(() => NProgress.start(), 250);
-  });
+router.on("start", () => {
+  timeout = setTimeout(() => NProgress.start(), 250);
+});
 
-  router.on("progress", (event) => {
-    if (NProgress.isStarted() && event.detail.progress.percentage) {
-      NProgress.set((event.detail.progress.percentage / 100) * 0.9);
-    }
-  });
+router.on("progress", (event) => {
+  if (NProgress.isStarted() && event.detail.progress.percentage) {
+    NProgress.set((event.detail.progress.percentage / 100) * 0.9);
+  }
+});
 
-  router.on("finish", (event) => {
-    clearTimeout(timeout);
+router.on("finish", (event) => {
+  clearTimeout(timeout);
 
-    if (!NProgress.isStarted()) {
-      return;
-    }
+  if (!NProgress.isStarted()) {
+    return;
+  }
 
-    if (event.detail.visit.completed) {
-      NProgress.done();
-    } else if (event.detail.visit.interrupted) {
-      NProgress.set(0);
-    } else if (event.detail.visit.cancelled) {
-      NProgress.done();
-      NProgress.remove();
-    }
-  });
-  ```
-</CodeGroup>
+  if (event.detail.visit.completed) {
+    NProgress.done();
+  } else if (event.detail.visit.interrupted) {
+    NProgress.set(0);
+  } else if (event.detail.visit.cancelled) {
+    NProgress.done();
+    NProgress.remove();
+  }
+});
+```
 
 ## Visit Options
 

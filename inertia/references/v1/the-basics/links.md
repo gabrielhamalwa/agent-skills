@@ -1,80 +1,78 @@
 # Links
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
-To create links to other pages within an Inertia app, you will typically use the Inertia `<a>` component. This component is a light wrapper around a standard anchor `<a>` link that intercepts click events and prevents full page reloads. This is [how Inertia provides a single-page app experience](/docs/v1/core-concepts/how-it-works) once your application has been loaded.
+To create links to other pages within an Inertia app, you will typically use the Inertia `<a>` component. This component is a light wrapper around a standard anchor `<a>` link that intercepts click events and prevents full page reloads. This is [how Inertia provides a single-page app experience](https://inertiajs.com/docs/v1/core-concepts/how-it-works.md) once your application has been loaded.
 
 ## Creating Links
 
 To create an Inertia link, use the Inertia `<a>` component. Any attributes you provide to this component will be proxied to the underlying HTML tag.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/">Home</Link>
-  ```
+<Link href="/">Home</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/">Home</Link>
-  ```
+<Link href="/">Home</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/">Home</Link>
-  ```
+<Link href="/">Home</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <a href="/" use:inertia>Home</a>
+<a href="/" use:inertia>Home</a>
 
-  <Link href="/">Home</Link>
-  ```
-</CodeGroup>
+<Link href="/">Home</Link>
+```
 
 By default, Inertia renders links as anchor `<a>` elements. However, you can change the tag using the `as` prop.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+<Link href="/logout" method="post" as="button" type="button">Logout</Link>
 
-  // Renders as...
-  <button type="button">Logout</button>
-  ```
+// Renders as...
+<button type="button">Logout</button>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+<Link href="/logout" method="post" as="button" type="button">Logout</Link>
 
-  // Renders as...
-  <button type="button">Logout</button>
-  ```
+// Renders as...
+<button type="button">Logout</button>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+<Link href="/logout" method="post" as="button" type="button">Logout</Link>
 
-  // Renders as...
-  <button type="button">Logout</button>
-  ```
+// Renders as...
+<button type="button">Logout</button>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia } from '@inertiajs/svelte'
 
-  <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
+<button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
 
-  // Renders as...
-  <button type="button">Logout</button>
-  ```
-</CodeGroup>
+// Renders as...
+<button type="button">Logout</button>
+```
 
 Creating `POST`/`PUT`/`PATCH`/ `DELETE` anchor `<a>` links is discouraged as it causes "Open Link in New Tab / Window" accessibility issues. Instead, consider using a more appropriate element, such as a `<button>`.
 
@@ -82,305 +80,289 @@ Creating `POST`/`PUT`/`PATCH`/ `DELETE` anchor `<a>` links is discouraged as it 
 
 You can specify the HTTP request method for an Inertia link request using the `method` prop. The default method used by links is `GET`, but you can use the `method` prop to make `POST`, `PUT`, `PATCH`, and `DELETE` requests via links.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/logout" method="post" as="button">Logout</Link>
-  ```
+<Link href="/logout" method="post" as="button">Logout</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/logout" method="post" as="button">Logout</Link>
-  ```
+<Link href="/logout" method="post" as="button">Logout</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/logout" method="post" as="button">Logout</Link>
-  ```
+<Link href="/logout" method="post" as="button">Logout</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
-  ```
-</CodeGroup>
+<button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
+```
 
 ## Data
 
 When making `POST` or `PUT` requests, you may wish to add additional data to the request. You can accomplish this using the `data` prop. The provided data can be an `object` or `FormData` instance.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
-  ```
+<Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
-  ```
+<Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
-  ```
+<Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { Link } from '@inertiajs/svelte'
 
-  <Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
-  ```
-</CodeGroup>
+<Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
+```
 
 ## Custom Headers
 
 The `headers` prop allows you to add custom headers to an Inertia link. However, the headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
-  ```
+<Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
-  ```
+<Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/endpoint" headers={{ foo: bar }}>Save</Link>
-  ```
+<Link href="/endpoint" headers={{ foo: bar }}>Save</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>
+<button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>
 
-  <Link href="/endpoint" headers={{ foo: bar}}>Save</Link>
-  ```
-</CodeGroup>
+<Link href="/endpoint" headers={{ foo: bar}}>Save</Link>
+```
 
 ## Browser History
 
 The `replace` prop allows you to specify the browser's history behavior. By default, page visits push (new) state (`window.history.pushState`) into the history; however, it's also possible to replace state (`window.history.replaceState`) by setting the `replace` prop to `true`. This will cause the visit to replace the current history state instead of adding a new history state to the stack.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/" replace>Home</Link>
-  ```
+<Link href="/" replace>Home</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/" replace>Home</Link>
-  ```
+<Link href="/" replace>Home</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <a replace href="/">Home</a>
-  ```
+<a replace href="/">Home</a>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <a href="/" use:inertia="{{ replace: true }}">Home</a>
+<a href="/" use:inertia="{{ replace: true }}">Home</a>
 
-  <Link href="/" replace>Home</Link>
-  ```
-</CodeGroup>
+<Link href="/" replace>Home</Link>
+```
 
 ## State Preservation
 
 You can preserve a page component's local state using the `preserve-state` prop. This will prevent a page component from fully re-rendering. The `preserve-state` prop is especially helpful on pages that contain forms, since you can avoid manually repopulating input fields and can also maintain a focused input.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <input v-model="query" type="text" />
+<input v-model="query" type="text" />
 
-  <Link href="/search" :data="{ query }" preserve-state>Search</Link>
-  ```
+<Link href="/search" :data="{ query }" preserve-state>Search</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <input v-model="query" type="text" />
+<input v-model="query" type="text" />
 
-  <Link href="/search" :data="{ query }" preserve-state>Search</Link>
-  ```
+<Link href="/search" :data="{ query }" preserve-state>Search</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <input onChange={this.handleChange} value={query} />
+<input onChange={this.handleChange} value={query} />
 
-  <Link href="/search" data={query} preserveState>Search</Link>
-  ```
+<Link href="/search" data={query} preserveState>Search</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <input on:change={handleChange} value={query} />
+<input on:change={handleChange} value={query} />
 
-  <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>
+<button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>
 
-  <Link href="/search" data={query} preserveState>Search</Link>
-  ```
-</CodeGroup>
+<Link href="/search" data={query} preserveState>Search</Link>
+```
 
 ## Scroll Preservation
 
 You can use the `preserveScroll` prop to prevent Inertia from automatically resetting the scroll position when making a page visit.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/" preserve-scroll>Home</Link>
-  ```
+<Link href="/" preserve-scroll>Home</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/" preserve-scroll>Home</Link>
-  ```
+<Link href="/" preserve-scroll>Home</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <a preserveScroll href="/">Home</a>
-  ```
+<a preserveScroll href="/">Home</a>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
+<a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
 
-  <Link href="/" preserveScroll>Home</Link>
-  ```
-</CodeGroup>
+<Link href="/" preserveScroll>Home</Link>
+```
 
-For more information on managing scroll position, please consult the documentation on [scroll management](/docs/v1/advanced/scroll-management).
+For more information on managing scroll position, please consult the documentation on [scroll management](https://inertiajs.com/docs/v1/advanced/scroll-management.md).
 
 ## Partial Reloads
 
 The `only` prop allows you to specify that only a subset of a page's props (data) should be retrieved from the server on subsequent visits to that page.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  <Link href="/users?active=true" :only="['users']">Show active</Link>
-  ```
+<Link href="/users?active=true" :only="['users']">Show active</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  <Link href="/users?active=true" :only="['users']">Show active</Link>
-  ```
+<Link href="/users?active=true" :only="['users']">Show active</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { Link } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { Link } from '@inertiajs/react'
 
-  <Link href="/users?active=true" only={['users']}>Show active</Link>
-  ```
+<Link href="/users?active=true" only={['users']}>Show active</Link>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { inertia, Link } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { inertia, Link } from '@inertiajs/svelte'
 
-  <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
+<a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
 
-  <Link href="/users?active=true" only={['users']}>Show active</Link>
-  ```
-</CodeGroup>
+<Link href="/users?active=true" only={['users']}>Show active</Link>
+```
 
-For more information on this topic, please consult the complete documentation on [partial reloads](/docs/v1/advanced/partial-reloads).
+For more information on this topic, please consult the complete documentation on [partial reloads](https://inertiajs.com/docs/v1/advanced/partial-reloads.md).
 
 ## Active States
 
 It's often desirable to set an active state for navigation links based on the current page. This can be accomplished when using Inertia by inspecting the `page` object and doing string comparisons against the `page.url` and `page.component` properties.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue2'
+```vue Vue 2 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue2'
 
-  // URL exact match...
-  <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
+// URL exact match...
+<Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
 
-  // Component exact match...
-  <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>
+// Component exact match...
+<Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>
 
-  // URL starts with (/users, /users/create, /users/1, etc.)...
-  <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
+// URL starts with (/users, /users/create, /users/1, etc.)...
+<Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
 
-  // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
-  <Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
-  ```
+// Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
+<Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  import { Link } from '@inertiajs/vue3'
+```vue Vue 3 icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
 
-  // URL exact match...
-  <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
+// URL exact match...
+<Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
 
-  // Component exact match...
-  <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>
+// Component exact match...
+<Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>
 
-  // URL starts with (/users, /users/create, /users/1, etc.)...
-  <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
+// URL starts with (/users, /users/create, /users/1, etc.)...
+<Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
 
-  // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
-  <Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
-  ```
+// Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
+<Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { usePage } from '@inertiajs/react'
+```jsx React icon="react" theme={null}
+import { usePage } from '@inertiajs/react'
 
-  const { url, component } = usePage()
+const { url, component } = usePage()
 
-  // URL exact match...
-  <a href="/users" >Users</a>
+// URL exact match...
+<a href="/users" >Users</a>
 
-  // Component exact match...
-  <a href="/users" >Users</a>
+// Component exact match...
+<a href="/users" >Users</a>
 
-  // URL starts with (/users, /users/create, /users/1, etc.)...
-  <a href="/users" >Users</a>
+// URL starts with (/users, /users/create, /users/1, etc.)...
+<a href="/users" >Users</a>
 
-  // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
-  <a href="/users" >Users</a>
-  ```
+// Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
+<a href="/users" >Users</a>
+```
 
-  ```svelte Svelte icon="s" theme={null}
-  import { page } from '@inertiajs/svelte'
+```svelte Svelte icon="s" theme={null}
+import { page } from '@inertiajs/svelte'
 
-  // URL exact match...
-  <a href="/users" class={$page.url === '/users' ? 'active' : ''}>Users</a>
+// URL exact match...
+<a href="/users" class={$page.url === '/users' ? 'active' : ''}>Users</a>
 
-  // Component exact match...
-  <a href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</a>
+// Component exact match...
+<a href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</a>
 
-  // URL starts with (/users, /users/create, /users/1, etc.)...
-  <a href="/users" class={$page.url.startsWith('/users') ? 'active' : ''}>Users</a>
+// URL starts with (/users, /users/create, /users/1, etc.)...
+<a href="/users" class={$page.url.startsWith('/users') ? 'active' : ''}>Users</a>
 
-  // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
-  <a href="/users" class={$page.component.startsWith('Users') ? 'active' : ''}>Users</a>
-  ```
-</CodeGroup>
+// Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
+<a href="/users" class={$page.component.startsWith('Users') ? 'active' : ''}>Users</a>
+```
 
 You can perform exact match comparisons (`===`), `startsWith()` comparisons (useful for matching a subset of pages), or even more complex comparisons using regular expressions.
 

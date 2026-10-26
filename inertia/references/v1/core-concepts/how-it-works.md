@@ -1,6 +1,8 @@
 # How It Works
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 With Inertia you build applications just like you've always done with your server-side web framework of choice. You use your framework's existing functionality for routing, controllers, middleware, authentication, authorization, data fetching, and more.
 
@@ -14,4 +16,4 @@ When Inertia makes an XHR visit, the server detects that it's an Inertia visit a
 
 **The end result is a silky smooth single-page experience.** 🎉
 
-To learn more about the nitty-gritty, technical details of how Inertia works under the hood, check out the [protocol page](/docs/v1/core-concepts/the-protocol).
+To learn more about the nitty-gritty, technical details of how Inertia works under the hood, check out the [protocol page](https://inertiajs.com/docs/v1/core-concepts/the-protocol.md).

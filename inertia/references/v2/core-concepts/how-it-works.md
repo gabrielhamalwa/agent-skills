@@ -1,6 +1,8 @@
 # How It Works
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 ## Use the Tools You Love
 
@@ -18,4 +20,4 @@ When Inertia makes an XHR visit, the server detects that it's an Inertia visit a
 
 **The end result is a silky smooth single-page experience.**
 
-To learn more about the nitty-gritty, technical details of how Inertia works under the hood, check out the [protocol page](/docs/v2/core-concepts/the-protocol).
+To learn more about the nitty-gritty, technical details of how Inertia works under the hood, check out the [protocol page](https://inertiajs.com/docs/v2/core-concepts/the-protocol.md).

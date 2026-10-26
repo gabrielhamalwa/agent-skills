@@ -1,77 +1,8 @@
 # Server-Side Rendering (SSR)
 
-export const VueSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return "Vue";
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || "Vue";
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (code !== "Vue") {
-    return null;
-  }
-  return children;
-};
-
-export const SvelteSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || null;
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (!code?.includes("Svelte")) {
-    return null;
-  }
-  return children;
-};
-
-export const ReactSpecific = ({children}) => {
-  const [code, setCode] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    return localStorage.getItem("code")?.replace(/"/g, "") || null;
-  });
-  useEffect(() => {
-    const handler = event => {
-      if (event.detail?.key === "code") {
-        setCode(event.detail.value?.replace(/"/g, ""));
-      }
-    };
-    window.addEventListener("localStorageUpdate", handler);
-    return () => window.removeEventListener("localStorageUpdate", handler);
-  }, []);
-  if (code !== "React") {
-    return null;
-  }
-  return children;
-};
-
-export const ClientSpecific = ({children}) => {
-  const [nada, setNada] = useState();
-  return children;
-};
-
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to receive fully rendered HTML when they visit your application. Since fully rendered HTML is served by your application, it's also easier for search engines to index your site.
 
@@ -89,83 +20,79 @@ npm run build:ssr
 
 To manually configure SSR without a Laravel starter kit, first create an SSR entry point file within your Laravel project.
 
-<CodeGroup>
-  ```bash Vue icon="vuejs" theme={null}
-  touch resources/js/ssr.js
-  ```
+```bash Vue icon="vuejs" theme={null}
+touch resources/js/ssr.js
+```
 
-  ```bash React icon="react" theme={null}
-  touch resources/js/ssr.jsx
-  ```
+```bash React icon="react" theme={null}
+touch resources/js/ssr.jsx
+```
 
-  ```bash Svelte icon="s" theme={null}
-  touch resources/js/ssr.js
-  ```
-</CodeGroup>
+```bash Svelte icon="s" theme={null}
+touch resources/js/ssr.js
+```
 
 This file is going to look very similar to your app entry point, except it's not going to run in the browser, but rather in Node.js. Here's a complete example.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { createInertiaApp } from '@inertiajs/vue3'
-  import createServer from '@inertiajs/vue3/server'
-  import { renderToString } from 'vue/server-renderer'
-  import { createSSRApp, h } from 'vue'
+```js Vue icon="vuejs" theme={null}
+import { createInertiaApp } from '@inertiajs/vue3'
+import createServer from '@inertiajs/vue3/server'
+import { renderToString } from 'vue/server-renderer'
+import { createSSRApp, h } from 'vue'
 
-  createServer(page =>
-      createInertiaApp({
-          page,
-          render: renderToString,
-          resolve: name => {
-              const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-              return pages[`./Pages/${name}.vue`]
-          },
-          setup({ App, props, plugin }) {
-              return createSSRApp({
-                  render: () => h(App, props),
-              }).use(plugin)
-          },
-      }),
-  )
-  ```
+createServer(page =>
+    createInertiaApp({
+        page,
+        render: renderToString,
+        resolve: name => {
+            const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+            return pages[`./Pages/${name}.vue`]
+        },
+        setup({ App, props, plugin }) {
+            return createSSRApp({
+                render: () => h(App, props),
+            }).use(plugin)
+        },
+    }),
+)
+```
 
-  ```jsx React icon="react" theme={null}
-  import { createInertiaApp } from '@inertiajs/react'
-  import createServer from '@inertiajs/react/server'
-  import ReactDOMServer from 'react-dom/server'
+```jsx React icon="react" theme={null}
+import { createInertiaApp } from '@inertiajs/react'
+import createServer from '@inertiajs/react/server'
+import ReactDOMServer from 'react-dom/server'
 
-  createServer(page =>
-      createInertiaApp({
-          page,
-          render: ReactDOMServer.renderToString,
-          resolve: name => {
-              const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-              return pages[`./Pages/${name}.jsx`]
-          },
-          setup: ({ App, props }) => <App {...props} />,
-      }),
-  )
-  ```
+createServer(page =>
+    createInertiaApp({
+        page,
+        render: ReactDOMServer.renderToString,
+        resolve: name => {
+            const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+            return pages[`./Pages/${name}.jsx`]
+        },
+        setup: ({ App, props }) => <App {...props} />,
+    }),
+)
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { createInertiaApp } from '@inertiajs/svelte'
-  import createServer from '@inertiajs/svelte/server'
-  import { render } from 'svelte/server'
+```js Svelte icon="s" theme={null}
+import { createInertiaApp } from '@inertiajs/svelte'
+import createServer from '@inertiajs/svelte/server'
+import { render } from 'svelte/server'
 
-  createServer(page =>
-      createInertiaApp({
-          page,
-          resolve: name => {
-              const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-              return pages[`./Pages/${name}.svelte`]
-          },
-          setup({ App, props }) {
-              return render(App, { props })
-          },
-      }),
-  )
-  ```
-</CodeGroup>
+createServer(page =>
+    createInertiaApp({
+        page,
+        resolve: name => {
+            const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+            return pages[`./Pages/${name}.svelte`]
+        },
+        setup({ App, props }) {
+            return render(App, { props })
+        },
+    }),
+)
+```
 
 When creating this file, be sure to add anything that's missing from your `app.js` file that makes sense to run in SSR mode, such as plugins or custom mixins.
 
@@ -175,157 +102,149 @@ By default, the SSR server will run on a single thread. Clustering starts multip
 
 You may enable clustering by passing a second argument of options to `createServer`.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { createInertiaApp } from '@inertiajs/vue3'
-  import createServer from '@inertiajs/vue3/server'
-  import { renderToString } from 'vue/server-renderer'
-  import { createSSRApp, h } from 'vue'
+```js Vue icon="vuejs" theme={null}
+import { createInertiaApp } from '@inertiajs/vue3'
+import createServer from '@inertiajs/vue3/server'
+import { renderToString } from 'vue/server-renderer'
+import { createSSRApp, h } from 'vue'
 
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { cluster: true },
-  )
-  ```
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { cluster: true },
+)
+```
 
-  ```jsx React icon="react" theme={null}
-  import { createInertiaApp } from '@inertiajs/react'
-  import createServer from '@inertiajs/react/server'
-  import ReactDOMServer from 'react-dom/server'
+```jsx React icon="react" theme={null}
+import { createInertiaApp } from '@inertiajs/react'
+import createServer from '@inertiajs/react/server'
+import ReactDOMServer from 'react-dom/server'
 
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { cluster: true },
-  )
-  ```
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { cluster: true },
+)
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { createInertiaApp } from '@inertiajs/svelte'
-  import createServer from '@inertiajs/svelte/server'
-  import { render } from 'svelte/server'
+```js Svelte icon="s" theme={null}
+import { createInertiaApp } from '@inertiajs/svelte'
+import createServer from '@inertiajs/svelte/server'
+import { render } from 'svelte/server'
 
-  createServer(page =>
-      createInertiaApp({
-          // ...
-      }),
-      { cluster: true },
-  )
-  ```
-</CodeGroup>
+createServer(page =>
+    createInertiaApp({
+        // ...
+    }),
+    { cluster: true },
+)
+```
 
 ## Client-Side Hydration
 
-<ClientSpecific>
-  Since your website will be server-side rendered, you should also update your `app.js` file to use hydration instead of normal rendering. This allows <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> to pick up the server-rendered HTML and make it interactive without re-rendering it.
-</ClientSpecific>
+Since your website will be server-side rendered, you should also update your `app.js` file to use hydration instead of normal rendering. This allows VueReactSvelte to pick up the server-rendered HTML and make it interactive without re-rendering it.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { createApp, h } from 'vue' // [!code --]
-  import { createSSRApp, h } from 'vue' // [!code ++]
-  import { createInertiaApp } from '@inertiajs/vue3'
+```js Vue icon="vuejs" theme={null}
+import { createApp, h } from 'vue' // [!code --]
+import { createSSRApp, h } from 'vue' // [!code ++]
+import { createInertiaApp } from '@inertiajs/vue3'
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-          return pages[`./Pages/${name}.vue`]
-      },
-      setup({ el, App, props, plugin }) {
-      createApp({ render: () => h(App, props) }) // [!code --]
-      createSSRApp({ render: () => h(App, props) }) // [!code ++]
-          .use(plugin)
-          .mount(el)
-      },
-  })
-  ```
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+        return pages[`./Pages/${name}.vue`]
+    },
+    setup({ el, App, props, plugin }) {
+    createApp({ render: () => h(App, props) }) // [!code --]
+    createSSRApp({ render: () => h(App, props) }) // [!code ++]
+        .use(plugin)
+        .mount(el)
+    },
+})
+```
 
-  ```js React icon="react" theme={null}
-  import { createInertiaApp } from '@inertiajs/react'
-  import { createRoot } from 'react-dom/client' // [!code --]
-  import { hydrateRoot } from 'react-dom/client' // [!code ++]
+```js React icon="react" theme={null}
+import { createInertiaApp } from '@inertiajs/react'
+import { createRoot } from 'react-dom/client' // [!code --]
+import { hydrateRoot } from 'react-dom/client' // [!code ++]
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-          return pages[`./Pages/${name}.jsx`]
-      },
-      setup({ el, App, props }) {
-          createRoot(el).render(<App {...props} />) // [!code --]
-          hydrateRoot(el, <App {...props} />) // [!code ++]
-      },
-  })
-  ```
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+        return pages[`./Pages/${name}.jsx`]
+    },
+    setup({ el, App, props }) {
+        createRoot(el).render(<App {...props} />) // [!code --]
+        hydrateRoot(el, <App {...props} />) // [!code ++]
+    },
+})
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { createInertiaApp } from '@inertiajs/svelte'
-  import { mount } from 'svelte' // [!code --]
-  import { hydrate, mount } from 'svelte' // [!code ++]
+```js Svelte icon="s" theme={null}
+import { createInertiaApp } from '@inertiajs/svelte'
+import { mount } from 'svelte' // [!code --]
+import { hydrate, mount } from 'svelte' // [!code ++]
 
-  createInertiaApp({
-      resolve: name => {
-          const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-          return pages[`./Pages/${name}.svelte`]
-      },
-      setup({ el, App, props }) {
-          mount(App, { target: el, props }) // [!code --]
-          if (el.dataset.serverRendered === 'true') { // [!code ++:5]
-              hydrate(App, { target: el, props })
-          } else {
-              mount(App, { target: el, props })
-          }
-      },
-  })
-  ```
-</CodeGroup>
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+        return pages[`./Pages/${name}.svelte`]
+    },
+    setup({ el, App, props }) {
+        mount(App, { target: el, props }) // [!code --]
+        if (el.dataset.serverRendered === 'true') { // [!code ++:5]
+            hydrate(App, { target: el, props })
+        } else {
+            mount(App, { target: el, props })
+        }
+    },
+})
+```
 
 ## Setup Vite
 
 Next, update your Vite configuration to build the new SSR entry point by adding a `ssr` property to Laravel's Vite plugin configuration in your `vite.config.js` file.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" vite.config.js theme={null}
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.js'],
-              ssr: 'resources/js/ssr.js', // [!code ++]
-              refresh: true,
-          }),
-          // ...
-      ],
-  })
-  ```
+```js Vue icon="vuejs" vite.config.js theme={null}
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            ssr: 'resources/js/ssr.js', // [!code ++]
+            refresh: true,
+        }),
+        // ...
+    ],
+})
+```
 
-  ```js React icon="react" vite.config.js theme={null}
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.jsx'],
-              ssr: 'resources/js/ssr.jsx', // [!code ++]
-              refresh: true,
-          }),
-          // ...
-      ],
-  })
-  ```
+```js React icon="react" vite.config.js theme={null}
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.jsx'],
+            ssr: 'resources/js/ssr.jsx', // [!code ++]
+            refresh: true,
+        }),
+        // ...
+    ],
+})
+```
 
-  ```js Svelte icon="s" vite.config.js theme={null}
-  export default defineConfig({
-      plugins: [
-          laravel({
-              input: ['resources/js/app.js'],
-              ssr: 'resources/js/ssr.js', // [!code ++]
-              refresh: true,
-          }),
-          // ...
-      ],
-  })
-  ```
-</CodeGroup>
+```js Svelte icon="s" vite.config.js theme={null}
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            ssr: 'resources/js/ssr.js', // [!code ++]
+            refresh: true,
+        }),
+        // ...
+    ],
+})
+```
 
 ## Update NPM Script
 

@@ -6,310 +6,292 @@ Inertia provides an event system that allows you to "hook into" the various life
 
 To register an event listener, use the `router.on()` method.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
+router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
+router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
-</CodeGroup>
+router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
 Under the hood, Inertia uses native browser events, so you can also interact with Inertia events using the typical event methods you may already be familiar with. Just be sure to prepend `inertia:` to the event name.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  document.addEventListener("inertia:start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
+document.addEventListener("inertia:start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  document.addEventListener("inertia:start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
+document.addEventListener("inertia:start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  document.addEventListener("inertia:start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
-</CodeGroup>
+document.addEventListener("inertia:start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
 ## Removing Listeners
 
 When you register an event listener, Inertia automatically returns a callback that can be invoked to remove the event listener.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  let removeStartEventListener = router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
+let removeStartEventListener = router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
 
-  // Remove the listener...
-  removeStartEventListener();
-  ```
+// Remove the listener...
+removeStartEventListener();
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  let removeStartEventListener = router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
+let removeStartEventListener = router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
 
-  // Remove the listener...
-  removeStartEventListener();
-  ```
+// Remove the listener...
+removeStartEventListener();
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  let removeStartEventListener = router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
+let removeStartEventListener = router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
 
-  // Remove the listener...
-  removeStartEventListener();
-  ```
-</CodeGroup>
+// Remove the listener...
+removeStartEventListener();
+```
 
 Combined with hooks, you can automatically remove the event listener when components unmount.
 
-<CodeGroup>
-  ```vue Vue icon="vuejs" theme={null}
-  <script setup>
-  import { router } from '@inertiajs/vue3'
-  import { onUnmounted } from 'vue'
+```vue Vue icon="vuejs" theme={null}
+<script setup>
+import { router } from '@inertiajs/vue3'
+import { onUnmounted } from 'vue'
 
-  onUnmounted(
-    router.on('start', (event) => {
-      console.log(`Starting a visit to ${event.detail.visit.url}`)
-    })
-  )
-  </script>
-  ```
+onUnmounted(
+  router.on('start', (event) => {
+    console.log(`Starting a visit to ${event.detail.visit.url}`)
+  })
+)
+</script>
+```
 
-  ```jsx React icon="react" theme={null}
-  import { useEffect } from "react";
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { useEffect } from "react";
+import { router } from "@inertiajs/react";
 
-  useEffect(() => {
-    return router.on("start", (event) => {
-      console.log(`Starting a visit to ${event.detail.visit.url}`);
-    });
-  }, []);
-  ```
-
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
-
-  $effect(() => {
-    return router.on("start", (event) => {
-      console.log(`Starting a visit to ${event.detail.visit.url}`);
-    });
+useEffect(() => {
+  return router.on("start", (event) => {
+    console.log(`Starting a visit to ${event.detail.visit.url}`);
   });
-  ```
-</CodeGroup>
+}, []);
+```
+
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
+
+$effect(() => {
+  return router.on("start", (event) => {
+    console.log(`Starting a visit to ${event.detail.visit.url}`);
+  });
+});
+```
 
 Alternatively, if you're using native browser events, you can remove the event listener using `removeEventListener()`.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  let startEventListener = (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  };
+let startEventListener = (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+};
 
-  document.addEventListener("inertia:start", startEventListener);
+document.addEventListener("inertia:start", startEventListener);
 
-  // Remove the listener...
-  document.removeEventListener("inertia:start", startEventListener);
-  ```
+// Remove the listener...
+document.removeEventListener("inertia:start", startEventListener);
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  let startEventListener = (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  };
+let startEventListener = (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+};
 
-  document.addEventListener("inertia:start", startEventListener);
+document.addEventListener("inertia:start", startEventListener);
 
-  // Remove the listener...
-  document.removeEventListener("inertia:start", startEventListener);
-  ```
+// Remove the listener...
+document.removeEventListener("inertia:start", startEventListener);
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  let startEventListener = (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  };
+let startEventListener = (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+};
 
-  document.addEventListener("inertia:start", startEventListener);
+document.addEventListener("inertia:start", startEventListener);
 
-  // Remove the listener...
-  document.removeEventListener("inertia:start", startEventListener);
-  ```
-</CodeGroup>
+// Remove the listener...
+document.removeEventListener("inertia:start", startEventListener);
+```
 
 ## One-time Listeners
 
 You may register a listener that fires only once using the `router.once()` method. The listener is automatically removed after the first invocation.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.once("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
+router.once("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.once("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
+router.once("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.once("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
-</CodeGroup>
+router.once("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
 Like `router.on()`, this method returns a callback you may invoke to remove the listener before it fires.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  let removeStartEventListener = router.once("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
+let removeStartEventListener = router.once("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
 
-  // Remove the listener before it fires...
-  removeStartEventListener();
-  ```
+// Remove the listener before it fires...
+removeStartEventListener();
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  let removeStartEventListener = router.once("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
+let removeStartEventListener = router.once("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
 
-  // Remove the listener before it fires...
-  removeStartEventListener();
-  ```
+// Remove the listener before it fires...
+removeStartEventListener();
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  let removeStartEventListener = router.once("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
+let removeStartEventListener = router.once("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
 
-  // Remove the listener before it fires...
-  removeStartEventListener();
-  ```
-</CodeGroup>
+// Remove the listener before it fires...
+removeStartEventListener();
+```
 
 ## Canceling Events
 
 Some events, such as `before`, `networkError`, `httpException`, and `location`, support cancellation, allowing you to prevent Inertia's default behavior. Just like native events, the event will be canceled if only one event listener calls `event.preventDefault()`.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("before", (event) => {
-    if (!confirm("Are you sure you want to navigate away?")) {
-      event.preventDefault();
-    }
-  });
-  ```
+router.on("before", (event) => {
+  if (!confirm("Are you sure you want to navigate away?")) {
+    event.preventDefault();
+  }
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("before", (event) => {
-    if (!confirm("Are you sure you want to navigate away?")) {
-      event.preventDefault();
-    }
-  });
-  ```
+router.on("before", (event) => {
+  if (!confirm("Are you sure you want to navigate away?")) {
+    event.preventDefault();
+  }
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("before", (event) => {
-    if (!confirm("Are you sure you want to navigate away?")) {
-      event.preventDefault();
-    }
-  });
-  ```
-</CodeGroup>
+router.on("before", (event) => {
+  if (!confirm("Are you sure you want to navigate away?")) {
+    event.preventDefault();
+  }
+});
+```
 
 For convenience, if you register your event listener using `router.on()`, you can cancel the event by returning `false` from the listener.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("before", (event) => {
-    return confirm("Are you sure you want to navigate away?");
-  });
-  ```
+router.on("before", (event) => {
+  return confirm("Are you sure you want to navigate away?");
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("before", (event) => {
-    return confirm("Are you sure you want to navigate away?");
-  });
-  ```
+router.on("before", (event) => {
+  return confirm("Are you sure you want to navigate away?");
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("before", (event) => {
-    return confirm("Are you sure you want to navigate away?");
-  });
-  ```
-</CodeGroup>
+router.on("before", (event) => {
+  return confirm("Are you sure you want to navigate away?");
+});
+```
 
 Note that browsers do not allow canceling the native `popstate` event, so preventing forward and back history visits with Inertia is not possible.
 
@@ -317,89 +299,83 @@ Note that browsers do not allow canceling the native `popstate` event, so preven
 
 The `before` event fires when a request is about to be made to the server. This is useful for intercepting visits.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("before", (event) => {
-    console.log(`About to make a visit to ${event.detail.visit.url}`);
-  });
-  ```
+router.on("before", (event) => {
+  console.log(`About to make a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("before", (event) => {
-    console.log(`About to make a visit to ${event.detail.visit.url}`);
-  });
-  ```
+router.on("before", (event) => {
+  console.log(`About to make a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("before", (event) => {
-    console.log(`About to make a visit to ${event.detail.visit.url}`);
-  });
-  ```
-</CodeGroup>
+router.on("before", (event) => {
+  console.log(`About to make a visit to ${event.detail.visit.url}`);
+});
+```
 
 The primary purpose of this event is to allow you to prevent a visit from happening.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("before", (event) => {
-    return confirm("Are you sure you want to navigate away?");
-  });
-  ```
+router.on("before", (event) => {
+  return confirm("Are you sure you want to navigate away?");
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("before", (event) => {
-    return confirm("Are you sure you want to navigate away?");
-  });
-  ```
+router.on("before", (event) => {
+  return confirm("Are you sure you want to navigate away?");
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("before", (event) => {
-    return confirm("Are you sure you want to navigate away?");
-  });
-  ```
-</CodeGroup>
+router.on("before", (event) => {
+  return confirm("Are you sure you want to navigate away?");
+});
+```
 
 ## Start
 
 The `start` event fires when a request to the server has started. This is useful for displaying loading indicators.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
+router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
+router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("start", (event) => {
-    console.log(`Starting a visit to ${event.detail.visit.url}`);
-  });
-  ```
-</CodeGroup>
+router.on("start", (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+```
 
 The `start` event is not cancelable.
 
@@ -407,31 +383,29 @@ The `start` event is not cancelable.
 
 The `progress` event fires as progress increments during file uploads.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("progress", (event) => {
-    this.form.progress = event.detail.progress.percentage;
-  });
-  ```
+router.on("progress", (event) => {
+  this.form.progress = event.detail.progress.percentage;
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("progress", (event) => {
-    this.form.progress = event.detail.progress.percentage;
-  });
-  ```
+router.on("progress", (event) => {
+  this.form.progress = event.detail.progress.percentage;
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("progress", (event) => {
-    this.form.progress = event.detail.progress.percentage;
-  });
-  ```
-</CodeGroup>
+router.on("progress", (event) => {
+  this.form.progress = event.detail.progress.percentage;
+});
+```
 
 The `progress` event is not cancelable.
 
@@ -439,69 +413,65 @@ The `progress` event is not cancelable.
 
 The `success` event fires on successful page visits, unless validation errors are present. However, this does *not* include history visits.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("success", (event) => {
-    console.log(`Successfully made a visit to ${event.detail.page.url}`);
-  });
-  ```
+router.on("success", (event) => {
+  console.log(`Successfully made a visit to ${event.detail.page.url}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("success", (event) => {
-    console.log(`Successfully made a visit to ${event.detail.page.url}`);
-  });
-  ```
+router.on("success", (event) => {
+  console.log(`Successfully made a visit to ${event.detail.page.url}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("success", (event) => {
-    console.log(`Successfully made a visit to ${event.detail.page.url}`);
-  });
-  ```
-</CodeGroup>
+router.on("success", (event) => {
+  console.log(`Successfully made a visit to ${event.detail.page.url}`);
+});
+```
 
 The `success` event is not cancelable.
 
 ## Flash
 
-The `flash` event fires when [flash data](/docs/v3/data-props/flash-data) is received from the server. This is useful for displaying toast notifications or handling temporary data in a central location.
+The `flash` event fires when [flash data](https://inertiajs.com/docs/v3/data-props/flash-data.md) is received from the server. This is useful for displaying toast notifications or handling temporary data in a central location.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("flash", (event) => {
-    if (event.detail.flash.toast) {
-      showToast(event.detail.flash.toast);
-    }
-  });
-  ```
+router.on("flash", (event) => {
+  if (event.detail.flash.toast) {
+    showToast(event.detail.flash.toast);
+  }
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("flash", (event) => {
-    if (event.detail.flash.toast) {
-      showToast(event.detail.flash.toast);
-    }
-  });
-  ```
+router.on("flash", (event) => {
+  if (event.detail.flash.toast) {
+    showToast(event.detail.flash.toast);
+  }
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("flash", (event) => {
-    if (event.detail.flash.toast) {
-      showToast(event.detail.flash.toast);
-    }
-  });
-  ```
-</CodeGroup>
+router.on("flash", (event) => {
+  if (event.detail.flash.toast) {
+    showToast(event.detail.flash.toast);
+  }
+});
+```
 
 The `flash` event is not cancelable and fires on every response that carries flash data.
 
@@ -509,198 +479,186 @@ The `flash` event is not cancelable and fires on every response that carries fla
 
 The `error` event fires when validation errors are present on "successful" page visits.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("error", (event) => {
-    console.log(event.detail.errors);
-  });
-  ```
+router.on("error", (event) => {
+  console.log(event.detail.errors);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("error", (event) => {
-    console.log(event.detail.errors);
-  });
-  ```
+router.on("error", (event) => {
+  console.log(event.detail.errors);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("error", (event) => {
-    console.log(event.detail.errors);
-  });
-  ```
-</CodeGroup>
+router.on("error", (event) => {
+  console.log(event.detail.errors);
+});
+```
 
 The `error` event is not cancelable.
 
 ## HTTP Exception
 
-The `httpException` event fires when a non-Inertia response is received from the server, such as an HTML or JSON response. A valid Inertia response has the `X-Inertia` header set to `true` and a JSON payload containing [the page object](/docs/v3/core-concepts/the-protocol#the-page-object).
+The `httpException` event fires when a non-Inertia response is received from the server, such as an HTML or JSON response. A valid Inertia response has the `X-Inertia` header set to `true` and a JSON payload containing [the page object](https://inertiajs.com/docs/v3/core-concepts/the-protocol.md#the-page-object).
 
 This event is fired for all response types, including `200`, `400`, and `500` response codes.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("httpException", (event) => {
-    console.log(`An invalid Inertia response was received.`);
-    console.log(event.detail.response);
-  });
-  ```
+router.on("httpException", (event) => {
+  console.log(`An invalid Inertia response was received.`);
+  console.log(event.detail.response);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("httpException", (event) => {
-    console.log(`An invalid Inertia response was received.`);
-    console.log(event.detail.response);
-  });
-  ```
+router.on("httpException", (event) => {
+  console.log(`An invalid Inertia response was received.`);
+  console.log(event.detail.response);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("httpException", (event) => {
-    console.log(`An invalid Inertia response was received.`);
-    console.log(event.detail.response);
-  });
-  ```
-</CodeGroup>
+router.on("httpException", (event) => {
+  console.log(`An invalid Inertia response was received.`);
+  console.log(event.detail.response);
+});
+```
 
 You may cancel the `httpException` event to prevent Inertia from showing the non-Inertia response modal.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("httpException", (event) => {
-    event.preventDefault();
+router.on("httpException", (event) => {
+  event.preventDefault();
 
-    // Handle the invalid response yourself...
-  });
-  ```
+  // Handle the invalid response yourself...
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("httpException", (event) => {
-    event.preventDefault();
+router.on("httpException", (event) => {
+  event.preventDefault();
 
-    // Handle the invalid response yourself...
-  });
-  ```
+  // Handle the invalid response yourself...
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("httpException", (event) => {
-    event.preventDefault();
+router.on("httpException", (event) => {
+  event.preventDefault();
 
-    // Handle the invalid response yourself...
-  });
-  ```
-</CodeGroup>
+  // Handle the invalid response yourself...
+});
+```
 
 ## Network Error
 
 The `networkError` event fires on unexpected XHR errors such as network interruptions. In addition, this event fires for errors generated when resolving page components.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("networkError", (event) => {
-    console.log(`An unexpected error occurred during an Inertia visit.`);
-    console.log(event.detail.error);
-  });
-  ```
+router.on("networkError", (event) => {
+  console.log(`An unexpected error occurred during an Inertia visit.`);
+  console.log(event.detail.error);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("networkError", (event) => {
-    console.log(`An unexpected error occurred during an Inertia visit.`);
-    console.log(event.detail.error);
-  });
-  ```
+router.on("networkError", (event) => {
+  console.log(`An unexpected error occurred during an Inertia visit.`);
+  console.log(event.detail.error);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("networkError", (event) => {
-    console.log(`An unexpected error occurred during an Inertia visit.`);
-    console.log(event.detail.error);
-  });
-  ```
-</CodeGroup>
+router.on("networkError", (event) => {
+  console.log(`An unexpected error occurred during an Inertia visit.`);
+  console.log(event.detail.error);
+});
+```
 
 You may cancel the `networkError` event to prevent the error from being thrown.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("networkError", (event) => {
-    event.preventDefault();
-    // Handle the error yourself
-  });
-  ```
+router.on("networkError", (event) => {
+  event.preventDefault();
+  // Handle the error yourself
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("networkError", (event) => {
-    event.preventDefault();
-    // Handle the error yourself
-  });
-  ```
+router.on("networkError", (event) => {
+  event.preventDefault();
+  // Handle the error yourself
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("networkError", (event) => {
-    event.preventDefault();
-    // Handle the error yourself
-  });
-  ```
-</CodeGroup>
+router.on("networkError", (event) => {
+  event.preventDefault();
+  // Handle the error yourself
+});
+```
 
-This event will *not* fire for XHR requests that receive `400`- and `500`-level responses or for non-Inertia responses, as these situations are handled in other ways by Inertia. Please consult the [error handling documentation](/docs/v3/advanced/error-handling) for more information.
+This event will *not* fire for XHR requests that receive `400`- and `500`-level responses or for non-Inertia responses, as these situations are handled in other ways by Inertia. Please consult the [error handling documentation](https://inertiajs.com/docs/v3/advanced/error-handling.md) for more information.
 
 ## Finish
 
 The `finish` event fires after an XHR request has completed for both "successful" and "unsuccessful" responses. This event is useful for hiding loading indicators.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("finish", (event) => {
-    NProgress.done();
-  });
-  ```
+router.on("finish", (event) => {
+  NProgress.done();
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("finish", (event) => {
-    NProgress.done();
-  });
-  ```
+router.on("finish", (event) => {
+  NProgress.done();
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("finish", (event) => {
-    NProgress.done();
-  });
-  ```
-</CodeGroup>
+router.on("finish", (event) => {
+  NProgress.done();
+});
+```
 
 The `finish` event is not cancelable.
 
@@ -708,142 +666,134 @@ The `finish` event is not cancelable.
 
 The `navigate` event fires on successful page visits, as well as when navigating through history.
 
-<Badge>v3.9.0+</Badge>
+v3.9.0+
 
 The event detail includes a `type` value describing how the navigation happened: `initial` for the first page load, `visit` for Inertia visits, and `history` for back and forward navigation.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("navigate", (event) => {
-    console.log(`Navigated to ${event.detail.page.url}`);
-    console.log(`Navigation type: ${event.detail.type}`);
-  });
-  ```
+router.on("navigate", (event) => {
+  console.log(`Navigated to ${event.detail.page.url}`);
+  console.log(`Navigation type: ${event.detail.type}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("navigate", (event) => {
-    console.log(`Navigated to ${event.detail.page.url}`);
-    console.log(`Navigation type: ${event.detail.type}`);
-  });
-  ```
+router.on("navigate", (event) => {
+  console.log(`Navigated to ${event.detail.page.url}`);
+  console.log(`Navigation type: ${event.detail.type}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("navigate", (event) => {
-    console.log(`Navigated to ${event.detail.page.url}`);
-    console.log(`Navigation type: ${event.detail.type}`);
-  });
-  ```
-</CodeGroup>
+router.on("navigate", (event) => {
+  console.log(`Navigated to ${event.detail.page.url}`);
+  console.log(`Navigation type: ${event.detail.type}`);
+});
+```
 
 The `navigate` event is not cancelable.
 
 ## Location
 
-<Badge>v3.6.0+</Badge>
+v3.6.0+
 
-The `location` event fires whenever Inertia is about to force a full-page navigation, either because the [asset version](/docs/v3/advanced/asset-versioning) changed or because the server returned an `Inertia::location()` redirect. The event detail includes a `versionChange` boolean so you may tell an automatic asset version change apart from a manual redirect.
+The `location` event fires whenever Inertia is about to force a full-page navigation, either because the [asset version](https://inertiajs.com/docs/v3/advanced/asset-versioning.md) changed or because the server returned an `Inertia::location()` redirect. The event detail includes a `versionChange` boolean so you may tell an automatic asset version change apart from a manual redirect.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("location", (event) => {
-    console.log(`Navigating to ${event.detail.url}`);
-    console.log(`Triggered by a version change: ${event.detail.versionChange}`);
-  });
-  ```
+router.on("location", (event) => {
+  console.log(`Navigating to ${event.detail.url}`);
+  console.log(`Triggered by a version change: ${event.detail.versionChange}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("location", (event) => {
-    console.log(`Navigating to ${event.detail.url}`);
-    console.log(`Triggered by a version change: ${event.detail.versionChange}`);
-  });
-  ```
+router.on("location", (event) => {
+  console.log(`Navigating to ${event.detail.url}`);
+  console.log(`Triggered by a version change: ${event.detail.versionChange}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("location", (event) => {
-    console.log(`Navigating to ${event.detail.url}`);
-    console.log(`Triggered by a version change: ${event.detail.versionChange}`);
-  });
-  ```
-</CodeGroup>
+router.on("location", (event) => {
+  console.log(`Navigating to ${event.detail.url}`);
+  console.log(`Triggered by a version change: ${event.detail.versionChange}`);
+});
+```
 
 You may cancel the `location` event to take over the navigation yourself, for example to show a "new version available" banner instead of reloading.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("location", (event) => {
-    if (event.detail.versionChange) {
-      event.preventDefault();
-      showBanner("A new version is available.");
-    }
-  });
-  ```
+router.on("location", (event) => {
+  if (event.detail.versionChange) {
+    event.preventDefault();
+    showBanner("A new version is available.");
+  }
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("location", (event) => {
-    if (event.detail.versionChange) {
-      event.preventDefault();
-      showBanner("A new version is available.");
-    }
-  });
-  ```
+router.on("location", (event) => {
+  if (event.detail.versionChange) {
+    event.preventDefault();
+    showBanner("A new version is available.");
+  }
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("location", (event) => {
-    if (event.detail.versionChange) {
-      event.preventDefault();
-      showBanner("A new version is available.");
-    }
-  });
-  ```
-</CodeGroup>
+router.on("location", (event) => {
+  if (event.detail.versionChange) {
+    event.preventDefault();
+    showBanner("A new version is available.");
+  }
+});
+```
 
 ## Prefetching
 
 The `prefetching` event fires when the router starts prefetching a page.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("prefetching", (event) => {
-    console.log(`Prefetching ${event.detail.visit.url}`);
-  });
-  ```
+router.on("prefetching", (event) => {
+  console.log(`Prefetching ${event.detail.visit.url}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("prefetching", (event) => {
-    console.log(`Prefetching ${event.detail.visit.url}`);
-  });
-  ```
+router.on("prefetching", (event) => {
+  console.log(`Prefetching ${event.detail.visit.url}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("prefetching", (event) => {
-    console.log(`Prefetching ${event.detail.visit.url}`);
-  });
-  ```
-</CodeGroup>
+router.on("prefetching", (event) => {
+  console.log(`Prefetching ${event.detail.visit.url}`);
+});
+```
 
 The `prefetching` event is not cancelable.
 
@@ -851,34 +801,32 @@ The `prefetching` event is not cancelable.
 
 The `prefetched` event fires when the router has successfully prefetched a page.
 
-<CodeGroup>
-  ```js Vue icon="vuejs" theme={null}
-  import { router } from "@inertiajs/vue3";
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
 
-  router.on("prefetched", (event) => {
-    console.log(`Prefetched ${event.detail.visit.url}`);
-  });
-  ```
+router.on("prefetched", (event) => {
+  console.log(`Prefetched ${event.detail.visit.url}`);
+});
+```
 
-  ```jsx React icon="react" theme={null}
-  import { router } from "@inertiajs/react";
+```jsx React icon="react" theme={null}
+import { router } from "@inertiajs/react";
 
-  router.on("prefetched", (event) => {
-    console.log(`Prefetched ${event.detail.visit.url}`);
-  });
-  ```
+router.on("prefetched", (event) => {
+  console.log(`Prefetched ${event.detail.visit.url}`);
+});
+```
 
-  ```js Svelte icon="s" theme={null}
-  import { router } from "@inertiajs/svelte";
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
 
-  router.on("prefetched", (event) => {
-    console.log(`Prefetched ${event.detail.visit.url}`);
-  });
-  ```
-</CodeGroup>
+router.on("prefetched", (event) => {
+  console.log(`Prefetched ${event.detail.visit.url}`);
+});
+```
 
 The `prefetched` event is not cancelable.
 
 ## Event Callbacks
 
-In addition to the global events described throughout this page, Inertia also provides a number of [event callbacks](/docs/v3/the-basics/manual-visits#event-callbacks) that fire when you manually make Inertia visits.
+In addition to the global events described throughout this page, Inertia also provides a number of [event callbacks](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#event-callbacks) that fire when you manually make Inertia visits.

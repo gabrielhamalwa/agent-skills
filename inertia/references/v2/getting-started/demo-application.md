@@ -1,14 +1,14 @@
 # Demo Application
 
-<Warning>You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](/docs/v3/getting-started/upgrade-guide) to get started.</Warning>
+> [!WARNING]
+>
+> You are viewing the documentation for Inertia.js v2. Inertia.js v3 has been released and is now the default version. Please visit the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide.md) to get started.
 
 We've setup a demo app for Inertia.js called [Ping CRM](https://demo.inertiajs.com). This application is built using Laravel and Vue. You can find the source code on [GitHub](https://github.com/inertiajs/pingcrm).
 
 The Ping CRM demo is hosted on Heroku and the database is reset every hour. Please be respectful when editing data.
 
-<Frame>
-  [  <img src="https://mintcdn.com/inertiajs/Rp49etZkBLard8yO/images/pingcrm.png?fit=max&auto=format&n=Rp49etZkBLard8yO&q=85&s=62657c2f07549384c155a06ee59d48bf" alt="Ping CRM" width="1500" height="919" data-path="images/pingcrm.png" />](https://demo.inertiajs.com)
-</Frame>
+[  ![Ping CRM](https://mintcdn.com/inertiajs/Rp49etZkBLard8yO/images/pingcrm.png?fit=max\&auto=format\&n=Rp49etZkBLard8yO\&q=85\&s=62657c2f07549384c155a06ee59d48bf)](https://demo.inertiajs.com)
 
 In addition to the Vue version of Ping CRM, we also maintain a Svelte version of the application, which you can find [on GitHub](https://github.com/inertiajs/pingcrm-svelte).
 

@@ -1,6 +1,8 @@
 # Error Handling
 
-<Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](/docs/v3/getting-started/index).</Warning>
+> [!WARNING]
+>
+> This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v3 docs](https://inertiajs.com/docs/v3/getting-started/index.md).
 
 ## Development
 
@@ -40,122 +42,120 @@ use Inertia\Inertia;
 
 You may have noticed we're returning an `Error` page component in the example above. You'll need to actually create this component, which will serve as the generic error page for your application. Here's an example error component you can use as a starting point.
 
-<CodeGroup>
-  ```vue Vue 2 icon="vuejs" theme={null}
-  <template>
-      <div>
-          <H1>{{ title }}</H1>
-          <div>{{ description }}</div>
-      </div>
-  </template>
+```vue Vue 2 icon="vuejs" theme={null}
+<template>
+    <div>
+        <H1>{{ title }}</H1>
+        <div>{{ description }}</div>
+    </div>
+</template>
 
-  <script>
-  export default {
-      props: {
-          status: Number,
-      },
-      computed: {
-          title() {
-              return {
-                  503: '503: Service Unavailable',
-                  500: '500: Server Error',
-                  404: '404: Page Not Found',
-                  403: '403: Forbidden',
-              }[this.status]
-          },
-          description() {
-              return {
-                  503: 'Sorry, we are doing some maintenance. Please check back soon.',
-                  500: 'Whoops, something went wrong on our servers.',
-                  404: 'Sorry, the page you are looking for could not be found.',
-                  403: 'Sorry, you are forbidden from accessing this page.',
-              }[this.status]
-          },
-      },
-  }
-  </script>
-  ```
+<script>
+export default {
+    props: {
+        status: Number,
+    },
+    computed: {
+        title() {
+            return {
+                503: '503: Service Unavailable',
+                500: '500: Server Error',
+                404: '404: Page Not Found',
+                403: '403: Forbidden',
+            }[this.status]
+        },
+        description() {
+            return {
+                503: 'Sorry, we are doing some maintenance. Please check back soon.',
+                500: 'Whoops, something went wrong on our servers.',
+                404: 'Sorry, the page you are looking for could not be found.',
+                403: 'Sorry, you are forbidden from accessing this page.',
+            }[this.status]
+        },
+    },
+}
+</script>
+```
 
-  ```vue Vue 3 icon="vuejs" theme={null}
-  <script setup>
-  import { computed } from 'vue'
+```vue Vue 3 icon="vuejs" theme={null}
+<script setup>
+import { computed } from 'vue'
 
-  const props = defineProps({ status: Number })
+const props = defineProps({ status: Number })
 
-  const title = computed(() => {
-      return {
-          503: '503: Service Unavailable',
-          500: '500: Server Error',
-          404: '404: Page Not Found',
-          403: '403: Forbidden',
-      }[props.status]
-  })
+const title = computed(() => {
+    return {
+        503: '503: Service Unavailable',
+        500: '500: Server Error',
+        404: '404: Page Not Found',
+        403: '403: Forbidden',
+    }[props.status]
+})
 
-  const description = computed(() => {
-      return {
-          503: 'Sorry, we are doing some maintenance. Please check back soon.',
-          500: 'Whoops, something went wrong on our servers.',
-          404: 'Sorry, the page you are looking for could not be found.',
-          403: 'Sorry, you are forbidden from accessing this page.',
-      }[props.status]
-  })
-  </script>
+const description = computed(() => {
+    return {
+        503: 'Sorry, we are doing some maintenance. Please check back soon.',
+        500: 'Whoops, something went wrong on our servers.',
+        404: 'Sorry, the page you are looking for could not be found.',
+        403: 'Sorry, you are forbidden from accessing this page.',
+    }[props.status]
+})
+</script>
 
-  <template>
-      <div>
-          <H1>{{ title }}</H1>
-          <div>{{ description }}</div>
-      </div>
-  </template>
-  ```
+<template>
+    <div>
+        <H1>{{ title }}</H1>
+        <div>{{ description }}</div>
+    </div>
+</template>
+```
 
-  ```jsx React icon="react" theme={null}
-  export default function ErrorPage({ status }) {
-      const title = {
-          503: '503: Service Unavailable',
-          500: '500: Server Error',
-          404: '404: Page Not Found',
-          403: '403: Forbidden',
-      }[status]
+```jsx React icon="react" theme={null}
+export default function ErrorPage({ status }) {
+    const title = {
+        503: '503: Service Unavailable',
+        500: '500: Server Error',
+        404: '404: Page Not Found',
+        403: '403: Forbidden',
+    }[status]
 
-      const description = {
-          503: 'Sorry, we are doing some maintenance. Please check back soon.',
-          500: 'Whoops, something went wrong on our servers.',
-          404: 'Sorry, the page you are looking for could not be found.',
-          403: 'Sorry, you are forbidden from accessing this page.',
-      }[status]
+    const description = {
+        503: 'Sorry, we are doing some maintenance. Please check back soon.',
+        500: 'Whoops, something went wrong on our servers.',
+        404: 'Sorry, the page you are looking for could not be found.',
+        403: 'Sorry, you are forbidden from accessing this page.',
+    }[status]
 
-      return (
-          <div>
-              <H1>{title}</H1>
-              <div>{description}</div>
-          </div>
-      )
-  }
-  ```
+    return (
+        <div>
+            <H1>{title}</H1>
+            <div>{description}</div>
+        </div>
+    )
+}
+```
 
-  ```html Svelte icon="s" theme={null}
-  <script>
-      export let status
+```html Svelte icon="s" theme={null}
+<script>
+    export let status
 
-      $: title = {
-          503: '503: Service Unavailable',
-          500: '500: Server Error',
-          404: '404: Page Not Found',
-          403: '403: Forbidden',
-      }[status]
+    $: title = {
+        503: '503: Service Unavailable',
+        500: '500: Server Error',
+        404: '404: Page Not Found',
+        403: '403: Forbidden',
+    }[status]
 
-      $: description = {
-          503: 'Sorry, we are doing some maintenance. Please check back soon.',
-          500: 'Whoops, something went wrong on our servers.',
-          404: 'Sorry, the page you are looking for could not be found.',
-          403: 'Sorry, you are forbidden from accessing this page.',
-      }[status]
-  </script>
+    $: description = {
+        503: 'Sorry, we are doing some maintenance. Please check back soon.',
+        500: 'Whoops, something went wrong on our servers.',
+        404: 'Sorry, the page you are looking for could not be found.',
+        403: 'Sorry, you are forbidden from accessing this page.',
+    }[status]
+</script>
 
-  <div>
-      <H1>{title}</H1>
-      <div>{description}</div>
-  </div>
-  ```
-</CodeGroup>
+<div>
+    <H1>{title}</H1>
+    <div>{description}</div>
+</div>
+```

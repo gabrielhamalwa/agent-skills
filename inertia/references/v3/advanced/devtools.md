@@ -6,37 +6,31 @@ DevTools is a local development tool, designed to run alongside your local devel
 
 ## Installation
 
-<Steps>
-  <Step title="Bump the client-side and server-side libraries">
-    There is no separate package to install in your app. DevTools ships inside the libraries you already use, so you only need the client-side adapter at `^3.6` and the Laravel adapter at `^3.2`.
-  </Step>
+**1. Bump the client-side and server-side libraries**
 
-  <Step title="Install the browser extension">
-    Install Inertia DevTools from the [Chrome Web Store](https://chromewebstore.google.com/detail/inertiajs-devtools/cbaffpghpcbmgbnlpamegieokkpdlnih) or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/inertia-js-devtools/), or download the latest release from [GitHub](https://github.com/inertiajs/inertia-devtools/releases) and load it unpacked.
-  </Step>
+There is no separate package to install in your app. DevTools ships inside the libraries you already use, so you only need the client-side adapter at `^3.6` and the Laravel adapter at `^3.2`.
 
-  <Step title="Enable or disable (optional)">
-    DevTools is enabled automatically in development, so most applications need no configuration to get started. To turn it on or off explicitly, or to access it from another environment, see [Enabling DevTools](#enabling-devtools).
-  </Step>
+**2. Install the browser extension**
 
-  <Step title="Open the panel">
-    Open your browser's DevTools on your Inertia app and select the "Inertia" panel. Navigate around your application and each visit will appear in the timeline.
-  </Step>
-</Steps>
+Install Inertia DevTools from the [Chrome Web Store](https://chromewebstore.google.com/detail/inertiajs-devtools/cbaffpghpcbmgbnlpamegieokkpdlnih) or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/inertia-js-devtools/), or download the latest release from [GitHub](https://github.com/inertiajs/inertia-devtools/releases) and load it unpacked.
 
-<Note>
-  Run the Vite development server for full functionality. In dev mode Inertia exposes the hooks the panel relies on for client-side detail such as visit options and request grouping. Without it, requests are still recorded, but some client-side features are unavailable.
-</Note>
+**3. Enable or disable (optional)**
+
+DevTools is enabled automatically in development, so most applications need no configuration to get started. To turn it on or off explicitly, or to access it from another environment, see [Enabling DevTools](#enabling-devtools).
+
+**4. Open the panel**
+
+Open your browser's DevTools on your Inertia app and select the "Inertia" panel. Navigate around your application and each visit will appear in the timeline.
+
+> [!NOTE]
+>
+> Run the Vite development server for full functionality. In dev mode Inertia exposes the hooks the panel relies on for client-side detail such as visit options and request grouping. Without it, requests are still recorded, but some client-side features are unavailable.
 
 ## The Timeline
 
-Every Inertia request is listed in the timeline on the left, with a live indicator while it is in flight. You may filter by method, request type, or status, or search by URL and component. Request types include full visits, [partial reloads](/docs/v3/data-props/partial-reloads), [deferred prop loads](/docs/v3/data-props/deferred-props), [polls](/docs/v3/data-props/polling), [prefetches](/docs/v3/data-props/prefetching), and [Precognition validation](/docs/v3/the-basics/forms#precognition). Related requests are grouped rather than listed separately, so a page visit and its follow-up requests appear together. The grouping is determined on the client because only the browser can distinguish a poll from a full navigation or know whether a prefetch was served from cache.
+Every Inertia request is listed in the timeline on the left, with a live indicator while it is in flight. You may filter by method, request type, or status, or search by URL and component. Request types include full visits, [partial reloads](https://inertiajs.com/docs/v3/data-props/partial-reloads.md), [deferred prop loads](https://inertiajs.com/docs/v3/data-props/deferred-props.md), [polls](https://inertiajs.com/docs/v3/data-props/polling.md), [prefetches](https://inertiajs.com/docs/v3/data-props/prefetching.md), and [Precognition validation](https://inertiajs.com/docs/v3/the-basics/forms.md#precognition). Related requests are grouped rather than listed separately, so a page visit and its follow-up requests appear together. The grouping is determined on the client because only the browser can distinguish a poll from a full navigation or know whether a prefetch was served from cache.
 
-<Frame>
-  <img className="block dark:hidden" src="https://mintcdn.com/inertiajs/cU7lTc-FnCztziVy/images/devtools-light-mode.webp?fit=max&auto=format&n=cU7lTc-FnCztziVy&q=85&s=29a3e50637198ca5b88bf4090a72ebed" alt="Inertia DevTools panel" width="3246" height="1625" data-path="images/devtools-light-mode.webp" />
-
-  <img className="hidden dark:block" src="https://mintcdn.com/inertiajs/cU7lTc-FnCztziVy/images/devtools-dark-mode.webp?fit=max&auto=format&n=cU7lTc-FnCztziVy&q=85&s=acd6e0e6260d491bc13799325303dc92" alt="Inertia DevTools panel" width="3246" height="1625" data-path="images/devtools-dark-mode.webp" />
-</Frame>
+![Inertia DevTools panel](https://mintcdn.com/inertiajs/cU7lTc-FnCztziVy/images/devtools-light-mode.webp?fit=max\&auto=format\&n=cU7lTc-FnCztziVy\&q=85\&s=29a3e50637198ca5b88bf4090a72ebed)
 
 ## Inspecting a Request
 
@@ -48,7 +42,7 @@ The **Page** tab shows the full page state after Inertia has handled the respons
 
 ## Client-Side Events
 
-Some interactions never reach the server, so the Network tab shows nothing for them. The extension records them as their own timeline entries: [Client Side Visits](/docs/v3/the-basics/manual-visits#client-side-visits) and requests served from the [prefetch](/docs/v3/data-props/prefetching) cache.
+Some interactions never reach the server, so the Network tab shows nothing for them. The extension records them as their own timeline entries: [Client Side Visits](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#client-side-visits) and requests served from the [prefetch](https://inertiajs.com/docs/v3/data-props/prefetching.md) cache.
 
 ## Editor Links
 
@@ -56,7 +50,7 @@ File references throughout the panel link directly to your editor. You may use t
 
 ## How It Works
 
-DevTools consists of two pieces that split the work across each request. The Laravel adapter records the server side as the response is prepared, while the browser extension captures the client side, and the two are paired into a single timeline entry. They communicate over a [documented protocol](/docs/v3/advanced/devtools-protocol) that any server adapter may implement, with the Laravel adapter serving as the reference implementation. Entries are stored locally over the same origin, so nothing is sent to a remote service and no account or cloud sync is required.
+DevTools consists of two pieces that split the work across each request. The Laravel adapter records the server side as the response is prepared, while the browser extension captures the client side, and the two are paired into a single timeline entry. They communicate over a [documented protocol](https://inertiajs.com/docs/v3/advanced/devtools-protocol) that any server adapter may implement, with the Laravel adapter serving as the reference implementation. Entries are stored locally over the same origin, so nothing is sent to a remote service and no account or cloud sync is required.
 
 ## Enabling DevTools
 
