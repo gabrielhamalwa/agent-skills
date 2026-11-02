@@ -6,7 +6,7 @@ Storybook's Highlight feature is a helpful tool for visually debugging your comp
 
 ## Highlighting DOM Elements
 
-To highlight DOM elements with the feature, you'll need to emit the `HIGHLIGHT` event from within a story or an addon. The event payload must contain a `selectors` property assigned to an array of selectors matching the elements you want to highlight. For example:
+To highlight DOM elements with the feature, you'll need to emit the `HIGHLIGHT` event from within a story or an addon. The event payload must contain an `id` property that uniquely identifies the highlight and a `selectors` property assigned to an array of selectors matching the elements you want to highlight. For example:
 
 ```ts
 // MyComponent.stories.ts|tsx — CSF 3
@@ -24,6 +24,7 @@ export const Highlighted: Story = {
     (storyFn) => {
       const emit = useChannel({});
       emit(HIGHLIGHT, {
+        id: 'my-highlight',
         selectors: ['h2', 'a', '.storybook-button'],
       });
       return storyFn();
@@ -44,6 +45,7 @@ export const Highlighted = meta.story({
     (storyFn) => {
       const emit = useChannel({});
       emit(HIGHLIGHT, {
+        id: 'my-highlight',
         selectors: ['h2', 'a', '.storybook-button'],
       });
       return storyFn();
@@ -74,6 +76,7 @@ export const StyledHighlight: Story = {
     (storyFn) => {
       const emit = useChannel({});
       emit(HIGHLIGHT, {
+        id: 'my-highlight',
         selectors: ['h2', 'a', '.storybook-button'],
         styles: {
           backgroundColor: `color-mix(in srgb, hotpink, transparent 90%)`,
@@ -111,6 +114,7 @@ export const StyledHighlight = meta.story({
     (storyFn) => {
       const emit = useChannel({});
       emit(HIGHLIGHT, {
+        id: 'my-highlight',
         selectors: ['h2', 'a', '.storybook-button'],
         styles: {
           backgroundColor: `color-mix(in srgb, hotpink, transparent 90%)`,
@@ -160,6 +164,7 @@ export const StyledHighlight: Story = {
     (storyFn) => {
       const emit = useChannel({});
       emit(HIGHLIGHT, {
+        id: 'my-highlight',
         selectors: ['h2', 'a', '.storybook-button'],
         menu: [
           [
@@ -167,7 +172,7 @@ export const StyledHighlight: Story = {
               id: 'button-name',
               title: 'Login',
               description: 'Navigate to the login page',
-              clickEvent: 'my-menu-click-event',
+              clickable: true,
             },
             {
               id: 'h2-home',
@@ -195,6 +200,7 @@ export const StyledHighlight = meta.story({
     (storyFn) => {
       const emit = useChannel({});
       emit(HIGHLIGHT, {
+        id: 'my-highlight',
         selectors: ['h2', 'a', '.storybook-button'],
         menu: [
           [
@@ -202,7 +208,7 @@ export const StyledHighlight = meta.story({
               id: 'button-name',
               title: 'Login',
               description: 'Navigate to the login page',
-              clickEvent: 'my-menu-click-event',
+              clickable: true,
             },
             {
               id: 'h2-home',
@@ -297,6 +303,7 @@ export const ResetHighlight: Story = {
       const emit = useChannel({});
       emit(RESET_HIGHLIGHT); //👈 Remove previously highlighted elements
       emit(HIGHLIGHT, {
+        id: 'my-highlight',
         selectors: ['header', 'section', 'footer'],
       });
       return storyFn();
@@ -318,6 +325,7 @@ export const ResetHighlight = meta.story({
       const emit = useChannel({});
       emit(RESET_HIGHLIGHT); //👈 Remove previously highlighted elements
       emit(HIGHLIGHT, {
+        id: 'my-highlight',
         selectors: ['header', 'section', 'footer'],
       });
       return storyFn();
@@ -391,6 +399,7 @@ This feature contributes the following exports to Storybook:
 ```js
 
   HIGHLIGHT,
+  HIGHLIGHT_MENU_CLICK,
   REMOVE_HIGHLIGHT,
   RESET_HIGHLIGHT,
   SCROLL_INTO_VIEW,
@@ -399,7 +408,7 @@ This feature contributes the following exports to Storybook:
 
 #### `HIGHLIGHT`
 
-An event to highlight DOM elements. The event payload must contain a `selectors` property assigned to an array of selectors matching the elements you want to highlight. It can be extended with an optional object containing additional configuration options. See the [usage example](#highlighting-dom-elements) above.
+An event to highlight DOM elements. The event payload must contain an `id` property and a `selectors` property assigned to an array of selectors matching the elements you want to highlight. Payloads without an `id` are ignored. It can be extended with an optional object containing additional configuration options. See the [usage example](#highlighting-dom-elements) above.
 
 ```ts
 
@@ -413,8 +422,8 @@ The `options` object contains the following properties:
 
 ```ts
 interface HighlightOptions {
-  /** Unique identifier for the highlight, required if you want to remove the highlight later */
-  id?: string;
+  /** Unique identifier for the highlight, used to remove it later and to attribute menu clicks */
+  id: string;
   /** HTML selectors of the elements */
   selectors: string[];
   /** Priority of the highlight, higher takes precedence, defaults to 0 */
@@ -442,14 +451,18 @@ interface HighlightMenuItem {
   iconLeft?: 'chevronLeft' | 'chevronRight' | 'info' | 'shareAlt';
   /** Icon for the menu item, right side */
   iconRight?: 'chevronLeft' | 'chevronRight' | 'info' | 'shareAlt';
-  /** Name for a channel event to trigger when the menu item is clicked */
-  clickEvent?: string;
+  /** Render the item as a button which emits `HIGHLIGHT_MENU_CLICK` when clicked */
+  clickable?: boolean;
   /** HTML selectors for which this menu item should show (subset of HighlightOptions['selectors']) */
   selectors?: HighlightOptions['selectors'];
 }
 ```
 
-Menu items can specify a `clickEvent` to be emitted on the channel when the item is clicked. The channel event will receive two arguments: the menu item `id` and a `ClickEventDetails` object with the following properties:
+Menu items that set `clickable` emit a [`HIGHLIGHT_MENU_CLICK`](#highlight_menu_click) event on the channel when clicked. The event includes the `id` of the highlight, so your listener can tell its own menu items apart from those of other addons.
+
+#### `HIGHLIGHT_MENU_CLICK`
+
+An event emitted when a `clickable` [menu item](#highlight-menu) is clicked. Listeners receive three arguments: the `id` of the highlight the menu belongs to, the `id` of the clicked menu item, and a `ClickEventDetails` object describing the clicked element:
 
 ```ts
 interface ClickEventDetails {
@@ -460,33 +473,36 @@ interface ClickEventDetails {
   height: number;
   // Selector(s) which matched the element
   selectors: string[];
-  // DOM element details
+  // Element name, without its attributes or content
   element: {
-    attributes: Record<string, string>;
     localName: string;
     tagName: string;
-    outerHTML: string;
   };
 }
 ```
 
-To listen for this event (assuming `clickEvent: 'MY_CLICK_EVENT'`):
+The highlight `id` and menu item `id` are not a security boundary. Any addon, and any page that can post messages to the preview, can emit a `HIGHLIGHT` payload that reuses your addon's highlight `id` with any menu item `id`, and a click on it will trigger your listener. Consider whether calling your listener can be used to trigger harmful side effects.
+
+To listen for this event (assuming the highlight was created with `id: 'my-highlight'`):
 
 ```ts
 
-const handleClickEvent = (itemId: string, details: ClickEventDetails) => {
+const handleMenuClick = (highlightId: string, itemId: string, details: ClickEventDetails) => {
+  if (highlightId !== 'my-highlight') {
+    return;
+  }
   // Handle the menu item click event
 };
 
 // When you have a channel instance:
-channel.on('MY_CLICK_EVENT', handleClickEvent);
+channel.on(HIGHLIGHT_MENU_CLICK, handleMenuClick);
 
 // Or from a decorator:
 useChannel(
   {
-    MY_CLICK_EVENT: handleClickEvent,
+    [HIGHLIGHT_MENU_CLICK]: handleMenuClick,
   },
-  [handleClickEvent],
+  [handleMenuClick],
 );
 ```
 

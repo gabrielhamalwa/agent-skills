@@ -27,7 +27,7 @@ Type: `string[] | true`
 
 Default: `[]`
 
-Configures the allowed hosts for the Storybook dev server, used for Origin and Host header validation. Storybook's localhost and local network (or [`--host`](https://storybook.js.org/docs/api/cli-options.md#dev)) addresses are always allowed. Use this when accessing your local Storybook instance through a reverse proxy (e.g. your webapp dev server). Set to `true` to disable hostname validation (insecure).
+Configures the allowed hosts for the Storybook dev server. Storybook validates the `Host` header of every request, and the `Origin` header of WebSocket connections and requests to the [MCP server](https://storybook.js.org/docs/ai/mcp/overview.md), against this list. Storybook's localhost (or [`--host`](https://storybook.js.org/docs/api/cli-options.md#dev)) address is always allowed. Use this when accessing your local Storybook instance through a reverse proxy (e.g. your webapp dev server). Set to `true` to disable hostname validation (insecure).
 
 ```ts
 // .storybook/main.ts — CSF 3
@@ -56,6 +56,10 @@ export default defineMain({
   },
 });
 ```
+
+Host validation protects the dev server from DNS rebinding. In a DNS rebinding attack, a website you visit points its own domain at your machine, and your browser sends that website's requests to your local Storybook. With host validation disabled, the website can read your stories and source files. It can also write files in your project through the WebSocket channel.
+
+Host validation does not protect Storybook from other machines on your network. Anyone who can reach the dev server over the network has the same access. The dev server listens on localhost only unless you pass [`--host`](https://storybook.js.org/docs/api/cli-options.md#dev). Only expose it to a network you trust.
 
 ## `builder`
 

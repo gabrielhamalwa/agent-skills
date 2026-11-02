@@ -164,6 +164,7 @@ Full documentation dump for older versions:
     - /docs/api/main-config/main-config-preview-body
     - /docs/api/main-config/main-config-preview-head
     - /docs/api/main-config/main-config-refs
+    - /docs/api/main-config/main-config-security
     - /docs/api/main-config/main-config-static-dirs
     - /docs/api/main-config/main-config-swc
     - /docs/api/main-config/main-config-tags

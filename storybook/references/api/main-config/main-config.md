@@ -61,6 +61,7 @@ An object to configure Storybook containing the following properties:
 - [`previewBody`](https://storybook.js.org/docs/api/main-config/main-config-preview-body.md)
 - [`previewHead`](https://storybook.js.org/docs/api/main-config/main-config-preview-head.md)
 - [`refs`](https://storybook.js.org/docs/api/main-config/main-config-refs.md)
+- [`security`](https://storybook.js.org/docs/api/main-config/main-config-security.md)
 - [`staticDirs`](https://storybook.js.org/docs/api/main-config/main-config-static-dirs.md)
 - [`swc`](https://storybook.js.org/docs/api/main-config/main-config-swc.md)
 - [`tags`](https://storybook.js.org/docs/api/main-config/main-config-tags.md)
