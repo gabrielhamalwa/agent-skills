@@ -8,7 +8,7 @@ The first step when installing Inertia is to configure your server-side framewor
 
 Inertia is fine-tuned for Laravel, so the documentation examples on this website utilize Laravel. For examples of using Inertia with other server-side frameworks, please refer to the framework specific documentation maintained by that adapter.
 
-> **[Laravel Starter Kits](https://laravel.com/docs/starter-kits)**
+> [card] [Laravel Starter Kits](https://laravel.com/docs/starter-kits)
 >
 > Laravel's starter kits provide out-of-the-box scaffolding for new Inertia applications.
 >

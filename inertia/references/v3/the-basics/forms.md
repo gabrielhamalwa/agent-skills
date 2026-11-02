@@ -1418,7 +1418,7 @@ function submit(e) {
 </form>
 ```
 
-To submit the form, you may use the `get`, `post`, `put`, `patch` and `delete` methods.
+To submit the form, you may use the `get`, `post`, `put`, `patch`, `delete`, and `query` methods.
 
 ```js Vue icon="vuejs" theme={null}
 form.submit(method, url, options);
@@ -1427,10 +1427,11 @@ form.post(url, options);
 form.put(url, options);
 form.patch(url, options);
 form.delete(url, options);
+form.query(url, options);
 ```
 
 ```js React icon="react" theme={null}
-const { submit, get, post, put, patch, delete: destroy } = useForm({ ... })
+const { submit, get, post, put, patch, delete: destroy, query } = useForm({ ... })
 
 submit(method, url, options)
 get(url, options)
@@ -1438,6 +1439,7 @@ post(url, options)
 put(url, options)
 patch(url, options)
 destroy(url, options)
+query(url, options)
 ```
 
 ```js Svelte icon="s" theme={null}
@@ -1447,6 +1449,7 @@ form.post(url, options);
 form.put(url, options);
 form.patch(url, options);
 form.delete(url, options);
+form.query(url, options);
 ```
 
 The submit methods support all of the typical [visit options](https://inertiajs.com/docs/v3/the-basics/manual-visits.md), such as `preserveState`, `preserveScroll`, and event callbacks, which can be helpful for performing tasks on successful form submissions. For example, you might use the `onSuccess` callback to reset inputs to their original state.

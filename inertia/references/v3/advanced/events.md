@@ -235,7 +235,7 @@ removeStartEventListener();
 
 ## Canceling Events
 
-Some events, such as `before`, `networkError`, `httpException`, and `location`, support cancellation, allowing you to prevent Inertia's default behavior. Just like native events, the event will be canceled if only one event listener calls `event.preventDefault()`.
+Some events, such as `before`, `networkError`, `httpException`, `location`, and `live`, support cancellation, allowing you to prevent Inertia's default behavior. Just like native events, the event will be canceled if only one event listener calls `event.preventDefault()`.
 
 ```js Vue icon="vuejs" theme={null}
 import { router } from "@inertiajs/vue3";
@@ -826,6 +826,36 @@ router.on("prefetched", (event) => {
 ```
 
 The `prefetched` event is not cancelable.
+
+## Live
+
+The `live` event fires whenever a broadcast event is about to refresh a [live prop](https://inertiajs.com/docs/v3/data-props/live-props.md). The event detail includes the props that are about to be refreshed, the channel the broadcast arrived on, the broadcast event name, and its payload.
+
+```js Vue icon="vuejs" theme={null}
+import { router } from "@inertiajs/vue3";
+
+router.on("live", (event) => {
+  console.log(`Refreshing ${event.detail.props.join(", ")}`);
+});
+```
+
+```js React icon="react" theme={null}
+import { router } from "@inertiajs/react";
+
+router.on("live", (event) => {
+  console.log(`Refreshing ${event.detail.props.join(", ")}`);
+});
+```
+
+```js Svelte icon="s" theme={null}
+import { router } from "@inertiajs/svelte";
+
+router.on("live", (event) => {
+  console.log(`Refreshing ${event.detail.props.join(", ")}`);
+});
+```
+
+The `live` event is cancelable, allowing you to hold back the update and let the user decide when to see the new data.
 
 ## Event Callbacks
 

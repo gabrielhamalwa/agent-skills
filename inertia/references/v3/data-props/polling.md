@@ -2,7 +2,7 @@
 
 ## Poll Helper
 
-Polling your server for new information on the current page is common, so Inertia provides a helper to reduce boilerplate. It automatically stops polling when the page is unmounted.
+Polling your server for new information on the current page is common, so Inertia provides a helper to reduce boilerplate. It automatically stops polling when the page is unmounted. For data your server already broadcasts, [live props](https://inertiajs.com/docs/v3/data-props/live-props.md) refresh a prop the moment its event fires instead of on an interval.
 
 The only required argument is the polling interval in milliseconds.
 

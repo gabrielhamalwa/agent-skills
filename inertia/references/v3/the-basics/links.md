@@ -57,11 +57,11 @@ import { Link } from '@inertiajs/svelte'
 
 > [!NOTE]
 >
-> Creating anchor (`<a>`) links that issue `POST`, `PUT`, `PATCH`, or `DELETE` requests is discouraged because it causes accessibility issues with "Open Link in New Tab / Window". The component automatically renders a `<button>` element when using these methods.
+> Creating anchor (`<a>`) links that issue `POST`, `PUT`, `PATCH`, `DELETE`, or `QUERY` requests is discouraged because it causes accessibility issues with "Open Link in New Tab / Window". The component automatically renders a `<button>` element when using these methods.
 
 ## Method
 
-You can specify the HTTP request method for an Inertia link request using the `method` prop. The default method used by links is `GET`, but you can use the `method` prop to make `POST`, `PUT`, `PATCH`, and `DELETE` requests via links.
+You may specify the HTTP request method for an Inertia link request using the `method` prop. Links use `GET` by default, but the `method` prop also accepts `POST`, `PUT`, `PATCH`, `DELETE`, and `QUERY`.
 
 ```vue Vue icon="vuejs" theme={null}
 import { Link } from '@inertiajs/vue3'
@@ -83,6 +83,30 @@ import { inertia, Link } from '@inertiajs/svelte'
 <button use:inertia={{ href: '/logout', method: 'post' }} type="button">Logout</button>
 
 <Link href="/logout" method="post">Logout</Link>
+```
+
+v3.10.0+
+
+Links using the `query` method send their [data](#data) in the request body instead of the query string. See the [QUERY method](https://inertiajs.com/docs/v3/the-basics/manual-visits.md#query-method) documentation for more information.
+
+```vue Vue icon="vuejs" theme={null}
+import { Link } from '@inertiajs/vue3'
+
+<Link href="/products" method="query" :data="{ brand: 'Acme' }">Acme products</Link>
+```
+
+```jsx React icon="react" theme={null}
+import { Link } from "@inertiajs/react";
+
+<Link href="/products" method="query" data={{ brand: "Acme" }}>
+  Acme products
+</Link>;
+```
+
+```svelte Svelte icon="s" theme={null}
+import { Link } from '@inertiajs/svelte'
+
+<Link href="/products" method="query" data={{ brand: 'Acme' }}>Acme products</Link>
 ```
 
 ## Wayfinder

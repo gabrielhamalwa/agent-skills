@@ -4,6 +4,6 @@ One benefit of using Inertia is that you don't need a special authentication sys
 
 Instead, you can use whatever authentication system your server-side framework provides. Typically, this is a session-based system, such as Laravel's.
 
-> **[Laravel Starter Kits](https://laravel.com/docs/starter-kits)**
+> [card] [Laravel Starter Kits](https://laravel.com/docs/starter-kits)
 >
 > Laravel's starter kits provide out-of-the-box scaffolding for new Inertia applications, including authentication.

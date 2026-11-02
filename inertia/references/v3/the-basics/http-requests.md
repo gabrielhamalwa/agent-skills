@@ -82,7 +82,7 @@ Unlike router visits, `useHttp` requests do not trigger page navigation or inter
 
 ## Submitting Data
 
-The hook provides `get`, `post`, `put`, `patch`, and `delete` convenience methods. A generic `submit` method is also available for dynamic HTTP methods.
+The hook provides `get`, `post`, `put`, `patch`, `delete`, and `query` convenience methods. A generic `submit` method is also available for dynamic HTTP methods.
 
 ```js Vue icon="vuejs" theme={null}
 http.get(url, options)
@@ -90,17 +90,19 @@ http.post(url, options)
 http.put(url, options)
 http.patch(url, options)
 http.delete(url, options)
+http.query(url, options)
 http.submit(method, url, options)
 ```
 
 ```js React icon="react" theme={null}
-const { get, post, put, patch, delete: destroy, submit } = useHttp({ ... })
+const { get, post, put, patch, delete: destroy, query, submit } = useHttp({ ... })
 
 get(url, options)
 post(url, options)
 put(url, options)
 patch(url, options)
 destroy(url, options)
+query(url, options)
 submit(method, url, options)
 ```
 
@@ -110,6 +112,7 @@ http.post(url, options)
 http.put(url, options)
 http.patch(url, options)
 http.delete(url, options)
+http.query(url, options)
 http.submit(method, url, options)
 ```
 

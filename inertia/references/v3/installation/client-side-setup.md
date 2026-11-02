@@ -2,7 +2,7 @@
 
 Once you have your [server-side framework configured](https://inertiajs.com/docs/v3/installation/server-side-setup.md), you then need to set up your client-side framework. Inertia currently provides support for React, Vue, and Svelte.
 
-> **[Laravel Starter Kits](https://laravel.com/docs/starter-kits)**
+> [card] [Laravel Starter Kits](https://laravel.com/docs/starter-kits)
 >
 > Laravel's starter kits provide out-of-the-box scaffolding for new Inertia applications.
 >

@@ -6,27 +6,27 @@ You can find the legacy docs for Inertia.js v2.0 at [inertiajs.com/docs/v2](http
 
 Inertia.js v3.0 is a major release focused on simplicity and developer experience. Axios has been replaced with a built-in XHR client for a smaller bundle, SSR now works out of the box during development without a separate Node.js server, and the new `@inertiajs/vite` plugin handles page resolution and SSR configuration automatically. This release also introduces standalone HTTP requests via the `useHttp` hook, optimistic updates with automatic rollback, layout props for sharing data between pages and layouts, and improved exception handling.
 
-> **[Vite Plugin](https://inertiajs.com/docs/v3/installation/client-side-setup.md#installation)**
+> [card] [Vite Plugin](https://inertiajs.com/docs/v3/installation/client-side-setup.md#installation)
 >
 > Automatic page resolution, SSR setup, and optional setup/resolve callbacks.
 
-> **[HTTP Requests](https://inertiajs.com/docs/v3/the-basics/http-requests.md)**
+> [card] [HTTP Requests](https://inertiajs.com/docs/v3/the-basics/http-requests.md)
 >
 > Make standalone HTTP requests with the `useHttp` hook without triggering page visits.
 
-> **[Optimistic Updates](https://inertiajs.com/docs/v3/the-basics/optimistic-updates.md)**
+> [card] [Optimistic Updates](https://inertiajs.com/docs/v3/the-basics/optimistic-updates.md)
 >
 > Apply data changes instantly before the server responds, with automatic rollback on failure.
 
-> **[Layout Props](https://inertiajs.com/docs/v3/the-basics/layouts.md#layout-props)**
+> [card] [Layout Props](https://inertiajs.com/docs/v3/the-basics/layouts.md#layout-props)
 >
 > Share dynamic data between pages and persistent layouts with the useLayoutProps hook.
 
-> **[Simplified SSR](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md)**
+> [card] [Simplified SSR](https://inertiajs.com/docs/v3/advanced/server-side-rendering.md)
 >
 > SSR works automatically in Vite dev mode. No separate Node.js server needed.
 
-> **[Exception Handling](https://inertiajs.com/docs/v3/advanced/error-handling.md#production)**
+> [card] [Exception Handling](https://inertiajs.com/docs/v3/advanced/error-handling.md#production)
 >
 > Render custom Inertia error pages directly from your exception handler, with shared data.
 

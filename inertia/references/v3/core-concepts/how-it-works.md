@@ -16,4 +16,4 @@ When Inertia makes an XHR visit, the server detects that it's an Inertia visit a
 
 **The end result is a silky smooth single-page experience.**
 
-To learn more about the nitty-gritty, technical details of how Inertia works under the hood, check out the [protocol page](https://inertiajs.com/docs/v3/core-concepts/the-protocol.md).
+The [protocol](https://inertiajs.com/docs/v3/core-concepts/the-protocol.md) page describes the requests and responses behind this exchange in detail. To bring Inertia to another server-side framework, read the protocol first, then follow the [building an adapter](https://inertiajs.com/docs/v3/advanced/building-an-adapter.md) guide.

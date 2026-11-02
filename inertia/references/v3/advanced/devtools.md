@@ -50,7 +50,7 @@ File references throughout the panel link directly to your editor. You may use t
 
 ## How It Works
 
-DevTools consists of two pieces that split the work across each request. The Laravel adapter records the server side as the response is prepared, while the browser extension captures the client side, and the two are paired into a single timeline entry. They communicate over a [documented protocol](https://inertiajs.com/docs/v3/advanced/devtools-protocol) that any server adapter may implement, with the Laravel adapter serving as the reference implementation. Entries are stored locally over the same origin, so nothing is sent to a remote service and no account or cloud sync is required.
+DevTools consists of two pieces that split the work across each request. The Laravel adapter records the server side as the response is prepared, while the browser extension captures the client side, and the two are paired into a single timeline entry. They communicate over a [documented protocol](https://inertiajs.com/docs/v3/advanced/devtools-protocol.md) that any server adapter may implement, with the Laravel adapter serving as the reference implementation. Entries are stored locally over the same origin, so nothing is sent to a remote service and no account or cloud sync is required.
 
 ## Enabling DevTools
 

@@ -10,27 +10,27 @@ You can find the legacy docs for Inertia.js v1.0 at [inertiajs.com/docs/v1](http
 
 Inertia.js v2.0 is a huge step forward for Inertia! The core library has been completely rewritten to architecturally support asynchronous requests, enabling a whole set of new features, including:
 
-> **[Polling](https://inertiajs.com/docs/v2/data-props/polling.md)**
+> [card] [Polling](https://inertiajs.com/docs/v2/data-props/polling.md)
 >
 > Keep data fresh by automatically polling the server at a specified interval.
 
-> **[Prefetching](https://inertiajs.com/docs/v2/data-props/prefetching.md)**
+> [card] [Prefetching](https://inertiajs.com/docs/v2/data-props/prefetching.md)
 >
 > Speed up navigation by prefetching data for links when they become visible.
 
-> **[Deferred props](https://inertiajs.com/docs/v2/data-props/deferred-props.md)**
+> [card] [Deferred props](https://inertiajs.com/docs/v2/data-props/deferred-props.md)
 >
 > Load non-essential data after the initial page load to improve performance.
 
-> **[Infinite scrolling](https://inertiajs.com/docs/v2/data-props/merging-props.md)**
+> [card] [Infinite scrolling](https://inertiajs.com/docs/v2/data-props/merging-props.md)
 >
 > Seamlessly load more data as the user scrolls down the page.
 
-> **[Lazy loading data on scroll](https://inertiajs.com/docs/v2/data-props/load-when-visible.md)**
+> [card] [Lazy loading data on scroll](https://inertiajs.com/docs/v2/data-props/load-when-visible.md)
 >
 > Load data only when it becomes visible in the viewport.
 
-> **[History encryption](https://inertiajs.com/docs/v2/security/history-encryption.md)**
+> [card] [History encryption](https://inertiajs.com/docs/v2/security/history-encryption.md)
 >
 > Clear page data from browser history state when logging out of an application.
 
