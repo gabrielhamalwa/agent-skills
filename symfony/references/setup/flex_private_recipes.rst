@@ -1,9 +1,9 @@
 How To Configure and Use Flex Private Recipe Repositories
 =========================================================
 
-Since the `release of version 1.16`_ of ``symfony/flex``, you can build your own
-private Symfony Flex recipe repositories, and seamlessly integrate them into the
-``composer`` package installation and maintenance process.
+You can build your own private Symfony Flex recipe repositories and seamlessly
+integrate them into the ``composer`` package installation and maintenance
+process.
 
 This is particularly useful when you have private bundles or packages that must
 perform their own installation tasks. To do this, you need to complete several steps:
@@ -393,14 +393,18 @@ run the following command:
 
     $ composer update
 
-If the private bundles/packages have already been installed and you just want to
-install the new private recipes, run the following command:
+If the private bundles/packages have already been installed and you want to
+install their new private recipes, run the ``recipes:install`` command:
 
 .. code-block:: terminal
 
+    # list the packages whose recipe is not installed yet
     $ composer recipes
 
-.. _`release of version 1.16`: https://github.com/symfony/flex/releases/tag/v1.16.0
+    # install the recipes of the given packages; the --force option is needed
+    # because these packages are already registered in the symfony.lock file
+    $ composer recipes:install acme/private-bundle acme/other-bundle --force -v
+
 .. _`Symfony recipe files`: https://github.com/symfony/recipes/tree/flex/main
 .. _`how to create recipes`: https://github.com/symfony/recipes?tab=readme-ov-file#creating-recipes
 .. _`recipes checker`: https://github.com/symfony-tools/recipes-checker
