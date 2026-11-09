@@ -129,7 +129,7 @@ To avoid interop issues, it is recommended to avoid relying on this behavior. Vi
 
 By default, Vite provides type definitions for `import.meta.env` in [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). While you can define more custom env variables in `.env.[mode]` files, you may want to get TypeScript IntelliSense for user-defined env variables that are prefixed with `VITE_`.
 
-To achieve this, you can create an `vite-env.d.ts` in `src` directory, then augment `ImportMetaEnv` like this:
+To achieve this, you can create a `vite-env.d.ts` in the `src` directory, then augment `ImportMetaEnv` like this:
 
 ```typescript [vite-env.d.ts]
 interface ViteTypeOptions {
@@ -148,7 +148,7 @@ interface ImportMeta {
 }
 ```
 
-If your code relies on types from browser environments such as [DOM](https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts) and [WebWorker](https://github.com/microsoft/TypeScript/blob/main/src/lib/webworker.generated.d.ts), you can update the [lib](https://www.typescriptlang.org/tsconfig#lib) field in `tsconfig.json`.
+If your code relies on types from browser environments such as [DOM](https://github.com/microsoft/TypeScript/blob/main/tsc/internal/bundled/libs/lib.dom.d.ts) and [WebWorker](https://github.com/microsoft/TypeScript/blob/main/tsc/internal/bundled/libs/lib.webworker.d.ts), you can update the [lib](https://www.typescriptlang.org/tsconfig#lib) field in `tsconfig.json`.
 
 ```json [tsconfig.json]
 {
@@ -205,11 +205,11 @@ As `vite build` runs a production build by default, you can also change this and
 NODE_ENV=development
 ```
 
-### NODE\_ENV and Modes
+### NODE_ENV and Modes
 
 It's important to note that `NODE_ENV` (`process.env.NODE_ENV`) and modes are two different concepts. Here's how different commands affect the `NODE_ENV` and mode:
 
-| Command                                              | NODE\_ENV        | Mode            |
+| Command                                              | NODE_ENV        | Mode            |
 | ---------------------------------------------------- | --------------- | --------------- |
 | `vite build`                                         | `"production"`  | `"production"`  |
 | `vite build --mode development`                      | `"production"`  | `"development"` |

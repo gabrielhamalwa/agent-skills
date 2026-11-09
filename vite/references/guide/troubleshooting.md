@@ -26,7 +26,7 @@ When importing an ESM only package by `require`, the following error happens.
 
 > Failed to resolve "foo". This package is ESM only but it was tried to load by `require`.
 
-> Error \[ERR\_REQUIRE\_ESM]: require() of ES Module /path/to/dependency.js from /path/to/vite.config.js not supported.
+> Error \[ERR_REQUIRE_ESM]: require() of ES Module /path/to/dependency.js from /path/to/vite.config.js not supported.
 > Instead change the require of index.js in /path/to/vite.config.js to a dynamic import() which is available in all CommonJS modules.
 
 In Node.js <=22, ESM files cannot be loaded by [`require`](https://nodejs.org/docs/latest-v22.x/api/esm.html#require) by default.
@@ -224,7 +224,9 @@ To resolve this, you can:
 
 This error may occur in unstable network environments. For example, when the request fails due to network errors or server downtime.
 
-Note that you cannot retry the dynamic import due to browser limitations ([whatwg/html#6768](https://github.com/whatwg/html/issues/6768)).
+Browsers that support [retriable module loading](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#browser_compatibility) do not cache network and HTTP errors in the module map. In these browsers, your application or framework can retry the original dynamic import. Older browsers cache the failure, so reloading the page remains the fallback.
+
+Retrying also does not fix [version skew](#version-skew) when a chunk has been permanently removed by a deployment.
 
 #### Browser extensions blocking requests
 
