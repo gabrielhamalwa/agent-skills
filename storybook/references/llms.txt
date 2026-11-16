@@ -30,12 +30,12 @@ Examples:
 ### Versioned Access
 
 Prefix the path with a version slug for older versions:
-- `/docs/11/get-started.md` — Version 11 (alpha)
+- `/docs/11/get-started.md` — Version 11 (beta)
 - `/docs/9/get-started.md` — Version 9
 - `/docs/8/get-started.md` — Version 8
 
 Full documentation dump for older versions:
-- `/llms-full.txt?version=11` — Version 11 (alpha)
+- `/llms-full.txt?version=11` — Version 11 (beta)
 - `/llms-full.txt?version=9` — Version 9
 - `/llms-full.txt?version=8` — Version 8
 
