@@ -228,7 +228,7 @@ A pull request (PR) is the way to send a bug fix or a new feature to Symfony.
 
 Before working on a change, `search the existing issues and pull requests`_ to
 see if someone already reported the topic or started a PR. If you have any
-question during the process, ask on the ``#contribs`` channel of the
+questions during the process, ask on the ``#contribs`` channel of the
 `Symfony Slack`_.
 
 All the code you contribute must be :ref:`released under the MIT license <symfony-license>`.
@@ -259,6 +259,8 @@ Work on the code and commit as much as you want, keeping these rules in mind:
   code style automatically);
 * Add tests that prove the bug is fixed or the feature works;
 * Never break backward compatibility (see the :doc:`BC promise </contributing/code/bc>`);
+* If you are adding a new Mailer, Notifier or Translation bridge, follow the
+  :doc:`checklist for new bridges </contributing/code/create_bridge>`;
 * Don't edit files unrelated to your change (e.g. to fix coding standards)
   because it makes the review harder.
 
@@ -383,7 +385,7 @@ execute the following:
 .. tip::
 
     Dependencies might fail to update and in this case Composer might need you
-    to tell it what Symfony version you are working on. To do so set
+    to tell it what Symfony version you are working on. To do so, set the
     ``COMPOSER_ROOT_VERSION`` variable, e.g.:
 
     .. code-block:: terminal
