@@ -128,7 +128,7 @@ config option and set it to either ``none``, ``short`` or ``full`` to add this
 information.
 
 ``short`` will add the information for the main request only.
-It's written in a concise way that makes it easy to record the
+It's written in a concise way, so you can record the
 information in your server log files. For example, in Apache you can
 use ``%{X-Symfony-Cache}o`` in ``LogFormat`` format statements.
 This information can be used to extract general information about
@@ -149,7 +149,7 @@ cache efficiency of your routes.
     be as fast as a proxy written in C.
 
     Fortunately, since all reverse proxies are effectively the same, you should
-    be able to switch to something more robust - like Varnish - without any problems.
+    be able to switch to something more reliable - like Varnish - without any problems.
     See :doc:`How to use Varnish </http_cache/varnish>`.
 
 .. _http-cache-introduction:
@@ -364,7 +364,9 @@ HTTP Caching and User Sessions
 Whenever the session is started during a request, Symfony turns the response
 into a private non-cacheable response. This is the best default behavior to not
 cache private user information (e.g. a shopping cart, a user's profile details,
-etc.) and expose it to other visitors.
+etc.) and expose it to other visitors. To make sure that a page you want to
+cache doesn't use the session by mistake, mark its route as
+:ref:`stateless <stateless-routing>`.
 
 However, even requests making use of the session can be cached under some
 circumstances. For example, information related to some user group could be

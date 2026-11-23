@@ -198,8 +198,8 @@ Any controller (whether or not it is registered as a service) can also define a
 single action using the ``__invoke()`` method, which is a common practice when
 following the `ADR pattern`_ (Action-Domain-Responder). When the class is
 registered as a service (for example via ``#[Route]`` on the class, as shown
-below), the ``__invoke()`` method benefits from service argument injection just
-like any other action method:
+below), the ``__invoke()`` method benefits from service argument injection like
+any other action method:
 
 .. configuration-block::
 
@@ -257,7 +257,8 @@ Alternatives to Base Controller Methods
 When using a controller defined as a service, you can still extend the
 :ref:`AbstractController base controller <the-base-controller-class-services>`
 and use its shortcuts. But, you don't need to! You can choose to extend *nothing*,
-and use dependency injection to access different services.
+and use dependency injection to access different services. If you still want
+to use its helpers, read :ref:`controller-decoupling`.
 
 The base `Controller class source code`_ is a great way to see how to accomplish
 common tasks. For example, ``$this->render()`` is usually used to render a Twig

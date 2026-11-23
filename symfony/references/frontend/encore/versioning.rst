@@ -52,7 +52,8 @@ the CSS and JavaScript files):
 
 In your app, you need to read this file if you want to be able to link (e.g. via
 an ``img`` tag) to certain assets. If you're using Symfony, activate the
-``json_manifest_file`` versioning strategy:
+``json_manifest_file`` versioning strategy with the
+:ref:`json_manifest_path <reference-assets-json-manifest-path>` option:
 
 .. code-block:: yaml
 
@@ -62,7 +63,7 @@ an ``img`` tag) to certain assets. If you're using Symfony, activate the
         assets:
             json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
 
-That's it! Be sure to wrap each path in the Twig ``asset()`` function
+Make sure to wrap each path in the Twig ``asset()`` function
 like normal:
 
 .. code-block:: html+twig

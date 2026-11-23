@@ -362,8 +362,8 @@ Disabling the Deprecation Helper
 
 Set the ``SYMFONY_DEPRECATIONS_HELPER`` environment variable to ``disabled=1``
 to completely disable the deprecation helper. This is useful to make use of the
-rest of the features provided by this component without getting errors or messages
-related to deprecations.
+rest of the features provided by this component without getting errors or
+messages related to deprecations.
 
 Deprecation Notices at Autoloading Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -588,6 +588,10 @@ will still use the system time instead of the mocked time. This means that you
 may need to change some code in your tests. For example, instead of ``new DateTime()``,
 you should use ``DateTime::createFromFormat('U', (string) time())`` to use the mocked
 ``time()`` function.
+
+If your code uses the :doc:`Clock component </components/clock>`, use its
+:ref:`ClockSensitiveTrait <clock_writing-tests>` instead, which doesn't need to
+mock any PHP function.
 
 To use the ``ClockMock`` class in your test, add the ``@group time-sensitive``
 annotation to its class or methods. This annotation only works when executing
@@ -1045,8 +1049,8 @@ If you have installed the bridge through Composer, you can run it by calling e.g
 
     It is also possible to require additional packages that will be installed along
     with the rest of the needed PHPUnit packages using the ``SYMFONY_PHPUNIT_REQUIRE``
-    env variable. This is especially useful for installing PHPUnit plugins without
-    having to add them to your main ``composer.json`` file. The required packages
+    env variable. This is especially useful for installing PHPUnit plugins
+    without having to add them to your main ``composer.json`` file. The required packages
     need to be separated with a space.
 
     .. code-block:: xml

@@ -76,7 +76,8 @@ displayed to the user::
 
     For example, to store the last login date of users, listen to the
     :class:`Symfony\\Component\\Security\\Http\\Event\\LoginSuccessEvent`
-    instead, which Symfony doesn't dispatch when impersonating users.
+    instead, which Symfony doesn't dispatch when impersonating users. Read
+    more about :ref:`security events <security-security-events>`.
 
 Enabling the Custom User Checker
 --------------------------------
@@ -85,8 +86,8 @@ Next, make sure your user checker is registered as a service. If you're using th
 :ref:`default services.yaml configuration <service-container-services-load-example>`,
 the service is registered automatically.
 
-All that's left to do is add the checker to the desired firewall where the value
-is the service id of your user checker:
+Then, add the checker to the desired firewall, where the value is the service
+id of your user checker:
 
 .. configuration-block::
 

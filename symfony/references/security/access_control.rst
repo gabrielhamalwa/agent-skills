@@ -266,13 +266,16 @@ Matching access_control by IP
 Certain situations may arise when you need to have an ``access_control``
 entry that *only* matches requests coming from some IP address or range.
 For example, this *could* be used to deny access to a URL pattern to all
-requests *except* those from a trusted, internal server.
+requests *except* those from a trusted, internal server. If your application
+runs behind a reverse proxy or a load balancer,
+:doc:`configure the trusted proxies </deployment/proxies>` so Symfony uses the
+real IP address of the client.
 
 .. warning::
 
     As you'll read in the explanation below the example, the ``ips`` option
-    does not restrict access to a specific IP address. Instead, using the ``ips``
-    key means that the ``access_control`` entry will only match this IP address,
+    does not restrict access to a specific IP address. Instead, using the
+    ``ips`` key means that the ``access_control`` entry will only match this IP address,
     and users accessing it from a different IP address will continue down
     the ``access_control`` list.
 
@@ -552,3 +555,6 @@ the user will be redirected to ``https``:
                 ->requiresChannel('https')
             ;
         };
+
+You can also force HTTPS per route with the
+:ref:`schemes option of the routes <routing-force-https>`.

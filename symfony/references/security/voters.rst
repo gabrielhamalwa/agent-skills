@@ -18,6 +18,10 @@ this could look if you want to make a route accessible to the "owner" only::
         throw $this->createAccessDeniedException();
     }
 
+For basic rules like this one, you can also pass
+:doc:`a security expression or a closure </security/expressions>` to the
+``#[IsGranted]`` attribute.
+
 In that sense, the following example used throughout this page is a minimal
 example for voters.
 
@@ -163,7 +167,7 @@ code like this:
         }
 
 The ``#[IsGranted]`` attribute or ``denyAccessUnlessGranted()`` method (and also the ``isGranted()`` method)
-calls out to the "voter" system. Right now, no voters will vote on whether or not
+calls the "voter" system. Right now, no voters will vote on whether or not
 the user can "view" or "edit" a ``Post``. But you can create your *own* voter that
 decides this using whatever logic you want.
 
@@ -265,7 +269,7 @@ by its author. A voter that implements this logic could look like this::
 
         The ``$extraData`` property was introduced in Symfony 7.4.
 
-That's it! The voter is done! Next, :ref:`configure it <declaring-the-voter-as-a-service>`.
+The voter is now complete. Next, :ref:`configure it <declaring-the-voter-as-a-service>`.
 
 To recap, here's what's expected from the two abstract methods:
 
@@ -284,7 +288,8 @@ To recap, here's what's expected from the two abstract methods:
     job is to return ``true`` to allow access and ``false`` to deny access.
     The ``$token`` can be used to find the current user object (if any).
     The ``$vote`` argument can be used to provide an explanation for the vote.
-    This explanation is included in log messages and on exception pages.
+    This explanation is included in log messages and on exception pages, and
+    you can also :ref:`read it in templates <security-template>`.
 
 .. _declaring-the-voter-as-a-service:
 
@@ -354,8 +359,9 @@ with ``ROLE_SUPER_ADMIN``::
     instead.
 
 If you're using the :ref:`default services.yaml configuration <service-container-services-load-example>`,
-you're done! Symfony will automatically pass the ``security.helper``
-service when instantiating your voter (thanks to autowiring).
+no extra configuration is needed. Symfony will automatically pass the
+``security.helper`` service when instantiating your voter (thanks to
+autowiring).
 
 .. _voter-improve-performance:
 

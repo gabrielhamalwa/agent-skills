@@ -77,7 +77,9 @@ the ``list()`` method of the ``BlogController`` class.
 
     The query string of a URL is not considered when matching routes. In this
     example, URLs like ``/blog?foo=bar`` and ``/blog?foo=bar&bar=foo`` will
-    also match the ``blog_list`` route.
+    also match the ``blog_list`` route. To get query string parameters as
+    controller arguments, see
+    :ref:`automatic mapping of the request <controller_map-request>`.
 
 .. warning::
 
@@ -545,8 +547,8 @@ evaluates them:
         contact_post  POST     ANY      localhost  /contact
         ------------  -------  -------  ---------  ---------
 
-Pass the name (or part of the name) of some route as the argument of this command to
-print the route details:
+Pass the name (or part of the name) of some route as the argument of this
+command to print the route details:
 
 .. code-block:: terminal
 
@@ -1030,7 +1032,7 @@ parameter:
 .. tip::
 
     To give a ``null`` default value to any parameter, add nothing after the
-    ``?`` character (e.g. ``/blog/{page?}``). If you do this, don't forget to
+    ``?`` character (e.g. ``/blog/{page?}``). If you do this, make sure to
     update the types of the related controller arguments to allow passing
     ``null`` values (e.g. replace ``int $page`` with ``?int $page``).
 
@@ -2587,8 +2589,8 @@ application. If you don't set the route name explicitly with the ``name``
 option, Symfony generates an automatic name based on the controller and action.
 
 Symfony declares route aliases based on the FQCN if the target class has an
-``__invoke()`` method that adds a route **and** if the target class defines exactly
-one route. Symfony also automatically adds an alias for every method
+``__invoke()`` method that adds a route **and** if the target class defines
+exactly one route. Symfony also automatically adds an alias for every method
 that defines only one route. Consider the following class::
 
         // src/Controller/MainController.php

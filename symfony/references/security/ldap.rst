@@ -38,8 +38,8 @@ This means that the following scenarios will work:
   either the LDAP form login or LDAP HTTP Basic authentication providers.
 
 * Checking a user's password against an LDAP server while fetching user
-  information from another source (like your main database for
-  example).
+  information from another source (like your main database, using the
+  :ref:`entity user provider <security-entity-user-provider>`).
 
 * Loading user information from an LDAP server, while using another
   authentication strategy (token-based pre-authentication, for example).
@@ -249,7 +249,7 @@ LDAP server), you may query the LDAP server using the
 
     The Security component escapes provided input data when the LDAP user
     provider is used. However, the LDAP component itself does not provide
-    any escaping yet. Thus, it's your responsibility to prevent LDAP injection
+    any escaping yet. So it's your responsibility to prevent LDAP injection
     attacks when using the component directly.
 
 By default, LDAP entries are lazy-loaded. If you wish to fetch
@@ -279,8 +279,8 @@ Use the ``filter`` option to only retrieve some specific attributes::
 Creating and Updating Entries
 -----------------------------
 
-The Ldap component provides methods to create new LDAP entries and to update or even
-delete existing ones::
+The Ldap component provides methods to create new LDAP entries and to update or
+even delete existing ones::
 
     use Symfony\Component\Ldap\Entry;
     use Symfony\Component\Ldap\Ldap;
@@ -343,8 +343,8 @@ method to update multiple attributes at once::
 
 Possible operation types are ``LDAP_MODIFY_BATCH_ADD``, ``LDAP_MODIFY_BATCH_REMOVE``,
 ``LDAP_MODIFY_BATCH_REMOVE_ALL`` and ``LDAP_MODIFY_BATCH_REPLACE``. The
-``$values`` parameter must be ``NULL`` when using the ``LDAP_MODIFY_BATCH_REMOVE_ALL``
-operation type.
+``$values`` parameter must be ``NULL`` when using the
+``LDAP_MODIFY_BATCH_REMOVE_ALL`` operation type.
 
 .. _security-ldap-user-provider:
 
@@ -602,8 +602,10 @@ constructor argument to override it.
 Authenticating against an LDAP server
 -------------------------------------
 
-Authenticating against an LDAP server can be done using the form login, the
-HTTP Basic or the JSON login authentication providers, via the
+Authenticating against an LDAP server can be done using the
+:ref:`form login <security-form-login>`, the
+:ref:`HTTP Basic <security-http_basic>` or the
+:ref:`JSON login <security-json-login>` authentication providers, via the
 ``form_login_ldap``, ``http_basic_ldap`` and ``json_login_ldap`` options.
 
 They are configured exactly as their non-LDAP counterparts, with the

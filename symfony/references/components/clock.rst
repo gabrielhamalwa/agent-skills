@@ -148,10 +148,11 @@ Monotonic Clock
 ~~~~~~~~~~~~~~~
 
 The ``MonotonicClock`` allows you to implement a precise stopwatch with up to
-nanosecond precision, depending on the system. It can be used to measure the elapsed
-time between two calls without being affected by inconsistencies sometimes introduced
-by the system clock, e.g. by updating it. Instead, it consistently increases time,
-making it especially useful for measuring performance.
+nanosecond precision, depending on the system. It can be used to measure the
+elapsed time between two calls without being affected by inconsistencies
+sometimes introduced by the system clock, e.g. by updating it. Instead, it
+consistently increases time, making it especially useful for measuring
+performance.
 
 .. _clock_use-inside-a-service:
 
@@ -191,8 +192,8 @@ You can now call the ``$this->now()`` method to get the current time::
 
 Thanks to the ``ClockAwareTrait``, and by using the ``MockClock`` implementation,
 you can set the current time arbitrarily without having to change your service code.
-This will help you test every case of your method without actually
-having to be in one month or another.
+This will help you test every case of your method without actually having to be
+in one month or another.
 
 .. _clock_date-point:
 
@@ -372,6 +373,10 @@ This test will behave the same no matter what time of the year you run it.
 By combining the :class:`Symfony\\Component\\Clock\\ClockAwareTrait` and
 :class:`Symfony\\Component\\Clock\\Test\\ClockSensitiveTrait`, you have full
 control over your time-sensitive code's behavior.
+
+If your code calls PHP functions such as ``time()`` or ``sleep()`` directly
+instead of using the clock, use the
+:ref:`ClockMock class of the PHPUnit Bridge <phpunit-bridge-time-sensitive-tests>`.
 
 Exceptions Management
 ---------------------

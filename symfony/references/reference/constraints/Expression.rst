@@ -4,7 +4,8 @@ Expression
 This constraint allows you to use an :ref:`expression <component-expression-language-examples>`
 for more complex, dynamic validation. See `Basic Usage`_ for an example.
 See :doc:`/reference/constraints/Callback` for a different constraint that
-gives you similar flexibility.
+gives you similar flexibility. To apply other constraints only when an
+expression is true, use the :doc:`When </reference/constraints/When>` constraint.
 
 ==========  ===================================================================
 Applies to  :ref:`class <validation-class-target>`
@@ -51,7 +52,7 @@ A) If ``isTechnicalPost`` is true, then ``category`` must be either ``php``
    or ``symfony``;
 B) If ``isTechnicalPost`` is false, then ``category`` can be anything.
 
-One way to accomplish this is with the Expression constraint:
+One way to do this is with the Expression constraint:
 
 .. configuration-block::
 
@@ -130,7 +131,7 @@ assert that the expression must return ``true`` for validation to fail.
 .. sidebar:: Mapping the Error to a Specific Field
 
     You can also attach the constraint to a specific property and still validate
-    based on the values of the entire entity. This is handy if you want to attach
+    based on the values of the entire entity. This is useful if you want to attach
     the error to a specific field. In this context, ``value`` represents the value
     of ``isTechnicalPost``.
 

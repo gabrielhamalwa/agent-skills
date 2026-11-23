@@ -1,9 +1,9 @@
 Maintenance
 ===========
 
-During the lifetime of a minor version, new releases (patch versions) are
-published on a monthly basis. This document describes the boundaries of
-acceptable changes.
+During the :ref:`lifetime of a minor version <contributing-release-maintenance>`,
+new releases (patch versions) are published on a monthly basis. This document
+describes the boundaries of acceptable changes.
 
 **Bug fixes** are accepted under the following conditions:
 
@@ -16,8 +16,8 @@ acceptable changes.
     When documentation (or PHPDoc) is not in sync with the code, code behavior
     should always be considered as being the correct one.
 
-To avoid backward compatibility breaks, we tend to be very strict about changes
-accepted for patch versions.
+To avoid :doc:`backward compatibility breaks </contributing/code/bc>`, we tend
+to be very strict about changes accepted for patch versions.
 
 Besides bug fixes, other minor changes might be accepted in a patch version on
 a case by case basis:
@@ -34,12 +34,12 @@ a case by case basis:
 * **Translations**: Translation updates and additions are always merged in the
   oldest maintained branch;
 
-* **External data**: External data included in Symfony can be
-  updated (like ICU for instance);
+* **External data**: External data included in Symfony can be updated (like
+  ICU for instance);
 
 * **Version updates for Composer dependencies**: Changing the minimal version
-  of a dependency is possible, bumping to a major one or increasing the minimal PHP
-  version is not;
+  of a dependency is possible, bumping to a major one or increasing the
+  minimal PHP version is not;
 
 * **Tests**: Tests that increase the code coverage can be added.
 

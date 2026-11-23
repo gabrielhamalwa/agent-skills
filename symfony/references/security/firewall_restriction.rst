@@ -8,6 +8,10 @@ the request will handle it.
 The last firewall can be configured without any matcher to handle every incoming
 request.
 
+Restricting a firewall only defines which requests it handles. To deny access
+to some URLs, use
+:ref:`access_control <security-access-control-matching-options>`.
+
 Restricting by Configuration
 ----------------------------
 
@@ -74,7 +78,7 @@ if the request path matches the configured ``pattern``.
 
 The ``pattern`` is a regular expression. In this example, the firewall will only be
 activated if the path starts (due to the ``^`` regex character) with ``/admin``. If
-the path does not match this pattern, the firewall will not be activated and subsequent
+the path does not match this pattern, the firewall will not be activated and the next
 firewalls will have the opportunity to be matched for this request.
 
 Restricting by Host
@@ -135,7 +139,7 @@ The ``host`` (like the ``pattern``) is a regular expression. In this example,
 the firewall will only be activated if the host is exactly equal (due to
 the ``^`` and ``$`` regex characters) to the hostname ``admin.example.com``.
 If the hostname does not match this pattern, the firewall will not be activated
-and subsequent firewalls will have the opportunity to be matched for this
+and the next firewalls will have the opportunity to be matched for this
 request.
 
 Restricting by HTTP Methods
@@ -193,7 +197,7 @@ the provided HTTP methods.
 
 In this example, the firewall will only be activated if the HTTP method of the
 request is either ``GET`` or ``POST``. If the method is not in the array of the
-allowed methods, the firewall will not be activated and subsequent firewalls will again
+allowed methods, the firewall will not be activated and the next firewalls will again
 have the opportunity to be matched for this request.
 
 Restricting by Service

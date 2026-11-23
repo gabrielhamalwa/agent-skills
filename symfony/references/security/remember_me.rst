@@ -563,16 +563,16 @@ visiting the site.
 
 In some cases, however, you may want to force the user to actually re-authenticate
 before accessing certain resources. For example, you might not allow "remember me"
-users to change their password. You can do this by using a few special
-"attributes"::
+users to change their password. You can do this by using a few
+:ref:`special attributes <checking-to-see-if-a-user-is-logged-in-is-authenticated-fully>`::
 
     // src/Controller/AccountController.php
     // ...
 
     public function accountInfo(): Response
     {
-        // allow any authenticated user - we don't care if they just
-        // logged in, or are logged in via a remember me cookie
+        // allow any authenticated user - it doesn't matter if they logged in
+        // recently or are logged in via a remember me cookie
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
         // ...
@@ -596,7 +596,8 @@ users to change their password. You can do this by using a few special
 Customizing the Remember Me Cookie
 ----------------------------------
 
-The ``remember_me`` configuration contains many options to customize the
+The :ref:`remember_me configuration <reference-security-firewall-remember-me>`
+contains many options to customize the
 cookie created by the system:
 
 ``name`` (default value: ``REMEMBERME``)
@@ -612,12 +613,12 @@ cookie created by the system:
 
 ``path`` (default value: ``/``)
     The path where the cookie associated with this feature is used. By default,
-    the cookie will be applied to the entire website, but you can restrict it to a
-    specific section (e.g. ``/forum``, ``/admin``).
+    the cookie will be applied to the entire website, but you can restrict it to
+    a specific section (e.g. ``/forum``, ``/admin``).
 
 ``domain`` (default value: ``null``)
-    The domain where the cookie associated with this feature is used. By default,
-    cookies use the current domain obtained from ``$_SERVER``.
+    The domain where the cookie associated with this feature is used. By
+    default, cookies use the current domain obtained from ``$_SERVER``.
 
 ``secure`` (default value: ``false``)
     If ``true``, the cookie associated with this feature is sent to the user

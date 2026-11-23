@@ -5,7 +5,8 @@ A "rate limiter" controls how frequently some event (e.g. an HTTP request or a
 login attempt) is allowed to happen. Rate limiting is commonly used as a
 defensive measure to protect services from excessive use (intended or not) and
 maintain their availability. It's also useful to control your internal or
-outbound processes (e.g. limit the number of simultaneously processed messages).
+outbound processes (e.g. limit the number of
+:ref:`simultaneously processed messages <messenger-rate-limited-transport>`).
 
 Symfony uses these rate limiters in built-in features like :ref:`login throttling <security-login-throttling>`,
 which limits how many failed login attempts a user can make in a given period of
@@ -18,7 +19,7 @@ time, but you can use them for your own features too.
     Such protections must consume as few resources as possible. Consider
     using `Apache mod_ratelimit`_, `NGINX rate limiting`_,
     `Caddy HTTP rate limit module`_ (also supported by FrankenPHP)
-    or proxies (like AWS or Cloudflare) to prevent your server from being overwhelmed.
+    or proxies (like AWS or Cloudflare) to prevent your server from being overloaded.
 
 .. _rate-limiter-policies:
 
@@ -216,6 +217,9 @@ at a rate of another 500 requests every 15 minutes. If you don't make that
 number of requests, the unused ones don't accumulate (the ``limit`` option
 prevents that number from being higher than 5,000).
 
+The :ref:`rate limiter configuration reference <reference-rate-limiter-name>`
+lists all the options available for each limiter.
+
 .. tip::
 
     All rate-limiters are tagged with the ``rate_limiter`` tag, so you can
@@ -260,7 +264,7 @@ argument named ``$anonymousApiLimiter``::
 
 **(2) Use the ``#[Target]`` attribute**
 
-When :ref:`dealing with multiple implementations of the same type <autowiring-multiple-implementations-same-type>`
+When :ref:`handling multiple implementations of the same type <autowiring-multiple-implementations-same-type>`
 the ``#[Target]`` attribute helps you select which one to inject. Symfony creates
 a target with the same name as the rate limiter.
 

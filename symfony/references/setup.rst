@@ -292,19 +292,23 @@ stable version. If you want to use an LTS version, add the ``--version`` option:
     # you can also select an exact specific Symfony version
     $ symfony new my_project_directory --version="7.4.*"
 
-The ``lts`` and ``next`` shortcuts are only available when using the Symfony CLI to
-create new projects. If you use Composer, you need to specify the exact version:
+The ``lts`` and ``next`` shortcuts are only available when using the Symfony
+CLI to create new projects. If you use Composer, you need to specify the exact
+version:
 
 .. code-block:: terminal
 
     $ composer create-project symfony/skeleton:"7.4.*" my_project_directory
+
+To work with Symfony versions that are still in development, read
+:doc:`how to install unreleased Symfony versions </setup/unstable_versions>`.
 
 The Symfony Demo application
 ----------------------------
 
 `The Symfony Demo Application`_ is a fully-functional application that shows the
 recommended way to develop Symfony applications. It's a great learning tool for
-Symfony newcomers and its code contains tons of comments and helpful notes.
+Symfony newcomers and its code contains many comments and helpful notes.
 
 Run this command to create a new project based on the Symfony Demo application:
 

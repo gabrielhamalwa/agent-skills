@@ -2,8 +2,8 @@ Security Issues
 ===============
 
 This document explains how Symfony security issues are handled by the
-Symfony core team (Symfony being the code hosted on the main ``symfony/symfony``
-`Git repository`_).
+Symfony core team (Symfony being the code hosted under the
+`Symfony GitHub organization`_).
 
 .. tip::
 
@@ -20,6 +20,10 @@ If you think that you have found a security issue in Symfony, don't use the
 bug tracker and don't publish it publicly. Instead, all security issues must
 be sent to **security [at] symfony.com**. Emails sent to this address are
 forwarded to the Symfony core team private mailing-list.
+
+Symfony is a `CVE Numbering Authority`_ (CNA), so it assigns the CVE identifiers
+of vulnerabilities found in its projects. To request a CVE identifier, send an
+email to the same address, even if the vulnerability is already public.
 
 The following issues are not considered security issues and should be handled
 as regular bug fixes (if you have any doubts, don't hesitate to send us an
@@ -55,7 +59,7 @@ confirmed, the core team works on a solution following these steps:
 
 #. Send an acknowledgment to the reporter;
 #. Work on a patch;
-#. Get a CVE identifier from `mitre.org`_;
+#. Reserve a CVE identifier and send it to the reporter;
 #. Write a security announcement for the official Symfony `blog`_ about the
    vulnerability. This post should contain the following information:
 
@@ -71,6 +75,8 @@ confirmed, the core team works on a solution following these steps:
 #. Package new versions for all affected versions;
 #. Publish the post on the official Symfony `blog`_ (it must also be added to
    the "`Security Advisories`_" category);
+#. Publish the CVE record in the CVE List no later than one day after the blog
+   post;
 #. Update the public `security advisories database`_ maintained by the
    FriendsOfPHP organization and which is used by
    :ref:`the check:security command <security-checker>`.
@@ -117,7 +123,7 @@ projects. The process works as follows:
 
 The list of downstream projects participating in this process is kept as small
 as possible in order to better manage the flow of confidential information
-prior to disclosure. As such, projects are included at the sole discretion of
+before disclosure. As such, projects are included at the sole discretion of
 the Symfony security team.
 
 As of today, the following projects have validated this process and are part
@@ -147,9 +153,9 @@ Check the `Security Advisories`_ blog category for a list of all security
 vulnerabilities that were fixed in Symfony releases, starting from Symfony
 1.0.0.
 
-.. _`Git repository`: https://github.com/symfony/symfony
-.. _blog: https://symfony.com/blog/
+.. _`Symfony GitHub organization`: https://github.com/symfony
+.. _`blog`: https://symfony.com/blog/
 .. _`security advisories database`: https://github.com/FriendsOfPHP/security-advisories
-.. _`mitre.org`: https://cveform.mitre.org/
+.. _`CVE Numbering Authority`: https://symfony.com/cna
 .. _`CVSS`: https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator
 .. _`Security Advisories`: https://symfony.com/blog/category/security-advisories

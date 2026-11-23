@@ -78,7 +78,7 @@ constructor, you can pass a mock object within a test::
         }
     }
 
-In this example, you are building the mocks from the inside out, first creating
+In this example, you build the mocks starting from the innermost one: first
 the employee which gets returned by the ``Repository``, which itself gets
 returned by the ``EntityManager``. This way, no real class is involved in
 testing.
@@ -88,7 +88,9 @@ Functional Testing of a Doctrine Repository
 
 In :ref:`functional tests <functional-tests>` you'll make queries to the
 database using the actual Doctrine repositories, instead of mocking them. To do
-so, get the entity manager via the service container as follows::
+so, get the entity manager via the service container as follows (this example
+assumes that the database contains the :ref:`fixtures <doctrine-fixtures>` used
+by the test)::
 
     // tests/Repository/ProductRepositoryTest.php
     namespace App\Tests\Repository;

@@ -3,7 +3,7 @@ Logging
 
 Symfony comes with two minimalist `PSR-3`_ loggers: :class:`Symfony\\Component\\HttpKernel\\Log\\Logger`
 for the HTTP context and :class:`Symfony\\Component\\Console\\Logger\\ConsoleLogger` for the
-CLI context. In conformance with `the twelve-factor app methodology`_, they send messages
+CLI context. Following `the twelve-factor app methodology`_, they send messages
 starting from the ``WARNING`` level to `stderr`_.
 
 The minimum log level can be changed by setting the ``SHELL_VERBOSITY`` environment variable:
@@ -59,7 +59,7 @@ Adding placeholders to log messages is recommended because:
   that are the same except for some variable values inside them;
 * It's much easier to translate those log messages;
 * It's better for security, because escaping can then be done by the
-  implementation in a context-aware fashion.
+  implementation in a way that depends on the context.
 
 The ``logger`` service has different methods for different logging levels/priorities.
 See `LoggerInterface`_ for a list of all of the methods on the logger.
@@ -67,7 +67,7 @@ See `LoggerInterface`_ for a list of all of the methods on the logger.
 Monolog
 -------
 
-Symfony integrates seamlessly with `Monolog`_, the most popular PHP logging
+Symfony integrates with `Monolog`_, the most popular PHP logging
 library, to create and store log messages in a variety of different places
 and trigger various actions.
 
@@ -115,7 +115,7 @@ to different locations (e.g. files, database, Slack, etc.).
     messages in different places. See :doc:`/logging/channels_handlers`.
 
 Symfony pre-configures some basic handlers in the default ``monolog.yaml``
-config files. Check these out for some real-world examples.
+config files. Check these files for some real-world examples.
 
 This example uses *two* handlers: ``stream`` (to write to a file) and ``syslog``
 to write logs using the :phpfunction:`syslog` function:
@@ -377,7 +377,8 @@ one of the messages reaches an ``action_level``. Take this example:
 Now, if even one log entry has a ``LogLevel::ERROR`` level or higher, then *all* log entries
 for that request are saved to a file via the ``file_log`` handler. That means that
 your log file will contain *all* the details about the problematic request - making
-debugging much easier!
+debugging much easier! To avoid triggering it for errors like 404 or 403, see
+:doc:`how to exclude specific HTTP codes from the log </logging/monolog_exclude_http_codes>`.
 
 .. tip::
 
@@ -389,7 +390,8 @@ All Built-in Handlers
 
 Monolog comes with *many* built-in handlers for emailing logs, sending them to Loggly,
 or notifying you in Slack. These are documented inside of MonologBundle itself. For
-a full list, see `Monolog Configuration`_.
+a full list, see `Monolog Configuration`_. Symfony also provides some
+:doc:`extra handlers </logging/handlers>`.
 
 How to Rotate your Log Files
 ----------------------------
@@ -487,7 +489,7 @@ During long-running processes, logs can be accumulated into Monolog and cause so
 buffer overflows, memory increases or even illogical logs. Monolog in-memory data
 can be cleared using the ``reset()`` method on a ``Monolog\Logger`` instance.
 This should typically be called between every job or task that a long-running process
-is working through.
+is processing.
 
 Learn More
 ----------

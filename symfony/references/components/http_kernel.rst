@@ -532,13 +532,13 @@ For example, to generate a 404 page, you might throw a special type of exception
 and then add a listener on this event that looks for this exception and
 creates and returns a 404 ``Response``. In fact, the HttpKernel component
 comes with an :class:`Symfony\\Component\\HttpKernel\\EventListener\\ErrorListener`,
-which, if you choose to use it, will do this and more by default (see the sidebar
-below for more details).
+which, if you choose to use it, will do this and more by default (see the
+sidebar below for more details).
 
 The :class:`Symfony\\Component\\HttpKernel\\Event\\ExceptionEvent` exposes the
 :method:`Symfony\\Component\\HttpKernel\\Event\\ExceptionEvent::isKernelTerminating`
-method, which you can use to determine if the kernel was terminating
-when the exception was thrown.
+method, which you can use to determine if the kernel was terminating when the
+exception was thrown.
 
 .. versionadded:: 7.1
 
@@ -698,8 +698,9 @@ In addition to the "main" request that's sent into ``HttpKernel::handle()``,
 you can also send a so-called "sub request". A sub request looks and acts like
 any other request, but typically serves to render just one small portion of
 a page instead of a full page. You'll most commonly make sub-requests from
-your controller (or perhaps from inside a template that's being rendered by
-your controller).
+your controller (e.g. when :doc:`forwarding to another controller
+</controller/forwarding>`) or from inside a template (e.g. when
+:ref:`embedding controllers <templates-embed-controllers>`).
 
 .. raw:: html
 

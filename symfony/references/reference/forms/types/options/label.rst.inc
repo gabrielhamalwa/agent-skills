@@ -3,8 +3,8 @@
 
 **type**: ``string`` or ``TranslatableMessage`` **default**: The label is "guessed" from the field name
 
-Sets the label that will be used when rendering the field. Setting it to ``false``
-will suppress the label::
+Sets the label that will be used when rendering the field. Setting it to
+``false`` will suppress the label::
 
     use Symfony\Component\Translation\TranslatableMessage;
 
@@ -14,6 +14,8 @@ will suppress the label::
             // optionally, you can use TranslatableMessage objects as the label content
             'label' => new TranslatableMessage('address.zipCode', ['%country%' => $country], 'address'),
         ])
+
+Read more about :ref:`translatable objects <translatable-objects>`.
 
 The label can also be set in the template:
 

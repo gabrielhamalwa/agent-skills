@@ -4,8 +4,8 @@ How to Configure Monolog to Email Errors
 `Monolog`_ can be configured to send an email when an error occurs within an
 application. The configuration for this requires a few nested handlers
 in order to avoid receiving too many emails. This configuration looks
-complicated at first but each handler is fairly straightforward when
-it is broken down.
+complicated at first but each handler is simple when you look at
+it separately.
 
 .. configuration-block::
 
@@ -122,8 +122,10 @@ it is broken down.
             ;
         };
 
-The ``main`` handler is a ``fingers_crossed`` handler which means that
-it is only triggered when the action level, in this case ``critical``, is reached.
+The ``main`` handler is a
+:ref:`fingers_crossed handler <logging-handler-fingers_crossed>` which means
+that it is only triggered when the action level, in this case ``critical``, is
+reached.
 The ``critical`` level is only triggered for 5xx HTTP code errors. If this level
 is reached once, the ``fingers_crossed`` handler will log all messages
 regardless of their level. The ``handler`` setting means that the output
@@ -136,7 +138,7 @@ is then passed on to the ``deduplicated`` handler.
     code above for an example.
 
 The ``deduplicated`` handler keeps all the messages for a request and then
-passes them on to the nested handler in one go, but only if the records are
+passes them on to the nested handler all at once, but only if the records are
 unique over a given period of time (60 seconds by default). Duplicated records are
 discarded. Adding this handler reduces the number of
 notifications to a manageable level, especially in critical failure scenarios.
@@ -183,8 +185,8 @@ You can adjust the time period using the ``time`` option:
         };
 
 The messages are then passed to the ``symfony_mailer`` handler. This is the handler that
-actually deals with emailing you the error. The settings for this are
-straightforward: the to and from addresses, the formatter, the content type
+actually sends you the error by email. The settings for this are
+simple: the to and from addresses, the formatter, the content type
 and the subject.
 
 You can combine these handlers with other handlers so that the errors still

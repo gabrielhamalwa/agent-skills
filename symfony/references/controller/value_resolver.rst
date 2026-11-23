@@ -76,12 +76,15 @@ Symfony ships with the following value resolvers in the
     URLs and leads to a 404 Not Found response in the two other cases.
 
 :class:`Symfony\\Component\\HttpKernel\\Controller\\ArgumentResolver\\RequestPayloadValueResolver`
-    Maps the request payload or the query string into the type-hinted object.
+    Maps the request payload, the query string or the uploaded files into the
+    type-hinted argument.
 
     Because this is a :ref:`targeted value resolver <value-resolver-targeted>`,
-    you'll have to use either the :ref:`MapRequestPayload <controller-mapping-request-payload>`
-    or the :ref:`MapQueryString <controller-mapping-query-string>` attribute
-    in order to use this resolver.
+    you'll have to use the
+    :ref:`MapRequestPayload <controller-mapping-request-payload>`,
+    :ref:`MapQueryString <controller-mapping-query-string>` or
+    :ref:`MapUploadedFile <controller_map-uploaded-file>` attribute in order to
+    use this resolver.
 
 :class:`Symfony\\Component\\HttpKernel\\Controller\\ArgumentResolver\\RequestAttributeValueResolver`
     Attempts to find a request attribute that matches the name of the argument.
@@ -153,9 +156,10 @@ In addition, some components, bridges and official bundles provide other value r
 :class:`Symfony\\Component\\Security\\Http\\Controller\\UserValueResolver`
     Injects the object that represents the current logged in user if type-hinted
     with ``UserInterface``. You can also type-hint your own ``User`` class but you
-    must then add the ``#[CurrentUser]`` attribute to the argument. The default value
-    can be set to ``null`` in case the controller can be accessed by anonymous
-    users. It requires installing the :doc:`SecurityBundle </security>`.
+    must then add the :ref:`#[CurrentUser] <retrieving-the-user-object>`
+    attribute to the argument. The default value can be set to ``null`` in case
+    the controller can be accessed by anonymous users. It requires installing
+    the :doc:`SecurityBundle </security>`.
 
     Union types are also supported, which is useful when your application has
     multiple user classes (e.g. ``#[CurrentUser] Admin|Member $user``).
@@ -216,8 +220,8 @@ if there is none.
 
 In that specific case, you don't need any resolver running before
 ``SessionValueResolver``, so skipping them would not only improve performance,
-but also prevent one of them from providing a value before ``SessionValueResolver``
-has a chance to.
+but also prevent one of them from providing a value before
+``SessionValueResolver`` has a chance to.
 
 The :class:`Symfony\\Component\\HttpKernel\\Attribute\\ValueResolver` attribute
 lets you do this by "targeting" the resolver you want::
@@ -331,8 +335,8 @@ This method first checks whether it can resolve the value:
 When those requirements are met, the method creates a new instance of the
 custom value object and returns it as the value for this argument.
 
-That's it! Now all you have to do is add the configuration for the service
-container. This can be done by adding one of the following tags to your value resolver.
+Now, add the configuration for the service container. This can be done by
+adding one of the following tags to your value resolver.
 
 ``controller.argument_value_resolver``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

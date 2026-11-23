@@ -4,8 +4,8 @@ ChoiceType Field (select drop-downs, radio buttons & checkboxes)
 A multi-purpose field used to allow the user to "choose" one or more options.
 It can be rendered as a ``select`` tag, radio buttons, or checkboxes.
 
-To use this field, you must specify *either* the ``choices`` or the ``choice_loader``
-option.
+To use this field, you must specify *either* the ``choices`` or the
+``choice_loader`` option.
 
 +---------------------------+----------------------------------------------------------------------+
 | Rendered as               | can be various tags (see below)                                      |
@@ -46,6 +46,10 @@ If the user selects ``No``, the form will return ``false`` for this field. Simil
 if the starting data for this field is ``true``, then ``Yes`` will be auto-selected.
 In other words, the **choice** of each item is the value you want to get/set in PHP
 code, while the **key** is the **label** that will be shown to the user.
+
+If the choices are Doctrine entities or PHP enum cases, use the
+:doc:`EntityType </reference/forms/types/entity>` or the
+:doc:`EnumType </reference/forms/types/enum>` instead.
 
 Advanced Example (with Objects!)
 --------------------------------

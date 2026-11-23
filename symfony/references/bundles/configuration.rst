@@ -101,6 +101,10 @@ class, you can add all the logic related to processing the configuration in that
         }
     }
 
+Read :doc:`how to define configuration values </components/config/definition>`
+to learn about all the node types and options available when defining the
+configuration tree.
+
 .. note::
 
     The ``configure()`` and ``loadExtension()`` methods are called only at compile time.
@@ -191,7 +195,7 @@ can add some configuration that looks like this:
         };
 
 The basic idea is that instead of having the user override individual
-parameters, you let the user configure just a few, specifically created,
+parameters, you let the user configure only a few, specifically created,
 options. As the bundle developer, you then parse through that configuration and
 load the correct services and parameters inside an "Extension" class.
 
@@ -222,7 +226,7 @@ load the correct services and parameters inside an "Extension" class.
 Processing the ``$configs`` Array
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-First things first, you have to create an extension class as explained in
+First, you have to create an extension class as explained in
 :doc:`/bundles/extension`.
 
 Whenever a user includes the ``acme_social`` key (which is the DI alias) in a
@@ -242,11 +246,11 @@ For the configuration example in the previous section, the array passed to your
         ],
     ]
 
-Notice that this is an *array of arrays*, not just a single flat array of the
+Notice that this is an *array of arrays*, not a single flat array of the
 configuration values. This is intentional, as it allows Symfony to parse several
 configuration resources. For example, if ``acme_social`` appears in another
 configuration file - say ``config/packages/dev/acme_social.yaml`` - with
-different values beneath it, the incoming array might look like this::
+different values under it, the incoming array might look like this::
 
     [
         // values from config/packages/acme_social.yaml
@@ -266,7 +270,7 @@ different values beneath it, the incoming array might look like this::
 
 The order of the two arrays depends on which one is set first.
 
-But don't worry! Symfony's Config component will help you merge these values,
+Symfony's Config component helps you merge these values,
 provide defaults and give the user validation errors on bad configuration.
 Here's how it works. Create a ``Configuration`` class in the
 ``DependencyInjection`` directory and build a tree that defines the structure
@@ -431,6 +435,8 @@ If you have multiple bundles that depend on each other, it may be useful to
 allow one ``Extension`` class to modify the configuration passed to another
 bundle's ``Extension`` class. This can be achieved using a prepend extension.
 For more details, see :doc:`/bundles/prepend_extension`.
+
+.. _bundle-config-dump-reference:
 
 Dump the Configuration
 ----------------------

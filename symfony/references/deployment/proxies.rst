@@ -26,7 +26,9 @@ and what headers your reverse proxy uses to send information.
 
 You can do that by setting the ``SYMFONY_TRUSTED_PROXIES`` and ``SYMFONY_TRUSTED_HEADERS``
 environment variables on your machine. Alternatively, you can configure them
-using the following configuration options:
+using the :ref:`trusted_proxies <reference-framework-trusted-proxies>` and
+:ref:`trusted_headers <reference-framework-trusted-headers>` configuration
+options:
 
 .. configuration-block::
 
@@ -106,7 +108,8 @@ using the following configuration options:
 
     Enabling the ``Request::HEADER_X_FORWARDED_HOST`` option exposes the
     application to `HTTP Host header attacks`_. Make sure the proxy really
-    sends an ``x-forwarded-host`` header.
+    sends an ``x-forwarded-host`` header and configure the
+    :ref:`trusted_hosts <configuration-framework-trusted-hosts>` option.
 
 The Request object has several ``Request::HEADER_*`` constants that control exactly
 *which* headers from your reverse proxy are trusted. The argument is a bit field,
@@ -163,7 +166,7 @@ In this case, you'll need to - *very carefully* - trust *all* proxies.
 
     The support for the ``'PRIVATE_SUBNETS'`` string was introduced in Symfony 7.2.
 
-That's it! It's critical that you prevent traffic from all non-trusted sources.
+It's critical that you prevent traffic from all non-trusted sources.
 If you allow outside traffic, they could "spoof" their true IP address and
 other information.
 

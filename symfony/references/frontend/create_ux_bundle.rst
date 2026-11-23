@@ -131,7 +131,7 @@ To use your controller in a template (e.g. one defined in your bundle) you can u
         ...
     </div>
 
-Don't forget to add ``symfony/stimulus-bundle:^2.9`` as a composer dependency to use
+Make sure to add ``symfony/stimulus-bundle:^2.9`` as a composer dependency to use
 Twig ``stimulus_*`` functions.
 
 .. tip::
@@ -163,8 +163,9 @@ Specifics for Asset Mapper
 --------------------------
 
 To make your bundle's assets work with AssetMapper, you must add the ``importmap``
-config like above in your ``package.json`` file, and prepend some configuration
-to the container::
+config like above in your ``package.json`` file, and
+:doc:`prepend some configuration </bundles/prepend_extension>` to the
+container::
 
     namespace Acme\FeatureBundle;
 

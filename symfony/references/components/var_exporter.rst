@@ -185,6 +185,9 @@ particularly useful when, for example, a class has properties that require
 heavy computation to determine their values. In such cases, you may want to
 trigger the computation only when the property is actually accessed. This way,
 the expensive processing is avoided entirely if the property is never used.
+In Symfony applications, you can make services lazy without using this component
+directly; read the article about
+:doc:`lazy services </service_container/lazy_services>`.
 
 Since version 8.4, PHP provides support for lazy objects via the reflection API.
 This native API works with concrete classes, but not with abstract or internal ones.
@@ -225,8 +228,8 @@ LazyGhostTrait
     objects instead. Note that using the trait with PHP versions earlier than 8.4
     does not trigger a deprecation, to ease the transition.
 
-Ghost objects are empty objects whose properties are populated the first
-time any method is called. Thanks to :class:`Symfony\\Component\\VarExporter\\LazyGhostTrait`,
+Ghost objects are empty objects whose properties are populated the first time
+any method is called. Thanks to :class:`Symfony\\Component\\VarExporter\\LazyGhostTrait`,
 implementing the lazy mechanism is easier. The ``MyLazyObject::populateHash()``
 method will be called only when the object is actually used and needs to be
 initialized::
@@ -292,9 +295,9 @@ convert non-lazy classes to lazy ones::
         $instance->validateHash();
     });
 
-As long as you never query the ``$processor->hash`` value, heavy methods will never be
-triggered. But still, the ``$processor`` object exists and can be used in your
-code, passed to methods, functions, etc.
+As long as you never query the ``$processor->hash`` value, heavy methods will
+never be triggered. But still, the ``$processor`` object exists and can be used
+in your code, passed to methods, functions, etc.
 
 Ghost objects unfortunately can't work with abstract classes or internal PHP
 classes. Nevertheless, the VarExporter component covers this need with the help
@@ -367,9 +370,10 @@ code::
         return $instance;
     });
 
-Just like ghost objects, as long as you never query ``$processor->hash``, its value
-will not be computed. The main difference with ghost objects is that this time,
-a proxy of an abstract class was created. This also works with internal PHP classes.
+Just like ghost objects, as long as you never query ``$processor->hash``, its
+value will not be computed. The main difference with ghost objects is that this
+time, a proxy of an abstract class was created. This also works with internal
+PHP classes.
 
 .. _`OPcache`: https://www.php.net/opcache
 .. _`PSR-2`: https://www.php-fig.org/psr/psr-2/

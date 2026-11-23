@@ -143,7 +143,7 @@ Internet Media Types like ``text/html`` to tell the client which format is
 being returned. You can see a `List of common media types`_ from IANA.
 
 Many other headers exist, some of which are very powerful. For example, certain
-headers can be used to create a powerful caching system.
+headers can be used to create a powerful :doc:`caching system </http_cache>`.
 
 Requests, Responses and Web Development
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -282,9 +282,8 @@ appropriate response based on your application logic*.
 The Journey from the Request to the Response
 --------------------------------------------
 
-Like HTTP itself, using the ``Request`` and ``Response`` objects is pretty
-straightforward. The hard part of building an application is writing what comes in
-between. In other words, the real work comes in writing the code that
+Like HTTP itself, using the ``Request`` and ``Response`` objects is simple.
+The hard part of building an application is writing what comes in between. In other words, the real work comes in writing the code that
 interprets the request information and creates the response.
 
 Your application probably does many things, like sending emails, handling
@@ -364,7 +363,7 @@ passed to PHP functions that return ``Response`` objects.
 
 This may not make sense yet, but as you keep reading, you'll learn about :doc:`routes </routing>`
 and :doc:`controllers </controller>`: the two fundamental parts of creating a page.
-But as you go along, don't forget that no matter *how* complex your app gets, your
+But as you go along, remember that no matter *how* complex your app gets, your
 job is always the same: read information from the Request and use it to create a
 Response.
 

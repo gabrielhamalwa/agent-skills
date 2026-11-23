@@ -142,7 +142,7 @@ the class name or the string ``Default``.
 
 .. warning::
 
-    When validating *just* the User object, there is no difference between the
+    When validating *only* the User object, there is no difference between the
     ``Default`` group and the ``User`` group. But, there is a difference if
     ``User`` has embedded objects. For example, imagine ``User`` has an
     ``address`` property that contains some ``Address`` object and that you've
@@ -175,4 +175,7 @@ will be applied.
 
 In a full-stack Symfony project, you'll usually work with validation indirectly
 through the form library. For information on how to use validation groups inside
-forms, see :doc:`/form/validation_groups`.
+forms, see
+:doc:`how to configure validation groups in forms </form/validation_groups>`.
+When :ref:`mapping the request payload <controller-mapping-request-payload>` in
+a controller, use the ``validationGroups`` argument of the attribute instead.

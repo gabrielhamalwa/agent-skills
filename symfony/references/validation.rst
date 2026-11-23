@@ -224,7 +224,9 @@ message:
     Most of the time you won't interact directly with the validator or need
     to worry about printing out the errors, because you'll use validation
     indirectly when handling submitted form data. For more information, see
-    :ref:`how to validate Symfony forms <validating-forms>`.
+    :ref:`how to validate Symfony forms <validating-forms>`. The same happens
+    when :ref:`mapping the request payload <controller-mapping-request-payload>`
+    to an object in your controllers.
 
 You could also pass the collection of errors into a template::
 
@@ -253,7 +255,7 @@ Inside the template, you can output the list of errors exactly as needed:
     object allows you, among other things, to get the constraint that caused this
     violation thanks to the ``ConstraintViolation::getConstraint()`` method.
 
-If you have lots of validation errors, you can filter them by error code::
+If you have many validation errors, you can filter them by error code::
 
     use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -275,6 +277,9 @@ when :ref:`validating OptionsResolver values <optionsresolver-validate-value>`):
     constraints aren't matched.
 :method:`Symfony\\Component\\Validator\\Validation::createIsValidCallable`
     This returns a closure that returns ``false`` when the constraints aren't matched.
+
+To validate a single value with the ``validator`` service, see
+:doc:`how to validate raw values </validation/raw_values>`.
 
 .. _validation-constraints:
 
@@ -396,8 +401,9 @@ literature genre mostly associated with the author, which can be set to either
 Constraints in Form Classes
 ---------------------------
 
-Constraints can be defined while building the form via the ``constraints`` option
-of the form fields::
+Constraints can be defined while building the form via the
+:ref:`constraints option <reference-form-option-constraints>` of the form
+fields::
 
     use Symfony\Component\Validator\Constraints as Assert;
 
@@ -418,7 +424,7 @@ Constraint Targets
 
 Constraints can be applied to a class property (e.g. ``name``),
 a getter method (e.g. ``getFullName()``) or an entire class. Property constraints
-are the most common and easy to use. Getter constraints allow you to specify
+are the most common and the simplest to use. Getter constraints allow you to specify
 more complex validation rules. Finally, class constraints are intended
 for scenarios where you want to validate a class as a whole.
 
@@ -606,7 +612,7 @@ Classes
 Some constraints apply to the entire class being validated. For example,
 the :doc:`Callback </reference/constraints/Callback>` constraint is a generic
 constraint that's applied to the class itself. When that class is validated,
-methods specified by that constraint are simply executed so that each can
+methods specified by that constraint are executed so that each can
 provide more custom validation.
 
 Validating Object With Inheritance

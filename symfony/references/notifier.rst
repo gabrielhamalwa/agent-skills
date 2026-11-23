@@ -425,7 +425,8 @@ Service
 
     By default, if you have the :doc:`Messenger component </messenger>` installed,
     the notifications will be sent through the MessageBus. If you don't have a
-    message consumer running, messages will never be sent.
+    :ref:`message consumer <messenger-worker>` running, messages will never be
+    sent.
 
     To change this behavior, add the following configuration to send messages
     directly via the transport:
@@ -1118,7 +1119,7 @@ The default behavior for browser channel notifications is to add a
 :ref:`flash message <flash-messages>` with ``notification`` as its key.
 
 However, you might prefer to map the importance level of the notification to the
-type of flash message, so you can tweak their style.
+type of flash message, so you can adjust their style.
 
 You can do that by overriding the default ``notifier.flash_message_importance_mapper``
 service with your own implementation of

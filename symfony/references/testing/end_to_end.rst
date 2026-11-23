@@ -277,7 +277,7 @@ You can then run this test using PHPUnit, like you would for any other test:
 
     $ ./vendor/bin/phpunit tests/HomepageTest.php
 
-When writing end-to-end tests, you should keep in mind that they are
+When writing end-to-end tests, remember that they are
 slower than other tests. If you need to check that the WebDriver connection
 is still active during long-running tests, you can use the
 ``Client::ping()`` method which returns a boolean depending on the
@@ -312,12 +312,12 @@ change some of them (e.g. to use a different mailer transport)::
 The web server is started only once and then reused by all tests, so this
 option only has effect in the first call that starts the web server.
 
-If your test bootstrap loads ``.env`` files, the Dotenv component stores the
-names of the variables it defined in the ``SYMFONY_DOTENV_VARS`` variable.
-The web server inherits it, so when the application loads the ``.env`` files
-again, Dotenv overrides any of those variables with the value from the
-``.env`` files, including the ones passed in ``env``. To prevent this,
-remove that variable from the web server process::
+If your test bootstrap loads :ref:`.env files <config-dot-env>`, the Dotenv
+component stores the names of the variables it defined in the
+``SYMFONY_DOTENV_VARS`` variable. The web server inherits it, so when the
+application loads the ``.env`` files again, Dotenv overrides any of those
+variables with the value from the ``.env`` files, including the ones passed in
+``env``. To prevent this, remove that variable from the web server process::
 
     $client = self::createPantherClient([
         'env' => [
@@ -599,7 +599,7 @@ Usage With Other Testing Tools
 ------------------------------
 
 If you want to use Panther with other testing tools like `LiipFunctionalTestBundle`_
-or if you just need to use a different base class, you can use the
+or if you only need to use a different base class, you can use the
 ``Symfony\Component\Panther\PantherTestCaseTrait`` to enhance your existing
 test-infrastructure with some Panther mechanisms::
 
@@ -870,8 +870,8 @@ The following features are not currently supported:
 * Selecting invalid choices in the select
 
 Also, there is a known issue if you are using Bootstrap 5. It implements a
-scrolling effect which tends to mislead Panther. To fix this,
-deactivate this effect by setting the Bootstrap 5 ``$enable-smooth-scroll``
+scrolling effect which tends to mislead Panther. To fix this, deactivate this
+effect by setting the Bootstrap 5 ``$enable-smooth-scroll``
 variable to ``false`` in your style file:
 
 .. code-block:: scss

@@ -126,7 +126,7 @@ services:
             $services->set('app.sqlite_lock', SqliteLock::class);
         };
 
-Instead of dealing with these three services, your application needs a generic
+Instead of handling these three services, your application needs a generic
 ``app.lock`` service that will be an alias to one of these services, depending on
 some configuration. Thanks to the ``auto_alias`` option, you can automatically create
 that alias based on the value of a configuration parameter.
@@ -222,8 +222,8 @@ a very short list of bootstrapping services (like ``router``, ``event_dispatcher
 of these services, with a special case for event listeners, where only listed events
 are propagated to their related listeners.
 
-In the cached service factories, it replaces the PHP autoload with
-plain inlined ``include_once``. The benefit is a complete bypass of the autoloader
+In the cached service factories, it replaces the PHP autoload with plain
+inlined ``include_once``. The benefit is a complete bypass of the autoloader
 for services and their class hierarchy. The result is a significant performance improvement.
 
 Use this tag with great caution; you have to be sure that the tagged service is always used.
@@ -780,10 +780,10 @@ monolog.processor
 
 **Purpose**: Add a custom processor for logging
 
-Monolog allows you to add processors in the logger or in the handlers to
-add extra data in the records. A processor receives the record as an argument
-and must return it after adding some extra data in the ``extra`` attribute
-of the record.
+Monolog allows you to add :doc:`processors </logging/processors>` in the
+logger or in the handlers to add extra data in the records. A processor
+receives the record as an argument and must return it after adding some extra
+data in the ``extra`` attribute of the record.
 
 The built-in ``IntrospectionProcessor`` can be used to add the file, the
 line, the class and the method where the logger was triggered.
@@ -1097,8 +1097,9 @@ translation.extractor
 **Purpose**: To register a custom service that extracts messages from a
 file
 
-When executing the ``translation:extract`` command, it uses extractors to
-extract translation messages from a file. By default, the Symfony Framework
+When :ref:`extracting translations <extracting-translation-contents>` with
+the ``translation:extract`` command, Symfony uses extractors to extract
+translation messages from a file. By default, the Symfony Framework
 has a :class:`Symfony\\Bridge\\Twig\\Translation\\TwigExtractor` to find and
 extract translation keys from Twig templates.
 

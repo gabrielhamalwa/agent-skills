@@ -14,8 +14,9 @@ Booleans) using a syntax similar to PHP and Twig.
 Symfony itself uses expressions in many features, such as :doc:`security rules
 </security/expressions>`, :ref:`route matching conditions
 <routing-matching-expressions>`, the :doc:`Expression validation constraint
-</reference/constraints/Expression>` and :ref:`service container configuration
-<services-expressions>`.
+</reference/constraints/Expression>`, :ref:`service container configuration
+<services-expressions>` and :ref:`workflow transition guards
+<workflow-blocking-transitions>`.
 
 In your own applications, the ExpressionLanguage component is a perfect
 candidate for the foundation of a *business rule engine*. The idea is to let
@@ -87,8 +88,8 @@ The ExpressionLanguage component provides a way to parse and lint expressions.
 The :method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::parse`
 method returns a :class:`Symfony\\Component\\ExpressionLanguage\\ParsedExpression`
 instance that can be used to inspect and manipulate the expression. The
-:method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::lint` method, on
-the other hand, throws a :class:`Symfony\\Component\\ExpressionLanguage\\SyntaxError`
+:method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::lint` method,
+on the other hand, throws a :class:`Symfony\\Component\\ExpressionLanguage\\SyntaxError`
 if the expression is not valid::
 
     use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -170,7 +171,7 @@ The ExpressionLanguage component provides a
 :method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::compile`
 method to be able to cache the expressions in plain PHP. But internally, the
 component also caches the parsed expressions, so duplicated expressions can be
-compiled/evaluated quicker.
+compiled/evaluated faster.
 
 The Workflow
 ~~~~~~~~~~~~
@@ -182,7 +183,7 @@ values. For ``evaluate()``, this overhead is even bigger.
 Both methods need to tokenize and parse the expression. This is done by the
 :method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::parse`
 method. It returns a :class:`Symfony\\Component\\ExpressionLanguage\\ParsedExpression`.
-Now, the ``compile()`` method just returns the string conversion of this object.
+Now, the ``compile()`` method only returns the string conversion of this object.
 The ``evaluate()`` method needs to loop through the "nodes" (pieces of an
 expression saved in the ``ParsedExpression``) and evaluate them dynamically.
 
@@ -390,6 +391,10 @@ or by using the second argument of the constructor::
 
     // using registerProvider()
     $expressionLanguage->registerProvider(new StringExpressionLanguageProvider());
+
+In a Symfony application, you can also add the functions of a provider to the
+routing and security expressions by tagging its service with one of the
+:doc:`expression language provider tags </reference/dic_tags>`.
 
 .. tip::
 

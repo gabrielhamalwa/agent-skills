@@ -1,7 +1,7 @@
 How to Style a Console Command
 ==============================
 
-One of the most boring tasks when creating console commands is to deal with the
+One of the most boring tasks when creating console commands is to handle the
 styling of the command's input and output. Displaying titles and tables or asking
 the user questions involves a lot of repetitive code.
 
@@ -168,7 +168,8 @@ Content Methods
 :method:`Symfony\\Component\\Console\\Style\\SymfonyStyle::createTable`
     Creates an instance of :class:`Symfony\\Component\\Console\\Helper\\Table`
     styled according to the Symfony Style Guide, which allows you to use
-    features such as dynamically appending rows.
+    features such as
+    :ref:`dynamically appending rows <console-modify-rendered-tables>`.
 
 :method:`Symfony\\Component\\Console\\Style\\SymfonyStyle::tree`
     It displays the given nested array as a formatted directory/file tree
@@ -288,7 +289,9 @@ Progress Bar Methods
 
 :method:`Symfony\\Component\\Console\\Style\\SymfonyStyle::createProgressBar`
     Creates an instance of :class:`Symfony\\Component\\Console\\Helper\\ProgressBar`
-    styled according to the Symfony Style Guide.
+    styled according to the Symfony Style Guide. Read the
+    :doc:`progress bar helper </console/helpers/progressbar>` article to learn
+    about its formats and other options.
 
 .. _symfony-style-questions:
 
@@ -361,8 +364,8 @@ User Input Methods
         $io->choice('Select the queue to analyze', [5 => 'queue1', 6 => 'queue2', 7 => 'queue3']);
 
     Finally, you can allow users to select multiple choices. To do so, users must
-    separate each choice with a comma (e.g. typing ``1, 2`` will select choices 1
-    and 2)::
+    separate each choice with a comma (e.g. typing ``1, 2`` will select
+    choices 1 and 2)::
 
         $io->choice('Select the queue to analyze', ['queue1', 'queue2', 'queue3'], multiSelect: true);
 
@@ -373,8 +376,9 @@ Result Methods
 
 .. note::
 
-    If you print any URL, it won't be broken/cut, so it will be clickable if the terminal supports it. If the "well
-    formatted output" is more important, you can switch it off::
+    If you print any URL, it won't be broken/cut, so it will be clickable if the
+    terminal supports it. If the "well formatted output" is more important, you
+    can switch it off::
 
         $io->getOutputWrapper()->setAllowCutUrls(true);
 
@@ -396,8 +400,9 @@ Result Methods
         ]);
 
 :method:`Symfony\\Component\\Console\\Style\\SymfonyStyle::info`
-    It's similar to the ``success()`` method (the given string or array of strings
-    is displayed with a green background) but the ``[OK]`` label is not prefixed.
+    It's similar to the ``success()`` method (the given string or array of
+    strings is displayed with a green background) but the ``[OK]`` label is not
+    prefixed.
     It's meant to be used once to display the final result of executing the given
     command, without showing the result as a successful or failed one::
 
@@ -489,8 +494,8 @@ define your own set of console styles. Create a class that implements the
     }
 
 Then, instantiate this custom class instead of the default ``SymfonyStyle`` in
-your commands. Thanks to the ``StyleInterface``, you won't need to change the code
-of your commands to change their appearance::
+your commands. Thanks to the ``StyleInterface``, you won't need to change the
+code of your commands to change their appearance::
 
     // src/Command/MyCommand.php
     namespace App\Command;
@@ -637,9 +642,9 @@ Commands can use the special ``<href>`` tag to display links similar to the
 
     $output->writeln('<href=https://symfony.com>Symfony Homepage</>');
 
-If your terminal belongs to the `list of terminal emulators that support links`_,
-you can click on the *"Symfony Homepage"* text to open its URL in your default
-browser. Otherwise, you'll see *"Symfony Homepage"* as regular text and the URL
+If your terminal belongs to the
+`list of terminal emulators that support links`_, you can click on the
+*"Symfony Homepage"* text to open its URL in your default browser. Otherwise, you'll see *"Symfony Homepage"* as regular text and the URL
 will be lost.
 
 .. _Cmder: https://github.com/cmderdev/cmder

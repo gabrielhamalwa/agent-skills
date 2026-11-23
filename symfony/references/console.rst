@@ -202,7 +202,7 @@ longer help text for the command::
     introduced in Symfony 7.4.
 
 Additionally, you can extend the :class:`Symfony\\Component\\Console\\Command\\Command` class to
-leverage advanced features like lifecycle hooks (e.g. :method:`Symfony\\Component\\Console\\Command\\Command::initialize`
+use advanced features like lifecycle hooks (e.g. :method:`Symfony\\Component\\Console\\Command\\Command::initialize`
 and :method:`Symfony\\Component\\Console\\Command\\Command::interact`)::
 
     use Symfony\Component\Console\Attribute\AsCommand;
@@ -474,6 +474,11 @@ Now, try executing the command:
     Whoa!
     You are about to create a user.
 
+.. tip::
+
+    Use :doc:`SymfonyStyle </console/style>` to display titles, tables,
+    questions and other common elements with a consistent style.
+
 .. _console-output-sections:
 
 Output Sections
@@ -641,7 +646,9 @@ command:
     Its purpose is to check if some of the options/arguments are missing
     and interactively ask the user for those values. This is the last place
     where you can ask for missing required options/arguments. This method is
-    called before validating the input.
+    called before validating the input. In invokable commands, use the
+    :ref:`#[Ask] and #[Interact] attributes <console-interactive-input>`
+    instead.
     Note that it will not be called when the command is run without interaction
     (e.g. when passing the ``--no-interaction`` global option flag).
 
@@ -787,7 +794,7 @@ with the :class:`Symfony\\Component\\Console\\Tester\\ApplicationTester` class::
 
 .. note::
 
-    Don't forget to call ``setAutoExit(false)`` on the application before passing
+    Make sure to call ``setAutoExit(false)`` on the application before passing
     it to ``ApplicationTester``. Without it, the application calls ``exit()``
     after running the command, which would terminate the PHPUnit process.
 
@@ -868,9 +875,9 @@ The log messages emitted by the service are displayed in the console output.
 Verbosity
 ~~~~~~~~~
 
-Depending on the verbosity level used to run the command, messages may or
-may not be sent to the :class:`Symfony\\Component\\Console\\Output\\OutputInterface`
-instance.
+Depending on the :doc:`verbosity level </console/verbosity>` used to run the
+command, messages may or may not be sent to the
+:class:`Symfony\\Component\\Console\\Output\\OutputInterface` instance.
 
 By default, the console logger behaves like
 :doc:`Monolog's Console Handler </logging/monolog_console>`.
@@ -975,7 +982,7 @@ The ``ConsoleEvents::COMMAND`` Event
 which command is going to be executed), or displaying something about the event
 to be executed.
 
-Just before executing any command, the ``ConsoleEvents::COMMAND`` event is
+Immediately before executing any command, the ``ConsoleEvents::COMMAND`` event is
 dispatched. Listeners receive a
 :class:`Symfony\\Component\\Console\\Event\\ConsoleCommandEvent` event::
 
@@ -1106,7 +1113,7 @@ Listeners receive a
 .. tip::
 
     This event is also dispatched when an exception is thrown by the command.
-    It is then dispatched just after the ``ConsoleEvents::ERROR`` event.
+    It is then dispatched immediately after the ``ConsoleEvents::ERROR`` event.
     The exit code received in this case is the exception code.
 
     Additionally, the event is dispatched when the command is being exited on
@@ -1342,7 +1349,7 @@ Building a Single-Command Application
 -------------------------------------
 
 When building a command line tool, you may not need to provide several commands.
-In that case, having to pass the command name each time is tedious. Use the
+In that case, having to pass the command name each time is repetitive. Use the
 :class:`Symfony\\Component\\Console\\SingleCommandApplication` class to create
 an application that runs a single command, without having to pass its name.
 The following example uses the :doc:`Finder component </components/finder>`

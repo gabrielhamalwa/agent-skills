@@ -8,6 +8,11 @@ How to Upload Files
     operations (such as file renaming, saving and deleting) and it's tightly
     integrated with Doctrine ORM, MongoDB ODM, PHPCR ODM and Propel.
 
+This article uploads files with Symfony forms. If you don't need a form (e.g.
+in an API endpoint), use the
+:ref:`MapUploadedFile <controller_map-uploaded-file>` attribute to get and
+validate the uploaded files in your controller.
+
 Imagine that you have a ``Product`` entity in your application and you want to
 add a PDF brochure for each product. To do so, add a new property called
 ``brochureFilename`` in the ``Product`` entity::
@@ -42,9 +47,10 @@ Note that the type of the ``brochureFilename`` column is ``string`` instead of
 file contents.
 
 The next step is to add a new field to the form that manages the ``Product``
-entity. This must be a ``FileType`` field so the browsers can display the file
-upload widget. The trick to make it work is to add the form field as "unmapped",
-so Symfony doesn't try to get/set its value from the related entity::
+entity. This must be a :doc:`FileType </reference/forms/types/file>` field so
+the browsers can display the file upload widget. The trick to make it work is to
+add the form field as :ref:`unmapped <form-unmapped-fields>`, so Symfony doesn't
+try to get/set its value from the related entity::
 
     // src/Form/ProductType.php
     namespace App\Form;
@@ -177,7 +183,7 @@ There are some important things to consider in the code of the above controller:
 
 #. In Symfony applications, uploaded files are objects of the
    :class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile` class. This class
-   provides methods for the most common operations when dealing with uploaded files;
+   provides methods for the most common operations when handling uploaded files;
 #. A well-known security best practice is to never trust the input provided by
    users. This also applies to the files uploaded by your visitors. The ``UploadedFile``
    class provides methods to get the original file extension
@@ -285,8 +291,8 @@ them and process each file individually::
 Creating an Uploader Service
 ----------------------------
 
-To avoid putting too much logic in controllers and making them big, you can extract
-the upload logic to a separate service::
+To avoid putting too much logic in controllers and making them big, you can
+extract the upload logic to a separate service::
 
     // src/Service/FileUploader.php
     namespace App\Service;
@@ -376,8 +382,8 @@ recommended, because Doctrine events shouldn't be used for your domain logic.
 
 Moreover, Doctrine listeners are often dependent on internal Doctrine behavior
 which may change in future versions. Also, they can introduce performance issues
-unintentionally (because your listener persists entities which cause other entities to
-be changed and persisted).
+unintentionally (because your listener persists entities which cause other
+entities to be changed and persisted).
 
 As an alternative, you can use :doc:`Symfony events, listeners and subscribers </event_dispatcher>`.
 

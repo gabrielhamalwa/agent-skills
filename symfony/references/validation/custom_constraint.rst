@@ -6,6 +6,9 @@ You can create a custom constraint by extending the base constraint class,
 going to create a basic validator that checks if a string contains only
 alphanumeric characters.
 
+If you only need the validation logic in a single class, use the
+:doc:`Callback constraint </reference/constraints/Callback>` instead.
+
 Creating the Constraint Class
 -----------------------------
 
@@ -140,7 +143,7 @@ The validator class only has one required method, ``validate()``::
             }
 
             // custom constraints should ignore null and empty values to allow
-            // other constraints (NotBlank, NotNull, etc.) to take care of that
+            // other constraints (NotBlank, NotNull, etc.) to handle that
             if (null === $value || '' === $value) {
                 return;
             }
@@ -178,9 +181,11 @@ The ``addViolation()`` method call finally adds the violation to the context.
 
 .. tip::
 
-    Validation error messages are automatically translated to the current application
-    locale. If your application doesn't use translations, you can disable this behavior
-    by calling the ``disableTranslation()`` method of ``ConstraintViolationBuilderInterface``.
+    Validation error messages are automatically
+    :doc:`translated </validation/translations>` to the current application
+    locale. If your application doesn't use translations, you can disable this
+    behavior by calling the ``disableTranslation()`` method of
+    ``ConstraintViolationBuilderInterface``.
     See also the :ref:`framework.validation.disable_translation option <reference-validation-disable_translation>`.
 
 Using the New Validator

@@ -25,7 +25,9 @@ access_denied_url
 **type**: ``string`` **default**: ``null``
 
 Defines the URL where the user is redirected after a ``403`` HTTP error (unless
-you define a custom access denial handler). Example: ``/no-permission``
+you define a
+:doc:`custom access denied handler </security/access_denied_handler>`).
+Example: ``/no-permission``
 
 erase_credentials
 -----------------
@@ -361,7 +363,7 @@ will intercept any requests (``POST`` requests only, by default) to this
 URL and process the submitted login credentials.
 
 Be sure that this URL is covered by your main firewall (i.e. don't create
-a separate firewall just for the ``check_path`` URL).
+a separate firewall only for the ``check_path`` URL).
 
 failure_path
 ............
@@ -469,7 +471,8 @@ redirected to the ``default_target_path`` to avoid a redirection loop.
 logout
 ~~~~~~
 
-You can configure logout options.
+You can configure logout options. Read more about
+:ref:`logging out users <security-logging-out>`.
 
 delete_cookies
 ..............
@@ -1394,8 +1397,8 @@ multiple firewalls, the "context" could actually be shared:
 
 .. note::
 
-    The firewall context key is stored in the session, so every firewall using it
-    must set its ``stateless`` option to ``false``. Otherwise, the context is
+    The firewall context key is stored in the session, so every firewall using
+    it must set its ``stateless`` option to ``false``. Otherwise, the context is
     ignored and you won't be able to authenticate on multiple firewalls at the
     same time.
 
@@ -1514,7 +1517,8 @@ Learn more about user checkers in :doc:`/security/user_checkers`.
 required_badges
 ~~~~~~~~~~~~~~~
 
-Firewalls can configure a list of required badges that must be present on the authenticated passport:
+Firewalls can configure a list of required badges that must be present on the
+authenticated :ref:`passport <security-passport>`:
 
 .. configuration-block::
 

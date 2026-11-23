@@ -63,8 +63,8 @@ Imagine you already process some "orders" in your application using a
 application but you can't use an API and need to use a shared CSV file with new
 orders.
 
-You will read this CSV file and dispatch a ``NewOrder`` message. All you need to
-do is to write your own CSV receiver::
+You will read this CSV file and dispatch a ``NewOrder`` message. To do that,
+write your own CSV receiver::
 
     namespace App\MessageReceiver;
 
@@ -348,8 +348,8 @@ named transport using your own DSN:
             ;
         };
 
-In addition to being able to route your messages to the ``yours`` sender, this
-will give you access to the following services:
+In addition to being able to :ref:`route your messages <messenger-routing>` to
+the ``yours`` sender, this will give you access to the following services:
 
 #. ``messenger.sender.yours``: the sender;
 #. ``messenger.receiver.yours``: the receiver.

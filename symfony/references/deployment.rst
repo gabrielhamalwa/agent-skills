@@ -44,8 +44,8 @@ Basic File Transfer
 ~~~~~~~~~~~~~~~~~~~
 
 The most basic way of deploying an application is copying the files manually
-via FTP/SCP (or a similar method). This has its disadvantages as you lack control
-over the system as the upgrade progresses. This method also requires you
+via FTP/SCP (or a similar method). This has its disadvantages as you lack
+control over the system as the upgrade progresses. This method also requires you
 to take some manual steps after transferring the files (see `Common Deployment Tasks`_).
 
 Using Source Control
@@ -57,8 +57,8 @@ upgrade, fetch the latest updates from your source control
 system. When using Git, a common approach is to create a tag for each release
 and check out the appropriate tag on deployment (see `Git Tagging`_).
 
-This makes updating your files *easier*, but you still need to worry about
-manually taking other steps (see `Common Deployment Tasks`_).
+This makes updating your files *easier*, but you still need to take other
+steps manually (see `Common Deployment Tasks`_).
 
 Using Platforms as a Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,7 +70,7 @@ provides a dedicated Symfony integration and helps fund the Symfony development.
 Using Build Scripts and other Tools
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There are also tools to help ease the pain of deployment. `Deployer`_ is a
+There are also tools to make deployment less difficult. `Deployer`_ is a
 deployment tool written in PHP that provides ready-to-use recipes for common
 Symfony deployment tasks.
 
@@ -185,6 +185,8 @@ as you normally do:
     The ``--optimize-autoloader`` flag improves Composer's autoloader performance
     significantly by building a "class map". The ``--no-dev`` flag ensures that
     development packages are not installed in the production environment.
+    For other ways to make your application faster in production, see the
+    :doc:`Performance </performance>` article.
 
 .. warning::
 
@@ -231,13 +233,14 @@ F) Other Things!
 There may be lots of other things that you need to do, depending on your
 setup:
 
-* Running any database migrations
+* Running any :ref:`database migrations <doctrine-creating-the-database-tables-schema>`
 * Clearing your APCu cache
 * Adding/editing CRON jobs
 * Restarting your workers
 * Pushing assets to a CDN
 * :ref:`Dumping error pages as static HTML files <dumping-error-pages-as-static-html-files>`
-* On a shared hosting platform using the Apache web server, you may need to
+* On a shared hosting platform using the
+  :doc:`Apache web server </setup/web_server_configuration>`, you may need to
   install the `symfony/apache-pack`_ package
 * etc.
 
@@ -250,10 +253,10 @@ deploying to staging, QA (Quality Assurance), running tests, etc.
 
 The use of staging, testing, QA, continuous integration, database migrations
 and the capability to roll back in case of failure are all strongly advised. There
-are simple and more complex tools and you can make the deployment as easy
-(or sophisticated) as your environment requires.
+are simple and more complex tools and you can make the deployment as simple
+(or complex) as your environment requires.
 
-Don't forget that deploying your application also involves updating any dependency
+Remember that deploying your application also involves updating any dependency
 (typically via Composer), migrating your database, clearing your cache and
 other potential things like pushing assets to a CDN (see `Common Deployment Tasks`_).
 

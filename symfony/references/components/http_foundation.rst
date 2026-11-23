@@ -190,10 +190,10 @@ doesn't support returning arrays, so you need to use the following code::
 .. _component-foundation-attributes:
 
 Thanks to the public ``attributes`` property, which is also an instance of
-:class:`Symfony\\Component\\HttpFoundation\\ParameterBag`, you can store additional
-data in the request. This is mostly used
-to attach information that belongs to the Request and that needs to be
-accessed from many different points in your application.
+:class:`Symfony\\Component\\HttpFoundation\\ParameterBag`, you can store
+additional data in the request. This is mostly used to attach information that
+belongs to the Request and that needs to be accessed from many different points
+in your application.
 
 Finally, the raw data sent with the request body can be accessed using
 :method:`Symfony\\Component\\HttpFoundation\\Request::getContent`::
@@ -214,6 +214,10 @@ which returns an instance of :class:`Symfony\\Component\\HttpFoundation\\InputBa
 wrapping this data::
 
     $data = $request->getPayload();
+
+In Symfony applications, you can also
+:ref:`map the request payload to an object <controller-mapping-request-payload>`
+and validate it.
 
 Identifying a Request
 ~~~~~~~~~~~~~~~~~~~~~
@@ -698,6 +702,9 @@ method::
 
 If the Response is not modified, it sets the status code to 304 and removes the
 actual response content.
+
+Read the :doc:`HTTP Cache </http_cache>` article to learn how to use HTTP
+caching in Symfony applications.
 
 .. _redirect-response:
 

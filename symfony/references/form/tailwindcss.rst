@@ -5,17 +5,20 @@ Symfony provides a minimal form theme for `Tailwind CSS`_. Tailwind is a *utilit
 CSS framework and provides *unlimited ways* to customize your forms. Tailwind has
 an official `form plugin`_ that provides a basic form reset that standardizes their look
 on all browsers. This form theme requires this plugin and adds a few basic Tailwind
-classes so your forms will look decent by default. Customization is almost always
-going to be required so this theme makes that easy.
+classes so your forms will look good by default. Customization is almost always
+going to be required so this theme makes it simple to do.
 
 .. image:: /_images/form/tailwindcss-form.png
     :alt: An HTML form showing a range of form types styled using TailwindCSS.
 
 To use it, first make sure you have installed and integrated `Tailwind CSS`_ and the
 `form plugin`_. Follow their respective documentation to install both packages.
+If you use AssetMapper, read :ref:`how to use Tailwind with AssetMapper
+<asset-mapper-tailwind>`.
 
-If you prefer to use the Tailwind theme on a form-by-form basis, include the
-``form_theme`` tag in the templates where those forms are used:
+You can :ref:`apply this theme to all forms <forms-theming-global>` of your
+application. If you prefer to use the Tailwind theme on a form-by-form basis,
+include the ``form_theme`` tag in the templates where those forms are used:
 
 .. code-block:: html+twig
 
@@ -58,7 +61,8 @@ Project Specific Form Layout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you have a generic Tailwind style for all your forms, you can create
-a custom form theme using the Tailwind CSS theme as a base.
+a :ref:`custom form theme <create-your-own-form-theme>` using the Tailwind CSS
+theme as a base.
 
 .. code-block:: twig
 

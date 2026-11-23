@@ -45,7 +45,8 @@ Accessing Profiling Data Programmatically
 
 Most of the time, the profiler information is accessed and analyzed using its
 web-based interface. However, you can also retrieve profiling information
-programmatically thanks to the methods provided by the ``profiler`` service.
+programmatically thanks to the methods provided by the ``profiler`` service
+(e.g. to check that data in :doc:`functional tests </testing/profiling>`).
 
 When the response object is available, use the
 :method:`Symfony\\Component\\HttpKernel\\Profiler\\Profiler::loadProfileFromResponse`
@@ -219,7 +220,7 @@ pages from a server.
 By default, the debug toolbar displays the information of the initial page load
 and doesn't refresh after each AJAX request. However, you can configure the
 toolbar to be refreshed after each AJAX request by enabling ``ajax_replace`` in the
-``web_profiler`` configuration:
+:doc:`web_profiler configuration </reference/configuration/web_profiler>`:
 
 .. configuration-block::
 
@@ -256,7 +257,7 @@ toolbar to be refreshed after each AJAX request by enabling ``ajax_replace`` in 
                 ->ajaxReplace(true);
         };
 
-If you need a more sophisticated solution, you can set the
+If you need a more advanced solution, you can set the
 ``Symfony-Debug-Toolbar-Replace`` header to a value of ``'1'`` in the response
 yourself::
 
@@ -512,7 +513,7 @@ block and setting the value of two variables called ``icon`` and ``text``:
 .. tip::
 
     Built-in collector templates define all their images as embedded SVG files.
-    This makes them work everywhere without having to mess with web assets links:
+    This makes them work everywhere without having to handle web assets links:
 
     .. code-block:: twig
 

@@ -30,7 +30,7 @@ depending on your needs:
 #. If you want to change the contents of non-HTML error output,
    :ref:`create a new normalizer <overriding-non-html-error-output>`;
 
-#. If you also want to tweak the logic used by Symfony to generate error pages,
+#. If you also want to change the logic used by Symfony to generate error pages,
    :ref:`override the default error controller <custom-error-controller>`;
 
 #. If you need total control of exception handling to run your own logic,
@@ -212,7 +212,8 @@ The Serializer component has a built-in ``FlattenException`` normalizer
 (:class:`Symfony\\Component\\Serializer\\Normalizer\\ProblemNormalizer`) and
 JSON/XML/CSV/YAML encoders. When your application throws an exception, Symfony
 can output it in one of those formats. If you want to change the output
-contents, create a new Normalizer that supports the ``FlattenException`` input::
+contents, create a new :doc:`normalizer </serializer/custom_normalizer>` that
+supports the ``FlattenException`` input::
 
     # src/Serializer/MyCustomProblemNormalizer.php
     namespace App\Serializer;
@@ -245,7 +246,7 @@ contents, create a new Normalizer that supports the ``FlattenException`` input::
 Overriding the Default ErrorController
 --------------------------------------
 
-If you need a little more flexibility beyond just overriding the template,
+If you need a little more flexibility beyond overriding the template,
 then you can change the controller that renders the error page. For example,
 you might need to pass some additional variables into your template.
 
@@ -309,8 +310,9 @@ Working with the ``kernel.exception`` Event
 -------------------------------------------
 
 When an exception is thrown, the :class:`Symfony\\Component\\HttpKernel\\HttpKernel`
-class catches it and dispatches a ``kernel.exception`` event. This gives you the
-power to convert the exception into a ``Response`` in a few different ways.
+class catches it and dispatches a :ref:`kernel.exception <kernel-kernel.exception>`
+event. This gives you the power to convert the exception into a ``Response`` in
+a few different ways.
 
 Working with this event is actually much more powerful than what has been explained
 before, but also requires a thorough understanding of Symfony internals. Suppose
@@ -332,7 +334,7 @@ error pages.
 
 This approach allows you to create centralized and layered error handling:
 instead of catching (and handling) the same exceptions in various controllers
-time and again, you can have just one (or several) listeners deal with them.
+again and again, you can have only one (or several) listeners handle them.
 
 .. tip::
 

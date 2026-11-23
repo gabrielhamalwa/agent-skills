@@ -17,6 +17,10 @@ It transforms incoming JSON request payloads into PHP objects that your
 application can work with. Similarly, it converts processed PHP objects into a
 JSON stream for outgoing responses.
 
+If you need features like serialization groups, name converters or formats
+other than JSON, read
+:ref:`when to use the Serializer instead <serializer-json-streamer>`.
+
 Installation
 ------------
 
@@ -33,7 +37,7 @@ Encoding Objects
 ----------------
 
 JsonStreamer only works with PHP classes that have **no constructor** and are
-composed solely of **public properties**, like `DTO classes`_. Consider the
+composed only of **public properties**, like `DTO classes`_. Consider the
 following ``Cat`` class::
 
     // src/Dto/Cat.php
@@ -349,7 +353,7 @@ structure::
 Configuring Encoding/Decoding
 -----------------------------
 
-While it's usually best not to alter the shape or values of objects during
+While it's usually best not to change the shape or values of objects during
 serialization, sometimes it's necessary.
 
 Including Null Properties
